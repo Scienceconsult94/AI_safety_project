@@ -16,7 +16,7 @@ COLS = ["task_id", "bench_commit", "category", "check", "method", "defect",
 
 def main() -> int:
     sample = json.loads((ROOT / "sample.json").read_text(encoding="utf-8"))
-    ids = set(sample["population_ids"]) | {"*"}
+    ids = set(sample["population_ids"]) | {"ALL"}
     commit = sample["bench_commit"]
     created = date.fromisoformat(sample["created"])
     with open(ROOT / "audit_log.csv", encoding="utf-8", newline="") as fp:

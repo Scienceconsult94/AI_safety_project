@@ -5,7 +5,7 @@ One row per `(task_id, check)`. Columns, in this order:
 
 | column | rule |
 |---|---|
-| task_id | an airline `base` task id (`sample.json` → `population_ids`), or `*` for a benchmark-wide check |
+| task_id | an airline `base` task id (`sample.json` → `population_ids`), or `ALL` for a benchmark-wide check (checklist convention) |
 | bench_commit | 40-hex SHA of the pinned checkout; one value for the whole file, equal to `sample.json` → `bench_commit` |
 | category | 1–6, the checklist numbering of the audit plan (1 solvability, 2 scoring validity, 3 isolation/leaks, 4 specification clarity, 5 determinism, 6 reporting) |
 | check | check id from `checklist.md` (e.g. `2a`); free text never |
