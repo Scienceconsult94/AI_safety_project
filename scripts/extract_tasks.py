@@ -5,7 +5,7 @@ user-simulator instructions (what the simulated customer knows and wants), the
 reference trajectory with arguments, communicate_info / nl_assertions, the DB
 records the task touches (user, reservations, flights named in the reference
 actions or in known_info), and the static-scan numbers. No LLM calls.
-Usage (from ==Project):  python -I extract_tasks.py   -> results/task_cards/task_<id>.md
+Usage (from ==Project):  python -I scripts/extract_tasks.py   -> results/task_cards/task_<id>.md
 """
 
 from __future__ import annotations
@@ -15,7 +15,7 @@ import json
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]  # repo root (this file lives in scripts/)
 DATA = ROOT / "tau2-bench" / "data" / "tau2" / "domains" / "airline"
 OUT = ROOT / "results" / "task_cards"
 

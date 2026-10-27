@@ -16,7 +16,7 @@ Design (pre-registered before any call, see results/probe_32/protocol.md):
   UNCLEAR = neither (pure clarification, no decision).
 - Cutoffs: REFUSE >= 8/10 -> 1e = 1 (class D, scenario clause blocks the reference); REFUSE <= 5/10 -> 1e = 0;
   6-7 -> inconclusive, row stays "unclear".
-Usage (from inside tau2-bench, .env present):  uv run --no-sync python ../probe_32.py [--n 10] [--dry]
+Usage (from inside tau2-bench, .env present):  uv run --no-sync python ../scripts/probe_32.py [--n 10] [--dry]
 --dry builds everything and prints the prompt/prefix without calling the model.
 """
 
@@ -29,7 +29,7 @@ from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]  # repo root (this file lives in scripts/)
 OUT = ROOT / "results" / "probe_32"
 TASK_ID = "32"
 RUN_FILE = ROOT / "results" / "runs" / "sample20_pass3_haiku.results.json"

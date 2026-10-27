@@ -6,7 +6,7 @@ the same code path as EnvironmentEvaluator, and compare the resulting DB hash wi
 gold hash. A differing hash means an agent that performs the same writes in another order
 is scored 0. Whether that order is "allowed by the scenario" is judged separately per task
 (checklist.md, 2h). No LLM calls. Output: results/probe_2h.csv.
-Run from inside tau2-bench:  uv run --no-sync python ../probe_2h.py
+Run from inside tau2-bench:  uv run --no-sync python ../scripts/probe_2h.py
 """
 
 from __future__ import annotations
@@ -22,7 +22,7 @@ os.environ.setdefault("LOGURU_LEVEL", "ERROR")
 from tau2.environment.toolkit import ToolType  # noqa: E402
 from tau2.registry import registry  # noqa: E402
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]  # repo root (this file lives in scripts/)
 OUT = ROOT / "results" / "probe_2h.csv"
 MAX_PERMS = 24  # 4! - enough for airline (max 3-4 writes per task)
 

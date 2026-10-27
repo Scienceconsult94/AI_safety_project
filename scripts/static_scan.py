@@ -17,7 +17,7 @@ For every task in the `base` split this script:
 
 No LLM is called. Output: results/static_scan.csv plus a summary on stdout.
 Run from inside the tau2-bench checkout so tau2 resolves its data directory:
-    cd tau2-bench && uv run --no-sync python ../static_scan.py
+    cd tau2-bench && uv run --no-sync python ../scripts/static_scan.py
 """
 
 from __future__ import annotations
@@ -42,7 +42,7 @@ from tau2.evaluator.evaluator_communicate import CommunicateEvaluator  # noqa: E
 from tau2.evaluator.evaluator_env import EnvironmentEvaluator  # noqa: E402
 from tau2.registry import registry  # noqa: E402
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]  # repo root (this file lives in scripts/)
 BENCH = ROOT / "tau2-bench"
 OUT = ROOT / "results" / "static_scan.csv"
 DOMAIN = "airline"

@@ -1,10 +1,10 @@
 # Pilot: 5 airline tasks end-to-end on Claude Haiku 5.5 (agent and user), substring scorer.
 # Preconditions: tau2-bench\.env with ANTHROPIC_API_KEY exists (created by hand; never read or printed here);
 #                spending limit set in the Anthropic Console; cost.md cumulative < $30.
-# Usage:  powershell -ExecutionPolicy Bypass -File .\run_pilot.ps1
+# Usage:  powershell -ExecutionPolicy Bypass -File .\scripts\runs\run_pilot.ps1
 $ErrorActionPreference = "Stop"
 $env:PYTHONUTF8 = 1
-$root  = Split-Path -Parent $MyInvocation.MyCommand.Path
+$root  = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))  # repo root (this file lives in scripts\runs\)
 $bench = Join-Path $root "tau2-bench"
 $uv    = Join-Path $env:USERPROFILE ".local\bin\uv.exe"
 
@@ -26,7 +26,7 @@ Push-Location $bench
     --max-concurrency 3 --timeout 900 --seed 300 `
     --save-to pilot_5_haiku
 $code = $LASTEXITCODE
-& $uv run --no-sync python ..\summarize_run.py data\simulations\pilot_5_haiku\results.json
+& $uv run --no-sync python ..\scripts\summarize_run.py data\simulations\pilot_5_haiku\results.json
 Pop-Location
 Write-Output "tau2 exit code: $code  -> now reconcile cost with the Anthropic Console and append a row to cost.md"
 exit $code

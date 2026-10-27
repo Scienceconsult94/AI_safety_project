@@ -14,7 +14,7 @@ Outputs (results/):
   trajectories/<task>_<src>_t<trial>.md   readable transcripts of those trajectories
 Rows that need a human/LLM reading (4f, 5d, and 1e/5c triage) are written as defect=0 with note
 "REVIEW" here; the reviewer's verdicts go to results/review_agent.csv, which build_audit_log.py reads last.
-Usage (from ==Project):  python -I agent_rows.py [--pass3 sample20_pass3_haiku] [--gt sample20_gt_haiku] [--log path ...]
+Usage (from ==Project):  python -I scripts/agent_rows.py [--pass3 sample20_pass3_haiku] [--gt sample20_gt_haiku] [--log path ...]
 No LLM calls, no file under tau2-bench/ is modified.
 """
 
@@ -27,7 +27,7 @@ import re
 from collections import defaultdict
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]  # repo root (this file lives in scripts/)
 RES = ROOT / "results"
 SIMS = ROOT / "tau2-bench" / "data" / "simulations"
 NORMAL = {"agent_stop", "user_stop"}

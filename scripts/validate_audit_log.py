@@ -9,7 +9,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]  # repo root (this file lives in scripts/)
 COLS = ["task_id", "bench_commit", "category", "check", "method", "defect",
         "severity", "evidence", "haiku_pass", "skeptic_ok", "date", "note"]
 

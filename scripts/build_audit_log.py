@@ -11,7 +11,7 @@ Inputs (all under results/ unless noted):
   review_agent.csv       optional: reviewer verdicts on failed/flipped trajectories (4f, 5c, 5d, 1e triage); read last
   skeptic_verdicts.csv   optional: task_id,check,skeptic_ok,note  (results-skeptic review of medium/high rows)
 Output: audit_log.csv (schema.md), then validate_audit_log.py is run.
-Usage (from ==Project):  python -I build_audit_log.py
+Usage (from ==Project):  python -I scripts/build_audit_log.py
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]  # repo root (this file lives in scripts/)
 RES = ROOT / "results"
 COLS = ["task_id", "bench_commit", "category", "check", "method", "defect",
         "severity", "evidence", "haiku_pass", "skeptic_ok", "date", "note"]
@@ -136,7 +136,7 @@ def main() -> int:
     by_sev = {s: sum(1 for r in rows if r["defect"] == "1" and r["severity"] == s) for s in ("high", "medium", "low")}
     tasks_def = sorted({r["task_id"] for r in rows if r["defect"] == "1" and r["severity"] in ("high", "medium") and r["task_id"] != "ALL"}, key=int)
     print(f"audit_log.csv: {len(rows)} rows; defect=1 rows: {n_def} {by_sev}; defective sampled tasks: {len(tasks_def)}/20 -> {tasks_def}")
-    return subprocess.call([sys.executable, "-I", str(ROOT / "validate_audit_log.py")])
+    return subprocess.call([sys.executable, "-I", str(Path(__file__).resolve().parent / "validate_audit_log.py")])
 
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ Scope: the 27 rows of `audit_log.csv` with defect=1 and severity high or medium 
 ## How the rows were checked
 
 - **Scoring code read.** `evaluator_env.py` replays the agent’s mutating calls through `Environment.set_state` and the reference actions through `make_tool_call` on a fresh environment, then compares `get_db_hash()`. `evaluator_communicate.py` (substring) lower-cases each assistant message, strips commas from the agent text only, and returns 1.0 for an empty `communicate_info` before it reads the trajectory. `evaluator.py` under `EvaluationType.ALL` multiplies only the components in `reward_basis`, so `nl_assertions` (natural-language assertions) never affect airline reward. `batch.py:367` defaults to `ALL`. `toolkit.py:242-244` hashes `get_dict_hash(db.model_dump())`, and `utils.py:36-43` computes `sha256(json.dumps(obj, sort_keys=True, default=str))`. That sorts dict keys but **keeps list order**.
-- **Audit scripts.** `static_scan.py` and `probe_2h.py` use the registry’s airline constructor (`get_environment`), `make_tool_call`, `get_db_hash`, and tau2’s own `EnvironmentEvaluator` / `CommunicateEvaluator`. The 2b probe calls these two classes on an empty trajectory instead of rescoring "greeting + one user turn" with `tau2 evaluate-trajs`. The checklist’s route needs a recorded run, and none exists (`cost.md`: no API calls). From the code the outcome is the same: those turns contain no tool calls, an empty `communicate_info` short-circuits to 1.0, and ACTION is not in the basis.
+- **Audit scripts.** `scripts/static_scan.py` and `scripts/probe_2h.py` use the registry’s airline constructor (`get_environment`), `make_tool_call`, `get_db_hash`, and tau2’s own `EnvironmentEvaluator` / `CommunicateEvaluator`. The 2b probe calls these two classes on an empty trajectory instead of rescoring "greeting + one user turn" with `tau2 evaluate-trajs`. The checklist’s route needs a recorded run, and none exists (`cost.md`: no API calls). From the code the outcome is the same: those turns contain no tool calls, an empty `communicate_info` short-circuits to 1.0, and ACTION is not in the basis.
 - **Independent recomputation without tau2.** The hash was re-implemented in the standard library, with the `model_dump` defaults: `Reservation.status=None`, float balances, int prices. The six airline WRITE tools (`book_reservation`, `cancel_reservation`, `update_reservation_flights/_baggages/_passengers`, `send_certificate`) were re-implemented the same way. Together they reproduce:
   - the initial hash `124e39a6…`;
   - **all 50** target hashes in `static_scan.csv`;
@@ -139,7 +139,7 @@ Scope: the 27 rows of `audit_log.csv` with defect=1 and severity high or medium 
 - **Rejected rows: none.** Every defect_if rule holds, every evidence string is factually correct (prices, balances, times and hashes re-derived), and every severity matches the checklist. No "severity should be X" flag applies.
 - **Reproducibility flags:**
   - 3/2g rests on a constructed reply; no agent trajectory exists.
-  - The seven 2b rows come from an in-process substitute for the checklist’s `evaluate-trajs` probe. They are reproducible with `static_scan.py`, which needs the uv environment.
+  - The seven 2b rows come from an in-process substitute for the checklist’s `evaluate-trajs` probe. They are reproducible with `scripts/static_scan.py`, which needs the uv environment.
   - 23/2h: `probe_2h.csv` stores raw order strings, so "all 5 reorderings" has to be decoded from them.
 - **Confirmed does not mean material.** The 27 rows fall into four groups:
   - **reward-affecting and task-specific:** 3/2g, 32/4c, 44/2k, 44/4a, 44/4c;
@@ -164,4 +164,4 @@ Scope: the 27 rows of `audit_log.csv` with defect=1 and severity high or medium 
    - the violating behaviours in 2k were constructed, not observed.
 6. **Provenance gaps.**
    - Review batches 2–4 report `static_scan.csv` columns as missing that exist in the current file, so the reviews were done against an earlier version.
-   - `probe_2h.py` caps the sweep at 24 permutations ("max 3-4 writes"), but task 18 has 5 writes (119 orders). A full emulated sweep finds 0 differences, so there is no effect on any result.
+   - `scripts/probe_2h.py` caps the sweep at 24 permutations ("max 3-4 writes"), but task 18 has 5 writes (119 orders). A full emulated sweep finds 0 differences, so there is no effect on any result.

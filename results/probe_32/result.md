@@ -1,6 +1,6 @@
 # Task 32, check 1e: counterfactual simulator probe — result
 
-Run 2026-10-27 with `probe_32.py` (protocol fixed beforehand in `protocol.md`). Files: `setup.json`, `samples.json`, `samples.md` (10 replies verbatim), `classification_a.csv`, `classification_b.csv` (independent, blind to each other).
+Run 2026-10-27 with `scripts/probe_32.py` (protocol fixed beforehand in `protocol.md`). Files: `setup.json`, `samples.json`, `samples.md` (10 replies verbatim), `classification_a.csv`, `classification_b.csv` (independent, blind to each other).
 
 | quantity | value |
 |---|---|

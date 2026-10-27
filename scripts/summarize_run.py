@@ -1,6 +1,6 @@
 """Summarise one tau2 results.json: reward per task/trial, pass^k, LiteLLM cost.
 
-Usage (from inside tau2-bench):  uv run --no-sync python ../summarize_run.py <results.json> [more.json ...]
+Usage (from inside tau2-bench):  uv run --no-sync python ../scripts/summarize_run.py <results.json> [more.json ...]
 Prints a compact table; never edits any file. Costs are LiteLLM estimates - the
 Anthropic Console figure is authoritative and is what goes into cost.md.
 """

@@ -11,7 +11,7 @@ Inputs (results/):
 Output: results/rereview.csv (one row per (task_id, check) in the blind file: original, corrected, blind, agree flags)
         and the agreement numbers printed and written to results/rereview_summary.md.
 Sampling of the three tasks: random.Random(20261027).sample(sample.json["task_ids"], 3) -> 23, 10, 37.
-Usage (from ==Project):  python -I rereview_agreement.py
+Usage (from ==Project):  python -I scripts/rereview_agreement.py
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ import csv
 import math
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]  # repo root (this file lives in scripts/)
 RES = ROOT / "results"
 
 

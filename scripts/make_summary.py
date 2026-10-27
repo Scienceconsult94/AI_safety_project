@@ -4,8 +4,8 @@ Inputs (next to this script): audit_log.csv, results/static_scan.csv, sample.jso
 Outputs: summary_numbers.md (numbers only) and fig_defects.png.
 Defect rule (schema.md): a task is defective iff it has >=1 row with defect=1
 and severity in {high, medium}. All intervals: 95% Wilson.
-Run:  python -I make_summary.py            (write outputs)
-      python -I make_summary.py --selftest (check the counting rules on fake data)
+Run:  python -I scripts/make_summary.py            (write outputs)
+      python -I scripts/make_summary.py --selftest (check the counting rules on fake data)
 """
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 import pandas as pd  # noqa: E402
 from statsmodels.stats.proportion import proportion_confint  # noqa: E402
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]  # repo root (this file lives in scripts/)
 CATEGORIES = {1: "Solvability", 2: "Scoring validity", 3: "Isolation and leaks",
               4: "Specification clarity", 5: "Determinism", 6: "Reporting"}
 CONFIRMED = {"high", "medium"}

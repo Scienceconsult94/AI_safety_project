@@ -19,4 +19,4 @@ One row per `(task_id, check)`. Columns, in this order:
 | note | optional free text; `patched=nl_judge_haiku` whenever the row's run used the recorded patch |
 
 Derived rule: a task is **defective** iff it has ≥1 row with defect=1 and severity ∈ {high, medium}.
-Validation: `python -I validate_audit_log.py` (exit code 0 = all rules hold).
+Validation: `python -I scripts/validate_audit_log.py` (exit code 0 = all rules hold).
