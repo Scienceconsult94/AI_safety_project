@@ -1,0 +1,11 @@
+sample,class,quote
+0,REFUSE,"I don't think I can go ahead with that ... I'd rather hold off"
+1,REFUSE,"I'd rather not go ahead with that step ... even if I get the refund later"
+2,REFUSE,"I don't want to go ahead with step 1 at that amount"
+3,REFUSE,"I can't do a $396 charge ... I'd rather not go ahead with it"
+4,REFUSE,"I don't think I can do that one. $396 is well over the $100"
+5,REFUSE,"I don't think I can go ahead with that one"
+6,REFUSE,"I'm not comfortable with that one ... rather not pay that"
+7,REFUSE,"I'd like to hold off on step 1"
+8,REFUSE,"I'm going to hold off on that one"
+9,REFUSE,"I'd like to pass on step 1 for now"
