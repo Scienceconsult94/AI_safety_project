@@ -1,0 +1,24 @@
+{
+  "source": "tau2-bench/data/tau2/domains/airline/tasks.json",
+  "bench_commit": "989d3285ae669e49503324bdb9981bf14fccedeb",
+  "source_sha256": "34dfcf0622792d0d0fa32aa491d21582e1b5d3ec1948e7743bae881885f878ea",
+  "tasks_changed": [
+    "7",
+    "23",
+    "32",
+    "44"
+  ],
+  "edits": [
+    "32:replace:task_instructions",
+    "32:append:task_instructions",
+    "7:replace:task_instructions",
+    "7:comm:None",
+    "7:nl:3",
+    "44:replace:reason_for_call",
+    "44:append:task_instructions",
+    "44:comm:None",
+    "23:nl:3",
+    "23:nl:4"
+  ],
+  "v2_sha256": "f553625575b11d7ae5059db0464e85e882544f46773d10375e95d42001bb5487"
+}
