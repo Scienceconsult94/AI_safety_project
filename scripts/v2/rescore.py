@@ -53,7 +53,12 @@ from tau2.evaluator.evaluator import EvaluationType, evaluate_simulation  # noqa
 from tau2.orchestrator.modes import CommunicationMode  # noqa: E402
 from tau2.registry import registry  # noqa: E402
 
-FILES = {"haiku": "sample20_pass3_haiku.results.json", "gt": "sample20_gt_haiku.results.json"}
+SETS = {
+    # recorded block-1 runs (v1 benchmark): gate = stock scorer reproduces the recorded reward
+    "recorded": {"dir": RUNS, "files": {"haiku": "sample20_pass3_haiku.results.json", "gt": "sample20_gt_haiku.results.json"}, "gate_cfg": "v1", "suffix": ""},
+    # fresh block-2 runs (v2 benchmark, scored live by V2): gate = V2 reproduces the recorded reward
+    "fresh": {"dir": OUT / "runs", "files": {"haiku": "v2_sample20_pass3_haiku/results.json", "gt": "v2_sample20_gt_haiku/results.json"}, "gate_cfg": "V2", "suffix": "_fresh"},
+}
 CONFIGS = [  # name, tasks, hash, comm, nl
     ("v1", "t1", 0, 0, 0),
     ("S_hash", "t1", 1, 0, 0),
@@ -108,31 +113,51 @@ def main() -> int:
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--votes", type=int, default=s2.JUDGE_VOTES)
+    ap.add_argument("--set", choices=list(SETS), default="recorded")
     args = ap.parse_args()
+    S = SETS[args.set]
+    SUF = S["suffix"]
     OUT.mkdir(parents=True, exist_ok=True)
     s2.install()
     s2.set_judge_cache(OUT / "judge_cache.json")
     tasks_v2.register()
-    t2 = {t.id: t for t in tasks_v2.get_tasks_v2(None)}
+    s2.SWITCHES.set(False, False, False)
+    t2 = {t.id: t for t in tasks_v2.get_tasks_v2(None)}  # plain tasks v2 (NL basis added per config below)
+    t1_stock = {t.id: t for t in registry.get_tasks_loader("airline")(None)}
 
     loaded = []
-    for agent, fn in FILES.items():
-        res = Results.load(RUNS / fn)
-        t1 = {t.id: t for t in res.tasks}
+    for agent, fn in S["files"].items():
+        p = S["dir"] / fn
+        if not p.exists():
+            print(f"missing {p} - skipped")
+            continue
+        res = Results.load(p)
+        if args.set == "recorded":
+            t1 = {t.id: t for t in res.tasks}
+            assert all(t1[k].model_dump() == t1_stock[k].model_dump() for k in t1), "embedded tasks differ from the pinned loader"
+        else:
+            t1 = {k: t1_stock[k] for k in {s.task_id for s in res.simulations}}
         loaded.append((agent, fn, res, t1))
+    if not loaded:
+        return 1
     comm_scoring = loaded[0][2].info.effective_communicate_scoring
 
-    # ---- stage A: replay gate
-    s2.SWITCHES.set(False, False, False)
+    # ---- stage A: replay gate (the configuration that produced the recorded reward must reproduce it)
+    gate = dict(zip(("name", "tasks", "h", "c", "n"), next(c for c in CONFIGS if c[0] == S["gate_cfg"])))
+    s2.SWITCHES.set(bool(gate["h"]), bool(gate["c"]), bool(gate["n"]))
     gate_rows, mism = [], 0
     for agent, fn, res, t1 in loaded:
         for sim in res.simulations:
-            ri = evaluate(sim, t1[sim.task_id], comm_scoring)
+            task = (t1 if gate["tasks"] == "t1" else t2)[sim.task_id]
+            if gate["n"]:
+                task = s2.with_nl_basis(task)
+            ri = evaluate(sim, task, comm_scoring)
             rec = sim.reward_info.reward if sim.reward_info else None
             ok = rec is not None and abs(ri.reward - rec) < 1e-9
             mism += not ok
             gate_rows.append({"file": fn, "agent": agent, "task_id": sim.task_id, "trial": sim.trial, "recorded_reward": rec, "recomputed_reward": ri.reward, "match": int(ok)})
-    with open(OUT / "replay_check.csv", "w", newline="", encoding="utf-8") as fp:
+    s2.SWITCHES.set(False, False, False)
+    with open(OUT / f"replay_check{SUF}.csv", "w", newline="", encoding="utf-8") as fp:
         w = csv.DictWriter(fp, fieldnames=list(gate_rows[0]))
         w.writeheader()
         w.writerows(gate_rows)
@@ -202,13 +227,13 @@ def main() -> int:
         for k in r:
             if k not in fields:
                 fields.append(k)
-    with open(OUT / "rescore.csv", "w", newline="", encoding="utf-8") as fp:
+    with open(OUT / f"rescore{SUF}.csv", "w", newline="", encoding="utf-8") as fp:
         w = csv.DictWriter(fp, fieldnames=fields)
         w.writeheader()
         w.writerows(rows)
 
     if s2.JUDGE_LOG:
-        with open(OUT / "judge_votes.csv", "w", newline="", encoding="utf-8") as fp:
+        with open(OUT / f"judge_votes{SUF}.csv", "w", newline="", encoding="utf-8") as fp:
             w = csv.DictWriter(fp, fieldnames=list(s2.JUDGE_LOG[0]))
             w.writeheader()
             w.writerows(s2.JUDGE_LOG)
@@ -216,11 +241,11 @@ def main() -> int:
     # ---- summary
     cost = s2.JUDGE_COST["in_tokens"] / 1e6 * PRICE_IN + s2.JUDGE_COST["out_tokens"] / 1e6 * PRICE_OUT
     lines = ["# Offline re-score of the recorded block-1 simulations (scorer v2)", "",
-             f"Inputs: {', '.join(FILES.values())} ({len(rows)} simulations). Replay gate: {len(gate_rows) - mism}/{len(gate_rows)}.",
+             f"Inputs ({args.set}): {', '.join(fn for _, fn, _, _ in loaded)} ({len(rows)} simulations). Replay gate ({S['gate_cfg']} reproduces the recorded reward): {len(gate_rows) - mism}/{len(gate_rows)}.",
              f"Judge: {s2.JUDGE_MODEL}, {args.votes} votes per assertion, {s2.JUDGE_COST['calls']} calls this run, "
              f"{s2.JUDGE_COST['in_tokens']:,} in / {s2.JUDGE_COST['out_tokens']:,} out tokens, own cost estimate ${cost:.3f} "
              f"(${PRICE_IN}/{PRICE_OUT} per MTok). Cached verdicts reused from judge_cache.json cost nothing.", "",
-             "## Pass counts per configuration", "", "| config | tasks | switches | haiku (60 sims) | haiku tasks 3/3 | gt (16 sims) | all 76 |", "|---|---|---|---|---|---|---|"]
+             "## Pass counts per configuration", "", f"| config | tasks | switches | haiku ({sum(1 for r in rows if r['agent'] == 'haiku')} sims) | haiku tasks 3/3 | gt ({sum(1 for r in rows if r['agent'] == 'gt')} sims) | all {len(rows)} |", "|---|---|---|---|---|---|---|"]
     by_task_cfg = defaultdict(dict)
     for name, tv, h, c, n in cfgs:
         hk = [r for r in rows if r["agent"] == "haiku"]
@@ -232,7 +257,7 @@ def main() -> int:
         for r in rows:
             by_task_cfg[(r["agent"], r["task_id"])].setdefault(name, []).append(r.get(f"{name}_reward"))
         sw = "+".join(x for x, v in (("hash", h), ("comm", c), ("nl", n)) if v) or "stock"
-        lines.append(f"| {name} | {tv} | {sw} | {ph}/60 | {full}/20 | {pg}/16 | {ph + pg}/76 |")
+        lines.append(f"| {name} | {tv} | {sw} | {ph}/{len(hk)} | {full}/{len({r['task_id'] for r in hk})} | {pg}/{len(gt)} | {ph + pg}/{len(rows)} |")
     lines += ["", "## Flips per simulation, v1 -> V2", ""]
     flips = Counter()
     for r in rows:
@@ -257,9 +282,9 @@ def main() -> int:
             votes[(v["key"], v["assertion_idx"])].append(v["met"])
         unanimous = sum(1 for vs in votes.values() if len(set(vs)) == 1)
         lines += ["", "## Judge agreement", "", f"{unanimous}/{len(votes)} assertion verdicts unanimous across {args.votes} votes (this run's calls only; cached pairs not re-voted)."]
-    (OUT / "rescore_summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (OUT / f"rescore_summary{SUF}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
-    print(f"\nwritten {OUT.relative_to(ROOT)}/rescore.csv, replay_check.csv, rescore_summary.md" + (", judge_votes.csv" if s2.JUDGE_LOG else ""))
+    print(f"\nwritten {OUT.relative_to(ROOT)}/rescore{SUF}.csv, replay_check{SUF}.csv, rescore_summary{SUF}.md" + (f", judge_votes{SUF}.csv" if s2.JUDGE_LOG else ""))
     return 0
 
 

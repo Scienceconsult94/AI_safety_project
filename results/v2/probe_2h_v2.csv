@@ -1,0 +1,14 @@
+task_id,n_write,write_names,n_permutations,n_hash_differs_raw,n_hash_differs_raw_probe_2h,n_hash_differs_canonical,n_with_replay_error,orders_that_differ_canonical
+7,3,update_reservation_flights|cancel_reservation|cancel_reservation,5,3,3,3,0,102|120|210
+14,2,cancel_reservation|book_reservation,1,0,0,0,0,
+17,3,update_reservation_flights|update_reservation_passengers|update_reservation_baggages,5,0,0,0,0,
+18,5,update_reservation_flights|update_reservation_flights|update_reservation_flights|update_reservation_flights|update_reservation_flights,24,0,0,0,0,
+21,2,update_reservation_flights|update_reservation_baggages,1,0,0,0,0,
+22,3,update_reservation_flights|update_reservation_passengers|update_reservation_baggages,5,0,0,0,0,
+23,4,cancel_reservation|book_reservation|book_reservation|book_reservation,23,20,20,0,0,
+29,2,cancel_reservation|book_reservation,1,0,0,0,0,
+32,2,update_reservation_flights|update_reservation_flights,1,1,1,1,0,10
+33,2,update_reservation_flights|update_reservation_baggages,1,0,0,0,0,
+39,3,cancel_reservation|cancel_reservation|cancel_reservation,5,0,0,0,0,
+42,2,cancel_reservation|cancel_reservation,1,0,0,0,0,
+44,3,update_reservation_flights|update_reservation_flights|update_reservation_flights,5,0,0,0,0,

@@ -302,8 +302,31 @@ def _norm(s: str) -> str:
     return re.sub(r"\s+", " ", s.strip().lower())
 
 
+JUDGE_VIEW = "with_tool_calls"  # "stock" = tau2's own view (role: content; tool-call arguments invisible)
+
+
 def trajectory_text(trajectory: list[Message]) -> str:
-    return "\n".join(f"{m.role}: {m.content}" for m in trajectory)  # same view as tau2
+    """Transcript shown to the judge.
+
+    tau2's NLAssertionsEvaluator renders `role: content` only, so an assistant turn that is a tool
+    call reads "assistant: None" and the judge cannot see which tool was called with which
+    arguments (observed 2026-10-27 on task 9 trial 1: `search_direct_flight(JFK, MCO, 2024-05-22)`
+    was called and the judge unanimously marked the search assertion unmet). The v2 view appends
+    the tool calls to the assistant turn and labels tool results; PLAN.md "Deviations" records it.
+    """
+    if JUDGE_VIEW == "stock":
+        return "\n".join(f"{m.role}: {m.content}" for m in trajectory)
+    lines = []
+    for m in trajectory:
+        if isinstance(m, AssistantMessage) and getattr(m, "tool_calls", None):
+            calls = "; ".join(f"{tc.name}({json.dumps(tc.arguments, default=str, ensure_ascii=False)})" for tc in m.tool_calls)
+            text = m.content if m.has_text_content() else ""
+            lines.append(f"assistant: {text}".rstrip() + f"\n  [tool calls: {calls}]")
+        elif m.role == "tool":
+            lines.append(f"tool result: {m.content}")
+        else:
+            lines.append(f"{m.role}: {m.content}")
+    return "\n".join(lines)
 
 
 def has_agent_text(trajectory: list[Message]) -> bool:
