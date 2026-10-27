@@ -24,6 +24,8 @@ CATEGORIES = {1: "Solvability", 2: "Scoring validity", 3: "Isolation and leaks",
               4: "Specification clarity", 5: "Determinism", 6: "Reporting"}
 CONFIRMED = {"high", "medium"}
 NOOP_CHECKS = ("2a", "2b")  # documented no-op class
+AGENT_RUN = "agent_run"  # method of rows from live runs; static and probe come from the static phase
+USER_SIM_CHECKS = ("5d",)  # user-simulator deviations
 
 
 def load_inputs(root: Path = ROOT):
@@ -42,6 +44,7 @@ def normalize(audit: pd.DataFrame) -> pd.DataFrame:
     a["severity"] = a["severity"].astype(str).str.strip().str.lower()
     a["skeptic_ok"] = a["skeptic_ok"].astype(str).str.strip()
     a["check"] = a["check"].astype(str).str.strip().str.lower()
+    a["method"] = a["method"].astype(str).str.strip().str.lower() if "method" in a else ""
     return a
 
 
@@ -51,10 +54,36 @@ def defect_rows(audit: pd.DataFrame, ids, severities) -> pd.DataFrame:
     return a[(a["defect"] == 1) & a["severity"].isin(severities) & a["task_id"].isin(set(ids))]
 
 
-def defective_tasks(audit, ids, exclude_checks=()) -> int:
-    """Distinct defective tasks in `ids` (each counted once), ignoring rows whose check is excluded."""
+def defective_task_ids(audit, ids, exclude_checks=(), methods=None, exclude_methods=()) -> set:
+    """Distinct defective task ids in `ids`, ignoring rows whose check is excluded;
+    `methods` keeps only rows of those methods, `exclude_methods` drops rows of those methods."""
     rows = defect_rows(audit, ids, CONFIRMED)
-    return rows.loc[~rows["check"].isin(exclude_checks), "task_id"].nunique()
+    m = ~rows["check"].isin(exclude_checks) & ~rows["method"].isin(exclude_methods)
+    if methods is not None:
+        m &= rows["method"].isin(methods)
+    return set(rows.loc[m, "task_id"])
+
+
+def defective_tasks(audit, ids, exclude_checks=(), methods=None, exclude_methods=()) -> int:
+    """Distinct defective tasks in `ids` (each counted once), ignoring rows whose check is excluded."""
+    return len(defective_task_ids(audit, ids, exclude_checks, methods, exclude_methods))
+
+
+def agent_run_only_tasks(audit, ids) -> int:
+    """Tasks defective over all methods but not over static/probe rows: their only confirmed defects are agent_run."""
+    return len(defective_task_ids(audit, ids) - defective_task_ids(audit, ids, exclude_methods=(AGENT_RUN,)))
+
+
+def rows_per_check(audit, ids) -> list:
+    """[(check, confirmed defect rows, distinct sampled tasks)] sorted by check id, checks with >=1 row only."""
+    rows = defect_rows(audit, ids, CONFIRMED)
+    g = rows.groupby("check")["task_id"].agg(["size", "nunique"])
+    return [(c, int(g.at[c, "size"]), int(g.at[c, "nunique"])) for c in sorted(g.index, key=_check_key)]
+
+
+def _check_key(c: str):
+    head = c.rstrip("abcdefghijklmnopqrstuvwxyz")
+    return (int(head), c) if head.isdigit() else (10**9, c)
 
 
 def defective_tasks_noop_free(audit, ids, noop_ids) -> int:
@@ -188,6 +217,17 @@ def build_markdown(audit, scan, sample, runs=None) -> str:
     empty = len(audit) == 0
     L.append("| defective tasks, sampled tasks | "
              + ("no rows yet" if empty else fmt_share(defective_tasks(audit, ids), n)) + " |")
+    split = [] if empty else [
+        ("static and probe checks only (method ≠ agent_run)",
+         defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,))),
+        ("agent_run checks only (1e, 4f, 5c, 5d, 5e, 5f)", defective_tasks(audit, ids, methods=(AGENT_RUN,))),
+        ("agent_run checks excluding 5d (user-simulator deviations)",
+         defective_tasks(audit, ids, USER_SIM_CHECKS, methods=(AGENT_RUN,)))]
+    for label, k in split:
+        L.append(f"| defective tasks, sampled tasks, {label} | {fmt_share(k, n)} |")
+    k_new = None if empty else agent_run_only_tasks(audit, ids)
+    L.append("| tasks whose only confirmed defects come from agent_run checks (new versus the static phase) | "
+             + ("no rows yet" if empty else fmt_share(k_new, n)) + " |")
     k_ex = None if empty else defective_tasks(audit, ids, NOOP_CHECKS)
     L.append("| defective tasks, sampled tasks, excluding the documented no-op class (checks 2a, 2b) | "
              + ("no rows yet" if empty else fmt_share(k_ex, n)) + " |")
@@ -215,6 +255,9 @@ def build_markdown(audit, scan, sample, runs=None) -> str:
         for c, name in CATEGORIES.items():
             L.append(f"| {c} {name} | {fmt_share(conf[c], n)} |")
             notes += rule_of_three(conf[c], n, f"category {c} {name}")
+        L += ["", "Table 2b. Confirmed defect rows by check (all methods)", "",
+              "| check | defect rows (high/medium) | sampled tasks |", "|---|---|---|"]
+        L += [f"| {c} | {r} | {t}/{n} |" for c, r, t in rows_per_check(audit, ids)]
         low_t, low_r = per_category(audit, ids, {"low"}), rows_per_category(audit, ids, {"low"})
         L += ["", "Table 3. Low-severity defects, by category (informational)", "",
               "| category | rows | sampled tasks |", "|---|---|---|"]
@@ -277,7 +320,7 @@ def run(root: Path = ROOT) -> str:
 def selftest():
     ids = [str(i) for i in range(1, 21)]
     cols = ["task_id", "category", "check", "defect", "severity", "skeptic_ok"]
-    fake = pd.DataFrame([
+    static = pd.DataFrame([
         ["1", "2", "2b", "1", "high", "1"],     # task 1: two cat-2 rows -> counted once
         ["1", "2", "2c", "1", "medium", ""],
         ["1", "4", "4a", "1", "medium", "1"],
@@ -290,14 +333,29 @@ def selftest():
         ["0", "1", "1a", "1", "high", "1"],     # task 0: outside sample -> ignored
         ["ALL", "6", "6a", "1", "high", "1"],   # benchmark-wide row -> not a sampled task
     ], columns=cols).astype(str)
-    assert defective_tasks(fake, ids) == 5
-    assert defective_tasks(fake, ids, NOOP_CHECKS) == 4
-    assert defective_tasks_noop_free(fake, ids, ["11", "12"]) == 3  # tasks 1, 10, 14
+    static["method"] = "static"
+    agent = pd.DataFrame([
+        ["5", "5", "5d", "1", "medium", "1"],   # task 5: only a 5d row -> new versus static, dropped without 5d
+        ["10", "1", "1e", "1", "high", ""],     # task 10: already defective statically -> not new
+        ["7", "5", "5c", "0", "", ""],          # task 7: agent_run non-defect -> ignored
+    ], columns=cols).astype(str)
+    agent["method"] = AGENT_RUN
+    fake = pd.concat([static, agent], ignore_index=True)
+    assert defective_tasks(static, ids) == 5
+    assert defective_tasks(fake, ids) == 6
+    assert defective_tasks(fake, ids, NOOP_CHECKS) == 5
+    assert defective_tasks_noop_free(fake, ids, ["11", "12"]) == 4  # tasks 1, 5, 10, 14
+    assert defective_tasks(fake, ids, exclude_methods=(AGENT_RUN,)) == 5
+    assert defective_tasks(fake, ids, methods=(AGENT_RUN,)) == 2       # tasks 5, 10
+    assert defective_tasks(fake, ids, USER_SIM_CHECKS, methods=(AGENT_RUN,)) == 1  # task 10
+    assert agent_run_only_tasks(fake, ids) == 1                        # task 5
+    assert rows_per_check(fake, ids) == [("1e", 1, 1), ("2a", 1, 1), ("2b", 1, 1), ("2c", 1, 1), ("2d", 1, 1),
+                                         ("2k", 2, 2), ("4a", 1, 1), ("5d", 1, 1)], rows_per_check(fake, ids)
     conf = per_category(fake, ids)
-    assert conf == {1: 0, 2: 5, 3: 0, 4: 1, 5: 0, 6: 0}, conf
+    assert conf == {1: 1, 2: 5, 3: 0, 4: 1, 5: 1, 6: 0}, conf
     assert per_category(fake, ids, {"low"})[1] == 1
     assert rows_per_category(fake, ids, {"low"}) == {1: 1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
-    assert unverified_rows(fake) == 2
+    assert unverified_rows(fake) == 3
     assert fmt_share(23, 50) == "23/50 = 0.460 [0.330, 0.596]"
     assert fmt_share(7, 20) == "7/20 = 0.350 [0.181, 0.567]"
     assert rule_of_three(0, 20, "x")[0].endswith("3/20 = 0.150")
