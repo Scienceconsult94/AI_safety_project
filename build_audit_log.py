@@ -105,7 +105,9 @@ def main() -> int:
                           + [RES / "review_ALL.csv", RES / "review_overrides.csv", RES / "haiku_pass.csv",
                              RES / "review_agent.csv"], sample, commit)
     # skeptic verdicts
-    verdicts = {(r["task_id"], r["check"]): r for r in read(RES / "skeptic_verdicts.csv")}
+    verdicts = {}
+    for p in sorted(RES.glob("skeptic_verdicts*.csv")):  # skeptic_verdicts.csv (static phase), skeptic_verdicts_agent.csv (agent runs)
+        verdicts.update({(r["task_id"], r["check"]): r for r in read(p)})
     for r in rows:
         v = verdicts.get((r["task_id"], r["check"]))
         if v and r["defect"] == "1":
@@ -116,6 +118,11 @@ def main() -> int:
     dedup = {}
     for r in rows:
         dedup[(r["task_id"], r["check"])] = r
+    # every agent_run row carries the task's haiku_pass (k/n from the 1f row, agent_rows.py)
+    hp = {t: r["haiku_pass"] for (t, c), r in dedup.items() if c == "1f" and r["haiku_pass"]}
+    for (t, c), r in dedup.items():
+        if r["method"] == "agent_run" and not r["haiku_pass"]:
+            r["haiku_pass"] = hp.get(t, "")
     rows = sorted(dedup.values(), key=lambda r: (r["task_id"] == "ALL", int(r["task_id"]) if r["task_id"].isdigit() else 0, r["check"]))
     with open(ROOT / "audit_log.csv", "w", newline="", encoding="utf-8") as fp:
         w = csv.DictWriter(fp, fieldnames=COLS)
