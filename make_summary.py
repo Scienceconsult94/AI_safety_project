@@ -57,6 +57,13 @@ def defective_tasks(audit, ids, exclude_checks=()) -> int:
     return rows.loc[~rows["check"].isin(exclude_checks), "task_id"].nunique()
 
 
+def defective_tasks_noop_free(audit, ids, noop_ids) -> int:
+    """Defective tasks after dropping no-op-derived rows: check 2a/2b, or 2k on a task with noop_pass=1."""
+    rows = defect_rows(audit, ids, CONFIRMED)
+    derived = rows["check"].isin(NOOP_CHECKS) | ((rows["check"] == "2k") & rows["task_id"].isin(set(noop_ids)))
+    return rows.loc[~derived, "task_id"].nunique()
+
+
 def per_category(audit, ids, severities=CONFIRMED) -> dict:
     """Category -> number of distinct tasks in `ids` with >=1 matching defect row."""
     rows = defect_rows(audit, ids, severities)
@@ -109,6 +116,11 @@ def build_markdown(audit, scan, sample) -> str:
     k_ex = None if empty else defective_tasks(audit, ids, NOOP_CHECKS)
     L.append("| defective tasks, sampled tasks, excluding the documented no-op class (checks 2a, 2b) | "
              + ("no rows yet" if empty else fmt_share(k_ex, n)) + " |")
+    noop_ids = scan.loc[scan["noop_pass"] == 1, "task_id"]
+    k_nf = None if empty else defective_tasks_noop_free(audit, ids, noop_ids)
+    L.append("| defective tasks, sampled tasks, excluding every defect that derives from the no-op design "
+             "(checks 2a, 2b, and 2k rows on tasks with noop_pass = 1 in results/static_scan.csv) | "
+             + ("no rows yet" if empty else fmt_share(k_nf, n)) + " |")
     L.append(f"| no-op pass, all airline tasks | {fmt_share(k_all, n_all)} |")
     L.append(f"| no-op pass, sampled tasks | {fmt_share(k_s, n_s)} |")
     L.append(f"| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | {unverified_rows(audit)} |")
@@ -121,6 +133,7 @@ def build_markdown(audit, scan, sample) -> str:
         k_def = defective_tasks(audit, ids)
         notes += rule_of_three(k_def, n, "defective tasks")
         notes += rule_of_three(k_ex, n, "defective tasks excluding checks 2a, 2b")
+        notes += rule_of_three(k_nf, n, "defective tasks excluding no-op-derived defects")
         conf = per_category(audit, ids)
         L += ["", "Table 2. Sampled tasks with ≥1 confirmed defect (high/medium), by category", "",
               "| category | share of sampled tasks |", "|---|---|"]
@@ -194,15 +207,18 @@ def selftest():
         ["1", "4", "4a", "1", "medium", "1"],
         ["10", "2", "2d", "1", "medium", ""],   # task 10: defective
         ["11", "2", "2a", "1", "high", "1"],    # task 11: only a 2a row -> excluded from no-op-free share
+        ["12", "2", "2k", "1", "high", "1"],    # task 12: 2k on a no-op task -> no-op-derived
+        ["14", "2", "2k", "1", "medium", "1"],  # task 14: 2k on a non-no-op task -> still counts
         ["3", "1", "1a", "1", "low", ""],       # task 3: low only -> not defective
         ["3", "5", "5a", "0", "", ""],
         ["0", "1", "1a", "1", "high", "1"],     # task 0: outside sample -> ignored
         ["ALL", "6", "6a", "1", "high", "1"],   # benchmark-wide row -> not a sampled task
     ], columns=cols).astype(str)
-    assert defective_tasks(fake, ids) == 3
-    assert defective_tasks(fake, ids, NOOP_CHECKS) == 2
+    assert defective_tasks(fake, ids) == 5
+    assert defective_tasks(fake, ids, NOOP_CHECKS) == 4
+    assert defective_tasks_noop_free(fake, ids, ["11", "12"]) == 3  # tasks 1, 10, 14
     conf = per_category(fake, ids)
-    assert conf == {1: 0, 2: 3, 3: 0, 4: 1, 5: 0, 6: 0}, conf
+    assert conf == {1: 0, 2: 5, 3: 0, 4: 1, 5: 0, 6: 0}, conf
     assert per_category(fake, ids, {"low"})[1] == 1
     assert rows_per_category(fake, ids, {"low"}) == {1: 1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
     assert unverified_rows(fake) == 2
