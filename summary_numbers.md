@@ -37,6 +37,25 @@ Table 3. Low-severity defects, by category (informational)
 | 5 Determinism | 0 | 0/20 |
 | 6 Reporting | 0 | 0/20 |
 
+Table 4. Agent runs (claude-haiku-5-5 agent and user, substring scorer)
+
+| quantity | value |
+|---|---|
+| pass^1, sampled tasks (first 1 trial(s) all reward 1.0) | 16/20 = 0.800 [0.584, 0.919] |
+| pass^2, sampled tasks (first 2 trial(s) all reward 1.0) | 13/20 = 0.650 [0.433, 0.819] |
+| pass^3, sampled tasks (first 3 trial(s) all reward 1.0) | 12/20 = 0.600 [0.387, 0.781] |
+| tasks solved in 0/3 trials | 3/20 = 0.150 [0.052, 0.360] |
+| tasks solved in 1/3 or 2/3 trials (unstable) | 5/20 = 0.250 [0.112, 0.469] |
+| tasks solved in 3/3 trials | 12/20 = 0.600 [0.387, 0.781] |
+| ground-truth agent reaches the target state (reward 1.0) | 11/16 = 0.688 [0.444, 0.858] |
+| Haiku passes ≥1 trial, ground-truth agent fails | 2 |
+| ground-truth agent passes, Haiku 0/3 | 0 |
+| infrastructure_error simulations excluded | 0 |
+
+- ground-truth agent fails on tasks: 7, 16, 23, 32, 44
+- Haiku passes ≥1 trial, ground-truth agent fails: 16, 23
+- ground-truth agent passes, Haiku 0/3: none
+
 Rule of three (k = 0)
 
 - category 1 Solvability: 0/20 → upper bound by the rule of three ≈ 3/20 = 0.150

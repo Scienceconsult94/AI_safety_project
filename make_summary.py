@@ -103,7 +103,82 @@ def noop_counts(scan: pd.DataFrame, ids):
     return int(s["noop_pass"].sum()), len(s), int(scan["noop_pass"].sum()), len(scan)
 
 
-def build_markdown(audit, scan, sample) -> str:
+RUN_FILES = {"haiku": "sample20_pass3_haiku.results.json", "gt": "sample20_gt_haiku.results.json"}
+
+
+def load_runs(root: Path = ROOT):
+    """Return {"haiku": simulations, "gt": simulations} from results/runs, or None if a file is missing."""
+    paths = {k: root / "results" / "runs" / f for k, f in RUN_FILES.items()}
+    if not all(p.exists() for p in paths.values()):
+        return None
+    return {k: json.loads(p.read_text(encoding="utf-8"))["simulations"] for k, p in paths.items()}
+
+
+def _id_key(t: str):
+    return (0, int(t), t) if t.isdigit() else (1, 0, t)
+
+
+def agent_run_stats(runs: dict, ids) -> dict:
+    """Per-task trial outcomes on sampled ids, infrastructure_error simulations excluded."""
+    ids = set(map(str, ids))
+    out, n_infra = {}, 0
+    for key, sims in runs.items():
+        per = {}
+        for s in sims:
+            t = str(s["task_id"])
+            if t not in ids:
+                continue
+            if s.get("termination_reason") == "infrastructure_error":
+                n_infra += 1
+                continue
+            r = (s.get("reward_info") or {}).get("reward")
+            per.setdefault(t, []).append((int(s["trial"]), r is not None and float(r) == 1.0))
+        out[key] = {t: [ok for _, ok in sorted(v)] for t, v in per.items()}
+    h, g = out["haiku"], out["gt"]
+    st = {"infra": n_infra}
+    for k in (1, 2, 3):
+        elig = [t for t, v in h.items() if len(v) >= k]
+        st[f"pass{k}"] = (sum(all(h[t][:k]) for t in elig), len(elig))
+    h3 = {t: sum(v[:3]) for t, v in h.items() if len(v) >= 3}
+    st["n3"] = len(h3)
+    st["s0"] = sum(x == 0 for x in h3.values())
+    st["s12"] = sum(x in (1, 2) for x in h3.values())
+    st["s3"] = sum(x == 3 for x in h3.values())
+    gt_ok = {t: v[0] for t, v in g.items()}
+    st["gt"] = (sum(gt_ok.values()), len(gt_ok))
+    st["gt_fail"] = sorted((t for t, ok in gt_ok.items() if not ok), key=_id_key)
+    st["h_not_gt"] = sorted((t for t, ok in gt_ok.items() if not ok and any(h.get(t, []))), key=_id_key)
+    st["gt_not_h"] = sorted((t for t, ok in gt_ok.items() if ok and t in h3 and h3[t] == 0), key=_id_key)
+    return st
+
+
+def _share(k: int, n: int) -> str:
+    return fmt_share(k, n) if n else f"{k}/0 (no tasks)"
+
+
+def agent_runs_table(runs, ids) -> list:
+    title = "Table 4. Agent runs (claude-haiku-5-5 agent and user, substring scorer)"
+    if runs is None:
+        return ["", title, "", "agent runs: not available"]
+    st = agent_run_stats(runs, ids)
+    n3, ids_ = st["n3"], lambda xs: ", ".join(xs) if xs else "none"
+    L = ["", title, "", "| quantity | value |", "|---|---|"]
+    L += [f"| pass^{k}, sampled tasks (first {k} trial(s) all reward 1.0) | {_share(*st[f'pass{k}'])} |"
+          for k in (1, 2, 3)]
+    L.append(f"| tasks solved in 0/3 trials | {_share(st['s0'], n3)} |")
+    L.append(f"| tasks solved in 1/3 or 2/3 trials (unstable) | {_share(st['s12'], n3)} |")
+    L.append(f"| tasks solved in 3/3 trials | {_share(st['s3'], n3)} |")
+    L.append(f"| ground-truth agent reaches the target state (reward 1.0) | {_share(*st['gt'])} |")
+    L.append(f"| Haiku passes ≥1 trial, ground-truth agent fails | {len(st['h_not_gt'])} |")
+    L.append(f"| ground-truth agent passes, Haiku 0/3 | {len(st['gt_not_h'])} |")
+    L.append(f"| infrastructure_error simulations excluded | {st['infra']} |")
+    L += ["", f"- ground-truth agent fails on tasks: {ids_(st['gt_fail'])}",
+          f"- Haiku passes ≥1 trial, ground-truth agent fails: {ids_(st['h_not_gt'])}",
+          f"- ground-truth agent passes, Haiku 0/3: {ids_(st['gt_not_h'])}"]
+    return L
+
+
+def build_markdown(audit, scan, sample, runs=None) -> str:
     ids = sample["task_ids"]
     n = len(ids)
     k_s, n_s, k_all, n_all = noop_counts(scan, ids)
@@ -144,6 +219,7 @@ def build_markdown(audit, scan, sample) -> str:
         L += ["", "Table 3. Low-severity defects, by category (informational)", "",
               "| category | rows | sampled tasks |", "|---|---|---|"]
         L += [f"| {c} {name} | {low_r[c]} | {low_t[c]}/{n} |" for c, name in CATEGORIES.items()]
+    L += agent_runs_table(runs, ids)
     if notes:
         L += ["", "Rule of three (k = 0)", ""] + notes
     return "\n".join(L) + "\n"
@@ -192,7 +268,7 @@ def run(root: Path = ROOT) -> str:
     audit, scan, sample = load_inputs(root)
     if len(audit) == 0:
         print("no rows yet")
-    md = build_markdown(audit, scan, sample)
+    md = build_markdown(audit, scan, sample, load_runs(root))
     (root / "summary_numbers.md").write_text(md, encoding="utf-8")
     make_figure(audit, scan, sample, root / "fig_defects.png")
     return md
@@ -225,6 +301,26 @@ def selftest():
     assert fmt_share(23, 50) == "23/50 = 0.460 [0.330, 0.596]"
     assert fmt_share(7, 20) == "7/20 = 0.350 [0.181, 0.567]"
     assert rule_of_three(0, 20, "x")[0].endswith("3/20 = 0.150")
+    # Table 4 on two tiny synthetic results.json files
+    import tempfile
+
+    def sim(t, trial, r, term="user_stop"):
+        return {"task_id": t, "trial": trial, "reward_info": {"reward": r}, "termination_reason": term}
+    haiku = [sim(t, i, r) for t, rs in {"1": [1.0] * 3, "2": [1.0, 0.0, 1.0], "3": [0.0] * 3}.items()
+             for i, r in enumerate(rs)]
+    haiku += [sim("3", 3, 1.0, "infrastructure_error"), sim("99", 0, 1.0)]  # excluded / outside sample
+    gt = [sim("1", 0, 1.0), sim("2", 0, 0.0), sim("3", 0, 1.0)]
+    with tempfile.TemporaryDirectory() as td:
+        rd = Path(td) / "results" / "runs"
+        rd.mkdir(parents=True)
+        assert load_runs(Path(td)) is None
+        for key, sims in (("haiku", haiku), ("gt", gt)):
+            (rd / RUN_FILES[key]).write_text(json.dumps({"simulations": sims}), encoding="utf-8")
+        st = agent_run_stats(load_runs(Path(td)), ids)
+    assert st["pass1"] == (2, 3) and st["pass3"] == (1, 3), st
+    assert st["gt"] == (2, 3) and st["gt_fail"] == ["2"], st
+    assert st["h_not_gt"] == ["2"] and st["gt_not_h"] == ["3"] and st["infra"] == 1, st
+    assert "agent runs: not available" in "\n".join(agent_runs_table(None, ids))
     print("selftest passed")
 
 
