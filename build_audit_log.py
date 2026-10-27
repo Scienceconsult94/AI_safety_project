@@ -103,7 +103,7 @@ def main() -> int:
     rows = static_rows(read(RES / "static_scan.csv"), sample, commit)
     rows += reviewer_rows([RES / "review_2h.csv"] + sorted(RES.glob("review_batch_*.csv"))
                           + [RES / "review_ALL.csv", RES / "review_overrides.csv", RES / "haiku_pass.csv",
-                             RES / "review_agent.csv"], sample, commit)
+                             RES / "review_agent.csv", RES / "review_agent_overrides.csv"], sample, commit)
     # skeptic verdicts
     verdicts = {}
     for p in sorted(RES.glob("skeptic_verdicts*.csv")):  # skeptic_verdicts.csv (static phase), skeptic_verdicts_agent.csv (agent runs)
@@ -111,7 +111,11 @@ def main() -> int:
     for r in rows:
         v = verdicts.get((r["task_id"], r["check"]))
         if v and r["defect"] == "1":
-            r["skeptic_ok"] = v["skeptic_ok"].strip()
+            ok = v["skeptic_ok"].strip()
+            # a skeptic row "should be defect=1" on a row that has since been set to defect=1 counts as confirmation
+            if ok == "0" and v.get("note", "").strip().lower().startswith("should be defect=1"):
+                ok = "1"
+            r["skeptic_ok"] = ok
             if v.get("note"):
                 r["note"] = (r["note"] + "; skeptic: " + v["note"].strip()).strip("; ")
     # duplicates: keep the last occurrence (later files override earlier ones)
