@@ -1,0 +1,28 @@
+task_id,check,skeptic_ok,note
+1,2a,1,"Holds: actions are READ-only and communicate_info=[], so target=initial (124e39a6, reproduced by a stdlib re-implementation). Documented design choice (docs/evaluation.md)."
+1,2b,1,"Holds: empty trajectory scores 1.0 (DB 1.0 x COMMUNICATE 1.0); in-process call, not the checklist's evaluate-trajs path; same outcome by code. Agrees with 2a."
+3,2g,1,Holds: '4' is matched in any assistant turn; flight date 2024-05-16 (all DB dates are 2024) and fare 149 give natural matches. No trajectory searched; 2b branch negative; 'near-certain' overstated.
+8,4c,1,"Holds: get_dict_hash keeps list order; [Kevin, Sophia] hashes c6e939a7 vs target 00766aa3 (emulated). Order-only, same class as 2h but filed as 4c; low likelihood."
+9,2a,1,"Holds: the only action is search_direct_flight (READ) and communicate_info=[], so target=initial (reproduced)."
+9,2b,1,"Holds: empty trajectory scores 1.0 (DB 1.0 x COMMUNICATE 1.0); in-process call, not the checklist's evaluate-trajs path; same outcome by code. Agrees with 2a."
+9,2k,1,Holds: skipping the JFK-MCO search (e.g. stating 'no nonstop' unchecked) keeps DB=initial with no strings: 1.0. Implied by the 2a/2b no-op pass; READ steps are non-required by design.
+10,2a,1,"Holds: actions=[] and communicate_info=[], so target=initial."
+10,2b,1,"Holds: empty trajectory scores 1.0 (DB 1.0 x COMMUNICATE 1.0); in-process call, not the checklist's evaluate-trajs path; same outcome by code. Agrees with 2a."
+10,2k,1,"Holds: cheapest May-24 business IAH-SEA is HAT190+HAT047=666; partial offer (666-265)x3=1203>=1000, user declines, no write, 1.0. An executed upgrade is a write and is caught."
+20,4c,1,"Holds: payment_history copies payment_methods in call order; [card 5, cert 250] hashes 5332159e vs target a561da60 (emulated). Order-only (2h class); the profile lists the card first."
+23,2h,1,Holds: emulated sweep reproduces probe_2h.csv: 20/23 orders differ; only 1023/1203/1230 (cancel moved) keep the hash. Scenario and policy leave booking order open.
+23,4c,1,Holds: booking order (same finding as 23/2h) and payment-list order (reordered first booking hashes 5f24be24 vs b46d1bed). Order-only; double-counts 23/2h.
+23,4e,1,Holds: nl 4 says 'outbound flights HAT023 and HAT204 on 2024-05-26'; action 23_1 books HAT204 (SFO-SEA) on 2024-05-28 as a return leg. No reward effect: nl_assertions unscored.
+26,2a,1,"Holds: actions=[] and communicate_info=[], so target=initial."
+26,2b,1,"Holds: empty trajectory scores 1.0 (DB 1.0 x COMMUNICATE 1.0); in-process call, not the checklist's evaluate-trajs path; same outcome by code. Agrees with 2a."
+28,2a,1,"Holds: actions=[] and communicate_info=[], so target=initial."
+28,2b,1,"Holds: empty trajectory scores 1.0 (DB 1.0 x COMMUNICATE 1.0); in-process call, not the checklist's evaluate-trajs path; same outcome by code. Agrees with 2a."
+32,4c,1,"Holds: step 1 +396 (gift cards 183/224 raise), step 2 -510; refund to either gift card is accepted and allowed by policy line 131; hashes c40c29e3/e874ca80 vs caea5724."
+44,2k,1,"Holds: communicate_info=[] and no budget limit, so 3 correct upgrades with a wrong or missing total (reference 484+163+740=1387) reach target 0c788749: 1.0. Real authoring gap."
+44,4a,1,Holds: 'under or equal to 3 hours (including layovers)' vs 44_19 upgrading KC18K6 (HAT300 06-09 + HAT215 11-13 = 7h). Layover reading hashes cae93edd != target. At least ambiguous.
+44,4c,1,"Holds: H8Q05L +163 <= gift_card_5094406 (274), tool accepts, hash 3af7f243 != 0c788749. NM1VX1 (484) and KC18K6 (740) raise on that card; certificates are rejected for updates."
+46,2a,1,"Holds: actions=[] and communicate_info=[], so target=initial."
+46,2b,1,"Holds: empty trajectory scores 1.0 (DB 1.0 x COMMUNICATE 1.0); in-process call, not the checklist's evaluate-trajs path; same outcome by code. Agrees with 2a."
+46,2k,1,Holds: no tool edits insurance; a verbal refund offer or a false 'done' without a write keeps DB=initial: 1.0. The same pattern was judged 0 for tasks 26 and 28 (inconsistent).
+48,2a,1,"Holds: the only action is get_reservation_details (READ) and communicate_info=[], so target=initial."
+48,2b,1,"Holds: empty trajectory scores 1.0 (DB 1.0 x COMMUNICATE 1.0); in-process call, not the checklist's evaluate-trajs path; same outcome by code. Agrees with 2a."
