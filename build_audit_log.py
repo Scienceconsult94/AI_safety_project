@@ -7,7 +7,8 @@ Inputs (all under results/ unless noted):
   review_batch_*.csv     per-task reviewer verdicts for 1d,2g,2k,4a-4e (same columns)
   review_ALL.csv         benchmark-level static rows, task_id = ALL   (same columns)
   review_overrides.csv   rows that replace reviewer rows after skeptic review (same columns)
-  haiku_pass.csv         optional: task_id,check,haiku_pass,defect,severity,evidence,note from agent runs
+  haiku_pass.csv         optional: task_id,check,haiku_pass,defect,severity,evidence,note from agent runs (agent_rows.py)
+  review_agent.csv       optional: reviewer verdicts on failed/flipped trajectories (4f, 5c, 5d, 1e triage); read last
   skeptic_verdicts.csv   optional: task_id,check,skeptic_ok,note  (results-skeptic review of medium/high rows)
 Output: audit_log.csv (schema.md), then validate_audit_log.py is run.
 Usage (from ==Project):  python -I build_audit_log.py
@@ -101,7 +102,8 @@ def main() -> int:
     sample, commit = set(sample_json["task_ids"]), sample_json["bench_commit"]
     rows = static_rows(read(RES / "static_scan.csv"), sample, commit)
     rows += reviewer_rows([RES / "review_2h.csv"] + sorted(RES.glob("review_batch_*.csv"))
-                          + [RES / "review_ALL.csv", RES / "review_overrides.csv", RES / "haiku_pass.csv"], sample, commit)
+                          + [RES / "review_ALL.csv", RES / "review_overrides.csv", RES / "haiku_pass.csv",
+                             RES / "review_agent.csv"], sample, commit)
     # skeptic verdicts
     verdicts = {(r["task_id"], r["check"]): r for r in read(RES / "skeptic_verdicts.csv")}
     for r in rows:
