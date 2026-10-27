@@ -15,7 +15,7 @@ $ids = (Get-Content (Join-Path $root "sample.json") -Raw -Encoding utf8 | Conver
 Write-Output ("task ids ({0}): {1}" -f $ids.Count, ($ids -join " "))
 
 Push-Location $bench
-if (git apply --check ..\patches\nl_judge_haiku.patch 2>$null) { git apply ..\patches\nl_judge_haiku.patch; Write-Output "patch applied: nl_judge_haiku" }
+# The NL-assertion judge is not invoked by `tau2 run` at v2.0.0 (EvaluationType.ALL default, src/tau2/runner/batch.py); patches/ stays unapplied.
 
 $common = @("--domain","airline","--task-split-name","base","--task-ids") + $ids + @(
     "--user","user_simulator","--user-llm","anthropic/claude-haiku-5-5",

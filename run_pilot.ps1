@@ -11,9 +11,8 @@ $uv    = Join-Path $env:USERPROFILE ".local\bin\uv.exe"
 if (-not (Test-Path (Join-Path $bench ".env")) -and -not (Test-Path (Join-Path $root ".env"))) {
     Write-Output "STOP: no .env found (tau2-bench\.env or ==Project\.env). No API call made."; exit 2
 }
-# Recorded deviation: diagnostic NL-assertion judge -> Haiku (see patches/README.md). Idempotent.
 Push-Location $bench
-if (git apply --check ..\patches\nl_judge_haiku.patch 2>$null) { git apply ..\patches\nl_judge_haiku.patch; Write-Output "patch applied: nl_judge_haiku" } else { Write-Output "patch already applied (or does not apply) - verify with: git diff src/tau2/config.py" }
+# The NL-assertion judge is not invoked by `tau2 run` at v2.0.0 (EvaluationType.ALL default, src/tau2/runner/batch.py); patches/ stays unapplied.
 
 & $uv run --no-sync tau2 run `
     --domain airline --task-split-name base --num-tasks 5 --num-trials 1 `

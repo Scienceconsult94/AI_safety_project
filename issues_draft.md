@@ -4,3 +4,4 @@ Rules: aggregates and reproducible rules only; no scorer-bypass recipes here (th
 
 | id | task_id(s) | category | one-line summary | evidence (path / rule) | status |
 |---|---|---|---|---|---|
+| I1 | ALL | 6 (reporting) | `docs/evaluation.md` says the CLI runner uses `EvaluationType.ALL_WITH_NL_ASSERTIONS` by default; at v2.0.0 the runner default is `EvaluationType.ALL` (`src/tau2/runner/batch.py:367`, `src/tau2/runner/simulation.py:23`), so `nl_assertions` are never evaluated by `tau2 run` and the configured NL judge model is never called | docs/evaluation.md, section "How to inspect action correctness anyway" vs src/tau2/runner/batch.py:367 | draft, low |
