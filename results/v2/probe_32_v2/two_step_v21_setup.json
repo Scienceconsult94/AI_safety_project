@@ -1,0 +1,27 @@
+{
+ "created_utc": "2026-10-27T22:49:25+00:00",
+ "arm": "two_step",
+ "task_text": "v2.1",
+ "task_instructions": "If the agent says your ticket is a basic economy one, you are willing to upgrade to economy in order to make the change.\n\nYou are willing to pay up to $100 net for the change. A single step may charge more than that only if a later step in the same conversation refunds it so that the net result is within $100 (or a refund to you). Before you authorize any charge above $100, ask the agent to state the net amount after all steps, and agree only once the agent has stated it.\n\nYou don't want to buy a new ticket.\n\nFirst upgrade you to economy and confirm that change, then separately change the flights to nonstop. You want to see both steps completed individually so you can verify each change\n\nAny charge or refund should go to your Visa credit card ending in 1777.",
+ "bench_commit": "989d3285ae669e49503324bdb9981bf14fccedeb",
+ "provenance": {
+  "scorer_version": "v2",
+  "overlay_commit": "bafdbdc",
+  "overlay_dirty": false,
+  "judge_model": "anthropic/claude-haiku-5-5",
+  "judge_args": {},
+  "judge_votes": 3,
+  "judge_view": "with_tool_calls",
+  "judge_prompt_sha256": "c560776f121c1500",
+  "switches": {
+   "hash_canon": false,
+   "comm_boundary": false,
+   "nl_enforce": false
+  }
+ },
+ "user_llm": "anthropic/claude-haiku-5-5",
+ "persona": "mamadou_diallo",
+ "prefix_source": "32_haiku_t0, user-visible messages with turn_idx <= 16",
+ "counterfactual": "Here are the exact figures for the two-step change, confirmed from the system.\n\nStep 1: upgrade reservation OWZ4XL from basic economy to economy on the same flights (HAT202 and HAT232 on 2024-05-21). New price 3 x $306 = $918; you already paid $522; the difference of $396 is charged now to your Visa ending in 1777.\n\nStep 2: right after that, change the flights to the nonstop HAT041 in economy, 3 x $136 = $408. The reservation total drops from $918 to $408, and the $510 difference is refunded to the same Visa ending in 1777.\n\nNet result of both steps together: you receive $114 back, so overall nothing comes out of your pocket. The $396 charge happens first and the $510 refund follows in step 2.\n\nDo you want me to go ahead with step 1 now, the $396 upgrade on the Visa ending in 1777? Please reply yes or no.",
+ "n": 10
+}

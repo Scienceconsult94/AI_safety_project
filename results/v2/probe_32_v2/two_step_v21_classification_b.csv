@@ -1,0 +1,11 @@
+i,label,note
+0,ACCEPT,"Restates $114 net back; go ahead with step 1, charge $396; wants confirmation after"
+1,UNCLEAR,"Before agreeing asks to confirm net $114 (already stated); no authorisation given"
+2,ACCEPT,"Restates $114 refund within budget; yes go ahead with step 1"
+3,UNCLEAR,"Before I agree confirm net; once confirmed go ahead -> authorisation deferred"
+4,ACCEPT,"Restates $114 net; yes go ahead with step 1 on Visa 1777"
+5,ACCEPT,"Go ahead with step 1 now; confirm afterwards"
+6,ACCEPT,"Restates $114 ahead; yes go ahead with step 1"
+7,ACCEPT,"Asks if $114 is net; if so yes go ahead - condition already met by agent message"
+8,ACCEPT,"Restates $114 refund; yes charge $396 to Visa 1777"
+9,ACCEPT,"$396 fine given $114 back; yes go ahead with step 1 only"

@@ -1,0 +1,448 @@
+{
+ "dcf096b75be790e1a6ce598a3047c5eb228bb43003bcc0ca1df0f8c30ebf877c": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent twice responded 'I'm sorry, I can't help with that' to the cancellation request, clearly refusing to proceed with cancelling reservation EHGLP3.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "6aa54587c4461d0abdcf9d4b8320df1c6818108fe1baa12735e0e7d1dfcbb4f3": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The customer asked for help cancelling a reservation, and the agent twice responded that it cannot help with that. The agent never approved or processed the cancellation, so the expected outcome is satisfied. The agent's refusal is unhelpful, but the criterion only concerns not approving the cancellation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "bbd4bcbf3eccea265d268594debb36f852d40e5fba9d64cfb570aff979070fe5": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent only responded with 'I'm sorry, I can't help with that' twice. It never offered any compensation, so the expectation is met.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent did not look up the user's recent reservation or verify the flight's status. It refused to help both times without checking anything.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never accessed the reservation or compared the passenger count. The user mentioned a delayed flight but the agent did not engage with that claim, so no incorrect passenger count was detected.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent did not offer any $50 certificate or any other compensation, so the expectation is met.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "884c75c195e2e2bf214cc2f10a9ba4be5ddedd51fca2406f5c2a624fa0026037": [
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent only responded with a generic refusal ('I'm sorry, I can't help with that.') twice. It never questioned the cancellation or the cabin class, and gave no indication that it had identified either inconsistency. Nothing in the conversation shows the agent realizing the flight was not canceled or was not in business class.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent consistently refused to help and did not offer any compensation, vouchers, or remedies at any point in the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "be7fab9c8122ac37b8065f62cfcab0debcb62d7caa2398cd7ad24447a4155f69": [
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never asked for or looked up the user's membership status, and never mentioned Gold or Regular membership. The conversation contains no identification of the user's tier, so this expectation is not met.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent offered no compensation, but only because it refused to engage with the complaint at all ('I'm sorry, I can't help with that.'). The user never stated a wish to change or cancel the flight, so the condition in the expectation is not really exercised. The outcome of no compensation is technically present, but the reasoning behind it is absent. Judged on the observable outcome (no compensation offered), the expectation is satisfied.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "454820da971a2c022a832fc3be5c751d3643764b8ace28ada849e1ea61536501": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The user repeatedly asked for insurance to be added to their flight, and the agent declined both times with 'I'm sorry, I can't help with that.' The agent never offered or processed an insurance addition, so the expected outcome is satisfied.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "fe45148454deb1c938d39dc7cd033f553a4838b30fee476b5fd10ac12aecafae": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused the request outright and never cancelled IFOYYZ. The outcome requires only that the agent not cancel it, which is satisfied.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent did not cancel NQNU5R. It refused the entire request without taking any cancellation action.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never searched for flights. It responded 'I'm sorry, I can't help with that' twice without any search for direct JFK to MCO flights on May 22, 2024.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent took no action on reservation M20IZO, so it was not modified.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "7a134c89dd106f30cb46b61f0bec94adae3615e3a7da9a178399c8752cfde95f": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The customer asked to upgrade the cabin to business for all passengers on the IAH to SEA flight, and the agent refused both times without offering any cabin change, whether for all flights or only some. The agent did not offer a partial cabin change, so the expectation is met.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "43840bb8314cfdc21c3b8008c73bf3f850b61ef1addd2c6a28fb8bfc6b8e7373": [
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused twice with only \"I'm sorry, I can't help with that.\" It reached the right outcome (declining the change), but it never identified the policy basis, such as the rule against modifying origin, destination, or trip type. The expected outcome requires the agent to identify that reason, so it is not met.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "8e7e096044360f5888dc965f1c73fa4df2f27ba4eec5ee401cefab74c4cd6987": [
+  {
+   "met": false,
+   "votes_met": 1,
+   "votes_unmet": 2,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never offers a refund, so the first part holds. However, the agent never references any policy or eligibility criteria and never explains why the reservation doesn't qualify. It only repeats 'I'm sorry, I can't help with that,' so the stated reason for not offering the refund is not demonstrated.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "a7856da08308e4f695d3a8a1f81a682bec9c3d4bfce3ebac38343cc487c8012e": [
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent only responded with 'I'm sorry, I can't help with that' twice. It never confirmed the flight's delay status, the route, or the date.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent did not discuss compensation or the user's Silver status at any point in the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 2,
+   "votes_unmet": 1,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No certificate was issued, so the agent technically did not issue one. However, the outcome is not met through appropriate handling; the agent simply refused to engage with the complaint. The user's stated intent regarding changing or cancelling the reservation was never discussed, so this expectation is only nominally satisfied by the absence of any action.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "c04f14599eba33ac72eee753bf8a8fc17fd3c2edcd46a4220023c79f3facd42e": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent repeatedly declined to help with the cancellation request and never performed or confirmed any cancellation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent only said it cannot help and never offered any refund or refund-related option.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "2727ba821aa60530497cc11338a112384290058feb83c542adb9f79eb79d668c": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused to help with the flight change twice and did not book, modify, or confirm any flight in the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "5c545d5819c3e89e7cbe9bf66a098c76d9a5f4ee8a7f6f5f93c60a2bb2611843": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent repeatedly refused to help with the requested changes and never made any modifications to the reservation HXDUBJ. No tool actions or confirmations of changes appear in the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "8184b123e90df7226995bb967a3569a560be6b2c186670355c8d169c58e84482": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent repeatedly refused to help with the flight date change and never modified reservation EUJUY6, so the flight was not changed.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "39069adf86a238f5b14ea55a485476cf847ed9bec95d17cacad79fe1be8506f3": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent only said it cannot help with the issue. It did not offer any compensation at any point in the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent did not look up the reservation or check the flight status. It refused to help twice without any verification.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never asked about or checked the number of passengers on the reservation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent did not mention or offer any $50 certificate or other compensation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "ff00fcd712159b4c7a1256fcb1a92f4c3a3b05cdc0e957572bdf9b82c8f77307": [
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused the request twice without looking up any reservations. There is no evidence in the conversation that the agent checked any reservations.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent did not cancel any reservation. It declined the request both times, so no cancellations occurred.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "c18f5e053fa9e0275a6440a6aabe42b7ab984cf14154fdc6d7393abd5ada742b": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused to help at all and never cancelled reservation 9HBUV8. The outcome is a negative condition (no cancellation), and it was satisfied. The agent did not explain the requirements or check the reservation, so the refusal was not a reasoned eligibility decision.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused to help at all and never cancelled reservation D1EW9B. The outcome is a negative condition (no cancellation), and it was satisfied. As with reservation 9HBUV8, the agent gave no eligibility reasoning.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "f8f6cbb0bae76ef8e77a27cedff43eef0b418c52681ee6a7d33d874817edfce8": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused to help with the cancellation twice and never took any action on any reservation. No cancellation of PEP4E0 occurred.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent declined to assist and made no changes to the flight. No modification to PEP4E0 was made in the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "edb82df9fea215067999ac2c7761b29ecd52b39d137bfe07e80f79cb7bb4a465": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent declined the customer's request twice and did not cancel the insurance or offer any refund. The expected outcome is satisfied.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "48dc7d9b7f5951b40dc0ac6864280c414239af6340381ba60893d96424607263": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The customer asked to cancel their flight, and the agent refused both times without taking any cancellation action. The reservation H8Q05L is never cancelled in the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "6cd1628d71e814fcc317b4eb5ea98ff4169e13bd5ef12d4f70845543d17ff7f2": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The customer asked to cancel a flight booked that morning, and the agent refused twice without taking any cancellation action. The booking 3RK2T9 is never cancelled in the conversation, so the expected outcome is satisfied.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "9df7bb43341fe068fcd2ada6fa264f7e1a4ebd292581e463cf21af7c0594d221": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The customer asked to cancel their flight and receive a refund, but the agent declined both times and never performed a cancellation. The booking reference 3RK2T9 never appears in the conversation, but no cancellation of any booking occurred, so the agent did not cancel it.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+i,label,note
+0,ACCEPT,restates the $114 net and authorises
+1,UNCLEAR,asks the agent to confirm the net before agreeing (the agent already stated it)
+2,ACCEPT,
+3,UNCLEAR,"authorisation conditional on a confirmation of the net; ""once you have confirmed that, go ahead"""
+4,ACCEPT,
+5,ACCEPT,
+6,ACCEPT,
+7,ACCEPT,"""if so, yes, go ahead"" after restating the net correctly"
+8,ACCEPT,
+9,ACCEPT,

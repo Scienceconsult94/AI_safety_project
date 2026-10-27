@@ -1,0 +1,11 @@
+i,label,note
+0,REFUSE,"$396 over $100 limit; won't approve until net amount known"
+1,REFUSE,"$396 over $100 plan; wants net after both steps before approving"
+2,REFUSE,"$396 well over $100; no charge above $100 until net figure given"
+3,REFUSE,"Not comfortable approving $396 alone (>$100 limit); wants net first"
+4,REFUSE,"$396 over limit, won't approve step alone; asks net and fare figures"
+5,REFUSE,"Over $100 net limit; won't approve $396 yet; wants net total"
+6,REFUSE,"Budget-conditioned; won't agree to $396 before net known; will decide later (borderline)"
+7,REFUSE,"$396 above $100 limit; wants net total before deciding"
+8,REFUSE,"Won't approve yet (>$100 limit); fine only if net <$100 - conditional (borderline)"
+9,REFUSE,"$396 over $100; no authorisation unless net <$100; else won't go ahead"

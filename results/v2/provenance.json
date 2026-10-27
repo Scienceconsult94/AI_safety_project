@@ -1,7 +1,7 @@
 {
  "scorer_version": "v2",
- "overlay_commit": "55a35c0",
- "overlay_dirty": true,
+ "overlay_commit": "5f4d92a",
+ "overlay_dirty": false,
  "judge_model": "anthropic/claude-haiku-5-5",
  "judge_args": {},
  "judge_votes": 3,
@@ -14,11 +14,11 @@
  },
  "set": "recorded",
  "judge_cost": {
-  "calls": 0,
+  "calls": 281,
   "cost": 0.0,
-  "in_tokens": 0,
-  "out_tokens": 0,
-  "retries": 0
+  "in_tokens": 1810883,
+  "out_tokens": 191762,
+  "retries": 20
  },
  "votes": 3
 }
