@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parent
 CATEGORIES = {1: "Solvability", 2: "Scoring validity", 3: "Isolation and leaks",
               4: "Specification clarity", 5: "Determinism", 6: "Reporting"}
 CONFIRMED = {"high", "medium"}
+NOOP_CHECKS = ("2a", "2b")  # documented no-op class
 
 
 def load_inputs(root: Path = ROOT):
@@ -40,6 +41,7 @@ def normalize(audit: pd.DataFrame) -> pd.DataFrame:
     a["category"] = pd.to_numeric(a["category"], errors="coerce")
     a["severity"] = a["severity"].astype(str).str.strip().str.lower()
     a["skeptic_ok"] = a["skeptic_ok"].astype(str).str.strip()
+    a["check"] = a["check"].astype(str).str.strip().str.lower()
     return a
 
 
@@ -49,9 +51,10 @@ def defect_rows(audit: pd.DataFrame, ids, severities) -> pd.DataFrame:
     return a[(a["defect"] == 1) & a["severity"].isin(severities) & a["task_id"].isin(set(ids))]
 
 
-def defective_tasks(audit, ids) -> int:
-    """Number of distinct tasks in `ids` that are defective (each task counted once)."""
-    return defect_rows(audit, ids, CONFIRMED)["task_id"].nunique()
+def defective_tasks(audit, ids, exclude_checks=()) -> int:
+    """Distinct defective tasks in `ids` (each counted once), ignoring rows whose check is excluded."""
+    rows = defect_rows(audit, ids, CONFIRMED)
+    return rows.loc[~rows["check"].isin(exclude_checks), "task_id"].nunique()
 
 
 def per_category(audit, ids, severities=CONFIRMED) -> dict:
@@ -66,7 +69,7 @@ def rows_per_category(audit, ids, severities) -> dict:
 
 
 def unverified_rows(audit) -> int:
-    """defect=1 rows with severity medium/high (whole file) whose skeptic_ok is empty."""
+    """defect=1 rows with severity medium/high (whole file, incl. task_id ALL) whose skeptic_ok is empty."""
     a = normalize(audit)
     m = (a["defect"] == 1) & a["severity"].isin(CONFIRMED)
     return int((m & (a["skeptic_ok"] == "")).sum())
@@ -103,9 +106,12 @@ def build_markdown(audit, scan, sample) -> str:
     empty = len(audit) == 0
     L.append("| defective tasks, sampled tasks | "
              + ("no rows yet" if empty else fmt_share(defective_tasks(audit, ids), n)) + " |")
+    k_ex = None if empty else defective_tasks(audit, ids, NOOP_CHECKS)
+    L.append("| defective tasks, sampled tasks, excluding the documented no-op class (checks 2a, 2b) | "
+             + ("no rows yet" if empty else fmt_share(k_ex, n)) + " |")
     L.append(f"| no-op pass, all airline tasks | {fmt_share(k_all, n_all)} |")
     L.append(f"| no-op pass, sampled tasks | {fmt_share(k_s, n_s)} |")
-    L.append(f"| medium/high defect rows with skeptic_ok empty (whole file) | {unverified_rows(audit)} |")
+    L.append(f"| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | {unverified_rows(audit)} |")
     notes = rule_of_three(k_all, n_all, "no-op pass, all") + rule_of_three(k_s, n_s, "no-op pass, sampled")
     if empty:
         L += ["", "Table 2. Sampled tasks with ≥1 confirmed defect (high/medium), by category", "",
@@ -114,6 +120,7 @@ def build_markdown(audit, scan, sample) -> str:
     else:
         k_def = defective_tasks(audit, ids)
         notes += rule_of_three(k_def, n, "defective tasks")
+        notes += rule_of_three(k_ex, n, "defective tasks excluding checks 2a, 2b")
         conf = per_category(audit, ids)
         L += ["", "Table 2. Sampled tasks with ≥1 confirmed defect (high/medium), by category", "",
               "| category | share of sampled tasks |", "|---|---|"]
@@ -180,19 +187,22 @@ def run(root: Path = ROOT) -> str:
 
 def selftest():
     ids = [str(i) for i in range(1, 21)]
-    cols = ["task_id", "category", "defect", "severity", "skeptic_ok"]
+    cols = ["task_id", "category", "check", "defect", "severity", "skeptic_ok"]
     fake = pd.DataFrame([
-        ["1", "2", "1", "high", "1"],     # task 1: two cat-2 rows -> counted once
-        ["1", "2", "1", "medium", ""],
-        ["1", "4", "1", "medium", "1"],
-        ["10", "2", "1", "medium", ""],   # task 10: defective
-        ["3", "1", "1", "low", ""],       # task 3: low only -> not defective
-        ["3", "5", "0", "", ""],
-        ["0", "1", "1", "high", "1"],     # task 0: outside sample -> ignored
+        ["1", "2", "2b", "1", "high", "1"],     # task 1: two cat-2 rows -> counted once
+        ["1", "2", "2c", "1", "medium", ""],
+        ["1", "4", "4a", "1", "medium", "1"],
+        ["10", "2", "2d", "1", "medium", ""],   # task 10: defective
+        ["11", "2", "2a", "1", "high", "1"],    # task 11: only a 2a row -> excluded from no-op-free share
+        ["3", "1", "1a", "1", "low", ""],       # task 3: low only -> not defective
+        ["3", "5", "5a", "0", "", ""],
+        ["0", "1", "1a", "1", "high", "1"],     # task 0: outside sample -> ignored
+        ["ALL", "6", "6a", "1", "high", "1"],   # benchmark-wide row -> not a sampled task
     ], columns=cols).astype(str)
-    assert defective_tasks(fake, ids) == 2
+    assert defective_tasks(fake, ids) == 3
+    assert defective_tasks(fake, ids, NOOP_CHECKS) == 2
     conf = per_category(fake, ids)
-    assert conf == {1: 0, 2: 2, 3: 0, 4: 1, 5: 0, 6: 0}, conf
+    assert conf == {1: 0, 2: 3, 3: 0, 4: 1, 5: 0, 6: 0}, conf
     assert per_category(fake, ids, {"low"})[1] == 1
     assert rows_per_category(fake, ids, {"low"}) == {1: 1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
     assert unverified_rows(fake) == 2

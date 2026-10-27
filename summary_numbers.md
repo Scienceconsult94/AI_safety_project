@@ -9,9 +9,10 @@ Table 1. Headline shares
 | quantity | share |
 |---|---|
 | defective tasks, sampled tasks | 13/20 = 0.650 [0.433, 0.819] |
+| defective tasks, sampled tasks, excluding the documented no-op class (checks 2a, 2b) | 9/20 = 0.450 [0.258, 0.658] |
 | no-op pass, all airline tasks | 23/50 = 0.460 [0.330, 0.596] |
 | no-op pass, sampled tasks | 7/20 = 0.350 [0.181, 0.567] |
-| medium/high defect rows with skeptic_ok empty (whole file) | 27 |
+| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | 27 |
 
 Table 2. Sampled tasks with ≥1 confirmed defect (high/medium), by category
 
