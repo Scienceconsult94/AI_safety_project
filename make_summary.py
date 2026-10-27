@@ -207,6 +207,30 @@ def agent_runs_table(runs, ids) -> list:
     return L
 
 
+def rereview_table(path: Path) -> list:
+    """Table 5: blind re-review agreement from results/rereview.csv (rereview_agreement.py)."""
+    if not path.exists():
+        return ["", "Table 5. Blind re-review", "", "blind re-review: not available"]
+    df = pd.read_csv(path, dtype=str).fillna("")
+    out = ["", "Table 5. Blind re-review of 3 sampled tasks (labels compared on defect 0/1 per task x check)", "",
+           "| comparison | agreement | Cohen's kappa |", "|---|---|---|"]
+    for col, label in (("original_defect", "blind vs original reviewer labels"),
+                       ("corrected_defect", "blind vs skeptic-corrected labels")):
+        sub = df[df[col] != ""]
+        a, b = sub[col].astype(str), sub["blind_defect"].astype(str)
+        n = len(sub)
+        if n == 0:
+            out.append(f"| {label} | n/a | n/a |")
+            continue
+        po = float((a == b).mean())
+        pe = float((a == "1").mean() * (b == "1").mean() + (a == "0").mean() * (b == "0").mean())
+        kappa = float("nan") if pe >= 1.0 else (po - pe) / (1 - pe)
+        out.append(f"| {label} | {int((a == b).sum())}/{n} = {po:.3f} | {kappa:.3f} |")
+    tasks = sorted(df["task_id"].unique(), key=lambda x: int(x) if str(x).isdigit() else 0)
+    out.append(f"\n- tasks: {', '.join(tasks)}; rows: {len(df)}; disagreements listed in results/rereview_summary.md")
+    return out
+
+
 def build_markdown(audit, scan, sample, runs=None) -> str:
     ids = sample["task_ids"]
     n = len(ids)
@@ -263,6 +287,7 @@ def build_markdown(audit, scan, sample, runs=None) -> str:
               "| category | rows | sampled tasks |", "|---|---|---|"]
         L += [f"| {c} {name} | {low_r[c]} | {low_t[c]}/{n} |" for c, name in CATEGORIES.items()]
     L += agent_runs_table(runs, ids)
+    L += rereview_table(ROOT / "results" / "rereview.csv")
     if notes:
         L += ["", "Rule of three (k = 0)", ""] + notes
     return "\n".join(L) + "\n"

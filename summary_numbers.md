@@ -24,9 +24,9 @@ Table 2. Sampled tasks with ≥1 confirmed defect (high/medium), by category
 | category | share of sampled tasks |
 |---|---|
 | 1 Solvability | 1/20 = 0.050 [0.009, 0.236] |
-| 2 Scoring validity | 10/20 = 0.500 [0.299, 0.701] |
+| 2 Scoring validity | 12/20 = 0.600 [0.387, 0.781] |
 | 3 Isolation and leaks | 0/20 = 0.000 [0.000, 0.161] |
-| 4 Specification clarity | 6/20 = 0.300 [0.145, 0.519] |
+| 4 Specification clarity | 4/20 = 0.200 [0.081, 0.416] |
 | 5 Determinism | 8/20 = 0.400 [0.219, 0.613] |
 | 6 Reporting | 0/20 = 0.000 [0.000, 0.161] |
 
@@ -37,11 +37,11 @@ Table 2b. Confirmed defect rows by check (all methods)
 | 1e | 1 | 1/20 |
 | 2a | 7 | 7/20 |
 | 2b | 7 | 7/20 |
-| 2g | 1 | 1/20 |
-| 2h | 1 | 1/20 |
+| 2g | 2 | 2/20 |
+| 2h | 3 | 3/20 |
 | 2k | 6 | 6/20 |
 | 4a | 1 | 1/20 |
-| 4c | 5 | 5/20 |
+| 4c | 2 | 2/20 |
 | 4e | 1 | 1/20 |
 | 4f | 2 | 2/20 |
 | 5c | 3 | 3/20 |
@@ -76,6 +76,15 @@ Table 4. Agent runs (claude-haiku-5-5 agent and user, substring scorer)
 - ground-truth agent fails on tasks: 7, 16, 23, 32, 44
 - Haiku passes ≥1 trial, ground-truth agent fails: 16, 23
 - ground-truth agent passes, Haiku 0/3: none
+
+Table 5. Blind re-review of 3 sampled tasks (labels compared on defect 0/1 per task x check)
+
+| comparison | agreement | Cohen's kappa |
+|---|---|---|
+| blind vs original reviewer labels | 27/29 = 0.931 | 0.758 |
+| blind vs skeptic-corrected labels | 29/29 = 1.000 | 1.000 |
+
+- tasks: 10, 23, 37; rows: 29; disagreements listed in results/rereview_summary.md
 
 Rule of three (k = 0)
 
