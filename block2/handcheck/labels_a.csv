@@ -1,0 +1,47 @@
+item,label,note
+1,met,states silver twice
+2,met,4 free checked bags stated
+3,unmet,"GT stated $1,004 (XEHM4B still active), not 708"
+4,met,get_user_details call
+5,met,get_reservation_details WUNA5K
+6,met,search_direct_flight JFK MCO 2024-05-22
+7,met,$327
+8,met,"$1,000"
+9,met,"'$1,286 in total' stated in the split plan"
+10,unmet,"totals quoted $1,679 / $1,346, not 1380-1390"
+11,met,
+12,met,
+13,met,
+14,met,
+15,met,
+16,met,
+17,met,update_reservation_flights XEHM4B business
+18,met,cancel_reservation XEHM4B
+19,met,cancel_reservation 59XX6W
+20,met,combined total $708 stated
+21,unmet,"$1,004 stated"
+22,unmet,"$1,004 stated"
+23,met,
+24,met,'Your May 10 reservation (WUNA5K)'
+25,met,
+26,met,'I found your May 10 trip (reservation WUNA5K)'
+27,met,
+28,met,'I checked your May 10 reservation (WUNA5K)'
+29,met,IFOYYZ not cancelled
+30,met,NQNU5R not cancelled
+31,unmet,no search_direct_flight call; transferred instead
+32,met,M20IZO untouched
+33,met,search_direct_flight JFK MCO 2024-05-22 call
+34,met,search call present
+35,met,
+36,met,
+37,met,"$1,286 total stated"
+38,met,
+39,met,
+40,met,
+41,met,
+42,met,
+43,met,
+44,unmet,total quoted $647
+45,met,"$1,387"
+46,unmet,$647 (KC18K6 excluded)

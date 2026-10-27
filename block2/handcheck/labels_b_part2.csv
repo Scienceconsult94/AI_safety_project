@@ -1,0 +1,16 @@
+item,label,note
+17,met,update_reservation_flights XEHM4B cabin=business with credit_card_2408938 (agent says ends 2135)
+18,met,cancel_reservation(XEHM4B) called after the business upgrade
+19,met,cancel_reservation(59XX6W) after illness covered by insurance confirmed
+20,met,"Assistant text: 7WPL39 $402 + 3EMQJ6 $306, ""combined total is $708"""
+21,unmet,Agent listed $402 and $306 but stated total $1004 incl. XEHM4B; $708 never stated
+22,unmet,Agent table incl. XEHM4B; stated total $1004; $708 never stated
+23,met,get_user_details(sophia_silva_7557) called
+24,met,"Assistant text: ""Your May 10 reservation (WUNA5K) lists flight HAT271"""
+25,met,get_user_details(sophia_silva_7557) called
+26,met,"Assistant text: ""I found your May 10 trip (reservation WUNA5K)"""
+27,met,get_user_details(sophia_silva_7557) called (twice)
+28,met,"Assistant text: ""I checked your May 10 reservation (WUNA5K). It includes HAT271"""
+44,unmet,Agent stated upgrade total $647 (only NM1VX1+H8Q05L); no total in $1380-1390
+45,met,"Assistant text: combined upgrade total ""about $1,387"" (NM1VX1+KC18K6+H8Q05L)"
+46,unmet,Agent stated $874 then corrected to $647; no total in $1380-1390

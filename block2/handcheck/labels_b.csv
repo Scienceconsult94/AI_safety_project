@@ -1,0 +1,47 @@
+item,label,note
+1,met,gt_3_t0: assistant states records show membership level silver not gold
+2,met,gt_3_t0: assistant states 2 per economy passenger x 2 = 4 free checked bags
+3,unmet,"gt_7_t0: agent lists 7WPL39 $402 and 3EMQJ6 $306 but states total $1,004 incl. XEHM4B; $708 never stated"
+4,met,gt_8_t0: get_user_details({user_id: sophia_silva_7557}) called
+5,met,"gt_8_t0: get_reservation_details(WUNA5K) called, then agent cites HAT271 from the May 10 trip"
+6,met,"gt_9_t0: search_direct_flight(JFK, MCO, 2024-05-22) called"
+7,met,gt_23_t0: assistant text 'Your gift cards total $327'
+8,met,"gt_23_t0: assistant text 'certificates total $1,000'"
+9,met,"gt_23_t0: assistant text 'Your Mastercard would be charged $1,286 in total' (split plan)"
+10,unmet,"gt_44_t0: agent states $1,679 business fares and $1,346 additional; neither in $1380-1390"
+11,met,haiku_3_t0: assistant says account shows silver not gold (rechecked via get_user_details)
+12,met,haiku_3_t0: assistant states total free checked bag allowance is 4 (2 per each of 2 economy passengers)
+13,met,haiku_3_t1: assistant states 'Membership tier on file: Silver'
+14,met,haiku_3_t1: assistant states 2 per economy passenger x 2 passengers = 4 free checked bags
+15,met,haiku_3_t2: assistant says profile lists membership as silver
+16,met,haiku_3_t2: assistant states 2 passengers x 2 bags = 4 free checked bags
+17,met,update_reservation_flights XEHM4B cabin=business with credit_card_2408938 (agent says ends 2135)
+18,met,cancel_reservation(XEHM4B) called after the business upgrade
+19,met,cancel_reservation(59XX6W) after illness covered by insurance confirmed
+20,met,"Assistant text: 7WPL39 $402 + 3EMQJ6 $306, ""combined total is $708"""
+21,unmet,Agent listed $402 and $306 but stated total $1004 incl. XEHM4B; $708 never stated
+22,unmet,Agent table incl. XEHM4B; stated total $1004; $708 never stated
+23,met,get_user_details(sophia_silva_7557) called
+24,met,"Assistant text: ""Your May 10 reservation (WUNA5K) lists flight HAT271"""
+25,met,get_user_details(sophia_silva_7557) called
+26,met,"Assistant text: ""I found your May 10 trip (reservation WUNA5K)"""
+27,met,get_user_details(sophia_silva_7557) called (twice)
+28,met,"Assistant text: ""I checked your May 10 reservation (WUNA5K). It includes HAT271"""
+29,met,haiku_9_t0: no cancel_reservation call; agent told user IFOYYZ cannot be cancelled
+30,met,haiku_9_t0: no cancel_reservation call for NQNU5R; transferred to human instead
+31,unmet,haiku_9_t0: no search_direct_flight call at all; agent transferred before searching
+32,met,haiku_9_t0: no update/modify call on M20IZO; agent says no changes made
+33,met,"haiku_9_t1: search_direct_flight(JFK, MCO, 2024-05-22) called"
+34,met,"haiku_9_t2: search_direct_flight(JFK, MCO, 2024-05-22) called"
+35,met,"t0 assistant turn: ""Gift cards: $327 total ($198 ... and $129 ...)"""
+36,met,"t0 assistant turn: ""Travel certificates: $1,000 total ($500, $250, $250)"""
+37,met,"t0 assistant states ""Total charged to the Mastercard ending in 9363: $1,286"" before booking and again after"
+38,met,"t1 assistant turn: ""Gift cards: $327 total ($198 ... and $129 ...)"""
+39,met,"t1 assistant turn: ""Travel certificates: $1,000 total ($500, $250, $250)"""
+40,met,"t1 assistant states ""Total charged to the Mastercard ending in 9363: $1,286"" before booking and in final summary"
+41,met,"t2 assistant turn: ""Gift cards: $327.00 total ($198.00 ... and $129.00 ...)"""
+42,met,"t2 assistant turn: ""Travel certificates: $1,000.00 total ($500, $250, $250)"""
+43,met,"t2 assistant states ""Total charged to the Mastercard ending 9363: $1,286"" in plan, final summary and recheck"
+44,unmet,Agent stated upgrade total $647 (only NM1VX1+H8Q05L); no total in $1380-1390
+45,met,"Assistant text: combined upgrade total ""about $1,387"" (NM1VX1+KC18K6+H8Q05L)"
+46,unmet,Agent stated $874 then corrected to $647; no total in $1380-1390

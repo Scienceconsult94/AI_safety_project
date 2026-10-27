@@ -1,0 +1,23 @@
+item,label,note
+1,met,gt_3_t0: assistant states records show membership level silver not gold
+2,met,"gt_3_t0: assistant states 2 per economy passenger x 2 = 4 free checked bags"
+3,unmet,"gt_7_t0: agent lists 7WPL39 $402 and 3EMQJ6 $306 but states total $1,004 incl. XEHM4B; $708 never stated"
+4,met,"gt_8_t0: get_user_details({user_id: sophia_silva_7557}) called"
+5,met,"gt_8_t0: get_reservation_details(WUNA5K) called, then agent cites HAT271 from the May 10 trip"
+6,met,"gt_9_t0: search_direct_flight(JFK, MCO, 2024-05-22) called"
+7,met,gt_23_t0: assistant text 'Your gift cards total $327'
+8,met,"gt_23_t0: assistant text 'certificates total $1,000'"
+9,met,"gt_23_t0: assistant text 'Your Mastercard would be charged $1,286 in total' (split plan)"
+10,unmet,"gt_44_t0: agent states $1,679 business fares and $1,346 additional; neither in $1380-1390"
+11,met,haiku_3_t0: assistant says account shows silver not gold (rechecked via get_user_details)
+12,met,haiku_3_t0: assistant states total free checked bag allowance is 4 (2 per each of 2 economy passengers)
+13,met,haiku_3_t1: assistant states 'Membership tier on file: Silver'
+14,met,haiku_3_t1: assistant states 2 per economy passenger x 2 passengers = 4 free checked bags
+15,met,haiku_3_t2: assistant says profile lists membership as silver
+16,met,haiku_3_t2: assistant states 2 passengers x 2 bags = 4 free checked bags
+29,met,haiku_9_t0: no cancel_reservation call; agent told user IFOYYZ cannot be cancelled
+30,met,haiku_9_t0: no cancel_reservation call for NQNU5R; transferred to human instead
+31,unmet,haiku_9_t0: no search_direct_flight call at all; agent transferred before searching
+32,met,haiku_9_t0: no update/modify call on M20IZO; agent says no changes made
+33,met,"haiku_9_t1: search_direct_flight(JFK, MCO, 2024-05-22) called"
+34,met,"haiku_9_t2: search_direct_flight(JFK, MCO, 2024-05-22) called"
