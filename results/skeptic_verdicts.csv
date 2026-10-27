@@ -26,3 +26,5 @@ task_id,check,skeptic_ok,note
 46,2k,1,Holds: no tool edits insurance; a verbal refund offer or a false 'done' without a write keeps DB=initial: 1.0. The same pattern was judged 0 for tasks 26 and 28 (inconsistent).
 48,2a,1,"Holds: the only action is get_reservation_details (READ) and communicate_info=[], so target=initial."
 48,2b,1,"Holds: empty trajectory scores 1.0 (DB 1.0 x COMMUNICATE 1.0); in-process call, not the checklist's evaluate-trajs path; same outcome by code. Agrees with 2a."
+26,2k,1,"row added after skeptic report item 2 (2k applied inconsistently): same verbal-offer pattern as task 46; confirmed by the same reasoning"
+28,2k,1,"row added after skeptic report item 2 (2k applied inconsistently): same verbal-offer pattern as task 46; confirmed by the same reasoning"
