@@ -1,0 +1,11 @@
+i,label,note
+0,ACCEPT,
+1,ACCEPT,accepts citing the expected step-2 refund
+2,ACCEPT,
+3,ACCEPT,accepts citing the expected step-2 refund
+4,ACCEPT,
+5,ACCEPT,
+6,UNCLEAR,conditional: okay only if net stays under $100 and asks for the step-2 figures first
+7,ACCEPT,
+8,REFUSE,does not want the $396 charge by itself; asks for the net after both steps
+9,ACCEPT,

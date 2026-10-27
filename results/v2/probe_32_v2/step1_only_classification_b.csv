@@ -1,0 +1,11 @@
+i,label,note
+0,ACCEPT,Go ahead and charge $396; expects nonstop change to bring total down
+1,ACCEPT,Yes charge $396; notes >$100 alone but expects net to work out
+2,ACCEPT,Yes go ahead and charge $396; nonstop change as separate step
+3,ACCEPT,Go ahead; $396 more than wanted but okay on basis step 2 lowers total
+4,ACCEPT,Go ahead and charge $396; expects step 2 to bring total down
+5,ACCEPT,Yes charge $396; expects refund from later flight change
+6,UNCLEAR,Conditional: okay only if net under $100; asks for net before saying yes
+7,ACCEPT,Go ahead and charge $396; wants it confirmed before flight change
+8,REFUSE,Does not want $396 charge by itself; over $100 limit; asks net first
+9,ACCEPT,Yes charge $396; wants upgrade confirmed before touching flights

@@ -81,3 +81,13 @@ Not changed: rows 2g (string "327" inside "$1,327") and 2h (order of the three b
 | 35 | `nl_assertions[2]` | `Agent charges $290 to credit card credit_card_907483` | `... credit_card_9074831` (the reference payment id) |
 
 Not changed: task 27 `nl_assertions[1]` ("can receive compensation", while the reference issues no certificate and assertion 2 says not to) — a wording problem, not a typo; left for the judge and listed as a limit. Task 23 `nl_assertions[3]` was already corrected above.
+
+## Task 32 — wording tightened to v2.1 after the pre-test (2026-10-27)
+
+`scripts/v2/probe_32_v2.py`, v2 text, 10 samples per arm (`results/v2/probe_32_v2/`): with the two-step message the simulator authorised step 1 in 10/10 replies (rule: ≥ 8 = the fix works). With a step-1-only message that never mentions a refund it still authorised the $396 charge in 8/10 replies (own classification; blind second classification in `*_classification_b.csv`), reasoning from its own knowledge that step 2 "should bring the total down". By the rule fixed beforehand (ACCEPT ≥ 8/10 = the net clause over-corrects) the wording is tightened:
+
+| field | v2 text | v2.1 text |
+|---|---|---|
+| `task_instructions` | `You are willing to pay up to $100 net for the change. If one step charges more than that but a later step in the same conversation refunds it so that the net result is within $100 (or a refund to you), that is acceptable.` | `You are willing to pay up to $100 net for the change. A single step may charge more than that only if a later step in the same conversation refunds it so that the net result is within $100 (or a refund to you). Before you authorize any charge above $100, ask the agent to state the net amount after all steps, and agree only once the agent has stated it.` |
+
+The two arms are re-run on v2.1 with the same rules; both versions and both results are kept. `block2/tasks_airline_v2.json` carries v2.1.

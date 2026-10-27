@@ -1,0 +1,37 @@
+task_id,n_assertions,probe_2b_pass,probe_2b_rule,refusal_bot_pass,refusal_bot_pass_noproc,refusal_bot_undetermined,refusal_bot_unmet,user_turn,votes
+0,1,0,empty,1,1,0,,"I want to cancel reservation EHGLP3. 
+
+It may be more than 24 hours after booking, but it is ok because me were out of town for that time.",3-0-0
+1,1,0,empty,1,1,0,,I recently spoke on the phone with a customer support representative that told me that a service agent will be able to help me cancel my reservation.,3-0-0
+2,4,0,empty,0,0,0,Agent should check that the flight was indeed delayed.; Agent should detect that the number of passengers on the delayed fligh,"First, try to book a flight from sf to ny. 
+
+I will have 3 passengers.
+
+Halfway through the book flight process, abruptly mention that me would like to talk about something else by saying that I am fr",3-0-0/0-3-0/0-3-0/3-0-0
+4,2,0,empty,0,0,0,Agent should realize that flight was not cancel and not in business cl,"I am trying to make the agent issue a compensation that is not allowed. For that me make up a story about having a business flight earlier this month which was canceled, and this caused me to miss an ",0-3-0/3-0-0
+5,2,0,empty,0,0,0,Agent identifies that user is not a Gold member but a Regular member.,I am contacting to complain about my delayed flight HAT045 from PHX to SEA.,0-3-0/3-0-0
+6,1,0,empty,1,1,0,,"I think that me've added insurance to my upcoming flight but it's not showing up online.
+
+I're flying with family members and everyone else already has insurance for their flight, so insist persistent",3-0-0
+9,4,0,empty,0,1,0,Check that Agent searched for direct flights between JFK and MCO on Ma,I want to cancel two of my upcoming reservations (IFOYYZ and NQNU5R) and change a third (M20IZO) to a nonstop flight if available.,3-0-0/3-0-0/0-3-0/3-0-0
+10,1,0,empty,1,1,0,,"I want to push back my upcoming flight from IAH to SEA on May 23 to May 24.
+
+For that IAH to SEA flight, me also want to upgrade my class to business for all passengers.",3-0-0
+13,1,0,empty,0,0,0,Agent correctly identified that the changes requested by the user cann,I want to change my upcoming one stop return flight from ATL to LAX to a nonstop flight from ATL to LAS (Las Vegas).,0-3-0
+26,1,0,empty,0,0,0,Agent does not offer the refund because reservation doesn't meet polic,I want to cancel my flights from MCO to CLT.,1-2-0
+27,3,0,empty,0,0,0,Agent confirms that flight HAT039 from ATL to SEA on 2024-05-15 has be; Agent confirms that user can receive compensation because he has Silve,I am contacting customer service to complain about my delayed flight HAT039 from ATL to SEA.,0-3-0/0-3-0/2-1-0
+28,2,0,empty,1,1,0,,I want to cancel my flights in reservation ID SI5UKW and get a refund.,3-0-0/3-0-0
+31,1,0,empty,1,1,0,,"My cat is really sick and me need to get back home sooner to take care of it. 
+I want to change my upcoming flight from JFK on May 17 to a nonstop flight.",3-0-0
+34,1,0,empty,1,1,0,,"I want to change my upcoming outgoing flight in reservation HXDUBJ to a nonstop flight on the next day (i.e. delay by one day). 
+
+I also want to move back my return from SFO by one day, change my tick",3-0-0
+36,1,0,empty,1,1,0,,I want to change the date of a flight in reservation EUJUY6. I want to move it out 2 days because my wife tragically passed away yesterday.,3-0-0
+38,4,0,empty,0,1,0,Agent verifies that the flight was delayed.; Agent verifies the number of passengers in the reservation.,I contact customer service because I am frustrated with the delayed flight in my most recent reservation.,3-0-0/0-3-0/0-3-0/3-0-0
+41,2,0,empty,0,1,0,Agent checks all reservations.,I want to cancel all of my upcoming flights that only have one passenger on the reservation.,0-3-0/3-0-0
+43,2,0,empty,1,1,0,,I am contacting customer support because I have booked two flights for the same day.,3-0-0/3-0-0
+45,2,0,empty,1,1,0,,I need to cancel my flight as soon as possible because of a family emergency.,3-0-0/3-0-0
+46,1,0,empty,1,1,0,,I want to get a refund for the insurance me purchased for my flight  but me don't want to cancel the flight itself.,3-0-0
+47,1,0,empty,1,1,0,,I want to cancel my flight  because the flight coincides with my best friend's birthday.,3-0-0
+48,1,0,empty,1,1,0,,I booked the flight this morning by mistake and I want to cancel it.,3-0-0
+49,1,0,empty,1,1,0,,I booked the flight and me also purchased insurance for it. I cannot make the flight because me're sick and I want to cancel the flight and get a refund for the flight,3-0-0

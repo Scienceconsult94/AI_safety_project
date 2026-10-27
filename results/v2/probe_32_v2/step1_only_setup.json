@@ -1,0 +1,26 @@
+{
+ "created_utc": "2026-10-27T22:46:07+00:00",
+ "arm": "step1_only",
+ "task_text": "v2",
+ "bench_commit": "989d3285ae669e49503324bdb9981bf14fccedeb",
+ "provenance": {
+  "scorer_version": "v2",
+  "overlay_commit": "5f4d92a",
+  "overlay_dirty": false,
+  "judge_model": "anthropic/claude-haiku-5-5",
+  "judge_args": {},
+  "judge_votes": 3,
+  "judge_view": "with_tool_calls",
+  "judge_prompt_sha256": "c560776f121c1500",
+  "switches": {
+   "hash_canon": false,
+   "comm_boundary": false,
+   "nl_enforce": false
+  }
+ },
+ "user_llm": "anthropic/claude-haiku-5-5",
+ "persona": "mamadou_diallo",
+ "prefix_source": "32_haiku_t0, user-visible messages with turn_idx <= 16",
+ "counterfactual": "Here are the exact figures for step 1, confirmed from the system.\n\nStep 1: upgrade reservation OWZ4XL from basic economy to economy on the same flights (HAT202 and HAT232 on 2024-05-21). New price 3 x $306 = $918; you already paid $522; the difference of $396 is charged now to your Visa ending in 1777.\n\nDo you want me to go ahead with step 1 now, the $396 upgrade on the Visa ending in 1777? Please reply yes or no.",
+ "n": 10
+}

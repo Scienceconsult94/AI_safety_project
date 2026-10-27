@@ -59,6 +59,7 @@ def main() -> int:
     args = ap.parse_args()
     if not args.dry:
         s2.require_clean("noop_judge_probe")
+    prov = s2.provenance()  # captured at start
     s2.install()
     s2.set_judge_cache(OUT / "judge_cache_noop.json")
     s2.SWITCHES.set(True, True, True)
@@ -94,7 +95,7 @@ def main() -> int:
     n = len(rows)
     cost = s2.JUDGE_COST["in_tokens"] / 1e6 * 0.10 + s2.JUDGE_COST["out_tokens"] / 1e6 * 0.50
     md = ["# No-op tasks under v2: the 2b probe and a refusal bot", "",
-          f"{n} tasks whose empty trajectory passes under v1 (noop_scan_v2.csv). Provenance: {json.dumps({k: s2.provenance()[k] for k in ('overlay_commit', 'overlay_dirty', 'judge_model', 'judge_view')})}.", "",
+          f"{n} tasks whose empty trajectory passes under v1 (noop_scan_v2.csv). Provenance: {json.dumps({k: prov[k] for k in ('overlay_commit', 'overlay_dirty', 'judge_model', 'judge_view')})}.", "",
           "| trajectory | passes under v2 | of |", "|---|---|---|",
           f"| greeting + one user turn (block-1 2b probe) | {sum(r['probe_2b_pass'] for r in rows)} | {n} |"]
     if not args.dry:

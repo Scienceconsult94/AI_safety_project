@@ -69,6 +69,7 @@ def main() -> int:
     ap.add_argument("--n", type=int, default=10)
     ap.add_argument("--arm", choices=["two_step", "step1_only", "both"], default="both")
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--tag", default="", help="suffix for the output files, e.g. v21 for the tightened wording")
     a = ap.parse_args()
 
     import scorer_v2 as s2
@@ -113,14 +114,15 @@ def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     arms = list(ARMS) if a.arm == "both" else [a.arm]
     for arm in arms:
+        stem = f"{arm}_{a.tag}" if a.tag else arm
         cf = AssistantMessage(role="assistant", content=ARMS[arm], turn_idx=PREFIX_LAST_TURN + 1)
-        meta = {"created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"), "arm": arm, "task_text": "v2",
+        meta = {"created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"), "arm": arm, "task_text": "v2.1" if a.tag else "v2", "task_instructions": task.user_scenario.instructions.task_instructions,
                 "bench_commit": results.info.git_commit, "provenance": s2.provenance(), "user_llm": config.llm_user, "persona": persona,
                 "prefix_source": f"32_haiku_t0, user-visible messages with turn_idx <= {PREFIX_LAST_TURN}", "counterfactual": ARMS[arm], "n": a.n}
         print(f"[{arm}] persona={persona} prefix={len(history)} msgs; system prompt chars={len(user.system_prompt)}")
         if a.dry:
             continue
-        (OUT / f"{arm}_setup.json").write_text(json.dumps(meta, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
+        (OUT / f"{stem}_setup.json").write_text(json.dumps(meta, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
         samples, tin, tout = [], 0, 0
         for i in range(a.n):
             state = user.get_init_state(deepcopy(history))
@@ -131,13 +133,13 @@ def main() -> int:
             samples.append({"i": i, "content": msg.content, "usage": u})
             print(f"  [{i}] {len(msg.content or '')} chars")
         cost = tin * 0.10 / 1e6 + tout * 0.50 / 1e6
-        (OUT / f"{arm}_samples.json").write_text(json.dumps({"setup": meta, "samples": samples, "tokens_in": tin, "tokens_out": tout, "cost_estimate_usd": round(cost, 4)}, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
+        (OUT / f"{stem}_samples.json").write_text(json.dumps({"setup": meta, "samples": samples, "tokens_in": tin, "tokens_out": tout, "cost_estimate_usd": round(cost, 4)}, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
         md = [f"# Task 32 v2 probe, arm {arm}: simulator replies", "", f"n={a.n}; persona {persona}; tokens in/out {tin}/{tout}; cost estimate ${cost:.4f}", "",
               "## Counterfactual assistant message", "", ARMS[arm], "", "## Replies (verbatim)", ""]
         for s in samples:
             md += [f"### sample {s['i']}", "", s["content"] or "", ""]
-        (OUT / f"{arm}_samples.md").write_text("\n".join(md), encoding="utf-8")
-        print(f"  tokens in/out {tin}/{tout}; cost estimate ${cost:.4f} -> results/v2/probe_32_v2/{arm}_samples.md")
+        (OUT / f"{stem}_samples.md").write_text("\n".join(md), encoding="utf-8")
+        print(f"  tokens in/out {tin}/{tout}; cost estimate ${cost:.4f} -> results/v2/probe_32_v2/{stem}_samples.md")
     if a.dry:
         print(user.system_prompt[user.system_prompt.find("$100 net") - 300: user.system_prompt.find("$100 net") + 300])
         print("[dry] no model call")

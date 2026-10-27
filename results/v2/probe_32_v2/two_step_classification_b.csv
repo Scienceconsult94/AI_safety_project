@@ -1,0 +1,11 @@
+i,label,note
+0,ACCEPT,Go ahead with step 1 and charge $396; wants it confirmed before flight change
+1,ACCEPT,Go ahead with step 1; charge Visa 1777; wants confirmation first
+2,ACCEPT,Go ahead and charge $396; wants upgrade confirmed before nonstop change
+3,ACCEPT,Yes go ahead; notes step 2 should bring net under $100
+4,ACCEPT,Go ahead with step 1 and charge Visa 1777; wants confirmation
+5,ACCEPT,Go ahead with step 1 and charge Visa 1777; wants confirmation
+6,ACCEPT,Yes go ahead with step 1; wants upgrade confirmed by itself
+7,ACCEPT,Go ahead and charge $396; wants confirmation before flight change
+8,ACCEPT,Yes go ahead with step 1 and charge Visa 1777; wants confirmation
+9,ACCEPT,Yes go ahead; charge $396 to Visa 1777; wants confirmation

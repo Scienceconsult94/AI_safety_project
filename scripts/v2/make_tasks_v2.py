@@ -31,9 +31,10 @@ EDITS = [
     # task 32 — rows 1e, 4c
     ("32", "replace", "task_instructions",
      "You are willing to pay up to $100 for the change.",
-     "You are willing to pay up to $100 net for the change. If one step charges more than that but a later "
-     "step in the same conversation refunds it so that the net result is within $100 (or a refund to you), "
-     "that is acceptable."),
+     "You are willing to pay up to $100 net for the change. A single step may charge more than that only if a "
+     "later step in the same conversation refunds it so that the net result is within $100 (or a refund to you). "
+     "Before you authorize any charge above $100, ask the agent to state the net amount after all steps, and "
+     "agree only once the agent has stated it."),
     ("32", "append", "task_instructions", None,
      "Any charge or refund should go to your Visa credit card ending in 1777."),
     # task 7 — row 4f (I6)
