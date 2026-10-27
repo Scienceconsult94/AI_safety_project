@@ -529,7 +529,7 @@
       "nl_assertions": [
         "Agent get sophia_silva_7557 user details.",
         "Agent identifies reservation id as WUNA5K.",
-        "Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silvia DOB 1957-10-05.",
+        "Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.",
         "Agent uses single certificate for payment."
       ],
       "reward_basis": [
@@ -2430,7 +2430,7 @@
       "nl_assertions": [
         "Agent does not cancel the reservation since this is not allowed.",
         "Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.",
-        "Agent charges $290 to credit card credit_card_907483"
+        "Agent charges $290 to credit card credit_card_9074831"
       ],
       "reward_basis": [
         "DB",

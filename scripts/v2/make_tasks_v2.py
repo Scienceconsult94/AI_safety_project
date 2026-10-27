@@ -65,7 +65,12 @@ EDITS = [
      "gift_card_6136092\", and $44 on credit_card_2198526.",
      "For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on "
      "gift_card_6136092, and $44 on credit_card_2198526."),
+    # assertion typos that contradict the reference, found by the classification pass (block2/nl_assertion_classes.md);
+    # prerequisites of nl_enforce like the task-23 rows above
+    ("8", "nl", 2, None, None),   # "Sophia Silvia" -> "Sophia Silva" (resolved at run time, see NL_TYPO)
+    ("35", "nl", 2, None, None),  # "credit_card_907483" -> "credit_card_9074831"
 ]
+NL_TYPO = {("8", 2): ("Sophia Silvia", "Sophia Silva"), ("35", 2): ("credit_card_907483", "credit_card_9074831")}
 
 
 def apply_edits(tasks: list[dict]) -> tuple[list[dict], list[str]]:
@@ -93,7 +98,12 @@ def apply_edits(tasks: list[dict]) -> tuple[list[dict], list[str]]:
             t["evaluation_criteria"]["communicate_info"] = new
         elif kind == "nl":
             cur = t["evaluation_criteria"]["nl_assertions"][loc]
-            if cur != old:
+            if old is None:  # typo substitution anchored to the exact wrong token
+                wrong, right = NL_TYPO[(tid, loc)]
+                if cur.count(wrong) != 1 or right in cur:
+                    raise SystemExit(f"task {tid} nl_assertions[{loc}]: expected exactly one {wrong!r}, got {cur!r}")
+                new = cur.replace(wrong, right)
+            elif cur != old:
                 raise SystemExit(f"task {tid} nl_assertions[{loc}]: expected {old!r}, found {cur!r}")
             t["evaluation_criteria"]["nl_assertions"][loc] = new
         else:

@@ -1,0 +1,5 @@
+agent,expected,ok,perturbation,stock,switch,switched,task,trial
+gt,0.0->1.0,1,passengers_reversed,0.0,hash,1.0,8,0
+gt,0.0->1.0,1,payments_reversed,0.0,hash,1.0,20,0
+haiku,0.0->1.0,1,bookings_swapped,0.0,hash,1.0,23,0
+haiku,1->0,1,comm_1327_only,1,comm,0,23,0

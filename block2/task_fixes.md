@@ -17,13 +17,13 @@ Expected effect: the reference path becomes scenario-compatible (H4: GT passes);
 
 ## Task 7 — row 4f (medium), issue I6
 
-Facts: `communicate_info` = ["1628"] = 402 + 296 + 624 + 306, the sum of all four upcoming reservations including the two the user cancels in the same conversation. The scenario asks for "any other upcoming flights" and their total; after the cancellations the remaining ones are 7WPL39 ($402) and 3EMQJ6 ($306) = $708. 4/4 recorded trajectories answered 708 or did not state a total; the trial whose DB matched the target scored 0 on this string alone.
+Facts: `communicate_info` = ["1628"] = 402 + 296 + 624 + 306, the sum of all four upcoming reservations including the two the user cancels in the same conversation. The scenario asks for "any other upcoming flights" and their total; after the cancellations the remaining ones are 7WPL39 ($402) and 3EMQJ6 ($306) = $708. Recorded totals: 7_haiku_t0 answered $708 (its DB matched the target and it scored 0 on this string alone); 7_gt_t0, 7_haiku_t1 and 7_haiku_t2 answered $1,004 = 402 + 306 + 296, because in those runs the agent refused the upgrade-then-cancel of XEHM4B and that reservation stayed active. No run stated 1628. (Corrected 2026-10-27 after the design review; the first version of this line said "4/4 answered 708 or no total".)
 
 | field | pinned text | v2 text |
 |---|---|---|
 | `task_instructions` | `you also want to check if you have any other upcoming flights and ask for what the total cost of those flights is.` | `you also want to check if you have any other upcoming flights (other than the two reservations you are cancelling) and ask what the total cost of those other flights is.` |
 | `communicate_info` | `["1628"]` | `["708"]` |
-| `nl_assertions[3]` | `Agent communicates that total cost of upcoming flights is $1,628.` | `Agent communicates that the total cost of the remaining upcoming flights (7WPL39 and 3EMQJ6) is $708.` |
+| `nl_assertions[3]` | `Agent communicates that total cost of upcoming flights is $1,628.` | `Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.` |
 
 Expected effect: the trajectory class "DB matched, only the total failed" (7_haiku_t0) scores 1 under v2 (H3 direction: 0 → 1).
 
@@ -70,3 +70,14 @@ Not changed: rows 2g (string "327" inside "$1,327") and 2h (order of the three b
 | no-op-class tasks (1, 9, 10, 26, 28, 46, 48) | 1 in trials where the agent did nothing wrong | unchanged for real transcripts (the judge sees the agent's refusal/explanation); 0 for an empty trajectory | nl_enforce |
 | 32 (all 4) | 0 | 0 | the recorded conversations never reached the target; the fix helps fresh runs only (H4) |
 | 44_haiku_t0, t2 | 0 | 0 | KC18K6 not upgraded in the transcript |
+
+## Tasks 8 and 35 — assertion typos found by the classification pass (added 2026-10-27, after the design review)
+
+`block2/nl_assertion_classes.md` flagged four assertions that contradict the reference. Two are plain typos and are corrected because, with `nl_enforce`, a correct run could fail on them; both are prerequisites of `nl_enforce` in the same sense as the task-23 rows above.
+
+| task | field | pinned text | v2 text |
+|---|---|---|---|
+| 8 | `nl_assertions[2]` | `... Kevin Smith DOB 2001-04-12 + Sophia Silvia DOB 1957-10-05.` | `... Sophia Silva ...` (the reference passenger) |
+| 35 | `nl_assertions[2]` | `Agent charges $290 to credit card credit_card_907483` | `... credit_card_9074831` (the reference payment id) |
+
+Not changed: task 27 `nl_assertions[1]` ("can receive compensation", while the reference issues no certificate and assertion 2 says not to) — a wording problem, not a typo; left for the judge and listed as a limit. Task 23 `nl_assertions[3]` was already corrected above.

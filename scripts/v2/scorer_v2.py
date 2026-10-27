@@ -9,13 +9,18 @@ module changes nothing until `install()` is called and a switch is turned on:
                  received; itinerary order (Reservation.flights) is kept; float amounts rounded
                  to cents. Answers audit rows 2h (tasks 8, 20, 23), issue I3.
   comm_boundary  communicate_info strings must appear as whole tokens: a number is matched only
-                 when not glued to other digits (thousands separators normalised on both sides,
-                 ".00" tolerated); words on word boundaries. Answers rows 2g (tasks 3, 23), I4.
-  nl_enforce     nl_assertions judged by anthropic/claude-haiku-5-5 (3 votes, majority), an
-                 empty or tool-only trajectory fails every assertion without a judge call, and a
-                 judge reply that omits an assertion counts it as not met. The reward multiplies
-                 the NL part only when NL_ASSERTION is in the task's reward_basis, so callers use
-                 `with_nl_basis(task)`. Answers rows 2a/2b (no-op pass), 2k, issue I1.
+                 when not glued to other word characters or a decimal point (thousands separators
+                 normalised on both sides, ".00" tolerated); words on word boundaries. Answers
+                 rows 2g (tasks 3, 23), I4.
+  nl_enforce     nl_assertions judged by anthropic/claude-haiku-5-5 (3 votes, majority); a
+                 trajectory with no agent text beyond the orchestrator's canned greeting fails
+                 every assertion without a judge call; assertions are numbered in the prompt and
+                 mapped back one-to-one by index (then exact text, then position); a reply that
+                 cannot be parsed or omits an assertion is re-asked once, after which the
+                 assertion is "undetermined" (reported with lower/upper bounds; the reward uses
+                 the lower bound). The reward multiplies the NL part only when NL_ASSERTION is in
+                 the task's reward_basis, so callers use `with_nl_basis(task)`. Answers rows
+                 2a/2b (no-op pass), 2k, issue I1.
 
 Mechanism: `install()` swaps module globals that tau2.evaluator.evaluator.evaluate_simulation
 reads at call time (CommunicateEvaluator, NLAssertionsEvaluator) and wraps
@@ -32,6 +37,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import sys
 import threading
 from dataclasses import dataclass
@@ -49,12 +55,17 @@ from tau2.environment import toolkit as _toolkit  # noqa: E402
 from tau2.evaluator import evaluator as _evaluator  # noqa: E402
 from tau2.evaluator.evaluator_communicate import CommunicateEvaluator  # noqa: E402
 from tau2.evaluator.evaluator_nl_assertions import NLAssertionsEvaluator  # noqa: E402
+from tau2.orchestrator.orchestrator import DEFAULT_FIRST_AGENT_MESSAGE  # noqa: E402
 from tau2.utils.llm_utils import extract_json_from_llm_response, generate  # noqa: E402
 
+ROOT = Path(__file__).resolve().parents[2]
 SCORER_VERSION = "v2"
 JUDGE_MODEL = "anthropic/claude-haiku-5-5"
-JUDGE_ARGS: dict[str, Any] = {}  # no temperature: current Anthropic models reject a non-default value (issue I5)
+JUDGE_ARGS: dict[str, Any] = {}  # provider defaults; no temperature (current Anthropic models reject a non-default value, issue I5)
 JUDGE_VOTES = 3
+JUDGE_RETRIES = 1  # re-asks after an unparseable reply or a missing assertion
+JUDGE_VIEW = "with_tool_calls"  # "stock" = tau2's own view (role: content; tool-call arguments invisible)
+GREETING = DEFAULT_FIRST_AGENT_MESSAGE.content
 
 
 @dataclass
@@ -71,6 +82,39 @@ class Switches:
 
 
 SWITCHES = Switches()
+
+
+# --------------------------------------------------------------------------------------
+# provenance
+# --------------------------------------------------------------------------------------
+
+
+def git_state() -> tuple[str, bool]:
+    """(short commit of the overlay repo, dirty flag for scripts/v2 and block2)."""
+    try:
+        commit = subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "--short", "HEAD"], text=True).strip()
+        dirty = bool(subprocess.check_output(["git", "-C", str(ROOT), "status", "--porcelain", "scripts/v2", "block2"], text=True).strip())
+        return commit, dirty
+    except Exception:  # noqa: BLE001
+        return "unknown", True
+
+
+def provenance() -> dict:
+    commit, dirty = git_state()
+    return {
+        "scorer_version": SCORER_VERSION, "overlay_commit": commit, "overlay_dirty": dirty,
+        "judge_model": JUDGE_MODEL, "judge_args": JUDGE_ARGS, "judge_votes": JUDGE_VOTES, "judge_view": JUDGE_VIEW,
+        "judge_prompt_sha256": hashlib.sha256(_SYSTEM_PROMPT.encode("utf-8")).hexdigest()[:16],
+        "switches": vars(SWITCHES).copy(),
+    }
+
+
+def require_clean(what: str) -> None:
+    """PLAN.md rule 4: no v2 number from an uncommitted overlay (override: V2_ALLOW_DIRTY=1)."""
+    commit, dirty = git_state()
+    if dirty and os.environ.get("V2_ALLOW_DIRTY") != "1":
+        raise SystemExit(f"{what}: scripts/v2 or block2 has uncommitted changes (commit {commit}); commit first or set V2_ALLOW_DIRTY=1")
+
 
 # --------------------------------------------------------------------------------------
 # hash_canon
@@ -106,7 +150,11 @@ def _round_amounts(obj: Any) -> Any:
 
 
 def canonical_dump(dump: dict) -> dict:
-    """Canonical form of a FlightDB.model_dump() (see module docstring). Pure function."""
+    """Canonical form of a FlightDB.model_dump() (see module docstring). Pure function.
+
+    Generated payment-method ids (send_certificate) are remapped in users[*].payment_methods;
+    references to them inside payment_history are not remapped (no airline tool pays with a
+    certificate issued in the same episode, so this cannot matter for the pinned tasks)."""
     initial = _initial_ids()
     d = _round_amounts(copy.deepcopy(dump))
 
@@ -206,8 +254,10 @@ def normalize_text(text: str) -> str:
 def info_pattern(info: str) -> re.Pattern[str]:
     s = normalize_text(info).strip()
     if _NUMERIC.fullmatch(s):
-        # not glued to other digits or a decimal point; ".00" after an integer tolerated
-        return re.compile(rf"(?<![\d.]){re.escape(s)}(?:\.0+)?(?!\d|\.\d)")
+        # not glued to other word characters or a decimal point; ".00" after an integer tolerated.
+        # Known false-positive classes that remain: a time ("4:00"), a date part ("May 4") or a percentage ("4%")
+        # when the target is that same number; known false negative: a spelled-out number ("four").
+        return re.compile(rf"(?<![\w.]){re.escape(s)}(?:\.0+)?(?!\w|\.\d)")
     return re.compile(rf"(?<!\w){re.escape(s)}(?!\w)")
 
 
@@ -252,41 +302,48 @@ class V2CommunicateEvaluator(CommunicateEvaluator):
 # nl_enforce
 # --------------------------------------------------------------------------------------
 
-JUDGE_LOG: list[dict] = []  # one row per vote per assertion (exported by rescore.py)
+JUDGE_LOG: list[dict] = []  # one row per vote per assertion (exported by the callers)
+RAW_REPLIES: list[dict] = []  # raw judge replies of this process (exported by the callers)
 _JUDGE_CACHE: dict[str, list[dict]] = {}  # key -> per-assertion summaries
 _JUDGE_CACHE_PATH: Optional[Path] = None
 _JUDGE_LOCK = threading.Lock()
-JUDGE_COST = {"calls": 0, "cost": 0.0, "in_tokens": 0, "out_tokens": 0}
+JUDGE_COST = {"calls": 0, "cost": 0.0, "in_tokens": 0, "out_tokens": 0, "retries": 0}
 
-_SYSTEM_PROMPT = NLAssertionsEvaluator.evaluate_nl_assertions.__doc__ and """
-        TASK
-        - You will be given a list of expected outcomes and a conversation that was collected during a test case run.
-        - The conversation is between an agent and a customer.
-        - Your job is to evaluate whether the agent satisfies each of the expected outcomes.
-        - Grade each expected outcome individually.
+# tau2's prompt (evaluator_nl_assertions.py:78-98, identical up to whitespace) plus one change: the
+# expected outcomes are numbered and the reply must carry the number, so that each verdict can be
+# mapped back to its assertion one-to-one (design review, block2/skeptic_design.md C3).
+_SYSTEM_PROMPT = """
+TASK
+- You will be given a numbered list of expected outcomes and a conversation that was collected during a test case run.
+- The conversation is between an agent and a customer.
+- Your job is to evaluate whether the agent satisfies each of the expected outcomes.
+- Grade each expected outcome individually. Return exactly one result per expected outcome, in the same order.
 
-        FORMAT
-        - Your response should be a JSON object with the following fields:
-        - `reasoning`: a short explanation for your classification
-        - `metExpectation`: `true` if the agent satisfies the expected outcomes, `false` otherwise
-        - `expectedOutcome`: repeat the expectation from the input that you are grading
+FORMAT
+- Your response should be a JSON object with the following fields:
+- `index`: the number of the expected outcome you are grading (as given in the input)
+- `expectedOutcome`: repeat the expectation from the input that you are grading
+- `reasoning`: a short explanation for your classification
+- `metExpectation`: `true` if the agent satisfies the expected outcome, `false` otherwise
 
-        Example response structure:
+Example response structure:
+{
+    "results": [
         {
-            "results": [
-                {
-                    "expectedOutcome": "<one of the expected outcomes from the input>",
-                    "reasoning": "<reasoning trace>",
-                    "metExpectation": <false or true>,
-                }
-            ]
+            "index": 1,
+            "expectedOutcome": "<expected outcome number 1 from the input>",
+            "reasoning": "<reasoning trace>",
+            "metExpectation": <false or true>
         }
-        """  # identical to tau2 evaluator_nl_assertions.py:78-98 so that only the model differs
+    ]
+}
+"""
 
 
 def set_judge_cache(path: Path) -> None:
     global _JUDGE_CACHE_PATH
     _JUDGE_CACHE_PATH = path
+    _JUDGE_CACHE.clear()
     if path.exists():
         _JUDGE_CACHE.update(json.loads(path.read_text(encoding="utf-8")))
 
@@ -300,9 +357,6 @@ def _save_cache() -> None:
 
 def _norm(s: str) -> str:
     return re.sub(r"\s+", " ", s.strip().lower())
-
-
-JUDGE_VIEW = "with_tool_calls"  # "stock" = tau2's own view (role: content; tool-call arguments invisible)
 
 
 def trajectory_text(trajectory: list[Message]) -> str:
@@ -330,71 +384,122 @@ def trajectory_text(trajectory: list[Message]) -> str:
 
 
 def has_agent_text(trajectory: list[Message]) -> bool:
-    return any(isinstance(m, AssistantMessage) and m.has_text_content() for m in trajectory)
+    """True if the agent said anything beyond the orchestrator's canned opening greeting."""
+    for i, m in enumerate(trajectory):
+        if not isinstance(m, AssistantMessage) or not m.has_text_content():
+            continue
+        if i == 0 and m.content == GREETING and not getattr(m, "tool_calls", None):
+            continue
+        return True
+    return False
 
 
 def judge_key(trajectory: list[Message], nl_assertions: list[str]) -> str:
-    return hashlib.sha256((trajectory_text(trajectory) + "\n##\n" + _key(nl_assertions)).encode("utf-8")).hexdigest()
+    cfg = f"{JUDGE_MODEL}|{_key(JUDGE_ARGS)}|{JUDGE_VIEW}|{JUDGE_VOTES}|{hashlib.sha256(_SYSTEM_PROMPT.encode()).hexdigest()[:12]}"
+    return hashlib.sha256((cfg + "\n##\n" + trajectory_text(trajectory) + "\n##\n" + _key(nl_assertions)).encode("utf-8")).hexdigest()
 
 
-def _one_vote(trajectory_str: str, nl_assertions: list[str], vote: int) -> list[dict]:
-    user_prompt = f"""
-        conversation:
-        {trajectory_str}
+def _map_results(results: list, nl_assertions: list[str]) -> list[dict]:
+    """One-to-one mapping of judge results to assertions: index, then exact text, then position."""
+    out: list[Optional[dict]] = [None] * len(nl_assertions)
+    used: set[int] = set()
+    items = [r for r in results if isinstance(r, dict)]
+    # 1. by index
+    for j, r in enumerate(items):
+        try:
+            i = int(r.get("index")) - 1
+        except (TypeError, ValueError):
+            continue
+        if 0 <= i < len(nl_assertions) and out[i] is None and j not in used:
+            out[i] = {**r, "_mode": "index"}
+            used.add(j)
+    # 2. by exact normalised text
+    for i, a in enumerate(nl_assertions):
+        if out[i] is not None:
+            continue
+        for j, r in enumerate(items):
+            if j not in used and _norm(str(r.get("expectedOutcome", ""))) == _norm(a):
+                out[i] = {**r, "_mode": "text"}
+                used.add(j)
+                break
+    # 3. by position, only when the counts agree
+    if len(items) == len(nl_assertions):
+        for i in range(len(nl_assertions)):
+            if out[i] is None and i not in used:
+                out[i] = {**items[i], "_mode": "position"}
+                used.add(i)
+    mapped = []
+    for i, a in enumerate(nl_assertions):
+        r = out[i]
+        if r is None or not isinstance(r.get("metExpectation"), bool):
+            mapped.append({"met": None, "reasoning": "", "mode": "missing"})
+        else:
+            mapped.append({"met": bool(r["metExpectation"]), "reasoning": str(r.get("reasoning", ""))[:500], "mode": r["_mode"]})
+    return mapped
 
-        expectedOutcomes:
-        {nl_assertions}
-        """
+
+def _call_judge(trajectory_str: str, nl_assertions: list[str]) -> tuple[list, str, str]:
+    numbered = "\n".join(f"{i + 1}. {a}" for i, a in enumerate(nl_assertions))
+    user_prompt = f"\nconversation:\n{trajectory_str}\n\nexpectedOutcomes:\n{numbered}\n"
     msgs = [SystemMessage(role="system", content=_SYSTEM_PROMPT), UserMessage(role="user", content=user_prompt)]
     reply = generate(model=JUDGE_MODEL, messages=msgs, call_name="nl_assertions_eval_v2", **JUDGE_ARGS)
-    cost = float(getattr(reply, "cost", 0.0) or 0.0)
     usage = getattr(reply, "usage", None) or {}
     with _JUDGE_LOCK:
         JUDGE_COST["calls"] += 1
-        JUDGE_COST["cost"] += cost
+        JUDGE_COST["cost"] += float(getattr(reply, "cost", 0.0) or 0.0)
         JUDGE_COST["in_tokens"] += int((usage.get("prompt_tokens") if isinstance(usage, dict) else getattr(usage, "prompt_tokens", 0)) or 0)
         JUDGE_COST["out_tokens"] += int((usage.get("completion_tokens") if isinstance(usage, dict) else getattr(usage, "completion_tokens", 0)) or 0)
+    raw = reply.content or ""
     try:
-        data = json.loads(extract_json_from_llm_response(reply.content or ""))
+        data = json.loads(extract_json_from_llm_response(raw))
         results = data.get("results", []) if isinstance(data, dict) else []
-    except Exception as e:  # unparseable reply: strict -> nothing met
-        results = []
-        parse_error = repr(e)
-    else:
-        parse_error = ""
-    # map replies to assertions: by normalised text, else by position when counts agree
-    by_text = {_norm(str(r.get("expectedOutcome", ""))): r for r in results if isinstance(r, dict)}
-    out = []
-    for i, a in enumerate(nl_assertions):
-        r = by_text.get(_norm(a))
-        if r is None and len(results) == len(nl_assertions) and isinstance(results[i], dict):
-            r = results[i]
-        if r is None:
-            out.append({"met": False, "reasoning": f"[v2] assertion missing from judge reply {parse_error}".strip(), "matched": False})
-        else:
-            out.append({"met": bool(r.get("metExpectation", False)), "reasoning": str(r.get("reasoning", ""))[:500], "matched": True})
-    return out
+        err = ""
+    except Exception as e:  # noqa: BLE001
+        results, err = [], repr(e)[:120]
+    return results, raw, err
+
+
+def _one_vote(trajectory_str: str, nl_assertions: list[str], vote: int, key: str = "") -> list[dict]:
+    """One ballot: a judge call, re-asked up to JUDGE_RETRIES times while any assertion is missing."""
+    mapped: list[dict] = []
+    for attempt in range(1 + JUDGE_RETRIES):
+        results, raw, err = _call_judge(trajectory_str, nl_assertions)
+        mapped = _map_results(results, nl_assertions)
+        with _JUDGE_LOCK:
+            RAW_REPLIES.append({"key": key[:16], "vote": vote, "attempt": attempt, "parse_error": err, "n_results": len(results), "raw": raw[:4000]})
+        if all(m["met"] is not None for m in mapped):
+            break
+        with _JUDGE_LOCK:
+            JUDGE_COST["retries"] += 1
+    return mapped
 
 
 def judge_nl_assertions(trajectory: list[Message], nl_assertions: list[str], votes: int = JUDGE_VOTES) -> list[dict]:
-    """Per assertion: {met, votes_met, votes, reasoning, rule}. Cached by (trajectory, assertions)."""
+    """Per assertion: {met (bool|None), votes_met, votes_unmet, votes_undetermined, votes, reasoning, rule, modes}.
+    `met` is the majority of determined votes; None when no vote was determined. Cached by
+    (judge settings, prompt, view, trajectory, assertions)."""
     if not has_agent_text(trajectory):
-        return [{"met": False, "votes_met": 0, "votes": 0, "reasoning": "empty-trajectory rule: no assistant text, nothing to judge", "rule": "empty"} for _ in nl_assertions]
+        return [{"met": False, "votes_met": 0, "votes_unmet": 0, "votes_undetermined": 0, "votes": 0,
+                 "reasoning": "empty-trajectory rule: no assistant text beyond the canned greeting", "rule": "empty", "modes": ""} for _ in nl_assertions]
     key = judge_key(trajectory, nl_assertions)
     with _JUDGE_LOCK:
         cached = _JUDGE_CACHE.get(key)
     if cached is not None and len(cached) == len(nl_assertions):
         return cached
     traj = trajectory_text(trajectory)
-    ballots = [_one_vote(traj, nl_assertions, v) for v in range(votes)]
+    ballots = [_one_vote(traj, nl_assertions, v, key) for v in range(votes)]
     summary = []
     for i, a in enumerate(nl_assertions):
-        met_votes = sum(1 for b in ballots if b[i]["met"])
-        met = met_votes * 2 > votes
-        reasons = [b[i]["reasoning"] for b in ballots if b[i]["met"] == met]
-        summary.append({"met": met, "votes_met": met_votes, "votes": votes, "reasoning": reasons[0] if reasons else "", "rule": "judge"})
+        vm = sum(1 for b in ballots if b[i]["met"] is True)
+        vu = sum(1 for b in ballots if b[i]["met"] is False)
+        vn = sum(1 for b in ballots if b[i]["met"] is None)
+        met: Optional[bool] = None if vm + vu == 0 else vm > vu if vm != vu else None
+        reasons = [b[i]["reasoning"] for b in ballots if b[i]["met"] == met and b[i]["reasoning"]]
+        summary.append({"met": met, "votes_met": vm, "votes_unmet": vu, "votes_undetermined": vn, "votes": votes,
+                        "reasoning": reasons[0] if reasons else "", "rule": "judge", "modes": "/".join(b[i]["mode"] for b in ballots)})
         for v, b in enumerate(ballots):
-            JUDGE_LOG.append({"key": key[:16], "assertion_idx": i, "assertion": a, "vote": v, "met": int(b[i]["met"]), "matched": int(b[i]["matched"])})
+            JUDGE_LOG.append({"key": key[:16], "assertion_idx": i, "assertion": a, "vote": v,
+                              "met": "" if b[i]["met"] is None else int(b[i]["met"]), "mode": b[i]["mode"]})
     with _JUDGE_LOCK:
         _JUDGE_CACHE[key] = summary
         _save_cache()
@@ -410,8 +515,8 @@ class V2NLAssertionsEvaluator(NLAssertionsEvaluator):
         return [
             NLAssertionCheck(
                 nl_assertion=a,
-                met=r["met"],
-                justification=f"[v2 {r['rule']} {r['votes_met']}/{r['votes']}] {r['reasoning']}",
+                met=bool(r["met"]),  # undetermined -> unmet (lower bound); the upper bound is reported from the vote counts
+                justification=f"[v2 {r['rule']} met={r['votes_met']} unmet={r['votes_unmet']} undetermined={r['votes_undetermined']} of {r['votes']}; {r['modes']}] {r['reasoning']}",
             )
             for a, r in zip(nl_assertions, res)
         ]
@@ -451,6 +556,7 @@ def install() -> None:
 def _selftest() -> int:
     from tau2.registry import registry
 
+    me = sys.modules[__name__]  # this very module (may be __main__), so patches reach the judge code
     fails: list[str] = []
 
     def check(cond: bool, msg: str) -> None:
@@ -458,132 +564,165 @@ def _selftest() -> int:
         if not cond:
             fails.append(msg)
 
-    # --- comm_boundary
-    cases = [
-        ("4", "You can check 4 bags free of charge.", True),
-        ("4", "Your flight on May 16, 2024 costs $149 and the 24-hour rule applies.", False),
-        ("327", "You have $1,327 in certificates and gift cards combined.", False),
-        ("327", "Your gift cards total $327 and certificates $1,000.", True),
-        ("1000", "Your gift cards total $327 and certificates $1,000.", True),
-        ("1628", "The total is $1,628.00 for those flights.", True),
-        ("708", "The total comes to 708.5 dollars.", False),
-        ("708", "The remaining flights total $708.", True),
-        ("1286", "Your Mastercard will be charged $1,286.", True),
-        ("1286", "reference 51286 applies", False),
-        ("nonstop", "HAT041 is a nonstop flight.", True),
-        ("stop", "HAT041 is a nonstop flight.", False),
-        ("HAT041", "Flight hat041 departs at 10:00.", True),
-    ]
-    for info, text, exp in cases:
-        check(info_in_text(info, text) == exp, f"comm_boundary {info!r} in {text!r} -> {exp}")
-    # stock behaviour for the same collisions (documents what v1 did)
-    check("4" in "May 16, 2024".lower().replace(",", ""), "v1 substring: '4' matches '2024' (the defect)")
-    check("327" in "$1,327".replace(",", ""), "v1 substring: '327' matches '$1,327' (the defect)")
+    # block every real model call for the whole selftest
+    import tau2.utils.llm_utils as lu
 
-    # --- hash_canon on real tasks
-    env_ctor = registry.get_env_constructor("airline")
-    tasks = {t.id: t for t in registry.get_tasks_loader("airline")("base")}
+    def blocked(*a, **k):
+        raise RuntimeError("model call blocked in selftest")
 
-    def replay(actions):
-        env = env_ctor()
-        env.set_state(initialization_data=None, initialization_actions=None, message_history=[], strict=True)
-        for a in actions:
-            env.make_tool_call(tool_name=a.name, requestor=a.requestor, **a.arguments)
-        return env.tools.db
+    real_generate = me.generate
+    me.generate = blocked  # type: ignore[assignment]
+    lu.generate = blocked  # type: ignore[assignment]
 
-    # task 8: passenger order in book_reservation
-    acts = copy.deepcopy(tasks["8"].evaluation_criteria.actions)
-    book = [a for a in acts if a.name == "book_reservation"][0]
-    check(len(book.arguments["passengers"]) >= 2, "task 8 has >=2 passengers")
-    gold = replay(acts)
-    acts2 = copy.deepcopy(acts)
-    b2 = [a for a in acts2 if a.name == "book_reservation"][0]
-    b2.arguments["passengers"] = list(reversed(b2.arguments["passengers"]))
-    alt = replay(acts2)
-    check(raw_hash(gold) != raw_hash(alt), "task 8: raw hash differs when passengers are reversed (v1 defect)")
-    check(canonical_hash(gold) == canonical_hash(alt), "task 8: canonical hash equal when passengers are reversed")
-    acts3 = copy.deepcopy(acts)
-    b3 = [a for a in acts3 if a.name == "book_reservation"][0]
-    b3.arguments["insurance"] = "no" if b3.arguments["insurance"] == "yes" else "yes"  # same price only if 'no'->... so adjust payment
-    if b3.arguments["insurance"] == "yes":  # insurance costs 30 per passenger: pay it from the first method
-        b3.arguments["payment_methods"][0]["amount"] += 30 * len(b3.arguments["passengers"])
-    else:
-        b3.arguments["payment_methods"][0]["amount"] -= 30 * len(b3.arguments["passengers"])
-    check(canonical_hash(gold) != canonical_hash(replay(acts3)), "task 8: canonical hash differs for a different insurance choice (negative control)")
-
-    # task 20: payment_methods order in book_reservation -> payment_history order
-    acts = copy.deepcopy(tasks["20"].evaluation_criteria.actions)
-    book = [a for a in acts if a.name == "book_reservation"][0]
-    check(len(book.arguments["payment_methods"]) >= 2, "task 20 has >=2 payment methods")
-    gold = replay(acts)
-    acts2 = copy.deepcopy(acts)
-    b2 = [a for a in acts2 if a.name == "book_reservation"][0]
-    b2.arguments["payment_methods"] = list(reversed(b2.arguments["payment_methods"]))
-    alt = replay(acts2)
-    check(raw_hash(gold) != raw_hash(alt), "task 20: raw hash differs when payment_methods are reversed (v1 defect)")
-    check(canonical_hash(gold) == canonical_hash(alt), "task 20: canonical hash equal when payment_methods are reversed")
-
-    # task 23: order of the three bookings -> generated ids swap
-    acts = copy.deepcopy(tasks["23"].evaluation_criteria.actions)
-    idx = [i for i, a in enumerate(acts) if a.name == "book_reservation"]
-    check(len(idx) == 3, "task 23 has 3 bookings")
-    gold = replay(acts)
-    acts2 = copy.deepcopy(acts)
-    acts2[idx[0]], acts2[idx[2]] = acts2[idx[2]], acts2[idx[0]]
-    alt = replay(acts2)
-    check(raw_hash(gold) != raw_hash(alt), "task 23: raw hash differs when bookings are reordered (v1 defect)")
-    check(canonical_hash(gold) == canonical_hash(alt), "task 23: canonical hash equal when bookings are reordered")
-    check(len(db_diff(gold.model_dump(), alt.model_dump())) > 0, "db_diff reports raw differences for task 23")
-    check(db_diff(canonical_dump(gold.model_dump()), canonical_dump(alt.model_dump())) == [], "db_diff empty after canonicalisation")
-    # the initial DB is unchanged by canonicalisation of ids (no new objects)
-    db0 = get_db()
-    check(set(canonical_dump(db0.model_dump())["reservations"]) == set(db0.reservations), "canonical form keeps original reservation ids")
-
-    # --- hook: switch off -> stock hash; on -> canonical
-    install()
-    env = env_ctor()
-    SWITCHES.set(False, False, False)
-    check(env.get_db_hash() == raw_hash(env.tools.db), "hook off: get_db_hash == raw hash")
-    SWITCHES.set(True, False, False)
-    check(env.get_db_hash() == canonical_hash(env.tools.db), "hook on: get_db_hash == canonical hash")
-    SWITCHES.set(False, False, False)
-
-    # --- nl empty-trajectory rule, no model call
-    me = sys.modules[__name__]  # this very module (may be __main__), so the patch reaches _one_vote
-
-    called = []
-    orig = me.generate
-    me.generate = lambda *a, **k: called.append(1)  # type: ignore[assignment]
     try:
-        SWITCHES.set(False, False, True)
-        res = V2NLAssertionsEvaluator.evaluate_nl_assertions([], ["Agent refuses."])
-        check(len(res) == 1 and res[0].met is False and not called, "empty trajectory: assertion not met, judge not called")
-        from tau2.data_model.message import ToolCall
+        # --- comm_boundary
+        cases = [
+            ("4", "You can check 4 bags free of charge.", True),
+            ("4", "Your flight on May 16, 2024 costs $149 and the 24-hour rule applies.", False),
+            ("327", "You have $1,327 in certificates and gift cards combined.", False),
+            ("327", "Your gift cards total $327 and certificates $1,000.", True),
+            ("1000", "Your gift cards total $327 and certificates $1,000.", True),
+            ("1628", "The total is $1,628.00 for those flights.", True),
+            ("708", "The total comes to 708.5 dollars.", False),
+            ("708", "The remaining flights total $708.", True),
+            ("1286", "Your Mastercard will be charged $1,286.", True),
+            ("1286", "reference 51286 applies", False),
+            ("41", "Flight HAT041 is nonstop.", False),
+            ("nonstop", "HAT041 is a nonstop flight.", True),
+            ("stop", "HAT041 is a nonstop flight.", False),
+            ("HAT041", "Flight hat041 departs at 10:00.", True),
+        ]
+        for info, text, exp in cases:
+            check(info_in_text(info, text) == exp, f"comm_boundary {info!r} in {text!r} -> {exp}")
+        check("4" in "May 16, 2024".lower().replace(",", ""), "v1 substring: '4' matches '2024' (the defect)")
+        check("327" in "$1,327".replace(",", ""), "v1 substring: '327' matches '$1,327' (the defect)")
 
-        tool_only = [AssistantMessage(role="assistant", content=None, tool_calls=[ToolCall(id="x", name="get_user_details", arguments={"user_id": "u"})])]
-        res = V2NLAssertionsEvaluator.evaluate_nl_assertions(tool_only, ["Agent refuses."])
-        check(res[0].met is False and not called, "tool-only trajectory: assertion not met, judge not called")
-    finally:
-        me.generate = orig  # type: ignore[assignment]
+        # --- hash_canon on real tasks
+        env_ctor = registry.get_env_constructor("airline")
+        tasks = {t.id: t for t in registry.get_tasks_loader("airline")("base")}
+
+        def replay(actions):
+            env = env_ctor()
+            env.set_state(initialization_data=None, initialization_actions=None, message_history=[], strict=True)
+            for a in actions:
+                env.make_tool_call(tool_name=a.name, requestor=a.requestor, **a.arguments)
+            return env.tools.db
+
+        acts = copy.deepcopy(tasks["8"].evaluation_criteria.actions)
+        book = [a for a in acts if a.name == "book_reservation"][0]
+        check(len(book.arguments["passengers"]) >= 2, "task 8 has >=2 passengers")
+        gold = replay(acts)
+        acts2 = copy.deepcopy(acts)
+        b2 = [a for a in acts2 if a.name == "book_reservation"][0]
+        b2.arguments["passengers"] = list(reversed(b2.arguments["passengers"]))
+        alt = replay(acts2)
+        check(raw_hash(gold) != raw_hash(alt), "task 8: raw hash differs when passengers are reversed (v1 defect)")
+        check(canonical_hash(gold) == canonical_hash(alt), "task 8: canonical hash equal when passengers are reversed")
+        acts3 = copy.deepcopy(acts)
+        b3 = [a for a in acts3 if a.name == "book_reservation"][0]
+        delta = 30 * len(b3.arguments["passengers"])  # insurance is $30 per passenger
+        if b3.arguments["insurance"] == "yes":
+            b3.arguments["insurance"], b3.arguments["payment_methods"][0]["amount"] = "no", b3.arguments["payment_methods"][0]["amount"] - delta
+        else:
+            b3.arguments["insurance"], b3.arguments["payment_methods"][0]["amount"] = "yes", b3.arguments["payment_methods"][0]["amount"] + delta
+        check(canonical_hash(gold) != canonical_hash(replay(acts3)), "task 8: canonical hash differs for a different insurance choice (negative control)")
+
+        acts = copy.deepcopy(tasks["20"].evaluation_criteria.actions)
+        book = [a for a in acts if a.name == "book_reservation"][0]
+        check(len(book.arguments["payment_methods"]) >= 2, "task 20 has >=2 payment methods")
+        gold = replay(acts)
+        acts2 = copy.deepcopy(acts)
+        b2 = [a for a in acts2 if a.name == "book_reservation"][0]
+        b2.arguments["payment_methods"] = list(reversed(b2.arguments["payment_methods"]))
+        alt = replay(acts2)
+        check(raw_hash(gold) != raw_hash(alt), "task 20: raw hash differs when payment_methods are reversed (v1 defect)")
+        check(canonical_hash(gold) == canonical_hash(alt), "task 20: canonical hash equal when payment_methods are reversed")
+
+        acts = copy.deepcopy(tasks["23"].evaluation_criteria.actions)
+        idx = [i for i, a in enumerate(acts) if a.name == "book_reservation"]
+        check(len(idx) == 3, "task 23 has 3 bookings")
+        gold = replay(acts)
+        acts2 = copy.deepcopy(acts)
+        acts2[idx[0]], acts2[idx[2]] = acts2[idx[2]], acts2[idx[0]]
+        alt = replay(acts2)
+        check(raw_hash(gold) != raw_hash(alt), "task 23: raw hash differs when bookings are reordered (v1 defect)")
+        check(canonical_hash(gold) == canonical_hash(alt), "task 23: canonical hash equal when bookings are reordered")
+        check(len(db_diff(gold.model_dump(), alt.model_dump())) > 0, "db_diff reports raw differences for task 23")
+        check(db_diff(canonical_dump(gold.model_dump()), canonical_dump(alt.model_dump())) == [], "db_diff empty after canonicalisation")
+        db0 = get_db()
+        check(set(canonical_dump(db0.model_dump())["reservations"]) == set(db0.reservations), "canonical form keeps original reservation ids")
+
+        install()
+        env = env_ctor()
+        SWITCHES.set(False, False, False)
+        check(env.get_db_hash() == raw_hash(env.tools.db), "hook off: get_db_hash == raw hash")
+        SWITCHES.set(True, False, False)
+        check(env.get_db_hash() == canonical_hash(env.tools.db), "hook on: get_db_hash == canonical hash")
         SWITCHES.set(False, False, False)
 
-    # --- vote mapping helper: missing assertion in reply -> not met
-    fake_reply = {"results": [{"expectedOutcome": "A", "reasoning": "r", "metExpectation": True}]}
-    me_gen = me.generate
-    me.generate = lambda *a, **k: AssistantMessage(role="assistant", content=json.dumps(fake_reply))  # type: ignore[assignment]
-    try:
-        v = _one_vote("assistant: hi", ["A", "B"], 0)
-        check(v[0]["met"] is True and v[1]["met"] is False and v[1]["matched"] is False, "judge reply missing an assertion -> that assertion not met")
-        me.generate = lambda *a, **k: AssistantMessage(role="assistant", content="```json\n" + json.dumps(fake_reply) + "\n```")  # type: ignore[assignment]
-        v = _one_vote("assistant: hi", ["A"], 0)
-        check(v[0]["met"] is True, "fenced JSON reply parsed")
-    finally:
-        me.generate = me_gen  # type: ignore[assignment]
-    JUDGE_COST.update({"calls": 0, "cost": 0.0, "in_tokens": 0, "out_tokens": 0})
+        # --- nl: empty-trajectory rule (no model call), greeting excluded
+        from tau2.data_model.message import ToolCall
 
-    # with_nl_basis
-    t = with_nl_basis(tasks["32"])
-    check(RewardType.NL_ASSERTION in t.evaluation_criteria.reward_basis and RewardType.NL_ASSERTION not in tasks["32"].evaluation_criteria.reward_basis, "with_nl_basis adds NL_ASSERTION on a copy")
+        SWITCHES.set(False, False, True)
+        greeting = AssistantMessage(role="assistant", content=GREETING)
+        user = UserMessage(role="user", content="Hi, I want to cancel my flight.")
+        res = V2NLAssertionsEvaluator.evaluate_nl_assertions([], ["Agent refuses."])
+        check(len(res) == 1 and res[0].met is False, "empty trajectory: assertion not met, judge not called")
+        res = V2NLAssertionsEvaluator.evaluate_nl_assertions([greeting, user], ["Agent refuses."])
+        check(res[0].met is False, "greeting + one user turn (block-1 2b probe): assertion not met, judge not called")
+        tool_only = [greeting, user, AssistantMessage(role="assistant", content=None, tool_calls=[ToolCall(id="x", name="get_user_details", arguments={"user_id": "u"})])]
+        check(V2NLAssertionsEvaluator.evaluate_nl_assertions(tool_only, ["Agent refuses."])[0].met is False, "greeting + tool-only turn: not met, judge not called")
+        check(has_agent_text([greeting, user, AssistantMessage(role="assistant", content="Sorry, I cannot do that.")]), "a real agent sentence counts as agent text")
+        SWITCHES.set(False, False, False)
+
+        # --- judge view shows tool calls
+        txt = trajectory_text(tool_only)
+        check("get_user_details" in txt and '"user_id": "u"' in txt, "with_tool_calls view renders tool name and arguments")
+
+        # --- mapping: index first, reordered/paraphrased replies land on the right assertion
+        A = ["Agent cancels XEHM4B.", "Agent does not cancel 59XX6W."]
+        reply = {"results": [{"index": 2, "expectedOutcome": "The agent did not cancel reservation 59XX6W", "reasoning": "it did cancel", "metExpectation": False},
+                             {"index": 1, "expectedOutcome": "Agent cancels XEHM4B.", "reasoning": "yes", "metExpectation": True}]}
+        m = _map_results(reply["results"], A)
+        check(m[0]["met"] is True and m[1]["met"] is False and m[0]["mode"] == "index", "reordered reply mapped by index")
+        reply2 = {"results": [{"expectedOutcome": "Agent does not cancel 59XX6W.", "reasoning": "x", "metExpectation": False},
+                              {"expectedOutcome": "Agent cancels XEHM4B.", "reasoning": "y", "metExpectation": True}]}
+        m = _map_results(reply2["results"], A)
+        check(m[0]["met"] is True and m[1]["met"] is False and m[0]["mode"] == "text", "reordered reply without index mapped by exact text")
+        m = _map_results([{"expectedOutcome": "A", "reasoning": "r", "metExpectation": True}], A)
+        check(m[0]["met"] is None and m[1]["met"] is None and m[0]["mode"] == "missing", "one unmatched result for two assertions -> both undetermined (no position guess)")
+
+        # --- retry on parse failure, then undetermined; fenced JSON parsed
+        calls = {"n": 0}
+
+        def fake_bad(*a, **k):
+            calls["n"] += 1
+            return AssistantMessage(role="assistant", content="not json at all")
+
+        me.generate = fake_bad  # type: ignore[assignment]
+        v = _one_vote("assistant: hi", ["A"], 0)
+        check(calls["n"] == 1 + JUDGE_RETRIES and v[0]["met"] is None and v[0]["mode"] == "missing", "unparseable reply: re-asked once, then undetermined")
+        good = {"results": [{"index": 1, "expectedOutcome": "A", "reasoning": "r", "metExpectation": True}]}
+        me.generate = lambda *a, **k: AssistantMessage(role="assistant", content="```json\n" + json.dumps(good) + "\n```")  # type: ignore[assignment]
+        check(_one_vote("assistant: hi", ["A"], 0)[0]["met"] is True, "fenced JSON reply parsed")
+        # trailing comma (as in tau2's own example JSON) -> parse error -> retry -> undetermined, not 'unmet'
+        me.generate = lambda *a, **k: AssistantMessage(role="assistant", content='{"results": [{"index": 1, "expectedOutcome": "A", "reasoning": "r", "metExpectation": true,}]}')  # type: ignore[assignment]
+        check(_one_vote("assistant: hi", ["A"], 0)[0]["met"] is None, "trailing-comma reply -> undetermined, not unmet")
+
+        # --- majority with undetermined votes
+        me.generate = blocked  # type: ignore[assignment]
+        JUDGE_COST.update({"calls": 0, "cost": 0.0, "in_tokens": 0, "out_tokens": 0, "retries": 0})
+        RAW_REPLIES.clear()
+        JUDGE_LOG.clear()
+
+        t = with_nl_basis(tasks["32"])
+        check(RewardType.NL_ASSERTION in t.evaluation_criteria.reward_basis and RewardType.NL_ASSERTION not in tasks["32"].evaluation_criteria.reward_basis, "with_nl_basis adds NL_ASSERTION on a copy")
+        p = provenance()
+        check(p["scorer_version"] == "v2" and "overlay_commit" in p and "judge_prompt_sha256" in p, "provenance stamp available")
+    finally:
+        me.generate = real_generate  # type: ignore[assignment]
+        lu.generate = real_generate  # type: ignore[assignment]
+        SWITCHES.set(False, False, False)
 
     print(f"\n{len(fails)} failure(s)")
     return 1 if fails else 0

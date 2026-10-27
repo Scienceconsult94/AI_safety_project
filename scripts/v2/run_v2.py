@@ -4,14 +4,15 @@ Same settings as the block-1 runs (results/runs/*.results.json info): agent and 
 anthropic/claude-haiku-5-5 with llm_args {} (issue I5), seed 300, max_steps 200, max_errors 10,
 substring communicate scorer, max_concurrency 3, timeout 900, workers 0 (threads only: the
 overlay lives in this process). Output lands OUTSIDE the clone in results/v2/runs/<name>/.
+The dry run also diffs the run Info against the block-1 Info (design review E7).
 
   --part pass3   llm_agent, 20 sampled tasks x 3 trials      (~60 simulations)
-  --part gt      llm_agent_gt, tasks with reference actions   (16 of the 20)
-  --part both    pass3 then gt
-  --dry-run      build everything, print the plan, call no model
-  --tasks        default: sample.json task_ids
+  --part gt      llm_agent_gt, tasks with reference actions   (16 of the 20), 1 trial
+  --part gt3     llm_agent_gt on the three text-fixed tasks 7, 32, 44, 3 trials (H4 by mechanism)
+  --part all     pass3, gt, gt3
+  --dry-run      build everything, print the plan and the Info diff, call no model
 
-Run from inside tau2-bench:  uv run --no-sync python ../scripts/v2/run_v2.py --part both
+Run from inside tau2-bench:  uv run --no-sync python ../scripts/v2/run_v2.py --part all
 SPENDS MONEY (agent + user simulator + NL judge). Block-2 ceiling $5 (PLAN.md §3.7).
 """
 
@@ -21,7 +22,6 @@ import argparse
 import csv
 import json
 import os
-import subprocess
 import sys
 import time
 from pathlib import Path
@@ -34,6 +34,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 ROOT = HERE.parents[1]
 OUT = ROOT / "results" / "v2" / "runs"
+BLOCK1_INFO = ROOT / "results" / "runs" / "sample20_pass3_haiku.results.json"
 
 import scorer_v2 as s2  # noqa: E402
 import tasks_v2  # noqa: E402
@@ -45,38 +46,33 @@ from tau2.runner.batch import _load_run_tasks, run_tasks  # noqa: E402
 
 MODEL = "anthropic/claude-haiku-5-5"
 PRICE_IN, PRICE_OUT = 0.10, 0.50
+PARTS = {
+    "pass3": {"agent": "llm_agent", "trials": 3, "tasks": None, "name": "v2_sample20_pass3_haiku"},
+    "gt": {"agent": "llm_agent_gt", "trials": 1, "tasks": None, "name": "v2_sample20_gt_haiku"},
+    "gt3": {"agent": "llm_agent_gt", "trials": 3, "tasks": ["7", "32", "44"], "name": "v2_gt3_haiku"},
+}
 
 
-def overlay_commit() -> str:
-    try:
-        return subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "--short", "HEAD"], text=True).strip()
-    except Exception:  # noqa: BLE001
-        return "unknown"
-
-
-def make_config(part: str, task_ids: list[str], trials: int, seed: int, save_to: str) -> TextRunConfig:
+def make_config(agent: str, task_ids: list[str], trials: int, seed: int, save_to: str) -> TextRunConfig:
     return TextRunConfig(
-        domain="airline",
-        task_set_name=tasks_v2.TASK_SET_NAME,
-        task_split_name="base",
-        task_ids=task_ids,
-        num_trials=trials if part == "pass3" else 1,
-        seed=seed,
-        agent="llm_agent" if part == "pass3" else "llm_agent_gt",
-        llm_agent=MODEL,
-        llm_args_agent={},
-        user="user_simulator",
-        llm_user=MODEL,
-        llm_args_user={},
-        max_steps=200,
-        max_errors=10,
-        max_concurrency=3,
-        timeout=900,
-        workers=0,
-        communicate_scoring=CommunicateScoring(scorer=CommunicateScorer.SUBSTRING),
-        save_to=save_to,
-        log_level="ERROR",
+        domain="airline", task_set_name=tasks_v2.TASK_SET_NAME, task_split_name="base", task_ids=task_ids,
+        num_trials=trials, seed=seed, agent=agent, llm_agent=MODEL, llm_args_agent={},
+        user="user_simulator", llm_user=MODEL, llm_args_user={},
+        max_steps=200, max_errors=10, max_concurrency=3, timeout=900, workers=0,
+        communicate_scoring=CommunicateScoring(scorer=CommunicateScorer.SUBSTRING), save_to=save_to, log_level="ERROR",
     )
+
+
+def info_diff(cfg: TextRunConfig) -> dict:
+    """Fields of the block-1 Info that this config would change (excluding the task set and language pins)."""
+    b1 = json.loads(BLOCK1_INFO.read_text(encoding="utf-8"))["info"]
+    mine = {"max_steps": cfg.max_steps, "max_errors": cfg.max_errors, "seed": cfg.seed, "language": cfg.language,
+            "agent_llm": cfg.llm_agent, "agent_llm_args": cfg.llm_args_agent, "user_llm": cfg.llm_user, "user_llm_args": cfg.llm_args_user,
+            "user_impl": cfg.user, "communicate_scoring": cfg.communicate_scoring.model_dump(mode="json")}
+    theirs = {"max_steps": b1["max_steps"], "max_errors": b1["max_errors"], "seed": b1["seed"], "language": b1["language"],
+              "agent_llm": b1["agent_info"]["llm"], "agent_llm_args": b1["agent_info"]["llm_args"], "user_llm": b1["user_info"]["llm"],
+              "user_llm_args": b1["user_info"]["llm_args"], "user_impl": b1["user_info"]["implementation"], "communicate_scoring": b1["communicate_scoring"]}
+    return {k: {"block1": theirs[k], "v2": mine[k]} for k in mine if mine[k] != theirs[k]}
 
 
 def usage_totals(results) -> dict:
@@ -96,62 +92,57 @@ def usage_totals(results) -> dict:
     return tot
 
 
-def run_part(part: str, task_ids: list[str], trials: int, seed: int, name: str, dry: bool) -> dict:
-    cfg = make_config(part, task_ids, trials, seed, name)
+def run_part(part: str, sample_ids: list[str], seed: int, dry: bool) -> dict:
+    P = PARTS[part]
+    cfg = make_config(P["agent"], P["tasks"] or sample_ids, P["trials"], seed, P["name"])
     cfg.validate()
     tasks = _load_run_tasks(cfg)
-    save_dir = OUT / name
-    plan = {
-        "part": part, "agent": cfg.agent, "task_set": cfg.task_set_name, "n_tasks": len(tasks), "task_ids": [t.id for t in tasks],
-        "num_trials": cfg.num_trials, "seed": cfg.seed, "switches": vars(s2.SWITCHES).copy(), "judge": s2.JUDGE_MODEL,
-        "nl_in_basis": all("NL_ASSERTION" in [str(b.value if hasattr(b, 'value') else b) for b in t.evaluation_criteria.reward_basis] for t in tasks),
-        "save_dir": str(save_dir.relative_to(ROOT)), "overlay_commit": overlay_commit(),
-    }
-    print(json.dumps(plan, indent=1))
+    save_dir = OUT / P["name"]
+    plan = {"part": part, "agent": cfg.agent, "task_set": cfg.task_set_name, "n_tasks": len(tasks), "task_ids": [t.id for t in tasks],
+            "num_trials": cfg.num_trials, "seed": cfg.seed, "provenance": s2.provenance(),
+            "nl_in_basis": all(any(str(getattr(b, "value", b)) == "NL_ASSERTION" for b in t.evaluation_criteria.reward_basis) for t in tasks),
+            "info_diff_vs_block1": info_diff(cfg), "save_dir": str(save_dir.relative_to(ROOT))}
+    print(json.dumps(plan, indent=1, default=str))
     if dry:
         return plan
     save_dir.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     results = run_tasks(cfg, tasks, save_path=save_dir / "results.json", save_dir=save_dir, evaluation_type=EvaluationType.ALL, results_format="json")
     metrics = compute_metrics(results)
-    summ = {
-        **plan, "seconds": round(time.time() - t0), "n_sims": len(results.simulations),
-        "infra_errors": sum(1 for s in results.simulations if str(s.termination_reason) .endswith("infrastructure_error") or getattr(s.termination_reason, "value", "") == "infrastructure_error"),
-        "avg_reward": metrics.avg_reward, "pass_hat_k": {str(k): v for k, v in metrics.pass_hat_ks.items()},
-        "usage": usage_totals(results),
-        "judge": {**s2.JUDGE_COST, "own_estimate_usd": s2.JUDGE_COST["in_tokens"] / 1e6 * PRICE_IN + s2.JUDGE_COST["out_tokens"] / 1e6 * PRICE_OUT},
-    }
+    summ = {**plan, "seconds": round(time.time() - t0), "n_sims": len(results.simulations),
+            "infra_errors": sum(1 for s in results.simulations if str(getattr(s.termination_reason, "value", s.termination_reason)) == "infrastructure_error"),
+            "avg_reward": metrics.avg_reward, "pass_hat_k": {str(k): v for k, v in metrics.pass_hat_ks.items()}, "usage": usage_totals(results),
+            "judge": {**s2.JUDGE_COST, "own_estimate_usd": s2.JUDGE_COST["in_tokens"] / 1e6 * PRICE_IN + s2.JUDGE_COST["out_tokens"] / 1e6 * PRICE_OUT}}
     (save_dir / "summary.json").write_text(json.dumps(summ, indent=1, default=str), encoding="utf-8")
     if s2.JUDGE_LOG:
         with open(save_dir / "judge_votes.csv", "w", newline="", encoding="utf-8") as fp:
             w = csv.DictWriter(fp, fieldnames=list(s2.JUDGE_LOG[0]))
             w.writeheader()
             w.writerows(s2.JUDGE_LOG)
+        (save_dir / "judge_raw.json").write_text(json.dumps(s2.RAW_REPLIES, indent=0, ensure_ascii=False), encoding="utf-8")
         s2.JUDGE_LOG.clear()
+        s2.RAW_REPLIES.clear()
+    for k in ("calls", "retries", "in_tokens", "out_tokens", "cost"):
+        s2.JUDGE_COST[k] = 0
     print(json.dumps({k: summ[k] for k in ("n_sims", "infra_errors", "avg_reward", "pass_hat_k", "seconds")}, indent=1))
     return summ
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--part", choices=["pass3", "gt", "both"], default="both")
-    ap.add_argument("--tasks", nargs="*", default=None)
-    ap.add_argument("--trials", type=int, default=3)
+    ap.add_argument("--part", choices=[*PARTS, "all"], default="all")
     ap.add_argument("--seed", type=int, default=300)
-    ap.add_argument("--prefix", default="v2")
-    ap.add_argument("--no-nl", action="store_true", help="switch nl_enforce off (not the pre-registered v2)")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
-
-    task_ids = args.tasks or json.loads((ROOT / "sample.json").read_text(encoding="utf-8"))["task_ids"]
+    if not args.dry_run:
+        s2.require_clean("run_v2")
+    sample_ids = json.loads((ROOT / "sample.json").read_text(encoding="utf-8"))["task_ids"]
     s2.install()
-    s2.SWITCHES.set(True, True, not args.no_nl)
+    s2.SWITCHES.set(True, True, True)
     s2.set_judge_cache(ROOT / "results" / "v2" / "judge_cache_live.json")
     tasks_v2.register()
-    parts = ["pass3", "gt"] if args.part == "both" else [args.part]
-    for part in parts:
-        name = f"{args.prefix}_{'sample20_pass3' if part == 'pass3' else 'sample20_gt'}_haiku"
-        run_part(part, task_ids, args.trials, args.seed, name, args.dry_run)
+    for part in (list(PARTS) if args.part == "all" else [args.part]):
+        run_part(part, sample_ids, args.seed, args.dry_run)
     return 0
 
 

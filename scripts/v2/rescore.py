@@ -1,33 +1,40 @@
-"""Offline re-score of the recorded block-1 simulations under scorer v2 (block2/PLAN.md §4, H3).
+"""Offline re-score of recorded simulations under scorer v2 (block2/PLAN.md §4, H3).
 
 Stages
-  A  replay gate: the stock scorer (no switch) must reproduce the recorded reward of every
-     simulation -> results/v2/replay_check.csv; the script stops if any differs (unless --force).
-  B  judge pre-computation (unless --no-judge): nl_assertions of tasks v1 and tasks v2 judged on
-     every recorded trajectory, 3 votes each, cached in results/v2/judge_cache.json (re-runs cost
-     nothing). Only this stage calls a model.
-  C  configurations (one switch at a time, all together, tasks v1 vs v2):
-       v1        tasks v1, stock scorer (= stage A)
-       S_hash    tasks v1, hash_canon
-       S_comm    tasks v1, comm_boundary
-       S_nl      tasks v1, nl_enforce
-       S_all_t1  tasks v1, all three switches
-       T2_stock  tasks v2, stock scorer  (effect of the text/communicate_info fixes alone)
-       V2        tasks v2, all three switches  (the v2 benchmark)
-     -> results/v2/rescore.csv (one row per simulation), judge_votes.csv, rescore_summary.md
-Also per simulation: the raw DB diff gold vs predicted under v1 and whether canonicalisation
-closes it (db_order_only), and gold-action replay errors.
+  A  replay gate: the configuration that produced the recorded reward must reproduce it for every
+     simulation (recorded block-1 runs: the stock scorer; fresh block-2 runs: V2 with the live judge
+     cache) -> results/v2/replay_check[_fresh].csv; the script stops on any difference (unless --force).
+  A2 engagement gate (no cost): four perturbations of real trajectories must flip as designed
+     (task 8 passengers reversed, task 20 payment methods reversed, task 23 bookings swapped: stock 0 ->
+     hash_canon 1; task 23 with "$1,327" only: stock communicate 1 -> comm_boundary 0)
+     -> results/v2/engagement_gate.csv; stops on failure.
+  B  judge pre-computation (unless --no-judge): nl_assertions of tasks v1 and tasks v2 judged on every
+     trajectory, 3 votes each, cached (results/v2/judge_cache.json; fresh runs: judge_cache_live.json,
+     written by run_v2.py, so for them this stage is a replay). Only this stage calls a model.
+  C  configurations (one switch at a time, all together, tasks v2 with the stock scorer, V2):
+       v1, S_hash, S_comm, S_nl, S_all_t1 (tasks v1), T2_stock, V2 (tasks v2)
+     -> results/v2/rescore[_fresh].csv (one row per simulation; per config: reward, db, comm, nl, the
+        upper-bound reward with undetermined judge verdicts counted as met, the reward with process-class
+        assertions excluded, per-assertion judge detail), judge_votes[_fresh].csv, judge_raw[_fresh].json,
+        rescore_summary[_fresh].md, provenance[_fresh].json.
+Per simulation also: the raw DB diff gold vs predicted under v1, whether canonicalisation closes it
+(db_order_only), gold-action replay errors.
 
-Run from inside tau2-bench (needs the tau2 venv; .env is read by tau2 for the judge):
-    uv run --no-sync python ../scripts/v2/rescore.py [--no-judge] [--force] [--workers 3]
+Reading rule (design review E3): a flip is attributed to its component (criteria text, hash, comm, nl);
+the task-7 trial that flips 0 -> 1 under tasks v2 does so by construction of the fix.
+
+Run from inside tau2-bench (tau2 venv; .env is read by tau2 for the judge):
+    uv run --no-sync python ../scripts/v2/rescore.py [--set recorded|fresh] [--no-judge] [--force] [--workers 3]
 """
 
 from __future__ import annotations
 
 import argparse
+import copy
 import csv
 import json
 import os
+import re
 import sys
 import time
 from collections import Counter, defaultdict
@@ -47,6 +54,7 @@ OUT = ROOT / "results" / "v2"
 import scorer_v2 as s2  # noqa: E402
 import tasks_v2  # noqa: E402
 from loguru import logger  # noqa: E402
+from tau2.data_model.message import AssistantMessage  # noqa: E402
 from tau2.data_model.simulation import Results  # noqa: E402
 from tau2.data_model.tasks import RewardType  # noqa: E402
 from tau2.evaluator.evaluator import EvaluationType, evaluate_simulation  # noqa: E402
@@ -54,10 +62,11 @@ from tau2.orchestrator.modes import CommunicationMode  # noqa: E402
 from tau2.registry import registry  # noqa: E402
 
 SETS = {
-    # recorded block-1 runs (v1 benchmark): gate = stock scorer reproduces the recorded reward
-    "recorded": {"dir": RUNS, "files": {"haiku": "sample20_pass3_haiku.results.json", "gt": "sample20_gt_haiku.results.json"}, "gate_cfg": "v1", "suffix": ""},
-    # fresh block-2 runs (v2 benchmark, scored live by V2): gate = V2 reproduces the recorded reward
-    "fresh": {"dir": OUT / "runs", "files": {"haiku": "v2_sample20_pass3_haiku/results.json", "gt": "v2_sample20_gt_haiku/results.json"}, "gate_cfg": "V2", "suffix": "_fresh"},
+    "recorded": {"dir": RUNS, "files": {"haiku": "sample20_pass3_haiku.results.json", "gt": "sample20_gt_haiku.results.json"},
+                 "gate_cfg": "v1", "suffix": "", "cache": OUT / "judge_cache.json"},
+    "fresh": {"dir": OUT / "runs", "files": {"haiku": "v2_sample20_pass3_haiku/results.json", "gt": "v2_sample20_gt_haiku/results.json",
+                                             "gt3": "v2_gt3_haiku/results.json"},
+              "gate_cfg": "V2", "suffix": "_fresh", "cache": OUT / "judge_cache_live.json"},
 }
 CONFIGS = [  # name, tasks, hash, comm, nl
     ("v1", "t1", 0, 0, 0),
@@ -107,6 +116,84 @@ def db_dumps(sim, task):
     return gold.tools.db.model_dump(), pred.tools.db.model_dump(), errs
 
 
+def load_classes() -> dict[tuple[str, int], str]:
+    p = ROOT / "block2" / "nl_assertion_classes.csv"
+    if not p.exists():
+        return {}
+    return {(r["task_id"], int(r["idx"])): r["class"] for r in csv.DictReader(open(p, encoding="utf-8"))}
+
+
+# ---------------------------------------------------------------------------------------------
+# engagement gate: perturbations of real trajectories that the switches must flip
+# ---------------------------------------------------------------------------------------------
+
+
+def _perturb(sim, how: str):
+    s = sim.model_copy(deep=True)
+    if how == "passengers_reversed":
+        for m in s.messages:
+            if isinstance(m, AssistantMessage) and m.tool_calls:
+                for tc in m.tool_calls:
+                    if tc.name == "book_reservation":
+                        tc.arguments["passengers"] = list(reversed(tc.arguments["passengers"]))
+    elif how == "payments_reversed":
+        for m in s.messages:
+            if isinstance(m, AssistantMessage) and m.tool_calls:
+                for tc in m.tool_calls:
+                    if tc.name == "book_reservation":
+                        tc.arguments["payment_methods"] = list(reversed(tc.arguments["payment_methods"]))
+    elif how == "bookings_swapped":
+        idx = [i for i, m in enumerate(s.messages) if isinstance(m, AssistantMessage) and m.tool_calls and any(tc.name == "book_reservation" for tc in m.tool_calls)]
+        a, b = idx[0], idx[-1]
+        s.messages[a].tool_calls, s.messages[b].tool_calls = s.messages[b].tool_calls, s.messages[a].tool_calls
+        # keep ToolMessage ids paired with the swapped calls
+        ra = next(m for m in s.messages[a + 1:] if m.role == "tool")
+        rb = next(m for m in s.messages[b + 1:] if m.role == "tool")
+        ra.id, rb.id = rb.id, ra.id
+    elif how == "comm_1327_only":
+        for m in s.messages:
+            if isinstance(m, AssistantMessage) and m.has_text_content() and "327" in m.content:
+                m.content = re.sub(r"\$327\b", "$1,327", m.content)
+                m.content = re.sub(r"(?<![\d,.])327(?!\d)", "1,327", m.content)
+    return s
+
+
+def engagement_gate(loaded, t1, comm_scoring, path: Path) -> bool:
+    plan = [  # (agent file, task, trial filter, perturbation, switch, expect stock (reward or comm), expect switched)
+        ("gt", "8", None, "passengers_reversed", "hash", 0.0, 1.0),
+        ("gt", "20", None, "payments_reversed", "hash", 0.0, 1.0),
+        ("haiku", "23", None, "bookings_swapped", "hash", 0.0, 1.0),
+        ("haiku", "23", None, "comm_1327_only", "comm", 1, 0),
+    ]
+    rows, ok_all = [], True
+    for agent, tid, _, how, sw, exp0, exp1 in plan:
+        res = next((r for a, _, r, _ in loaded if a == agent), None)
+        sim = next((x for x in res.simulations if x.task_id == tid and x.reward_info and x.reward_info.reward == 1.0), None) if res else None
+        if sim is None:
+            rows.append({"perturbation": how, "task": tid, "status": "no passing trajectory available", "ok": 0})
+            ok_all = False
+            continue
+        p = _perturb(sim, how)
+        s2.SWITCHES.set(False, False, False)
+        r0 = evaluate(p, t1[tid], comm_scoring)
+        s2.SWITCHES.set(sw == "hash", sw == "comm", False)
+        r1 = evaluate(p, t1[tid], comm_scoring)
+        s2.SWITCHES.set(False, False, False)
+        v0 = r0.reward if sw == "hash" else components(r0)[2]
+        v1 = r1.reward if sw == "hash" else components(r1)[2]
+        ok = (v0 == exp0) and (v1 == exp1)
+        ok_all &= ok
+        rows.append({"perturbation": how, "task": tid, "trial": sim.trial, "agent": agent, "switch": sw, "stock": v0, "switched": v1,
+                     "expected": f"{exp0}->{exp1}", "ok": int(ok)})
+    with open(path, "w", newline="", encoding="utf-8") as fp:
+        w = csv.DictWriter(fp, fieldnames=sorted({k for r in rows for k in r}))
+        w.writeheader()
+        w.writerows(rows)
+    for r in rows:
+        print(f"  engagement {r['perturbation']:>19} task {r['task']}: {r.get('stock')} -> {r.get('switched')} expected {r.get('expected')} {'ok' if r['ok'] else 'FAIL'}")
+    return ok_all
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-judge", action="store_true")
@@ -118,12 +205,16 @@ def main() -> int:
     S = SETS[args.set]
     SUF = S["suffix"]
     OUT.mkdir(parents=True, exist_ok=True)
+    if not args.no_judge:
+        s2.require_clean("rescore (judge stage)")
+    prov = s2.provenance()
     s2.install()
-    s2.set_judge_cache(OUT / "judge_cache.json")
+    s2.set_judge_cache(S["cache"])
     tasks_v2.register()
     s2.SWITCHES.set(False, False, False)
     t2 = {t.id: t for t in tasks_v2.get_tasks_v2(None)}  # plain tasks v2 (NL basis added per config below)
     t1_stock = {t.id: t for t in registry.get_tasks_loader("airline")(None)}
+    classes = load_classes()
 
     loaded = []
     for agent, fn in S["files"].items():
@@ -142,7 +233,7 @@ def main() -> int:
         return 1
     comm_scoring = loaded[0][2].info.effective_communicate_scoring
 
-    # ---- stage A: replay gate (the configuration that produced the recorded reward must reproduce it)
+    # ---- stage A: replay gate
     gate = dict(zip(("name", "tasks", "h", "c", "n"), next(c for c in CONFIGS if c[0] == S["gate_cfg"])))
     s2.SWITCHES.set(bool(gate["h"]), bool(gate["c"]), bool(gate["n"]))
     gate_rows, mism = [], 0
@@ -161,10 +252,16 @@ def main() -> int:
         w = csv.DictWriter(fp, fieldnames=list(gate_rows[0]))
         w.writeheader()
         w.writerows(gate_rows)
-    print(f"stage A replay gate: {len(gate_rows) - mism}/{len(gate_rows)} recorded rewards reproduced")
+    print(f"stage A replay gate ({S['gate_cfg']}): {len(gate_rows) - mism}/{len(gate_rows)} recorded rewards reproduced; judge calls so far {s2.JUDGE_COST['calls']}")
     if mism and not args.force:
         print("replay gate FAILED - stopping (use --force to continue)")
         return 2
+
+    # ---- stage A2: engagement gate (recorded set only: it needs block-1 trajectories)
+    if args.set == "recorded":
+        if not engagement_gate(loaded, t1_stock, comm_scoring, OUT / "engagement_gate.csv") and not args.force:
+            print("engagement gate FAILED - stopping")
+            return 3
 
     # ---- stage B: judge pre-computation
     key_meta: dict[str, dict] = {}
@@ -179,22 +276,24 @@ def main() -> int:
                         continue
                     key_meta[k] = {"agent": agent, "task_id": sim.task_id, "trial": sim.trial, "tasks": tv, "n_assertions": len(asserts)}
                     jobs.append((sim.messages, asserts))
-        print(f"stage B judge: {len(jobs)} distinct (trajectory, assertions) pairs x {args.votes} votes")
+        print(f"stage B judge: {len(jobs)} distinct (trajectory, assertions) pairs x {args.votes} votes (cached pairs cost nothing)")
         t0 = time.time()
         with ThreadPoolExecutor(max_workers=args.workers) as ex:
             futs = [ex.submit(s2.judge_nl_assertions, m, a, args.votes) for m, a in jobs]
             for i, f in enumerate(as_completed(futs), 1):
                 f.result()
                 if i % 10 == 0 or i == len(futs):
-                    print(f"  judged {i}/{len(futs)}  calls={s2.JUDGE_COST['calls']}  in={s2.JUDGE_COST['in_tokens']} out={s2.JUDGE_COST['out_tokens']}  {time.time() - t0:.0f}s")
+                    print(f"  judged {i}/{len(futs)}  calls={s2.JUDGE_COST['calls']} retries={s2.JUDGE_COST['retries']} in={s2.JUDGE_COST['in_tokens']} out={s2.JUDGE_COST['out_tokens']}  {time.time() - t0:.0f}s")
 
     # ---- stage C: configurations
     rows = []
     cfgs = [c for c in CONFIGS if not (args.no_judge and c[4])]
     for agent, fn, res, t1 in loaded:
         for sim in res.simulations:
-            row = {"file": fn, "agent": agent, "task_id": sim.task_id, "trial": sim.trial, "seed": sim.seed, "termination": str(sim.termination_reason.value if hasattr(sim.termination_reason, 'value') else sim.termination_reason),
-                   "recorded_reward": sim.reward_info.reward if sim.reward_info else None, "n_messages": len(sim.messages or [])}
+            row = {"file": fn, "agent": agent, "task_id": sim.task_id, "trial": sim.trial, "seed": sim.seed,
+                   "termination": str(getattr(sim.termination_reason, "value", sim.termination_reason)),
+                   "recorded_reward": sim.reward_info.reward if sim.reward_info else None, "n_messages": len(sim.messages or []),
+                   "scorer_version": prov["scorer_version"], "overlay_commit": prov["overlay_commit"], "overlay_dirty": int(prov["overlay_dirty"])}
             GOLD_WARNINGS.clear()
             gold, pred, gerrs = db_dumps(sim, t1[sim.task_id])
             raw_diff = s2.db_diff(gold, pred, limit=8)
@@ -205,16 +304,25 @@ def main() -> int:
             row["gold_action_errors"] = " | ".join(gerrs)[:200]
             for name, tv, h, c, n in cfgs:
                 s2.SWITCHES.set(bool(h), bool(c), bool(n))
-                task = (t1 if tv == "t1" else t2)[sim.task_id]
-                if n:
-                    task = s2.with_nl_basis(task)
+                base_task = (t1 if tv == "t1" else t2)[sim.task_id]
+                task = s2.with_nl_basis(base_task) if n else base_task
                 try:
                     ri = evaluate(sim, task, comm_scoring)
                     r, db, comm, nl = components(ri)
-                    if n and ri.nl_assertions:
-                        row[f"{name}_nl_failed"] = "; ".join(a.nl_assertion[:60] for a in ri.nl_assertions if not a.met)[:300]
                     if c is not None and ri.communicate_checks:
                         row[f"{name}_comm_failed"] = "; ".join(ch.info for ch in ri.communicate_checks if not ch.met)
+                    if n:
+                        asserts = base_task.evaluation_criteria.nl_assertions or []
+                        det = s2.judge_nl_assertions(sim.messages, asserts)  # cached: no call
+                        row[f"{name}_nl_failed"] = "; ".join(a[:60] for a, d in zip(asserts, det) if d["met"] is not True)[:300]
+                        row[f"{name}_nl_detail"] = json.dumps([{"i": i, "met": d["met"], "vm": d["votes_met"], "vu": d["votes_unmet"], "vn": d["votes_undetermined"], "rule": d["rule"]} for i, d in enumerate(det)])
+                        undet = sum(1 for d in det if d["met"] is None)
+                        row[f"{name}_nl_undetermined"] = undet
+                        base = float((db or 0) * (1 if comm is None else comm))
+                        nl_upper = all(d["met"] is not False for d in det)  # undetermined counted as met
+                        row[f"{name}_reward_upper"] = base * float(nl_upper)
+                        nl_noproc = all(d["met"] is True for i, d in enumerate(det) if classes.get((sim.task_id, i), "") != "process")
+                        row[f"{name}_reward_noproc"] = base * float(nl_noproc) if classes else ""
                 except Exception as e:  # noqa: BLE001
                     r, db, comm, nl = None, None, None, None
                     row[f"{name}_error"] = repr(e)[:200]
@@ -231,60 +339,69 @@ def main() -> int:
         w = csv.DictWriter(fp, fieldnames=fields)
         w.writeheader()
         w.writerows(rows)
-
     if s2.JUDGE_LOG:
         with open(OUT / f"judge_votes{SUF}.csv", "w", newline="", encoding="utf-8") as fp:
             w = csv.DictWriter(fp, fieldnames=list(s2.JUDGE_LOG[0]))
             w.writeheader()
             w.writerows(s2.JUDGE_LOG)
+        (OUT / f"judge_raw{SUF}.json").write_text(json.dumps(s2.RAW_REPLIES, indent=0, ensure_ascii=False), encoding="utf-8")
+    (OUT / f"provenance{SUF}.json").write_text(json.dumps({**prov, "set": args.set, "judge_cost": s2.JUDGE_COST, "votes": args.votes}, indent=1, default=str), encoding="utf-8")
 
     # ---- summary
     cost = s2.JUDGE_COST["in_tokens"] / 1e6 * PRICE_IN + s2.JUDGE_COST["out_tokens"] / 1e6 * PRICE_OUT
-    lines = ["# Offline re-score of the recorded block-1 simulations (scorer v2)", "",
-             f"Inputs ({args.set}): {', '.join(fn for _, fn, _, _ in loaded)} ({len(rows)} simulations). Replay gate ({S['gate_cfg']} reproduces the recorded reward): {len(gate_rows) - mism}/{len(gate_rows)}.",
-             f"Judge: {s2.JUDGE_MODEL}, {args.votes} votes per assertion, {s2.JUDGE_COST['calls']} calls this run, "
-             f"{s2.JUDGE_COST['in_tokens']:,} in / {s2.JUDGE_COST['out_tokens']:,} out tokens, own cost estimate ${cost:.3f} "
-             f"(${PRICE_IN}/{PRICE_OUT} per MTok). Cached verdicts reused from judge_cache.json cost nothing.", "",
-             "## Pass counts per configuration", "", f"| config | tasks | switches | haiku ({sum(1 for r in rows if r['agent'] == 'haiku')} sims) | haiku tasks 3/3 | gt ({sum(1 for r in rows if r['agent'] == 'gt')} sims) | all {len(rows)} |", "|---|---|---|---|---|---|---|"]
-    by_task_cfg = defaultdict(dict)
+    hk = [r for r in rows if r["agent"] == "haiku"]
+    gt = [r for r in rows if r["agent"] != "haiku"]
+    n_tasks = len({r["task_id"] for r in hk})
+    lines = [f"# Re-score of the {args.set} simulations under scorer v2", "",
+             f"Inputs: {', '.join(fn for _, fn, _, _ in loaded)} ({len(rows)} simulations). Replay gate ({S['gate_cfg']} reproduces the recorded reward): {len(gate_rows) - mism}/{len(gate_rows)}.",
+             f"Provenance: scorer {prov['scorer_version']}, overlay commit {prov['overlay_commit']}{' (DIRTY)' if prov['overlay_dirty'] else ''}, judge {prov['judge_model']} args {prov['judge_args']} view {prov['judge_view']} prompt {prov['judge_prompt_sha256']}, {args.votes} votes.",
+             f"Judge calls this run: {s2.JUDGE_COST['calls']} ({s2.JUDGE_COST['retries']} re-asks), {s2.JUDGE_COST['in_tokens']:,} in / {s2.JUDGE_COST['out_tokens']:,} out tokens, own cost estimate ${cost:.3f} (${PRICE_IN}/{PRICE_OUT} per MTok).", "",
+             "## Pass counts per configuration", "",
+             f"| config | tasks | switches | haiku sims ({len(hk)}) | haiku tasks 3/3 ({n_tasks}) | gt sims ({len(gt)}) | all ({len(rows)}) | upper bound (undetermined→met) | without process-class assertions |",
+             "|---|---|---|---|---|---|---|---|---|"]
     for name, tv, h, c, n in cfgs:
-        hk = [r for r in rows if r["agent"] == "haiku"]
-        gt = [r for r in rows if r["agent"] == "gt"]
         ph = sum(1 for r in hk if r.get(f"{name}_reward") == 1.0)
         pg = sum(1 for r in gt if r.get(f"{name}_reward") == 1.0)
         per_task = Counter(r["task_id"] for r in hk if r.get(f"{name}_reward") == 1.0)
         full = sum(1 for t in {r["task_id"] for r in hk} if per_task[t] == 3)
-        for r in rows:
-            by_task_cfg[(r["agent"], r["task_id"])].setdefault(name, []).append(r.get(f"{name}_reward"))
         sw = "+".join(x for x, v in (("hash", h), ("comm", c), ("nl", n)) if v) or "stock"
-        lines.append(f"| {name} | {tv} | {sw} | {ph}/{len(hk)} | {full}/{len({r['task_id'] for r in hk})} | {pg}/{len(gt)} | {ph + pg}/{len(rows)} |")
-    lines += ["", "## Flips per simulation, v1 -> V2", ""]
-    flips = Counter()
+        up = sum(1 for r in rows if r.get(f"{name}_reward_upper") == 1.0) if n else ph + pg
+        npc = sum(1 for r in rows if r.get(f"{name}_reward_noproc") == 1.0) if n and classes else (ph + pg if not n else "n/a")
+        lines.append(f"| {name} | {tv} | {sw} | {ph} | {full} | {pg} | {ph + pg} | {up} | {npc} |")
+    undet_total = sum(int(r.get("V2_nl_undetermined") or 0) for r in rows)
+    lines += ["", f"Undetermined judge verdicts under V2 (after re-asks): {undet_total} assertion(s) across {len(rows)} simulations.", ""]
+    lines += ["## Flips per simulation, v1 -> V2, attributed to the component that first changes the reward", "",
+              "| agent | task | trial | v1 | V2 | component(s) | detail |", "|---|---|---|---|---|---|---|"]
+    nflip = 0
     for r in rows:
         a, b = r.get("v1_reward"), r.get("V2_reward")
-        if a is not None and b is not None and a != b:
-            flips[(r["agent"], r["task_id"], "1->0" if a > b else "0->1")] += 1
-    if flips:
-        lines += ["| agent | task | direction | sims |", "|---|---|---|---|"]
-        for (a, t, d), n in sorted(flips.items(), key=lambda x: (x[0][0], int(x[0][1]), x[0][2])):
-            lines.append(f"| {a} | {t} | {d} | {n} |")
-    else:
-        lines.append("(no flips or V2 not computed)")
-    lines += ["", "## DB failures under v1 that are order-only", ""]
+        if a is None or b is None or a == b:
+            continue
+        nflip += 1
+        comp = [n for n, k in (("criteria text (T2_stock)", "T2_stock_reward"), ("hash_canon", "S_hash_reward"), ("comm_boundary", "S_comm_reward"), ("nl_enforce", "S_nl_reward")) if r.get(k) not in (None, "") and r.get(k) != a]
+        detail = r.get("V2_nl_failed") or r.get("V2_comm_failed") or ""
+        if r["task_id"] == "7" and b > a:
+            detail = "by construction: communicate_info 1628 -> 708; " + detail
+        lines.append(f"| {r['agent']} | {r['task_id']} | {r['trial']} | {a} | {b} | {', '.join(comp) or 'interaction'} | {detail[:160]} |")
+    if not nflip:
+        lines.append("| (none) | | | | | | |")
     oo = [r for r in rows if r["db_order_only"]]
-    lines.append(f"{len(oo)} of {sum(1 for r in rows if not r['db_raw_match'])} v1 DB mismatches disappear under canonicalisation: "
-                 + ", ".join(f"{r['agent']}/{r['task_id']}/t{r['trial']}" for r in oo))
-    ge = [r for r in rows if r["gold_action_errors"]]
-    lines += ["", f"Gold-action replay errors: {len(ge)} simulations" + ("; tasks " + ", ".join(sorted({r['task_id'] for r in ge}, key=int)) if ge else "")]
+    lines += ["", "## DB failures under v1 that are order-only", "",
+              f"{len(oo)} of {sum(1 for r in rows if not r['db_raw_match'])} v1 DB mismatches disappear under canonicalisation" + (": " + ", ".join(f"{r['agent']}/{r['task_id']}/t{r['trial']}" for r in oo) if oo else "."),
+              f"Communicate flips from comm_boundary alone: {sum(1 for r in rows if r.get('S_comm_reward') not in (None, '') and r['v1_reward'] != r['S_comm_reward'])}.",
+              f"Gold-action replay errors: {sum(1 for r in rows if r['gold_action_errors'])} simulations."]
     if s2.JUDGE_LOG:
         votes = defaultdict(list)
         for v in s2.JUDGE_LOG:
             votes[(v["key"], v["assertion_idx"])].append(v["met"])
         unanimous = sum(1 for vs in votes.values() if len(set(vs)) == 1)
-        lines += ["", "## Judge agreement", "", f"{unanimous}/{len(votes)} assertion verdicts unanimous across {args.votes} votes (this run's calls only; cached pairs not re-voted)."]
+        modes = Counter(v["mode"] for v in s2.JUDGE_LOG)
+        lines += ["", "## Judge as an instrument (this run's calls only; cached pairs were not re-voted)", "",
+                  f"{unanimous}/{len(votes)} assertion verdicts unanimous across {args.votes} votes; mapping modes {dict(modes)}; re-asks {s2.JUDGE_COST['retries']}. "
+                  "Unanimity is a reliability figure, not validity: the stock-view pass was 255/255 unanimous and still wrong on task 9 trial 1 (hand-check file: block2/judge_handcheck.md)."]
     (OUT / f"rescore_summary{SUF}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
-    print(f"\nwritten {OUT.relative_to(ROOT)}/rescore{SUF}.csv, replay_check{SUF}.csv, rescore_summary{SUF}.md" + (f", judge_votes{SUF}.csv" if s2.JUDGE_LOG else ""))
+    print(f"\nwritten {OUT.relative_to(ROOT)}/rescore{SUF}.csv, replay_check{SUF}.csv, rescore_summary{SUF}.md, provenance{SUF}.json" + (f", judge_votes{SUF}.csv, judge_raw{SUF}.json" if s2.JUDGE_LOG else ""))
     return 0
 
 
