@@ -19,6 +19,7 @@ Push-Location $bench
 
 $common = @("--domain","airline","--task-split-name","base","--task-ids") + $ids + @(
     "--user","user_simulator","--user-llm","anthropic/claude-haiku-5-5",
+    "--agent-llm-args","{}","--user-llm-args","{}",   # see run_pilot.ps1: default temperature 0.0 is rejected by current Anthropic models
     "--communicate-scorer","substring","--max-concurrency","3","--timeout","900","--seed","300")
 
 if ($Part -eq "pass3" -or $Part -eq "both") {

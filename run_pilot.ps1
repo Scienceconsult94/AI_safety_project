@@ -13,11 +13,15 @@ if (-not (Test-Path (Join-Path $bench ".env")) -and -not (Test-Path (Join-Path $
 }
 Push-Location $bench
 # The NL-assertion judge is not invoked by `tau2 run` at v2.0.0 (EvaluationType.ALL default, src/tau2/runner/batch.py); patches/ stays unapplied.
+# --agent-llm-args '{}' --user-llm-args '{}': tau2 defaults both to {"temperature": 0.0} (src/tau2/config.py:28-31);
+# current Anthropic models reject a non-default temperature with HTTP 400, which tau2 counts as an infra error
+# (first pilot attempt 2026-10-27: 5/5 infra errors, $0). Empty args = provider defaults; no code patched.
 
 & $uv run --no-sync tau2 run `
     --domain airline --task-split-name base --num-tasks 5 --num-trials 1 `
     --agent llm_agent --agent-llm anthropic/claude-haiku-5-5 `
     --user user_simulator --user-llm anthropic/claude-haiku-5-5 `
+    --agent-llm-args '{}' --user-llm-args '{}' `
     --communicate-scorer substring `
     --max-concurrency 3 --timeout 900 --seed 300 `
     --save-to pilot_5_haiku

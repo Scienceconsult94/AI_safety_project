@@ -6,7 +6,7 @@ All paths are relative to `tau2-bench/`.
 ## Conventions
 
 - `$RUN` = `--domain airline --task-split-name base --agent-llm anthropic/claude-haiku-5-5 --user-llm anthropic/claude-haiku-5-5 --communicate-scorer substring --max-concurrency 3 --timeout 900`.
-  Seed 300 and temperature 0.0 for both models are defaults (`src/tau2/config.py`). Output: `data/simulations/<save_to>/results.json`.
+  Seed 300 is the default (`src/tau2/config.py`). The default `{"temperature": 0.0}` for both models is rejected by current Anthropic models (HTTP 400, see issues_draft.md I5), so all runs pass `--agent-llm-args '{}' --user-llm-args '{}'` (provider-default sampling). Output: `data/simulations/<save_to>/results.json`.
 - Probe: a copy of a recorded `results.json` in which the `messages` of one simulation are edited. Each tool call stays paired with its tool message by id, and `termination_reason` is set to `user_stop`.
   The copy is rescored with `tau2 evaluate-trajs <probe.json> -o <dir>`. Per `src/tau2/scripts/evaluate_trajectories.py`, this uses `EvaluationType.ALL`, the scorer recorded in `info.communicate_scoring`, `strict_replay=False`, and the tasks embedded in the file.
   Substring rescoring makes no LLM calls. Concrete scorer-bypass constructions live in the private folder; the rows below name only the check.
