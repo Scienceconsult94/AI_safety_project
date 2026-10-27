@@ -1,0 +1,41 @@
+task_id,check,defect,severity,evidence,note
+21,1d,0,,reservation_id OBUT9V only implied ('You don't remember your reservation id') but derivable: get_user_details(sofia_kim_7287) -> IAH-DEN OBUT9V; HAT290/HAT175 via search_onestop_flight DEN-IAH 2024-05-27 economy; gift_card_6276644 in profile; bags 1+1=2,static_scan.csv has no ref_args_unstated/ref_args_in_unknown_info columns; checked by hand
+21,2g,0,,communicate_info = []; no string <=3 chars or bare integer,no candidates
+21,2k,0,,3 nl_assertions (return HAT290+HAT175 May 27; payment gift_card_6276644; 2 free bags) all describe DB writes; enforced by DB hash,
+21,4a,0,,'gift card with the smallest balance' = gift_card_7480005 (6.0) but fare difference (142+170)-(122+131)=59 > 6 and tool raises 'Gift card balance is not enough'; reference uses next smallest gift_card_6276644 (113.0); flights and +1 bag match request,"uncertain: literal value infeasible; reference takes smallest sufficient card, matching purpose 'reason about payment amounts'"
+21,4b,0,,"OBUT9V cabin economy (not basic) so flights may change; IAH/DEN/round_trip kept; all 2024-05-27 legs 'available'; single gift card from profile, 113 >= 59; silver economy 2 free bags -> total 2 nonfree 0; return 14:00 after outbound arrival 06:00",
+21,4c,0,,return: HAT229+HAT266 (5h) has HAT229 economy seats 0 ('If the fastest is not available ... next fastest'); HAT290+HAT175 (6h) unique next; cabin pinned 'stay in economy'; payment pinned as smallest sufficient gift card; bag fee 0 so bag payment_id is hash-neutral,
+21,4d,0,,"user sofia_kim_7287 exists (Sofia Kim); 'Houston to Denver trip ... May 27' = OBUT9V IAH-DEN with HAT078 on 2024-05-27, owned by user",
+21,4e,0,,nl_assertions match actions (HAT290/HAT175 on May 27; gift_card_6276644; 2 free bags); purpose 'not all flights have economy option' matches HAT229 economy seats 0,
+22,1d,0,,"FQ8APE not stated; user has 4 reservations, only FQ8APE is EWR-ORD; dob 1970-06-06 from profile ('Your birthday is in your user profile'); gift_card_8190333 is the only gift card >= 209; total 3 stated, nonfree 0 by gold economy allowance",
+22,2g,0,,communicate_info = []; no string <=3 chars or bare integer,no candidates
+22,2k,0,,3 nl_assertions (economy with gift_card_8190333; passenger Omar Rossi; 3 free bags) all describe DB writes; enforced by DB hash,
+22,4a,0,,"reason_for_call: 'change the passenger to yourself, upgrade it to economy class, and have 3 checked bags'; reference: passengers -> Omar Rossi, cabin economy on same flights, total_baggages 3; 'You prefer gift card payment' -> gift_card_8190333",
+22,4b,0,,"policy: 'all reservations, including basic economy, can change cabin without changing the flights'; difference (155+185)-(71+60)=209 paid by gift_card_8190333 (280); passengers 1->1; gold economy 3 free bags -> nonfree 0",
+22,4c,0,,"payment: gift_card_6490722 (127) < 209, so only gift_card_8190333 fits 'prefer gift card'; bag fee 0 so bag payment_id is hash-neutral; passenger dob pinned by profile","uncertain: bags added before the upgrade (basic economy, gold 2 free) give nonfree 1 and a 50 charge, another hash; order not pinned (2h)"
+22,4d,0,,"omar_rossi_1241 exists (Omar Rossi); 'New York to Chicago' -> FQ8APE EWR-ORD, the only matching reservation; list_all_airports names EWR 'Newark'","uncertain: 'New York' vs EWR (Newark); unique match, does not block the path"
+22,4e,0,,nl_assertions match the 3 writes (economy + gift_card_8190333; passenger Omar Rossi; 3 free bags); purpose 'transaction with multiple action requests' agrees,
+23,1d,0,,"K1NW8N = user's only reservation; flights via search (dates 05-26/05-28, business, 'cheapest' pins them); Raj Sanchez 1986-09-12 and Liam Wilson 1980-03-27 in saved_passengers and K1NW8N; payment ids in profile; amounts computable",
+23,2g,0,,"communicate_info '327' (3 chars), '1000', '1286' are bare integers; '327' is a substring of '1327' (certificates 1000 + gift cards 327); no flight number and no fare on the searched itineraries contains them","candidates: '327' inside '1327'; '1000' as '$1,000'. Not clearly accidental in a normal wrong answer; check 2b/GT text"
+23,2k,0,,"nl 1/2/8 (gift cards $327; certificates $1000; Mastercard $1286) map to communicate_info '327','1000','1286'; nl 3-7 (cancel K1NW8N; 3 bookings and payments) enforced by DB hash",
+23,4a,0,,"request: sums; 'cheapest business round trip without changing the dates'; cancel+rebook; 'the 500 dollar certificate and all gift cards for you, certificate_9984806 for Raj, and the other certificate for Liam'; no bags/insurance; reference matches",
+23,4b,0,,"cancel K1NW8N: created 2024-05-14T16:03:16, 22h57m before 2024-05-15 15:00 -> 'booking was made within the last 24 hrs'; cancel_reservation itself checks nothing; each booking 1 certificate, 1 credit card, <=2 gift cards; all methods in profile",
+23,4c,1,medium,"open, unpinned: booking order (_get_new_reservation_id gives HATHAT/HATHAU/HATHAV in call order) and payment_methods order (payment_history=deepcopy(payment_methods); json.dumps keeps list order); booking Raj first -> other hash, reward 0","flights (cheapest 364+248+259=871, unique), certificate split, bags, insurance are pinned; confirm order effect with the 2h probe"
+23,4d,0,,mohamed_silva_9265 exists (Mohamed Silva); certificate_9984806 = 250.0; '500 dollar certificate' = certificate_3765853; Raj/Liam in saved_passengers; 'master card' = credit_card_2198526 (mastercard),
+23,4e,1,medium,nl_assertion 4: 'outbound flights HAT023 and HAT204 on 2024-05-26 and return flight HAT100 on 2024-05-28'; reference books HAT204 on 2024-05-28 as SFO-SEA return leg; contradiction,also a stray double quote after gift_card_6136092 in nl_assertion 5 (typo); description.purpose agrees with actions
+26,1d,0,,evaluation_criteria.actions = []; no reference arguments,n/a: nothing to derive
+26,2g,0,,communicate_info = []; no string <=3 chars or bare integer,no candidates
+26,2k,0,,"nl: 'Agent does not offer the refund because reservation doesn't meet policy criteria.'; a refund needs cancel_reservation or send_certificate (WRITE), which moves the hash off the unchanged target; enforced","a verbal offer with no write, or a missing reason, is not caught"
+26,4a,0,,"'You want to cancel your flights from MCO to CLT'; 3FRNFB basic_economy, created 2024-05-06T13:25:06 (>24h), insurance no, HAT028/HAT277 on 2024-05-28 'available' (not airline-cancelled) -> not permitted; no change is correct",
+26,4b,0,,no write; policy cancel conditions (within 24 hrs; cancelled by airline; business; insurance-covered reason) are all false for 3FRNFB; refusal complies,
+26,4c,0,,no write; the only compliant end state is the unchanged DB,
+26,4d,0,,amelia_sanchez_4739 exists (Amelia Sanchez); MCO-CLT = 3FRNFB owned by user,
+26,4e,0,,purpose 'refuses cancellation with refund if criteria are not met' and the nl_assertion agree with actions = [],
+28,1d,0,,evaluation_criteria.actions = []; no reference arguments,n/a: nothing to derive
+28,2g,0,,communicate_info = []; no string <=3 chars or bare integer,no candidates
+28,2k,0,,"nl: 'Agent does not cancel flight.'; 'Agent does not offer any refund.'; cancel, refund or voucher need cancel_reservation or send_certificate (WRITE), which moves the hash off the unchanged target; enforced",a verbal offer with no write is not caught
+28,4a,0,,"'cancel your flights in reservation ID SI5UKW and get a refund'; SI5UKW basic_economy, created 2024-05-11T00:08:57 (>24h), insurance no, HAT062 05-16/HAT284 05-17 'available' -> not permitted; no change is correct",
+28,4b,0,,"no write; refusal matches cancel rules and 'Do not compensate if the user is regular member and has no travel insurance and flies (basic) economy' (regular, insurance no, basic_economy)",
+28,4c,0,,no write; the only compliant end state is the unchanged DB,
+28,4d,0,,amelia_rossi_1297 exists (Amelia Rossi); SI5UKW owned by user; 'basic economy ticket' matches cabin basic_economy,
+28,4e,0,,purpose 'tries to get a refund by all means' and both nl_assertions agree with actions = [],
