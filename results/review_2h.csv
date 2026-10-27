@@ -1,0 +1,7 @@
+task_id,check,defect,severity,evidence,note
+7,2h,0,,"results/probe_2h.csv: 3/5 WRITE permutations change the hash, but each of them moves update_reservation_flights(XEHM4B) after cancel_reservation(XEHM4B); the independent reorderings (cancel 59XX6W before/after the XEHM4B pair) keep the gold hash","dependent writes only; order of independent writes is hash-neutral"
+21,2h,0,,"results/probe_2h.csv: update_reservation_flights + update_reservation_baggages, 1 permutation, hash unchanged",
+22,2h,0,,"results/probe_2h.csv: flights|passengers|baggages updates, 5 permutations, hash unchanged",
+23,2h,1,medium,"results/probe_2h.csv: cancel_reservation(K1NW8N) + 3 book_reservation calls (one per passenger, same flights); all 5 reorderings of the 3 bookings change the DB hash because new reservation ids come from the fixed sequence HATHAT/HATHAU/HATHAV (tools.py _get_new_reservation_id) and are assigned in call order; the scenario does not pin the passenger order","a policy-compliant agent that books the same three passengers in another order is scored 0"
+32,2h,0,,"results/probe_2h.csv: two update_reservation_flights on OWZ4XL; the swapped order ends in a different state, and the scenario pins the order ('First upgrade ... then separately change the flights')","order fixed by the scenario"
+44,2h,0,,"results/probe_2h.csv: three update_reservation_flights, 5 permutations, hash unchanged",
