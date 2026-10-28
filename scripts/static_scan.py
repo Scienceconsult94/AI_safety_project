@@ -117,7 +117,8 @@ def ids_missing_in_db(raw_text: str, users: set, reservations: set, flights: set
     missing = {m for m in re.findall(r"\b[a-z]+_[a-z]+_\d{4}\b", raw_text) if m not in users}
     missing |= {m.upper() for m in re.findall(r"\bhat\d{3}\b", raw_text) if m.upper() not in flights}
     for m in re.findall(r"(?<![a-z0-9])[a-z0-9]{6}(?![a-z0-9])", raw_text):
-        if re.search(r"\d", m) and not m.isdigit() and m.upper() not in reservations:
+        # flight numbers (hat266) are six characters too; they are checked against the flights above
+        if re.search(r"\d", m) and not m.isdigit() and not re.fullmatch(r"hat\d{3}", m) and m.upper() not in reservations:
             missing.add(m.upper())
     return sorted(missing)
 
