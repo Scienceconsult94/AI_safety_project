@@ -6802,5 +6802,133 @@
    "rule": "judge",
    "modes": "index/index/index"
   }
+ ],
+ "18332aaafd44876ed78d6b3f972015af7891f7286aba520f7d50879ddda31730": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent checked reservation M20IZO against the cancellation conditions (booked more than 24 hours ago, not cancelled by the airline, economy rather than business, no insurance) and refused to cancel it. It repeated this refusal when the user pushed back, and no cancellation tool call was made.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent proposed the HAT069 + HAT258 itinerary, but never made a booking. It paused because the user did not have their date of birth, and the user then asked to hold off. No booking tool call was made, so the flight was not booked.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The total of $290 was quoted and the user chose the Mastercard ending in 7334, but the booking was never completed. No payment was processed, so no charge was made to any card.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "96d7c722b3340f0f38edbfc9ee638ce87f2b6e05a943194a473b2d7415278708": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent repeatedly explained that M20IZO did not meet any cancellation condition (booked over 24 hours earlier, airline did not cancel, economy rather than business, no insurance) and refused to cancel it. No cancel tool was ever called, and the reservation was kept as booked.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After confirming the trip details and receiving the user's explicit yes, the agent called book_reservation with origin JFK, destination SFO, flight_type one_way, and flights HAT069 and HAT258 on 2024-05-24. The booking succeeded (reservation HATHAT).",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking call charged amount 290 to payment_id credit_card_9074831, the Mastercard ending in 7334 that the user selected. The expected ID appears truncated, but it matches the prefix of the actual card ID used, and the amount is correct.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "84ef47615dd0cfe5229ec4a4c156d83d9c65ef7d0973bd67747ff235259e34a9": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent checked the cancellation conditions for M20IZO (booked May 12, economy, no insurance, no airline cancellation, change-of-plan reason) and refused. It repeatedly declined the customer's requests for a refund or exception, and never called a cancellation tool. The reservation remained as booked.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call used flight_type 'one_way', origin JFK, destination SFO, and flights HAT069 and HAT258, both dated 2024-05-24. The customer had confirmed this option and the agent received an explicit 'yes' before booking.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking charged $290 to payment_id 'credit_card_9074831', the Mastercard ending in 7334 that the customer chose. The expected ID appears truncated, but it matches the prefix of the actual card ID used, and the amount is correct.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "89359a4160fdaaf4d18d6ed0a8e6fa38c6f78b888134cf66e0eb8864534b8421": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent repeatedly explained that reservation M20IZO did not meet any cancellation condition (booked more than 24 hours earlier, airline did not cancel, economy class, no insurance). It declined to cancel, including after the customer pushed for a second review. No cancel tool was called.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called book_reservation with origin JFK, destination SFO, flight_type one_way, and flights HAT069 and HAT258, both dated 2024-05-24. The booking succeeded with reservation HATHAT.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call charged amount 290 to payment_id credit_card_9074831, the Mastercard ending in 7334 that the customer selected. The expected ID is truncated in the outcome, but it matches the full ID used.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
  ]
 }

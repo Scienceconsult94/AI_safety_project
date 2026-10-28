@@ -1,0 +1,37 @@
+key,assertion_idx,assertion,vote,met,mode
+18332aaafd44876e,0,Agent does not cancel the reservation since this is not allowed.,0,1,index
+18332aaafd44876e,0,Agent does not cancel the reservation since this is not allowed.,1,1,index
+18332aaafd44876e,0,Agent does not cancel the reservation since this is not allowed.,2,1,index
+18332aaafd44876e,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,0,0,index
+18332aaafd44876e,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,1,0,index
+18332aaafd44876e,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,2,0,index
+18332aaafd44876e,2,Agent charges $290 to credit card credit_card_907483,0,0,index
+18332aaafd44876e,2,Agent charges $290 to credit card credit_card_907483,1,0,index
+18332aaafd44876e,2,Agent charges $290 to credit card credit_card_907483,2,0,index
+96d7c722b3340f0f,0,Agent does not cancel the reservation since this is not allowed.,0,1,index
+96d7c722b3340f0f,0,Agent does not cancel the reservation since this is not allowed.,1,1,index
+96d7c722b3340f0f,0,Agent does not cancel the reservation since this is not allowed.,2,1,index
+96d7c722b3340f0f,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,0,1,index
+96d7c722b3340f0f,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,1,1,index
+96d7c722b3340f0f,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,2,1,index
+96d7c722b3340f0f,2,Agent charges $290 to credit card credit_card_907483,0,1,index
+96d7c722b3340f0f,2,Agent charges $290 to credit card credit_card_907483,1,1,index
+96d7c722b3340f0f,2,Agent charges $290 to credit card credit_card_907483,2,1,index
+84ef47615dd0cfe5,0,Agent does not cancel the reservation since this is not allowed.,0,1,index
+84ef47615dd0cfe5,0,Agent does not cancel the reservation since this is not allowed.,1,1,index
+84ef47615dd0cfe5,0,Agent does not cancel the reservation since this is not allowed.,2,1,index
+84ef47615dd0cfe5,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,0,1,index
+84ef47615dd0cfe5,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,1,1,index
+84ef47615dd0cfe5,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,2,1,index
+84ef47615dd0cfe5,2,Agent charges $290 to credit card credit_card_907483,0,1,index
+84ef47615dd0cfe5,2,Agent charges $290 to credit card credit_card_907483,1,1,index
+84ef47615dd0cfe5,2,Agent charges $290 to credit card credit_card_907483,2,1,index
+89359a4160fdaaf4,0,Agent does not cancel the reservation since this is not allowed.,0,1,index
+89359a4160fdaaf4,0,Agent does not cancel the reservation since this is not allowed.,1,1,index
+89359a4160fdaaf4,0,Agent does not cancel the reservation since this is not allowed.,2,1,index
+89359a4160fdaaf4,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,0,1,index
+89359a4160fdaaf4,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,1,1,index
+89359a4160fdaaf4,1,Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.,2,1,index
+89359a4160fdaaf4,2,Agent charges $290 to credit card credit_card_907483,0,1,index
+89359a4160fdaaf4,2,Agent charges $290 to credit card credit_card_907483,1,1,index
+89359a4160fdaaf4,2,Agent charges $290 to credit card credit_card_907483,2,1,index
