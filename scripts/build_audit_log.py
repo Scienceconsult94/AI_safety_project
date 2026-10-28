@@ -130,8 +130,10 @@ def main() -> int:
         v = verdicts.get((r["task_id"], r["check"]))
         if v and r["defect"] == "1":
             ok = v["skeptic_ok"].strip()
-            # a skeptic row "should be defect=1" on a row that has since been set to defect=1 counts as confirmation
-            if ok == "0" and v.get("note", "").strip().lower().startswith("should be defect=1"):
+            # a skeptic row "should be defect=1" (or, for a blind re-review disagreement, "re-review prevails") on a row
+            # that has since been set to defect=1 counts as confirmation; block 1 wrote such rows with skeptic_ok 0,
+            # the rest briefs with skeptic_ok empty
+            if ok in ("", "0") and v.get("note", "").strip().lower().startswith(("should be defect=1", "re-review prevails")):
                 ok = "1"
             r["skeptic_ok"] = ok
             if v.get("note"):
