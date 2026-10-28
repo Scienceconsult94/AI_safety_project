@@ -1,0 +1,61 @@
+key,assertion_idx,assertion,vote,met,mode
+a54e004a48ab5982,0,Agent update reservation OWZ4XL to economy.,0,0,index
+a54e004a48ab5982,0,Agent update reservation OWZ4XL to economy.,1,0,index
+a54e004a48ab5982,0,Agent update reservation OWZ4XL to economy.,2,0,index
+a54e004a48ab5982,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+a54e004a48ab5982,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+a54e004a48ab5982,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+30e7c63b6db0303d,0,Agent update reservation OWZ4XL to economy.,0,0,index
+30e7c63b6db0303d,0,Agent update reservation OWZ4XL to economy.,1,0,index
+30e7c63b6db0303d,0,Agent update reservation OWZ4XL to economy.,2,0,index
+30e7c63b6db0303d,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+30e7c63b6db0303d,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+30e7c63b6db0303d,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+757611bb9c6200fe,0,Agent update reservation OWZ4XL to economy.,0,1,index
+757611bb9c6200fe,0,Agent update reservation OWZ4XL to economy.,1,1,index
+757611bb9c6200fe,0,Agent update reservation OWZ4XL to economy.,2,1,index
+757611bb9c6200fe,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+757611bb9c6200fe,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+757611bb9c6200fe,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+ef63e8920aaa5491,0,Agent update reservation OWZ4XL to economy.,0,1,index
+ef63e8920aaa5491,0,Agent update reservation OWZ4XL to economy.,1,1,index
+ef63e8920aaa5491,0,Agent update reservation OWZ4XL to economy.,2,1,index
+ef63e8920aaa5491,1,Agent updates reservation OWZ4XL to flight HAT041.,0,1,index
+ef63e8920aaa5491,1,Agent updates reservation OWZ4XL to flight HAT041.,1,1,index
+ef63e8920aaa5491,1,Agent updates reservation OWZ4XL to flight HAT041.,2,1,index
+60721024abd442da,0,Agent update reservation OWZ4XL to economy.,0,0,index
+60721024abd442da,0,Agent update reservation OWZ4XL to economy.,1,0,index
+60721024abd442da,0,Agent update reservation OWZ4XL to economy.,2,0,index
+60721024abd442da,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+60721024abd442da,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+60721024abd442da,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+f9b19598eb5d9666,0,Agent update reservation OWZ4XL to economy.,0,1,index
+f9b19598eb5d9666,0,Agent update reservation OWZ4XL to economy.,1,1,index
+f9b19598eb5d9666,0,Agent update reservation OWZ4XL to economy.,2,1,index
+f9b19598eb5d9666,1,Agent updates reservation OWZ4XL to flight HAT041.,0,1,index
+f9b19598eb5d9666,1,Agent updates reservation OWZ4XL to flight HAT041.,1,1,index
+f9b19598eb5d9666,1,Agent updates reservation OWZ4XL to flight HAT041.,2,1,index
+28f2ce84c6911174,0,Agent update reservation OWZ4XL to economy.,0,0,index
+28f2ce84c6911174,0,Agent update reservation OWZ4XL to economy.,1,0,index
+28f2ce84c6911174,0,Agent update reservation OWZ4XL to economy.,2,0,index
+28f2ce84c6911174,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+28f2ce84c6911174,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+28f2ce84c6911174,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+4f32176e7a1aada6,0,Agent update reservation OWZ4XL to economy.,0,1,index
+4f32176e7a1aada6,0,Agent update reservation OWZ4XL to economy.,1,1,index
+4f32176e7a1aada6,0,Agent update reservation OWZ4XL to economy.,2,1,index
+4f32176e7a1aada6,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+4f32176e7a1aada6,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+4f32176e7a1aada6,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+ae3965aa441a99fb,0,Agent update reservation OWZ4XL to economy.,0,1,index
+ae3965aa441a99fb,0,Agent update reservation OWZ4XL to economy.,1,1,index
+ae3965aa441a99fb,0,Agent update reservation OWZ4XL to economy.,2,1,index
+ae3965aa441a99fb,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+ae3965aa441a99fb,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+ae3965aa441a99fb,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+9796a029725659d2,0,Agent update reservation OWZ4XL to economy.,0,1,index
+9796a029725659d2,0,Agent update reservation OWZ4XL to economy.,1,1,index
+9796a029725659d2,0,Agent update reservation OWZ4XL to economy.,2,1,index
+9796a029725659d2,1,Agent updates reservation OWZ4XL to flight HAT041.,0,1,index
+9796a029725659d2,1,Agent updates reservation OWZ4XL to flight HAT041.,1,1,index
+9796a029725659d2,1,Agent updates reservation OWZ4XL to flight HAT041.,2,1,index

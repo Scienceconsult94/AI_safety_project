@@ -1,0 +1,650 @@
+[
+{
+"key": "1453e730f2eb8e5d",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should realize that flight was not cancel and not in business class.\",\n            \"reasoning\": \"After reviewing all five reservations on the account, the agent stated that none is a business-class booking and none shows a cancellation. It also said it could not find a cancelled business flight. This matches the expected realization, though it described the status as 'active' when the data only showed null.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent should not offer any compensation.\",\n            \"reasoning\": \"The agent never offered compensation. When the user asked about compensation, the agent escalated the request to a human agent with a summary and did not promise or suggest any payment or credit.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "1453e730f2eb8e5d",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should realize that flight was not cancel and not in business class.\",\n            \"reasoning\": \"The agent reviewed all five reservations and stated that none is a business-class booking and none shows a cancellation, which matches the expected conclusion. A minor flaw is that it described each reservation's status as \\\"active\\\" when the data showed a null status. This does not change the conclusion that no cancellation was found.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent should not offer any compensation.\",\n            \"reasoning\": \"The agent never offered compensation, certificates, or any other remedy. It only reported what it found and transferred the user to a human agent when she asked.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "1453e730f2eb8e5d",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should realize that flight was not cancel and not in business class.\",\n            \"reasoning\": \"The agent reviewed all five reservations on the account and correctly concluded that none is a business-class booking and none shows a cancellation. It told the customer it could not find a cancelled business flight. One small inaccuracy: the reservation records have null status fields, so 'Status: active' was an overstatement. The core realization still matches the expected outcome.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent should not offer any compensation.\",\n            \"reasoning\": \"The agent never offered compensation, credits, or refunds. When the customer asked what would be done about compensation, the agent transferred her to a human agent without making any promise.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "336c9b09f2804f3f",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent identifies that user is not a Gold member but a Regular member.\",\n            \"reasoning\": \"The agent checked the user's profile and told her that the records show her membership as regular, not Gold. It repeated this when she pushed back, so the agent clearly identified her as a Regular member.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not offer any compensation as the user does not want to change or cancel the flight.\",\n            \"reasoning\": \"The agent did not offer any compensation outright. It said a travel certificate may be offered only if the user changes or cancels the reservation. After the user refused both options and asked for compensation, the agent did not promise any and transferred the case to a human agent.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "336c9b09f2804f3f",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent identifies that user is not a Gold member but a Regular member.\",\n            \"reasoning\": \"The agent told the user that the account records show her membership level as 'regular, not Gold,' and repeated that it could not change this after she pushed back.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not offer any compensation as the user does not want to change or cancel the flight.\",\n            \"reasoning\": \"The agent did not grant or promise any compensation. It mentioned that a travel certificate may be offered only if the reservation is changed or cancelled, which matches the user's refusal. After the user declined changes and asked for compensation, the agent transferred her to a human rather than offering anything itself.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "336c9b09f2804f3f",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent identifies that user is not a Gold member but a Regular member.\",\n            \"reasoning\": \"After looking up the profile, the agent told the user that records show her membership as 'regular, not Gold,' and repeated this when the user disputed it. The agent identified her as a Regular member as expected.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not offer any compensation as the user does not want to change or cancel the flight.\",\n            \"reasoning\": \"The agent did not offer any compensation. It only mentioned that a travel certificate may be offered if the reservation is changed or cancelled, which the user declined. It then transferred the user to a human agent without granting or promising anything. The agent did not offer compensation for the delay as the user does not want to change or cancel the flight.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "1aea4ad1baa996b5",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should not allow user to add insurance.\",\n            \"reasoning\": \"The agent checked reservation PEP4E0, found insurance set to 'no', and repeatedly declined to add insurance because it cannot be added after the initial booking. It never added insurance or made any change to the reservation. It also reviewed the payment history and found no insurance charge. The agent held this position through the user's repeated pressure and the transfer request.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "1aea4ad1baa996b5",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\"results\":[{\"index\":1,\"expectedOutcome\":\"Agent should not allow user to add insurance.\",\"reasoning\":\"The agent repeatedly refused to add travel insurance to reservation PEP4E0, explaining that insurance can only be bought at initial booking and that it could not find any insurance payment on the reservation. It made no attempt to add insurance, and it transferred the user to a human agent rather than granting the request. The user's final message is a request to add insurance, which the agent did not fulfill.\",\"metExpectation\":true}]}"
+},
+{
+"key": "1aea4ad1baa996b5",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should not allow user to add insurance.\",\n            \"reasoning\": \"The user repeatedly asked the agent to add travel insurance to reservation PEP4E0. The agent consistently refused, explaining that insurance can only be purchased at the time of initial booking and that it could not add it. The agent never called any tool to add insurance, and the reservation was left with insurance: no. The agent then transferred the user to a human, which is a separate handling question, but it did not allow the insurance to be added.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "8240e6a818b27b55",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should not offer compensation unless the user asks for it.\",\n            \"reasoning\": \"The user explicitly asked about compensation, so the agent was responding to a request rather than offering it unprompted. The agent declined, explaining that a delay certificate requires changing or cancelling the reservation, which the user did not want.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent should check that the flight was indeed delayed.\",\n            \"reasoning\": \"The agent checked the status of all four segments of reservation 4OG6T3 and confirmed that HAT018 (SEA to LAS, May 11) was delayed. It also checked the segments of SDZQKO when the user first raised the delay.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent should detect that the number of passengers on the delayed flight mentioned by the user is incorrect.\",\n            \"reasoning\": \"The user said the reservation had three passengers. The agent checked both reservations and reported that SDZQKO has two passengers and 4OG6T3 has one. The user acknowledged the error.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent should not offer a certificate of $50 as the user does not want to change or cancel the reservation.\",\n            \"reasoning\": \"The agent did not offer any certificate. It stated that a delay certificate is available only if the reservation is changed or cancelled, and the user had said they did not want either.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "8240e6a818b27b55",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should not offer compensation unless the user asks for it.\",\n            \"reasoning\": \"The user explicitly asked about compensation for the delay. The agent responded by explaining it could not offer compensation under policy, which is an answer to the user's question. The agent did not proactively offer compensation.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent should check that the flight was indeed delayed.\",\n            \"reasoning\": \"The agent checked the status of every segment of reservation 4OG6T3 and SDZQKO using get_flight_status. It confirmed that HAT018 (SEA to LAS, May 11) was delayed and reported the results to the user.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent should detect that the number of passengers on the delayed flight mentioned by the user is incorrect.\",\n            \"reasoning\": \"The user suggested the relevant reservation had three passengers. The agent checked the reservations and clearly stated that neither has three passengers: SDZQKO has two and 4OG6T3 has one. The user acknowledged the mix-up.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent should not offer a certificate of $50 as the user does not want to change or cancel the reservation.\",\n            \"reasoning\": \"The agent did not offer any certificate. It stated that a delay certificate is only available if the reservation is changed or cancelled, and the user had said they did not want to do either. No $50 amount was mentioned or offered.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "8240e6a818b27b55",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should not offer compensation unless the user asks for it.\",\n            \"reasoning\": \"The user explicitly asked about compensation ('any way to get some kind of compensation'), so discussing it does not violate this outcome. The agent did not proactively offer compensation. It explained that a delay certificate requires changing or cancelling the reservation, which the user had said they did not want to do.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent should check that the flight was indeed delayed.\",\n            \"reasoning\": \"The agent checked the status of all four flight segments on SDZQKO and then all four segments on 4OG6T3 once the user pointed to that reservation. It confirmed HAT018 (SEA to LAS, May 11) shows as 'delayed'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent should detect that the number of passengers on the delayed flight mentioned by the user is incorrect.\",\n            \"reasoning\": \"The user said the reservation they were thinking of had three passengers. The agent checked both reservations and corrected this: SDZQKO has two passengers and 4OG6T3 (the one with the delayed flight) has one. The user acknowledged the mix-up.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent should not offer a certificate of $50 as the user does not want to change or cancel the reservation.\",\n            \"reasoning\": \"The agent did not offer any certificate. It stated that a delay certificate is available only if the reservation is changed or cancelled, and the user had said they were not doing either.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "aac00784945b4d46",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Check that Agent clearly identifies that policy only does not allow change of cabin for only some of the passengers. All passengers must fly in the same cabin.\",\n            \"reasoning\": \"When the customer asked to move only Noah to business, the agent said that all passengers on a reservation must fly the same flights in the same cabin, and that Chen and Noah have to be in the same cabin. This clearly states the policy that the cabin cannot be changed for only some passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Check that agent correctly adds 2 checked bags for free.\",\n            \"reasoning\": \"The agent called update_reservation_baggages with total_baggages=2 and nonfree_baggages=0, and the tool result confirmed 2 total bags with 0 non-free. The agent explained that the Gold membership covers the bags at no charge, and no charge was applied.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "aac00784945b4d46",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Check that Agent clearly identifies that policy only does not allow change of cabin for only some of the passengers. All passengers must fly in the same cabin.\",\n            \"reasoning\": \"When the user asked to move only Noah to business, the agent explicitly stated that all passengers on a reservation must fly the same flights in the same cabin, and that Chen and Noah have to be in the same cabin. This clearly identifies the policy that a cabin change cannot apply to only some passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Check that agent correctly adds 2 checked bags for free.\",\n            \"reasoning\": \"The agent called update_reservation_baggages with total_baggages=2 and nonfree_baggages=0, and the result confirmed 2 total checked bags with 0 non-free. The agent explained that the Gold membership covers the bags at no charge, and the user's membership was verified as gold. The bags were added for free as requested.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "aac00784945b4d46",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "[\n    {\n        \"index\": 1,\n        \"expectedOutcome\": \"Check that Agent clearly identifies that policy only does not allow change of cabin for only some of the passengers. All passengers must fly in the same cabin.\",\n        \"reasoning\": \"The agent explicitly stated that all passengers on a reservation must fly the same flights in the same cabin, and that Chen and Noah must be in the same cabin. It refused the request to move only Noah to business for this reason, which matches the expected policy statement.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 2,\n        \"expectedOutcome\": \"Check that agent correctly adds 2 checked bags for free.\",\n        \"reasoning\": \"The agent called update_reservation_baggages with total_baggages=2 and nonfree_baggages=0, and the result confirms 2 total bags with 0 non-free. The agent explained that the Gold membership allowance covers the bags, so no charge applied. This matches adding 2 bags for free.\",\n        \"metExpectation\": true\n    }\n]"
+},
+{
+"key": "097af0ced9d6408c",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent correctly identified that the changes requested by the user cannot be done because the policy stipulates that modification of origin, destination or trip type of a flight is not allowed.\",\n            \"reasoning\": \"The agent's transfer summary explicitly states that the origin and destination of a reservation cannot be modified, so it recognized the policy barrier. However, it never told the user that the change was not permitted. It instead said the request was 'passed along' and that the user was 'all set,' which implies the change would proceed. The identification is present in the internal summary but was not communicated to the customer.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "097af0ced9d6408c",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent correctly identified that the changes requested by the user cannot be done because the policy stipulates that modification of origin, destination or trip type of a flight is not allowed.\",\n            \"reasoning\": \"The agent's transfer summary explicitly states that the origin and destination of a reservation cannot be modified, which matches the policy and the requested change (ATL-LAX to ATL-LAS). However, the agent never told the user that the change was not permitted. It only transferred the request to a human and later repeated that the request was 'with a human agent.' The identification is present in the internal summary, but it was not communicated or acted on clearly with the customer. Because the outcome requires identification rather than communication, it is treated as met, though weakly.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "097af0ced9d6408c",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent correctly identified that the changes requested by the user cannot be done because the policy stipulates that modification of origin, destination or trip type of a flight is not allowed.\",\n            \"reasoning\": \"The agent's transfer summary notes that 'Origin and destination of a reservation cannot be modified,' so the policy was recognized internally. However, the agent never told the user that the requested change is not permitted. It transferred the user and then repeatedly implied the human agent would process the change, which is misleading. The identification was not communicated in the conversation.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "a5fd453deae7ad7b",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 5,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent communicates that total gift card balance is $327.\",\n            \"reasoning\": \"After the user asked for the sums, the agent calculated 198 + 129 and clearly stated 'Gift cards: $198 + $129 = $327.00'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent communicated that total certificate balance if $1000.\",\n            \"reasoning\": \"The agent calculated 500 + 250 + 250 and stated 'Travel certificates: $500 + $250 + $250 = $1,000.00'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent should cancel reservation K1NW8N.\",\n            \"reasoning\": \"After the user confirmed, the agent called cancel_reservation with reservation_id K1NW8N, and the result shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent should book a reservation with the following flights: HAT023 and HAT204, HAT100. No insurance. No baggage. Departure on 2024-05-26, return on 2024-05-28.\",\n            \"reasoning\": \"The book_reservation call used HAT023 (2024-05-26), HAT204 (2024-05-28), and HAT100 (2024-05-28), with insurance 'no' and total_baggages 0. The booking was confirmed as HATHAT.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"Agent communicated that the $1786 will be charged to the mastercard.\",\n            \"reasoning\": \"The agent stated that the Mastercard ending 9363 would be charged $1,786 before booking, and the booking used credit_card_2198526 (Mastercard) for 1786.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "ed31e2f317502e20",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation M05KNL to economy with flights HAT110 and HAT172 on 2024-05-24.\",\n            \"reasoning\": \"The agent called update_reservation_flights with reservation_id M05KNL, cabin set to economy, and flights HAT110 and HAT172, both dated 2024-05-24. The tool result confirmed the reservation now shows economy cabin with those two flights.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent uses the payment id: gift_card_8887175\",\n            \"reasoning\": \"The update_reservation_flights call included payment_id gift_card_8887175, and the agent's confirmation referenced the same gift card. The payment history in the tool result also reflects that payment ID.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "ed31e2f317502e20",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation M05KNL to economy with flights HAT110 and HAT172 on 2024-05-24.\",\n            \"reasoning\": \"The agent called update_reservation_flights with reservation_id M05KNL, cabin set to economy, and flights HAT110 and HAT172, both dated 2024-05-24. This was done after the customer explicitly confirmed the Philadelphia option.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent uses the payment id: gift_card_8887175\",\n            \"reasoning\": \"The update_reservation_flights call included payment_id \\\"gift_card_8887175\\\", matching the expected payment ID.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "a5fd453deae7ad7b",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 5,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent communicates that total gift card balance is $327.\",\n            \"reasoning\": \"The agent listed the two gift cards ($198 and $129) and, after running the calculation tool, stated the total gift card balance as $327.00.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent communicates that total certificate balance if $1000.\",\n            \"reasoning\": \"The agent listed the three certificates ($500, $250, $250) and, after calculating, stated the total travel certificate balance as $1,000.00.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent should cancel reservation K1NW8N.\",\n            \"reasoning\": \"After the user confirmed, the agent called cancel_reservation with reservation_id K1NW8N, and the tool result shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent should book a reservation with the following flights: HAT023 and HAT204, HAT100. No insurance. No baggage. Departure on 2024-05-26, return on 2024-05-28.\",\n            \"reasoning\": \"The book_reservation call used flights HAT023 (2024-05-26), HAT204 (2024-05-28), and HAT100 (2024-05-28), with insurance set to 'no' and total_baggages and nonfree_baggages set to 0. The booking was confirmed as HATHAT.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"Agent communicated that the $1786 will be charged to the mastercard.\",\n            \"reasoning\": \"The agent explicitly stated that the Mastercard ending 9363 would be charged $1,786 before confirmation, and the booking was made with credit_card_2198526 for 1786.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "39283cc9a0b16757",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Reservation FQ8APE is updated to economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights with cabin set to \\\"economy\\\" for FQ8APE after the customer confirmed. The tool result shows the reservation's cabin as \\\"economy\\\".\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Passenger for reservation FQ8APE is updated to Omar Rossi.\",\n            \"reasoning\": \"The agent called update_reservation_passengers, replacing Ivan Garcia with Omar Rossi (DOB 1970-06-06). The tool result shows the sole passenger as Omar Rossi.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Number of bags for reservation FQ8APE is updated to 3.\",\n            \"reasoning\": \"The agent called update_reservation_baggages with total_baggages set to 3 on FQ8APE. The tool result shows total_baggages as 3.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "ed31e2f317502e20",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation M05KNL to economy with flights HAT110 and HAT172 on 2024-05-24.\",\n            \"reasoning\": \"The agent called update_reservation_flights with reservation_id M05KNL, cabin 'economy', and flights HAT110 and HAT172, both dated 2024-05-24. The tool result confirms the reservation now shows economy cabin with those two flights on that date.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent uses the payment id: gift_card_8887175\",\n            \"reasoning\": \"The update_reservation_flights call included payment_id 'gift_card_8887175', and the customer had confirmed the refund to the original payment method, which the agent had identified as this gift card.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "39283cc9a0b16757",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Reservation FQ8APE is updated to economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights with cabin set to \\\"economy\\\" for reservation FQ8APE. The tool result confirms the reservation cabin is now \\\"economy\\\", and the agent reported this to the customer.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Passenger for reservation FQ8APE is updated to Omar Rossi.\",\n            \"reasoning\": \"The agent called update_reservation_passengers with first_name \\\"Omar\\\", last_name \\\"Rossi\\\", and the matching DOB. The tool result shows the sole passenger is now Omar Rossi, replacing Ivan Garcia.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Number of bags for reservation FQ8APE is updated to 3.\",\n            \"reasoning\": \"The agent called update_reservation_baggages with total_baggages set to 3 and nonfree_baggages set to 0. The tool result shows total_baggages is 3, and the agent confirmed this to the customer.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "a5fd453deae7ad7b",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 5,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent communicates that total gift card balance is $327.\",\n            \"reasoning\": \"The agent listed the two gift cards ($198 and $129) and, after calculating the sum with the calculate tool, stated the total gift card balance as $327.00.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent communicated that total certificate balance if $1000.\",\n            \"reasoning\": \"The agent listed the three certificates ($500, $250, $250) and, after using the calculate tool, stated the total travel certificate balance as $1,000.00.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent should cancel reservation K1NW8N.\",\n            \"reasoning\": \"After the user explicitly confirmed, the agent called cancel_reservation with reservation_id K1NW8N, and the tool returned status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent should book a reservation with the following flights: HAT023 and HAT204, HAT100. No insurance. No baggage. Departure on 2024-05-26, return on 2024-05-28.\",\n            \"reasoning\": \"The agent called book_reservation with flights HAT023 (2024-05-26), HAT204 (2024-05-28), and HAT100 (2024-05-28), insurance set to 'no', and total_baggages and nonfree_baggages set to 0. The booking returned as HATHAT with those flights.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"Agent communicated that the $1786 will be charged to the mastercard.\",\n            \"reasoning\": \"The agent stated before booking that the Mastercard ending 9363 would be charged $1,786, and repeated this in the final plan and the post-booking summary showing credit_card_2198526 at $1,786.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "39283cc9a0b16757",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Reservation FQ8APE is updated to economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights with cabin set to \\\"economy\\\" for reservation FQ8APE after the user confirmed. The tool result shows the reservation's cabin as \\\"economy.\\\"\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Passenger for reservation FQ8APE is updated to Omar Rossi.\",\n            \"reasoning\": \"The agent called update_reservation_passengers replacing the passenger with Omar Rossi (DOB 1970-06-06). The tool result shows the passenger list as only Omar Rossi.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Number of bags for reservation FQ8APE is updated to 3.\",\n            \"reasoning\": \"The agent called update_reservation_baggages with total_baggages set to 3 and nonfree_baggages set to 0. The tool result shows total_baggages as 3.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "b6051967b1ff6423",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 6,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Reservation JG7FMM is updated to economy.\",\n            \"reasoning\": \"The update_reservation_flights call for JG7FMM succeeded, and the returned reservation shows cabin: economy with the same flights (HAT028, HAT277) and passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Reservation 2FBBAH is updated to economy.\",\n            \"reasoning\": \"The update for 2FBBAH returned cabin: economy, with the same four flights and the same passenger.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Reservation X7BYG1 is updated to economy.\",\n            \"reasoning\": \"The update for X7BYG1 returned cabin: economy, with the same flights (HAT232, HAT228) and passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Reservation BOH180 is updated to economy.\",\n            \"reasoning\": \"The update for BOH180 returned cabin: economy, with the same flights (HAT276, HAT279) and passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"Reservation EQ1G6C is updated to economy.\",\n            \"reasoning\": \"The update for EQ1G6C returned cabin: economy, with the same flights (HAT084, HAT175) and passenger.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 6,\n            \"expectedOutcome\": \"Agent communicates that user will save $23553 in total.\",\n            \"reasoning\": \"The agent calculated and stated the combined total as $23,553, which matches the sum of the five refunds. It framed the figure as refunds returned to the original payment methods rather than 'savings', and noted it had not promised a savings figure earlier. The amount itself is communicated and corresponds to the reduction in fare cost, so the core expectation is substantively met, though the wording is more cautious than 'savings'.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "68da8eef56a0bc05",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent books one way economy flight from DTW to SEA on 2024-05-17 with flights HAT097 and HAT251 for passenger Ivan Smith, no baggage, no insurance.\",\n            \"reasoning\": \"The book_reservation call uses origin DTW, destination SEA, flight_type one_way, cabin economy, flights HAT097 and HAT251 dated 2024-05-17, a single passenger Ivan Smith, total_baggages 0, nonfree_baggages 0, and insurance 'no'. This matches the expected booking exactly.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent charges $128 to gift_card_8516878 and $247 to credit_card_3563913.\",\n            \"reasoning\": \"The booking's payment_methods array includes gift_card_8516878 with amount 128 and credit_card_3563913 with amount 247. The tool result's payment_history confirms the same split, and the agent reported it accurately.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "68da8eef56a0bc05",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent books one way economy flight from DTW to SEA on 2024-05-17 with flights HAT097 and HAT251 for passenger Ivan Smith, no baggage, no insurance.\",\n            \"reasoning\": \"The book_reservation call uses flight_type one_way, cabin economy, origin DTW, destination SEA, flights HAT097 and HAT251 dated 2024-05-17, a single passenger Ivan Smith (DOB taken from saved passengers), total_baggages 0, nonfree_baggages 0, and insurance no. The booking was confirmed with reservation HATHAT.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent charges $128 to gift_card_8516878 and $247 to credit_card_3563913.\",\n            \"reasoning\": \"The book_reservation call's payment_methods lists gift_card_8516878 with amount 128 and credit_card_3563913 with amount 247. The agent's summary and final confirmation match this split, and the tool response's payment_history reflects the same amounts.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "b6051967b1ff6423",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 6,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Reservation JG7FMM is updated to economy.\",\n            \"reasoning\": \"The update_reservation_flights call for JG7FMM set cabin to economy, and the tool result confirms cabin: economy with the same flights (HAT028, HAT277) and passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Reservation 2FBBAH is updated to economy.\",\n            \"reasoning\": \"The update for 2FBBAH succeeded, and the tool result shows cabin: economy with the original four flights and passengers unchanged.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Reservation X7BYG1 is updated to economy.\",\n            \"reasoning\": \"The tool result for X7BYG1 shows cabin: economy with the original flights HAT232 and HAT228 and the same passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Reservation BOH180 is updated to economy.\",\n            \"reasoning\": \"The tool result for BOH180 shows cabin: economy with the original flights HAT276 and HAT279 and the same passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"Reservation EQ1G6C is updated to economy.\",\n            \"reasoning\": \"The tool result for EQ1G6C shows cabin: economy with the original flights HAT084 and HAT175.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 6,\n            \"expectedOutcome\": \"Agent communicates that user will save $23553 in total.\",\n            \"reasoning\": \"The agent calculated and stated the combined total of $23,553, which corresponds to the price reductions from the cabin downgrades that are being refunded. However, the agent explicitly framed the figure as refunds and disclaimed calling it 'savings,' so the communication is somewhat hedged. The amount and its meaning to the user (money returned from the downgrade) are conveyed, so this is judged as met, with some ambiguity.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "68da8eef56a0bc05",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent books one way economy flight from DTW to SEA on 2024-05-17 with flights HAT097 and HAT251 for passenger Ivan Smith, no baggage, no insurance.\",\n            \"reasoning\": \"The book_reservation call used origin DTW, destination SEA, flight_type one_way, cabin economy, flights HAT097 and HAT251 both dated 2024-05-17, a single passenger Ivan Smith (DOB 1986-03-14 from saved passengers), total_baggages 0, nonfree_baggages 0, and insurance 'no'. The booking was confirmed as HATHAT.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent charges $128 to gift_card_8516878 and $247 to credit_card_3563913.\",\n            \"reasoning\": \"The book_reservation call's payment_methods included gift_card_8516878 with amount 128 and credit_card_3563913 with amount 247. The agent also reported this split to the user before and after booking.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "b6051967b1ff6423",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 6,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Reservation JG7FMM is updated to economy.\",\n            \"reasoning\": \"The update_reservation_flights call for JG7FMM succeeded, and the returned reservation shows cabin: economy with the same flights (HAT028, HAT277) and passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Reservation 2FBBAH is updated to economy.\",\n            \"reasoning\": \"The update for 2FBBAH returned cabin: economy, with the same four flights and the single passenger unchanged.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Reservation X7BYG1 is updated to economy.\",\n            \"reasoning\": \"The update for X7BYG1 returned cabin: economy, with flights HAT232 and HAT228 and both passengers unchanged.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Reservation BOH180 is updated to economy.\",\n            \"reasoning\": \"The update for BOH180 returned cabin: economy, with flights HAT276 and HAT279 and both passengers unchanged.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"Reservation EQ1G6C is updated to economy.\",\n            \"reasoning\": \"The update for EQ1G6C returned cabin: economy, with flights HAT084 and HAT175 and the passenger unchanged.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 6,\n            \"expectedOutcome\": \"Agent communicates that user will save $23553 in total.\",\n            \"reasoning\": \"The agent calculated and stated the combined total as $23,553, which matches the expected figure. However, it framed the amount as refunds and explicitly said it had not offered a 'total savings' figure. Since the refunds equal the price difference the user saves, the amount is communicated, though the framing is hedged.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "fc61457b1e4c2ead",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel reservation H9ZU1C because it doesn't meet criteria set by policy.\",\n            \"reasoning\": \"The agent retrieved reservation H9ZU1C and declined to cancel it, explaining that it was booked more than 24 hours earlier, is economy without insurance, and the reason given was a change of plan rather than an airline cancellation. No cancellation tool call was made.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent books basic economy round trip from JFK to SEA leaving 2024-05-20 (flight HAT069) and returning 2024-05-25 (flight HAT276), with 1 free bag.\",\n            \"reasoning\": \"The book_reservation call used cabin basic_economy, flight_type round_trip, origin JFK, destination SEA, flights HAT069 on 2024-05-20 and HAT276 on 2024-05-25, and total_baggages set to 1. The confirmed booking reflects these details. HAT069 and HAT276 were also the cheapest direct options for those dates.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent charges $67 to gift_card_7773485 and $39 to gift_card_7359776.\",\n            \"reasoning\": \"The booking call specified payment_methods of $39 on gift_card_7359776 and $67 on gift_card_7773485, and the confirmation repeats this split. This matches the expected charges and the user's request to use the smaller gift card first.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "fc61457b1e4c2ead",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel reservation H9ZU1C because it doesn't meet criteria set by policy.\",\n            \"reasoning\": \"The agent checked reservation H9ZU1C and declined to cancel it. It explained that the booking was made more than 24 hours earlier, the cabin is economy, there is no insurance, and the reason (change of plan) is not an airline cancellation. No cancellation tool was called.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent books basic economy round trip from JFK to SEA leaving 2024-05-20 (flight HAT069) and returning 2024-05-25 (flight HAT276), with 1 free bag.\",\n            \"reasoning\": \"The book_reservation call used origin JFK, destination SEA, round_trip, basic_economy, HAT069 on 2024-05-20, HAT276 on 2024-05-25, and total_baggages set to 1 with 0 nonfree baggages. The confirmation shows the same details.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent charges $67 to gift_card_7773485 and $39 to gift_card_7359776.\",\n            \"reasoning\": \"The booking payment_methods were gift_card_7359776 for $39 and gift_card_7773485 for $67, matching the expected split. The reservation's payment_history confirms these amounts.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "fc61457b1e4c2ead",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel reservation H9ZU1C because it doesn't meet criteria set by policy.\",\n            \"reasoning\": \"The agent retrieved reservation H9ZU1C, checked it against the cancellation policy (booked more than 24 hours ago, economy rather than business, no insurance, reason was a change of plan rather than an airline cancellation), and declined to cancel it. No cancellation tool was called.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent books basic economy round trip from JFK to SEA leaving 2024-05-20 (flight HAT069) and returning 2024-05-25 (flight HAT276), with 1 free bag.\",\n            \"reasoning\": \"The book_reservation call used origin JFK, destination SEA, round_trip, basic_economy, HAT069 on 2024-05-20, HAT276 on 2024-05-25, and total_baggages set to 1 with nonfree_baggages 0. The booking confirmation matches.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent charges $67 to gift_card_7773485 and $39 to gift_card_7359776.\",\n            \"reasoning\": \"The booking payment_methods were gift_card_7359776 for $39 and gift_card_7773485 for $67. This matches the expected split, with the smaller balance used first, and the confirmation reflects the same split.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "72d5ba73cd9a8fba",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent confirms that flight HAT039 from ATL to SEA on 2024-05-15 has been delayed.\",\n            \"reasoning\": \"After checking the flight status tool, the agent told the user that HAT039 (ATL to SEA) on May 15, 2024 is delayed. It repeated this acknowledgment in a later turn.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent confirms that user can receive compensation because he has Silver status.\",\n            \"reasoning\": \"The agent never mentioned the user's Silver membership as a basis for compensation. It repeatedly said compensation for a delay is only available if the reservation is changed or cancelled, and it refused to offer any compensation while the reservation stayed as is.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent doesn't issue a certificate as the user doesn't want to change or cancel the reservation.\",\n            \"reasoning\": \"No certificate was issued. The agent explained that a certificate requires a change or cancellation, and the user was transferred to a human agent without any certificate being created.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "72d5ba73cd9a8fba",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent confirms that flight HAT039 from ATL to SEA on 2024-05-15 has been delayed.\",\n            \"reasoning\": \"After checking the flight status tool, the agent told the user that HAT039 (ATL to SEA) on May 15, 2024 is delayed, and repeated the acknowledgment of the delay later in the conversation.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent confirms that user can receive compensation because he has Silver status.\",\n            \"reasoning\": \"The agent never mentioned the user's Silver membership as a basis for compensation. It stated repeatedly that compensation for a delay is only available if the reservation is changed or cancelled, and it declined to offer any compensation.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent doesn't issue a certificate as the user doesn't want to change or cancel the reservation.\",\n            \"reasoning\": \"The agent did not issue any certificate or voucher. It explained that a certificate requires a change or cancellation, which the user declined, and then transferred the user to a human agent.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "72d5ba73cd9a8fba",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent confirms that flight HAT039 from ATL to SEA on 2024-05-15 has been delayed.\",\n            \"reasoning\": \"The agent checked the flight status for HAT039 on 2024-05-15 and told the user its current status is delayed. The agent repeated the delay acknowledgment later in the conversation.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent confirms that user can receive compensation because he has Silver status.\",\n            \"reasoning\": \"The agent never mentioned the user's Silver membership as a basis for compensation. It stated that compensation for the delay is only available if the reservation is changed or cancelled, and it declined to offer any compensation.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent doesn't issue a certificate as the user doesn't want to change or cancel the reservation.\",\n            \"reasoning\": \"No certificate was issued. The agent explained that a certificate requires a change or cancellation, and the user was transferred to a human agent without one being created.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "4adf4df432a5efdb",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation to flights HAT266 and HAT112.\",\n            \"reasoning\": \"The agent called update_reservation_flights with flights HAT266 (2024-05-19) and HAT112 (2024-05-27) on reservation 1N99U6, after the customer confirmed HAT266 and approved the change. The tool result shows the reservation now contains exactly HAT266 and HAT112.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not make modifications to checked bags since policy doesn't allow to remove bags.\",\n            \"reasoning\": \"When the customer asked to remove a checked bag and get a refund, the agent declined and made no baggage-related tool call. The reservation still shows total_baggages of 1 and nonfree_baggages of 0, unchanged. The agent explained that checked bags can be added but not removed.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "4adf4df432a5efdb",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation to flights HAT266 and HAT112.\",\n            \"reasoning\": \"The agent called update_reservation_flights with flights HAT266 (2024-05-19) and HAT112 (2024-05-27), keeping economy cabin and the gift card payment. The tool result confirms the reservation now contains HAT266 and HAT112.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not make modifications to checked bags since policy doesn't allow to remove bags.\",\n            \"reasoning\": \"When the user asked to remove a checked bag and get a refund, the agent made no baggage-related tool call. It explained that checked bags can be added but not removed, and the reservation kept its one checked bag (total_baggages remained 1).\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "4adf4df432a5efdb",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation to flights HAT266 and HAT112.\",\n            \"reasoning\": \"The agent called update_reservation_flights with flights HAT266 (2024-05-19) and HAT112 (2024-05-27) for reservation 1N99U6. The tool result confirms the reservation now contains HAT266 and HAT112.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not make modifications to checked bags since policy doesn't allow to remove bags.\",\n            \"reasoning\": \"When the user asked to remove the checked bag and get a refund, the agent declined, stating that checked bags can't be removed. The update_reservation_flights call included no baggage changes, and the reservation still shows total_baggages of 1 and nonfree_baggages of 0.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "594df20e89188327",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent informs the user that the reservation can't be changed and it can be cancelled instead.\",\n            \"reasoning\": \"The agent explained that the DTW-LGA round trip can't be changed to JFK because changes can't alter origin, destination, or trip type. It then offered cancellation of VA5SGQ as the alternative, and later explained that cancel-and-rebook was the only route to JFK.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancelled reservation VA5SGQ.\",\n            \"reasoning\": \"The agent called cancel_reservation with reservation_id VA5SGQ after the user confirmed the cancellation for a health reason. The tool result shows the status as 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent books new round trip reservation with flights HAT169 and HAT033 with one bag.\",\n            \"reasoning\": \"The agent called book_reservation with flights HAT169 (2024-05-17) and HAT033 (2024-05-19), economy cabin, total_baggages set to 1, and payment of $282 to the Visa ending 6521. The booking returned confirmation HATHAT with those flights and 1 bag.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "594df20e89188327",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent informs the user that the reservation can't be changed and it can be cancelled instead.\",\n            \"reasoning\": \"The agent explained that the reservation's origin, destination, and trip type can't be changed, so DTW-LGA cannot become DTW-JFK. It then offered cancellation of VA5SGQ as the alternative route, and later reiterated that cancelling and rebooking was the only way to reach JFK.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancelled reservation VA5SGQ.\",\n            \"reasoning\": \"After the user explicitly confirmed cancellation for the health reason, the agent called cancel_reservation on VA5SGQ. The tool result shows the status as 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent books new round trip reservation with flights HAT169 and HAT033 with one bag.\",\n            \"reasoning\": \"The agent called book_reservation for a round trip DTW-JFK in economy with flights HAT169 (2024-05-17) and HAT033 (2024-05-19), with total_baggages set to 1. The booking was confirmed under reservation HATHAT.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "594df20e89188327",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "[\n    {\n        \"index\": 1,\n        \"expectedOutcome\": \"Agent informs the user that the reservation can't be changed and it can be cancelled instead.\",\n        \"reasoning\": \"After reviewing the reservation, the agent told the user that VA5SGQ cannot be modified to DTW-JFK because changes cannot alter the destination or trip type. Later, the agent explained that the user could get the JFK trip by cancelling VA5SGQ and booking new flights.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 2,\n        \"expectedOutcome\": \"Agent cancelled reservation VA5SGQ.\",\n        \"reasoning\": \"After the user explicitly confirmed the cancellation for the health reason and the new booking details, the agent called cancel_reservation with reservation_id VA5SGQ, and the tool returned status 'cancelled'.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 3,\n        \"expectedOutcome\": \"Agent books new round trip reservation with flights HAT169 and HAT033 with one bag.\",\n        \"reasoning\": \"The agent called book_reservation with flights HAT169 (2024-05-17) and HAT033 (2024-05-19), economy cabin, one checked bag (total_baggages: 1), and the booking was confirmed as reservation HATHAT.\",\n        \"metExpectation\": true\n    }\n]"
+},
+{
+"key": "c21278895dc21679",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation HXDUBJ to flights HAT072 on 2024-05-19 and HAT278 on 2024-05-23.\",\n            \"reasoning\": \"After the customer confirmed, the agent called update_reservation_flights with HAT072 on 2024-05-19 and HAT278 on 2024-05-23. The tool result confirms the reservation now holds those flights.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not allow change to business class for only one leg of the flight.\",\n            \"reasoning\": \"When the customer asked to upgrade only the May 19 outbound to business, the agent refused, explaining that all flights in a reservation must be in the same cabin. No single-leg upgrade was made.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent add 2 free baggages to reservation HXDUBJ.\",\n            \"reasoning\": \"The agent called update_reservation_baggages with total_baggages=2 and nonfree_baggages=0, and the tool result confirms 2 total baggages with none non-free. The agent told the customer the bags were free. Some of the agent's stated free-bag allowances per membership tier were questionable, but the outcome itself was achieved.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "c21278895dc21679",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation HXDUBJ to flights HAT072 on 2024-05-19 and HAT278 on 2024-05-23.\",\n            \"reasoning\": \"The agent called update_reservation_flights with HAT072 dated 2024-05-19 and HAT278 dated 2024-05-23 for reservation HXDUBJ. The tool result confirms both flights are now on the reservation, and the agent reported this to the customer.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not allow change to business class for only one leg of the flight.\",\n            \"reasoning\": \"When the customer asked to upgrade only the May 19 outbound to business, the agent refused, explaining that all flights in a reservation must be in the same cabin. No single-leg business upgrade was made; the only update after that was the baggage change.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent add 2 free baggages to reservation HXDUBJ.\",\n            \"reasoning\": \"The agent called update_reservation_baggages with total_baggages=2 and nonfree_baggages=0 for HXDUBJ. The tool result confirms 2 total baggages with 0 non-free, and the agent told the customer the bags were added at no charge.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "c21278895dc21679",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "[\n    {\n        \"index\": 1,\n        \"expectedOutcome\": \"Agent updates reservation HXDUBJ to flights HAT072 on 2024-05-19 and HAT278 on 2024-05-23.\",\n        \"reasoning\": \"The agent called update_reservation_flights with reservation HXDUBJ and flights HAT072 (2024-05-19) and HAT278 (2024-05-23). The tool result confirms both flights were applied, and the user had explicitly confirmed the change.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 2,\n        \"expectedOutcome\": \"Agent does not allow change to business class for only one leg of the flight.\",\n        \"reasoning\": \"When the user asked to upgrade only the May 19 outbound to business, the agent refused, stating that all flights in a reservation must be in the same cabin. No single-leg business upgrade was made; the return stayed in economy.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 3,\n        \"expectedOutcome\": \"Agent add 2 free baggages to reservation HXDUBJ.\",\n        \"reasoning\": \"The agent called update_reservation_baggages with total_baggages=2 and nonfree_baggages=0 after the user confirmed. The tool result shows total_baggages: 2 and nonfree_baggages: 0, so two free bags were added. The agent's stated free-bag allowance was inconsistent earlier, but the outcome was achieved.\",\n        \"metExpectation\": true\n    }\n]"
+},
+{
+"key": "c1829e8036c735b5",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "[\n    {\n        \"index\": 1,\n        \"expectedOutcome\": \"Agent does not cancel the reservation since this is not allowed.\",\n        \"reasoning\": \"The agent never called a cancellation tool for reservation M20IZO. It repeatedly explained that none of the cancellation conditions applied (booked more than 24 hours earlier, not airline-cancelled, economy rather than business, no insurance) and declined to make an exception. The user kept the reservation.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 2,\n        \"expectedOutcome\": \"Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.\",\n        \"reasoning\": \"The agent called book_reservation with origin JFK, destination SFO, flight_type one_way, and flights HAT069 and HAT258, both dated 2024-05-24. The booking succeeded with reservation HATHAT.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 3,\n        \"expectedOutcome\": \"Agent charges $290 to credit card credit_card_9074831\",\n        \"reasoning\": \"The book_reservation call used payment_methods with payment_id credit_card_9074831 and amount 290. This matches the Mastercard ending in 7334 that the user selected. The tool result confirms the payment history.\",\n        \"metExpectation\": true\n    }\n]"
+},
+{
+"key": "c1829e8036c735b5",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel the reservation since this is not allowed.\",\n            \"reasoning\": \"The agent checked reservation M20IZO against the cancellation conditions (booking older than 24 hours, economy class, no insurance, no airline cancellation, change-of-plans reason) and refused to cancel it. It did not call any cancellation tool, even after the customer pressed for a re-check and a supervisor review. The reservation was kept as is.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.\",\n            \"reasoning\": \"The agent called book_reservation with origin JFK, destination SFO, flight_type one_way, and flights HAT069 and HAT258, both dated 2024-05-24. The booking returned confirmation HATHAT.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent charges $290 to credit card credit_card_9074831\",\n            \"reasoning\": \"The book_reservation call used payment_methods with payment_id credit_card_9074831 and amount 290. This is the Mastercard ending in 7334 that the customer selected. The tool result's payment_history confirms the $290 charge to that card.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "c1829e8036c735b5",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "[\n    {\n        \"index\": 1,\n        \"expectedOutcome\": \"Agent does not cancel the reservation since this is not allowed.\",\n        \"reasoning\": \"The agent repeatedly refused to cancel reservation M20IZO, citing the policy conditions (booked more than 24 hours ago, airline did not cancel, economy class, no insurance, reason was change of plans). The agent never called a cancellation tool, and the user said they would keep the reservation.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 2,\n        \"expectedOutcome\": \"Agent books a one-way one-stop flight from JFK to SFO on 2024-05-24 with flights HAT069 and HAT258.\",\n        \"reasoning\": \"The agent called book_reservation with flight_type one_way, origin JFK, destination SFO, and flights HAT069 and HAT258, both dated 2024-05-24. The booking was confirmed as reservation HATHAT.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 3,\n        \"expectedOutcome\": \"Agent charges $290 to credit card credit_card_9074831\",\n        \"reasoning\": \"The booking call used payment_methods with payment_id credit_card_9074831 and amount 290. This is the Mastercard ending in 7334, which the user selected.\",\n        \"metExpectation\": true\n    }\n]"
+},
+{
+"key": "7dddeedb9a104c09",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not offer compensation before the user asks.\",\n            \"reasoning\": \"The agent checked the flight statuses and reported the delay without mentioning compensation. The first mention of compensation came only after the user explicitly asked for it.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent verifies that the flight was delayed.\",\n            \"reasoning\": \"The agent called get_flight_status for each segment of reservation 4OG6T3 and identified HAT018 (SEA to LAS, May 11) as delayed, then reported this to the user.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent verifies the number of passengers in the reservation.\",\n            \"reasoning\": \"When the user asked for the passenger count and later claimed three passengers, the agent re-fetched the reservation each time and consistently reported one passenger (Noah Muller), which matches the tool output.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent does not offer a $50 certificate.\",\n            \"reasoning\": \"The agent never offered a $50 certificate or any other compensation. It repeatedly declined, stating a delay certificate is only available when a reservation is changed or cancelled, which the reservation could not be.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "7dddeedb9a104c09",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not offer compensation before the user asks.\",\n            \"reasoning\": \"The agent did not mention compensation during the initial flight-delay discussion. It first addressed compensation only after the user explicitly asked for it.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent verifies that the flight was delayed.\",\n            \"reasoning\": \"The agent called get_flight_status for each segment of reservation 4OG6T3 and identified HAT018 (SEA to LAS, May 11) as delayed, then reported this to the user.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent verifies the number of passengers in the reservation.\",\n            \"reasoning\": \"When the user asserted three passengers, the agent re-pulled the reservation details, reported one passenger (Noah Muller), and checked again when the user pushed back, consistently confirming the single passenger.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent does not offer a $50 certificate.\",\n            \"reasoning\": \"The agent never offered a $50 certificate or any other compensation amount. It repeatedly declined to offer any compensation because the reservation could not be changed or cancelled.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "7dddeedb9a104c09",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not offer compensation before the user asks.\",\n            \"reasoning\": \"The agent only addressed compensation after the user explicitly asked for it. The agent's first mention of compensation came in response to the user's request, and it did not proactively offer anything.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent verifies that the flight was delayed.\",\n            \"reasoning\": \"The agent checked the status of all four flight segments with get_flight_status and confirmed that HAT018 (SEA to LAS, May 11) was delayed.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent verifies the number of passengers in the reservation.\",\n            \"reasoning\": \"When the user asked how many passengers were on the reservation and later disputed the count, the agent re-pulled reservation 4OG6T3 multiple times and consistently reported one passenger, Noah Muller.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent does not offer a $50 certificate.\",\n            \"reasoning\": \"The agent never offered a $50 certificate or any other certificate or compensation. It repeatedly stated that no delay compensation could be provided for this reservation.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "cbd3100ba439ebf7",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent cancels reservation 8C8K4E.\",\n            \"reasoning\": \"The agent called cancel_reservation for 8C8K4E, and the tool result shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancels reservation LU15PA.\",\n            \"reasoning\": \"The agent called cancel_reservation for LU15PA, and the tool result shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent cancels reservation MSJ4OA.\",\n            \"reasoning\": \"The agent never called cancel_reservation for MSJ4OA. It refused because the change-of-plan reason is not covered by travel insurance, and the user's request was ultimately escalated via transfer to a human agent.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent does not cancel any other reservation.\",\n            \"reasoning\": \"Only 8C8K4E and LU15PA were cancelled. UDMOP1, XAZ3C0, I6M8JQ, and 4XGCCM were not cancelled, and MSJ4OA was not cancelled either.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "cbd3100ba439ebf7",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent cancels reservation 8C8K4E.\",\n            \"reasoning\": \"The agent called cancel_reservation on 8C8K4E after the user confirmed, and the tool result shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancels reservation LU15PA.\",\n            \"reasoning\": \"The agent called cancel_reservation on LU15PA, and the tool result shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent cancels reservation MSJ4OA.\",\n            \"reasoning\": \"The agent never cancelled MSJ4OA. It refused repeatedly because the change-of-plan reason is not covered by travel insurance, and then transferred the user to a human agent.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent does not cancel any other reservation.\",\n            \"reasoning\": \"The only cancel_reservation calls were for 8C8K4E and LU15PA. UDMOP1, XAZ3C0, I6M8JQ, and 4XGCCM were not cancelled.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "cbd3100ba439ebf7",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent cancels reservation 8C8K4E.\",\n            \"reasoning\": \"The agent called cancel_reservation on 8C8K4E, and the returned record shows status 'cancelled'. The user had confirmed the cancellation with a reason of change of plan.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancels reservation LU15PA.\",\n            \"reasoning\": \"The agent called cancel_reservation on LU15PA, and the returned record shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent cancels reservation MSJ4OA.\",\n            \"reasoning\": \"The agent never called cancel_reservation on MSJ4OA. It refused because the change-of-plan reason is not covered by travel insurance, and the reservation did not meet any other cancellation condition. It then transferred the user to a human agent, so MSJ4OA remains active.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent does not cancel any other reservation.\",\n            \"reasoning\": \"Only 8C8K4E and LU15PA were cancelled. UDMOP1, XAZ3C0, I6M8JQ, and 4XGCCM were not cancelled, and MSJ4OA was not cancelled either.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "984b2ba67cbefd0c",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not change the flight.\",\n            \"reasoning\": \"The agent checked the reservation and determined that basic economy flights cannot be modified and that the May 14 segments had already flown. It never executed any flight modification, cabin change, or cancellation. It then transferred the user to a human agent, and the transfer was the only action taken. No flight was changed in the conversation.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "984b2ba67cbefd0c",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not change the flight.\",\n            \"reasoning\": \"The agent checked the reservation and explained that basic economy flights cannot be modified and that the May 14 segments have already flown. It did not modify, rebook, or cancel any flight. It then transferred the user to a human agent, and no flight change was made in the conversation.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "984b2ba67cbefd0c",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not change the flight.\",\n            \"reasoning\": \"The agent checked reservation EUJUY6, determined that basic economy flights cannot be modified and that the May 14 segments had already flown, and did not make any change to the flights. It then transferred the user to a human agent. No modification tool was called, and the flight was never changed.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "a68b2276377a349c",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation 3RK2T9 to passenger Mei Garcia.\",\n            \"reasoning\": \"After getting the customer's confirmation, the agent called update_reservation_passengers on reservation 3RK2T9, changing the passenger from Mei Lee to Mei Garcia while keeping Anya Garcia unchanged. The tool result confirms the reservation now lists Mei Garcia (DOB 1989-12-13), and the agent reported this accurately.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "a68b2276377a349c",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation 3RK2T9 to passenger Mei Garcia.\",\n            \"reasoning\": \"After the user confirmed the change from Mei Lee to Mei Garcia, the agent called update_reservation_passengers on reservation 3RK2T9 with Mei Garcia (DOB 1989-12-13) and the tool result confirmed the passenger list now shows Mei Garcia. Anya Garcia's entry was left unchanged, as intended.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "a68b2276377a349c",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n  \"results\": [\n    {\n      \"index\": 1,\n      \"expectedOutcome\": \"Agent updates reservation 3RK2T9 to passenger Mei Garcia.\",\n      \"reasoning\": \"After verifying the user and reservation, the agent obtained explicit confirmation from the user and called update_reservation_passengers on reservation 3RK2T9, changing the passenger from Mei Lee to Mei Garcia with the DOB unchanged. The tool result confirms the passenger list now shows Mei Garcia, DOB 1989-12-13.\",\n      \"metExpectation\": true\n    }\n  ]\n}"
+},
+{
+"key": "35d0d9ac8fd19261",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent checks all reservations.\",\n            \"reasoning\": \"After retrieving the user profile, the agent called get_reservation_details for all seven reservations listed on the account (8C8K4E, UDMOP1, XAZ3C0, LU15PA, MSJ4OA, I6M8JQ, 4XGCCM) before summarizing its findings.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not cancel any reservation.\",\n            \"reasoning\": \"The agent never called a cancellation tool. It declined to cancel UDMOP1 because it did not meet the cancellation criteria, left 4XGCCM untouched, and ultimately transferred the user to a human agent without making any changes.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "35d0d9ac8fd19261",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent checks all reservations.\",\n            \"reasoning\": \"After retrieving the user's profile, the agent called get_reservation_details for all seven reservation IDs on the account (8C8K4E, UDMOP1, XAZ3C0, LU15PA, MSJ4OA, I6M8JQ, 4XGCCM) and reviewed each one before responding.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not cancel any reservation.\",\n            \"reasoning\": \"The agent never called a cancellation tool. It declined to cancel UDMOP1 because it did not meet the cancellation conditions, made no changes to 4XGCCM, and ended by transferring the user to a human agent.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "35d0d9ac8fd19261",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent checks all reservations.\",\n            \"reasoning\": \"After retrieving the user's profile, the agent called get_reservation_details for all seven reservations listed on the account (8C8K4E, UDMOP1, XAZ3C0, LU15PA, MSJ4OA, I6M8JQ, 4XGCCM) and reviewed each one before responding.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not cancel any reservation.\",\n            \"reasoning\": \"The agent never called a cancellation tool. It declined to cancel UDMOP1 because it did not meet the cancellation conditions, made no changes to 4XGCCM, and ended by transferring the user to a human agent.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "63cb148d940b8781",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent cancels reservation FDZ0T5\",\n            \"reasoning\": \"After the user confirmed with 'Yes, cancel MFRB94, HSR97W, and FDZ0T5', the agent called cancel_reservation for FDZ0T5. The tool result shows status 'cancelled' and a refund entry reversing the payment.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancels reservation HSR97W\",\n            \"reasoning\": \"After the user's confirmation, the agent called cancel_reservation for HSR97W. The tool result shows status 'cancelled' and a refund entry reversing the payment.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "63cb148d940b8781",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent cancels reservation FDZ0T5\",\n            \"reasoning\": \"After the user confirmed, the agent called cancel_reservation for FDZ0T5. The tool result shows status 'cancelled', so the cancellation was completed.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancels reservation HSR97W\",\n            \"reasoning\": \"After the user confirmed, the agent called cancel_reservation for HSR97W. The tool result shows status 'cancelled', so the cancellation was completed.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "63cb148d940b8781",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent cancels reservation FDZ0T5\",\n            \"reasoning\": \"After the user confirmed, the agent called cancel_reservation on FDZ0T5. The tool result shows its status as \\\"cancelled\\\", and the agent confirmed the cancellation to the user.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancels reservation HSR97W\",\n            \"reasoning\": \"After the user confirmed, the agent called cancel_reservation on HSR97W. The tool result shows its status as \\\"cancelled\\\", and the agent confirmed the cancellation to the user.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "8d52f9a840d1f941",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\"results\":[{\"index\":1,\"expectedOutcome\":\"Agent should not cancel reservation PEP4E0.\",\"reasoning\":\"The agent verified the user, checked the policy criteria (booking not within 24 hours, not airline-cancelled, basic economy, no insurance), and repeatedly declined to cancel. It never called a cancel tool. It then transferred the user to a human agent at the user's request, which does not cancel the reservation.\",\"metExpectation\":true},{\"index\":2,\"expectedOutcome\":\"Agent should not change PEP4E0 flight.\",\"reasoning\":\"The agent made no changes to the flights in reservation PEP4E0. It only retrieved details and then transferred the call. No modification tool was invoked.\",\"metExpectation\":true}]}"
+},
+{
+"key": "8d52f9a840d1f941",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\"results\":[{\"index\":1,\"expectedOutcome\":\"Agent should not cancel reservation PEP4E0.\",\"reasoning\":\"The agent verified the user ID, then repeatedly declined to cancel the reservation, citing the policy that cancellations are allowed only within 24 hours of booking, for airline cancellations, business class, or with covered travel insurance. It never called a cancel function, and it transferred the user to a human agent at the user's request rather than cancelling.\",\"metExpectation\":true},{\"index\":2,\"expectedOutcome\":\"Agent should not change PEP4E0 flight.\",\"reasoning\":\"The agent made no changes to the flights in reservation PEP4E0. It only retrieved details and then transferred the user to a human agent, with no modification tool calls.\",\"metExpectation\":true}]}"
+},
+{
+"key": "c1c342fb4dae6014",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "[\n    {\n        \"index\": 1,\n        \"expectedOutcome\": \"Agent should not cancel reservation 9HBUV8 since it does not meet requirements.\",\n        \"reasoning\": \"The agent never called a cancellation function for 9HBUV8 and told the customer it could not be cancelled. Its reasons (basic economy, not a business flight, not airline-cancelled, and insurance that doesn't cover change of plans) are consistent with the stated eligibility rules. The agent did assert that the booking was more than 24 hours old and described the insurance policy's coverage, which the transcript does not verify, but the outcome concerns not cancelling, and it was not cancelled.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 2,\n        \"expectedOutcome\": \"Agent should not cancel reservation D1EW9B since it does not meet requirements.\",\n        \"reasoning\": \"The agent never called a cancellation function for D1EW9B and repeatedly declined to cancel it, including after the customer's silver-membership appeal. The stated reasons (basic economy, no insurance, booked May 4, change of plans) match the eligibility rules, so the agent correctly refused.\",\n        \"metExpectation\": true\n    }\n]"
+},
+{
+"key": "8d52f9a840d1f941",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should not cancel reservation PEP4E0.\",\n            \"reasoning\": \"The agent repeatedly reviewed the reservation and explicitly refused to cancel it, citing that none of the policy conditions (booked within 24 hours, airline-cancelled, business class, or insurance) were met. No cancellation tool was called; the only action taken was a transfer to a human agent at the user's request.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent should not change PEP4E0 flight.\",\n            \"reasoning\": \"The agent never modified the flights, cabin, or dates on PEP4E0. It only retrieved reservation details and then transferred the user to a human agent.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "c1c342fb4dae6014",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should not cancel reservation 9HBUV8 since it does not meet requirements.\",\n            \"reasoning\": \"The agent never called a cancellation tool for 9HBUV8. It explained that the reservation was booked more than 24 hours earlier, the airline did not cancel the flight, it is basic economy, and its insurance does not cover a change of plans. The agent correctly refused to cancel it.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent should not cancel reservation D1EW9B since it does not meet requirements.\",\n            \"reasoning\": \"The agent never called a cancellation tool for D1EW9B. It refused after confirming the booking was older than 24 hours, the airline did not cancel, it is basic economy, and it has no insurance. It also declined to make an exception for silver membership.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "c1c342fb4dae6014",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent should not cancel reservation 9HBUV8 since it does not meet requirements.\",\n            \"reasoning\": \"The agent never cancelled 9HBUV8. It correctly found the booking was made May 12 (more than 24 hours earlier), the flight was not airline-cancelled, and the cabin is basic economy, so no cancellation condition applied. The agent did state the insurance policy only covers health or weather reasons, which does not appear in the tool data. That detail is unsupported, but the expected outcome concerns only whether the reservation was cancelled, and it was not.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent should not cancel reservation D1EW9B since it does not meet requirements.\",\n            \"reasoning\": \"The agent did not cancel D1EW9B. The reservation was booked May 4, not within 24 hours, is basic economy rather than business, and has no insurance, so it does not meet any cancellation condition. The agent declined consistently across repeated requests, including the silver-membership appeal.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "2d233ca087845c32",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel H8Q05L.\",\n            \"reasoning\": \"The agent checked the reservation and repeatedly refused to cancel it, explaining that the booking was over 24 hours old, the flight was not cancelled by the airline, it was basic economy rather than business, and the insurance only covers health or weather reasons. The agent never called a cancellation tool. It then transferred the user to a human agent without cancelling the reservation.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "2d233ca087845c32",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel H8Q05L.\",\n            \"reasoning\": \"The agent looked up the reservation, verified the user's identity, and repeatedly denied the cancellation under policy (booking older than 24 hours, no airline cancellation, basic economy, insurance doesn't cover the reason). It never called a cancellation tool; it only escalated to a human agent via transfer_to_human_agents, so the reservation was not cancelled.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "2d233ca087845c32",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel H8Q05L.\",\n            \"reasoning\": \"The agent retrieved the reservation details and repeatedly denied cancellation under policy (booking older than 24 hours, no airline cancellation, basic economy, insurance doesn't cover the reason). It never invoked any cancel function; it only called get_reservation_details and transfer_to_human_agents. The reservation was not cancelled.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "a56663c0e801011b",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel 3RK2T9.\",\n            \"reasoning\": \"Throughout the conversation the agent checked the reservation twice, found insurance: no and no insurance charge, determined none of the cancellation conditions (24-hour window, airline cancellation, business class, insurance) were met, and repeatedly stated it could not cancel. It only transferred to a human agent and never invoked a cancellation action. The reservation was not cancelled.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "a56663c0e801011b",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\"results\": [\n{\"index\": 1, \"expectedOutcome\": \"Agent does not cancel 3RK2T9.\", \"reasoning\": \"The agent repeatedly checked the reservation, determined it did not meet cancellation conditions (no insurance on record, booked more than 24 hours ago, basic economy, not airline-cancelled), and never called a cancel tool. It only transferred to a human agent. The reservation was not cancelled.\", \"metExpectation\": true}\n]}\n</br>"
+},
+{
+"key": "a56663c0e801011b",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n  \"results\": [\n    {\n      \"index\": 1,\n      \"expectedOutcome\": \"Agent does not cancel 3RK2T9.\",\n      \"reasoning\": \"Throughout the conversation the agent repeatedly checked the reservation, determined it did not meet any cancellation criteria (no insurance on record, booked more than 24 hours earlier, basic economy, not airline-cancelled), and explicitly stated it had not cancelled the reservation. It only transferred the user to a human agent, and the transfer summaries state cancellation has not been processed. No cancel tool was called.\",\n      \"metExpectation\": true\n    }\n  ]\n}"
+}
+]

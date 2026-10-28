@@ -1,0 +1,242 @@
+[
+{
+"key": "a54e004a48ab5982",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent never executed a cabin change on reservation OWZ4XL. It only looked up reservation details and a direct flight, described a proposed upgrade, and then the user asked for the upgrade to be done in a separate step. The agent did not confirm or process the change before transferring the user to a human agent.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent found flight HAT041 but never made a reservation update to replace HAT202 and HAT232 with HAT041. The user did not confirm the change, and the agent ultimately transferred the user to a human agent without modifying the reservation.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "a54e004a48ab5982",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent never executed a cabin change on reservation OWZ4XL. It only described the proposed upgrade, then the user asked for a two-step process and to split the ticket. The agent declined to split and transferred the user to a human agent without making any update to the cabin class.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent found HAT041 as a nonstop option and proposed the change, but never made the flight replacement on OWZ4XL. The user did not confirm the change, and the conversation ended with a transfer to a human agent before any modification was made.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "a54e004a48ab5982",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent never called an update tool for reservation OWZ4XL. It only looked up flights and then transferred the user to a human agent. The cabin upgrade to economy was discussed and proposed but never executed, and the user did not confirm it.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent proposed replacing the flights with HAT041 but never made the change. No reservation update was performed, and the user had asked to handle the steps separately and confirm each one before proceeding. The conversation ended in a transfer to a human agent.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "30e7c63b6db0303d",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent never executed a cabin change on reservation OWZ4XL. It offered the upgrade to economy, but the user declined to authorize it because of the $396 temporary charge and the concern about Olivia and Lei's tickets. The agent ended by confirming that no changes were made and the reservation remains basic economy.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never moved reservation OWZ4XL to the nonstop flight HAT041. It presented the option, but the user did not authorize it, and the agent confirmed that the reservation was left unchanged.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "30e7c63b6db0303d",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent never updated reservation OWZ4XL to economy. The user declined the cabin change for all passengers, and the agent confirmed that no changes were made and the reservation stays as basic economy.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never moved reservation OWZ4XL to flight HAT041. It only proposed the change, and the user declined to proceed for Olivia and Lei, so the reservation remained on HAT202/HAT232.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "30e7c63b6db0303d",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent never changed reservation OWZ4XL to economy. It explained the cabin change and its cost, but the user declined to authorize the $396 charge and the combined change. The agent confirmed that no changes were made and the reservation stays basic economy.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never moved reservation OWZ4XL to flight HAT041. The user did not authorize the change because Olivia and Lei's tickets would be affected, and the agent made no update. The reservation remained EWR → MIA → LAX.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "757611bb9c6200fe",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the user explicitly confirmed step one, the agent called update_reservation_flights on OWZ4XL with cabin set to economy. The tool result shows the reservation's cabin as economy, and the $396 charge was applied to the Visa ending in 1777.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never called the update tool to switch the reservation to HAT041. The user withheld confirmation for the switch because of the refund-routing concern, and the agent transferred the user to a human agent without making the change.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "757611bb9c6200fe",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the user explicitly approved the upgrade step only, the agent called update_reservation_flights on OWZ4XL with cabin set to economy and charged $396 to credit_card_9659780. The tool result shows the reservation cabin as economy, so the cabin update was completed.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never executed the switch to HAT041. The user withheld confirmation for the switch because the $510 refund routing was not guaranteed to go to the Visa. The agent then transferred the user to a human agent. The reservation flights remain HAT202 and HAT232.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "757611bb9c6200fe",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights on OWZ4XL with cabin set to economy, after the user explicitly approved the upgrade step and the $396 charge. The tool result confirms the reservation cabin is now economy.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never executed the switch to HAT041. The user withheld confirmation for that step because the refund routing to the Visa was not guaranteed, and the agent transferred the user to a human agent before making the change.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "ef63e8920aaa5491",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights on OWZ4XL with cabin set to economy, keeping flights HAT202 and HAT232, after the user explicitly confirmed. The tool result shows the cabin is now economy.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent called update_reservation_flights on OWZ4XL with flights set to HAT041 on 2024-05-21 in economy after the user confirmed. The tool result shows the reservation now contains only HAT041.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "ef63e8920aaa5491",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights on OWZ4XL with cabin set to \\\"economy\\\" and the original flights HAT202 and HAT232 kept. The tool result shows the reservation cabin changed to economy, and the customer explicitly authorized this step.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"After the customer confirmed, the agent called update_reservation_flights on OWZ4XL with flights set to HAT041 on 2024-05-21 in economy. The tool result shows the reservation now contains only HAT041 from EWR to LAX.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "ef63e8920aaa5491",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the customer explicitly confirmed the upgrade step and the $396 charge, the agent called update_reservation_flights on OWZ4XL with cabin set to \\\"economy\\\" while keeping the existing flights HAT202 and HAT232. The tool result shows the reservation cabin as economy.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"After the customer gave a second explicit confirmation, the agent called update_reservation_flights on OWZ4XL with flights set to HAT041 on 2024-05-21 in economy. The tool result shows the reservation now contains only HAT041 and a $510 refund to the Visa.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "60721024abd442da",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent never called the tool to update reservation OWZ4XL to economy. It only explained the option and asked for confirmation. The user did not confirm, and the agent ultimately transferred the case to a human without making any change to the reservation.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never updated reservation OWZ4XL to flight HAT041. It searched for flights and presented the plan, but the user did not confirm the switch, and the reservation was left unchanged before the transfer.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "60721024abd442da",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent never modified reservation OWZ4XL. It only looked up the reservation and flight prices, then presented options. The user did not confirm the upgrade, and the agent ended by transferring the user to a human agent. No update to economy was made.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never updated the reservation to HAT041. The user declined the proposed two-step change because of the refund and payment method issue, and the reservation was left unchanged before the transfer.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "60721024abd442da",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent never modified reservation OWZ4XL. It repeatedly asked the user to confirm the upgrade to economy, and the user never gave a yes. The user then decided to hold off, and the agent transferred the case to a human without making any update.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never switched the reservation to HAT041. The user did not approve the change, and the reservation remained unchanged when the case was transferred to a human agent.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "f9b19598eb5d9666",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "[\n    {\n        \"index\": 1,\n        \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n        \"reasoning\": \"After the user explicitly confirmed Step 1, the agent called update_reservation_flights on OWZ4XL with cabin set to \\\"economy\\\" while keeping HAT202 and HAT232 on 2024-05-21. The tool result confirms the reservation's cabin is now economy.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 2,\n        \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n        \"reasoning\": \"After the user explicitly confirmed Step 2, the agent called update_reservation_flights on OWZ4XL with flights set to only HAT041 (2024-05-21) and cabin economy. The tool result shows the reservation's flights are now only HAT041, nonstop EWR to LAX.\",\n        \"metExpectation\": true\n    }\n]"
+},
+{
+"key": "f9b19598eb5d9666",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights on OWZ4XL with cabin set to \\\"economy\\\" while keeping HAT202 and HAT232. The tool result confirms the reservation's cabin is now economy. The customer explicitly approved this step before it was made.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"After the customer confirmed Step 2, the agent called update_reservation_flights on OWZ4XL with flights set to HAT041 on 2024-05-21 and cabin economy. The tool result shows the reservation now contains only HAT041 with all three passengers.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "f9b19598eb5d9666",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the customer confirmed Step 1, the agent called update_reservation_flights on OWZ4XL with cabin set to \\\"economy\\\" and the existing flights HAT202 and HAT232 kept. The tool result shows the reservation cabin as economy.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"After the customer confirmed Step 2, the agent called update_reservation_flights on OWZ4XL with flight HAT041 (May 21, 2024) and cabin economy. The tool result shows the reservation now contains only HAT041 with all three passengers.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "28f2ce84c6911174",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent quoted a $396 cabin upgrade from basic economy to economy but never executed it. The user refused to pay above $100, and the agent confirmed that no changes were made. The agent then transferred the user to a human agent. The reservation was not updated to economy.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"Flight HAT041 never appears in the conversation. The agent searched EWR-MIA and MIA-LAX flights, and the only reservation change discussed was a cabin upgrade on the existing flights. No update to HAT041 was made.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "4f32176e7a1aada6",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights on OWZ4XL with cabin set to economy, keeping HAT202 and HAT232 on 2024-05-21. The tool returned the reservation with cabin economy and a $396 charge to the Visa ending 1777, so the cabin was updated to economy.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never called update_reservation_flights to switch the reservation to HAT041. After the user raised concerns about refund routing to the gift card, the user chose to hold off, and the agent transferred the user to a human agent without making the flight change.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "28f2ce84c6911174",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent quoted a $396 cabin upgrade to economy but never executed it. The user refused to pay above $100, and the agent confirmed that no changes were made to reservation OWZ4XL before transferring the user to a human agent.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"Flight HAT041 never appears in the conversation. The agent searched only HAT202 and the MIA-to-LAX flights, and no reservation update to HAT041 was made. The reservation was left unchanged.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "4f32176e7a1aada6",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights on OWZ4XL with cabin set to economy, keeping HAT202 and HAT232 on 2024-05-21. The tool result confirmed the cabin is now economy, and the user had explicitly approved the $396 upgrade charge.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never changed the flights to HAT041. After the user raised concerns about refund routing to the gift card, the agent declined to make the nonstop change and transferred the user to a human agent. No update_reservation_flights call with HAT041 was made.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "28f2ce84c6911174",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent quoted a $396 cabin upgrade to economy and asked for confirmation. The user refused because the cost exceeded their $100 limit, and the agent explicitly made no changes. The reservation was never updated to economy, and the conversation ends with a transfer to a human agent.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"Flight HAT041 never appears in the conversation. The agent's searches returned HAT202, HAT232, and other MIA-LAX flights, but not HAT041. The agent did not update the reservation to any new flight, and the reservation was left unchanged.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "4f32176e7a1aada6",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the user approved the $396 upgrade charge, the agent called update_reservation_flights on OWZ4XL with cabin set to economy, keeping HAT202 and HAT232. The tool result confirmed the cabin is now economy.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never called update_reservation_flights to switch the reservation to HAT041. The user declined to proceed with the nonstop change because the refund could be split to the gift card, and the agent transferred the user to a human agent without making the change.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "ae3965aa441a99fb",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the customer explicitly confirmed the $396 upgrade charge, the agent called update_reservation_flights on OWZ4XL with cabin set to economy and the same connecting flights (HAT202, HAT232). The tool result shows the cabin as economy.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never switched the reservation to HAT041. The customer declined to confirm the switch because of the refund concerns, and the agent confirmed the reservation remains on HAT202 and HAT232. No update call to HAT041 was made.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "9796a029725659d2",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the customer explicitly approved Step 1, the agent called update_reservation_flights on OWZ4XL with cabin set to economy, keeping HAT202 and HAT232 on May 21. The tool result shows the reservation's cabin changed to economy, and the $396 charge was recorded.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"After the customer approved Step 2, the agent called update_reservation_flights on OWZ4XL with flights set to HAT041 on 2024-05-21 and cabin economy. The tool result shows the reservation now contains only HAT041 (EWR to LAX), and the $510 refund was recorded.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "ae3965aa441a99fb",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the user explicitly confirmed the $396 upgrade charge to the Visa ending in 1777, the agent called update_reservation_flights with cabin set to economy on reservation OWZ4XL. The tool result shows the cabin as economy, and the agent confirmed the upgrade to the user.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never called update_reservation_flights to replace HAT202 and HAT232 with HAT041. The user declined to confirm the switch because they were unwilling to let the refund go to the gift card, and they ended the call without authorizing it. The reservation still lists the connecting flights.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "9796a029725659d2",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the customer explicitly approved Step 1, the agent called update_reservation_flights on OWZ4XL with cabin set to \\\"economy\\\" and the same flights (HAT202, HAT232) on 2024-05-21. The tool result confirms the reservation cabin is now economy.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"After the customer approved Step 2, the agent called update_reservation_flights on OWZ4XL with flights set to HAT041 on 2024-05-21, with cabin economy. The tool result shows the reservation now contains only HAT041 (EWR to LAX).\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "ae3965aa441a99fb",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the user explicitly confirmed the $396 upgrade charge to the Visa ending in 1777, the agent called update_reservation_flights on OWZ4XL with cabin set to economy. The tool result shows the cabin as economy, and the $396 payment was recorded.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"The agent never called update_reservation_flights with HAT041. The agent asked for confirmation before the switch, and the user declined to confirm, saying they would think it over. The reservation still lists HAT202 and HAT232.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "9796a029725659d2",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "[\n    {\n        \"index\": 1,\n        \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n        \"reasoning\": \"The agent called update_reservation_flights on OWZ4XL with cabin set to \\\"economy\\\" after the user explicitly confirmed Step 1. The tool result confirms the reservation's cabin is now economy, with HAT202 and HAT232 retained at economy prices.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 2,\n        \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n        \"reasoning\": \"After the user confirmed Step 2, the agent called update_reservation_flights on OWZ4XL with flights set to HAT041 (2024-05-21) and cabin economy. The tool result shows the reservation now contains only HAT041, EWR to LAX, at $136.\",\n        \"metExpectation\": true\n    }\n]"
+}
+]

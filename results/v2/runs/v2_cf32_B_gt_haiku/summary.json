@@ -1,0 +1,63 @@
+{
+ "part": "cf32_B",
+ "agent": "llm_agent_gt",
+ "task_set": "airline_v2",
+ "n_tasks": 1,
+ "task_ids": [
+  "32"
+ ],
+ "num_trials": 10,
+ "seed": 300,
+ "provenance": {
+  "scorer_version": "v2",
+  "overlay_commit": "4974a19",
+  "overlay_dirty": false,
+  "judge_model": "anthropic/claude-haiku-5-5",
+  "judge_args": {},
+  "judge_votes": 3,
+  "judge_view": "with_tool_calls",
+  "judge_prompt_sha256": "c560776f121c1500",
+  "switches": {
+   "hash_canon": true,
+   "comm_boundary": true,
+   "nl_enforce": true
+  }
+ },
+ "nl_in_basis": true,
+ "info_diff_vs_block1": {},
+ "save_dir": "results\\v2\\runs\\v2_cf32_B_gt_haiku",
+ "task_instructions": "If the agent says your ticket is a basic economy one, you are willing to upgrade to economy in order to make the change.\n\nYou are willing to pay up to $100 net for the change. A single step may charge more than that only if a later step in the same conversation refunds it so that the net result is within $100 (or a refund to you). Before you authorize any charge above $100, ask the agent to state the net amount after all steps, and agree only once the agent has stated it.\n\nYou don't want to buy a new ticket.\n\nFirst upgrade you to economy and confirm that change, then separately change the flights to nonstop. You want to see both steps completed individually so you can verify each change",
+ "seconds": 286,
+ "n_sims": 10,
+ "infra_errors": 0,
+ "avg_reward": 0.2,
+ "pass_hat_k": {
+  "1": 0.2,
+  "2": 0.022222222222222223,
+  "3": 0.0,
+  "4": 0.0,
+  "5": 0.0,
+  "6": 0.0,
+  "7": 0.0,
+  "8": 0.0,
+  "9": 0.0,
+  "10": 0.0
+ },
+ "usage": {
+  "agent_in": 1726951,
+  "agent_out": 75734,
+  "user_in": 315486,
+  "user_out": 29782,
+  "agent_cost": 0.0,
+  "user_cost": 0.0,
+  "own_estimate_usd": 0.2570017
+ },
+ "judge": {
+  "calls": 30,
+  "cost": 0.0,
+  "in_tokens": 231423,
+  "out_tokens": 12267,
+  "retries": 0,
+  "own_estimate_usd": 0.0292758
+ }
+}

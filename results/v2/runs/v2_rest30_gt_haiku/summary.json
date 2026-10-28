@@ -1,0 +1,79 @@
+{
+ "part": "gt_rest30",
+ "agent": "llm_agent_gt",
+ "task_set": "airline_v2",
+ "n_tasks": 27,
+ "task_ids": [
+  "2",
+  "4",
+  "5",
+  "6",
+  "12",
+  "13",
+  "14",
+  "15",
+  "17",
+  "18",
+  "24",
+  "25",
+  "27",
+  "29",
+  "30",
+  "33",
+  "35",
+  "36",
+  "38",
+  "39",
+  "40",
+  "41",
+  "42",
+  "43",
+  "45",
+  "47",
+  "49"
+ ],
+ "num_trials": 1,
+ "seed": 300,
+ "provenance": {
+  "scorer_version": "v2",
+  "overlay_commit": "6d4bab1",
+  "overlay_dirty": false,
+  "judge_model": "anthropic/claude-haiku-5-5",
+  "judge_args": {},
+  "judge_votes": 3,
+  "judge_view": "with_tool_calls",
+  "judge_prompt_sha256": "c560776f121c1500",
+  "switches": {
+   "hash_canon": true,
+   "comm_boundary": true,
+   "nl_enforce": true
+  }
+ },
+ "nl_in_basis": true,
+ "info_diff_vs_block1": {},
+ "save_dir": "results\\v2\\runs\\v2_rest30_gt_haiku",
+ "seconds": 441,
+ "n_sims": 27,
+ "infra_errors": 0,
+ "avg_reward": 0.8888888888888888,
+ "pass_hat_k": {
+  "1": 0.8888888888888888
+ },
+ "usage": {
+  "agent_in": 2963897,
+  "agent_out": 82440,
+  "user_in": 443781,
+  "user_out": 26601,
+  "agent_cost": 0.0,
+  "user_cost": 0.0,
+  "own_estimate_usd": 0.39528830000000004
+ },
+ "judge": {
+  "calls": 81,
+  "cost": 0.0,
+  "in_tokens": 396009,
+  "out_tokens": 45790,
+  "retries": 0,
+  "own_estimate_usd": 0.0624959
+ }
+}
