@@ -1,6 +1,6 @@
 # How an agent exam fails: a validation audit of tau2-bench (airline and retail), and a stricter protocol laid over it
 
-This repository asks one question of a widely used agent benchmark: when a task is marked "passed", did the agent do the job, or did the examination procedure let it through? It audits the airline domain of [tau2-bench](https://github.com/sierra-research/tau2-bench) at tag `v2.0.0` (commit `989d3285ae669e49503324bdb9981bf14fccedeb`), then builds a stricter scoring protocol ("v2") as an overlay, re-scores the recorded conversations under both, and runs the benchmark again under v2. It then applies the same checklist to every task of the retail domain, and it measures what an agent that does nothing scores in every task set of the benchmark. Every number is rebuilt from the CSV and JSON files by script; every paid run carries a provenance stamp; two adversarial reviews (one of the design, one of the results) are part of the record.
+This repository asks one question of a widely used agent benchmark: when a task is marked "passed", did the agent do the job, or did the examination procedure let it through? It audits the airline domain of [tau2-bench](https://github.com/sierra-research/tau2-bench) at tag `v2.0.0` (commit `989d3285ae669e49503324bdb9981bf14fccedeb`), then builds a stricter scoring protocol ("v2") as an overlay, re-scores the recorded conversations under both, and runs the benchmark again under v2. It then applies the same checklist to every task of the retail domain, and it measures what an agent that does nothing scores in every task set of the benchmark and on four external agent benchmarks. Every number is rebuilt from the CSV and JSON files by script; every paid run carries a provenance stamp; two adversarial reviews (one of the design, one of the results) are part of the record.
 
 ## Headline results
 
@@ -62,6 +62,19 @@ What an agent that does nothing scores, by task set (stock scorer, no model call
 |---|---|---|---|
 | 23/50 = 46% | 6/114 = 5% | 0/114 / 0/2,285 | 0/200 |
 
+The same floor on four external agent benchmarks, each scored offline with its own code (`results/null_agent/external.md`). The refusal agent does nothing except give the benchmark's "cannot be done" answer:
+
+| benchmark | doing nothing | only refusing |
+|---|---|---|
+| BFCL V4 | 10.00 of 100 overall points | 10.00 of 100 |
+| tau-bench (original), airline test | 19/50 = 38% | 19/50 |
+| tau-bench (original), retail test | 7/115 = 6% | 7/115 |
+| OSWorld-Verified | not measured (needs the virtual machine) | 30/369 = 8.1% as released, 26/369 = 7.0% now (counted from task files) |
+| WebArena-Verified | 0/812 | 24/812 = 3.0% |
+| WebArena, original task file | not measured (needs the live sites) | 36/812 = 4.4% for the answer "N/A" (counted) |
+
+Original tau-bench retail task 106 is tau2 retail task 105: its only reference action is rejected for an insufficient gift-card balance. The original gives it to an agent that does nothing; tau2 added an assertion that demands the exchange and made it impossible.
+
 Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file and line references and reproduction paths); none has been filed yet.
 
 ## What is in the repository
@@ -72,7 +85,7 @@ Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file a
 - `summary_numbers.md`, `fig_defects.png`, `analysis.ipynb`: block-1 numbers and figure, generated.
 - `block2/`: pre-registration (`PLAN.md`, with dated deviations), task fixes with their audit rows, the two adversarial reviews (`skeptic_design.md`, `skeptic_results.md`), the hand-check of judge verdicts, and the generated `summary_v2.md`.
 - `retail/`, `scripts/retail/`, `results/retail/`: the retail audit. It holds the pre-registration with dated deviations, the per-check readings, the audit log, the generated `summary_numbers.md` and `comparison.md`, every script, the reviewer files, the runs and the re-judge.
-- `scripts/null_agent/`, `results/null_agent/`, `null_agent/`: the null-agent table over every tau2 task set, and a desk survey of external benchmarks where the same floor can be measured.
+- `scripts/null_agent/`, `results/null_agent/`, `null_agent/`: the null-agent table over every tau2 task set, a desk survey of nine external benchmarks, and the floors measured on four of them (the benchmarks themselves are installed outside the repository).
 - `strong_vs_weak/`, `scripts/strong_vs_weak/`: the Sonnet-vs-Haiku check (pre-registration, summary, per-task table and figure).
 - `scripts/demo/demo.py`: four reproductions for a live demo, offline and without a model call (about 12 seconds).
 - `scripts/`, `scripts/v2/`: every script that produced a number; `scripts/runs/`, `scripts/v2/run_v2.py` and `scripts/retail/run_retail.py` are the paid runs.
@@ -85,8 +98,8 @@ Not in the repository: the upstream clone (pinned by commit; clone it next to th
 
 Offline parts need the tau2 virtual environment (for the scripts that import tau2) and Python 3.11 with `statsmodels` (for the summaries). The exact command sequences are in `STRUCTURE.md` ("Block 1 rebuild", "Block 2 rebuild", "Retail domain audit"). The judge and probe scripts replay from cached votes and make no model call once the caches exist; the live runs are the only steps that spend money and are listed in `cost.md` with their token counts.
 
-Models used: `claude-haiku-5-5` as the agent, as the user simulator and as the judge of free-text assertions (the latter is a known self-evaluation risk; the reward-changing judge verdicts of block 2 were hand-checked by two readers, 46/46 agreement). In retail the same model replaces the stock judge, an OpenAI model, with the stock prompt and evaluator.
+Models used: `claude-haiku-5-5` as the agent, as the user simulator and as the judge of free-text assertions (the latter is a known self-evaluation risk; the reward-changing judge verdicts of block 2 were hand-checked by two readers, 46/46 agreement). In retail the same model replaces the stock judge, an OpenAI model, with the stock prompt and evaluator. The strong-vs-weak check uses `claude-sonnet-5-5` as the agent, with everything else unchanged.
 
 ## Limits
 
-Airline: 20 of 50 tasks sampled before any run, and the free-text assertions of the 30 unsampled tasks were not audited. Retail: all 114 tasks, but the rows from its agent runs were not adversarially reviewed. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. Dollar figures are own estimates from token counts at an assumed price and were not reconciled with billing.
+Airline: 20 of 50 tasks sampled before any run, and the free-text assertions of the 30 unsampled tasks were not audited. Retail: all 114 tasks, but the rows from its agent runs were not adversarially reviewed. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. The OSWorld-Verified and original WebArena floors are counted from task files, not measured by running the evaluator. Dollar figures are own estimates from token counts at the published per-token prices; they were not reconciled with billing row by row (billing showed about $11 when the own estimate was $10.79).

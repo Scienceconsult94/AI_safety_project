@@ -244,12 +244,28 @@ The same script also runs a positive control: it replays every reference and che
 - **Telecom:** the control passes once the agent and user state are synchronised after every action, as the orchestrator does.
 - **Retail:** 15 references contain a raising action. Most are intended negative steps; task 105 is the one that matters.
 
-A desk survey of nine external agent benchmarks (`null_agent/external_candidates.md`) lists where the same floor can be measured offline at no API cost. Two numbers follow from scoring code and task files alone; they are cited there and were not measured here:
+Four external agent benchmarks, chosen from a desk survey of nine (`null_agent/external_candidates.md`), were then measured the same way: each with its own scoring code, installed in its own folder outside the repository, with no model call (`results/null_agent/external.md`). Next to the null agent, the table reports a refusal agent, which does nothing except give the benchmark's "cannot be done" answer.
 
-- **BFCL V4:** an empty response earns 10 of 100 overall points, because the irrelevance subsets count "no call" as success.
-- **OSWorld-Verified:** answering "infeasible" alone scores 30/369 = 8.1%.
+Table 9b. Null-agent and refusal-agent floors on four external benchmarks (Wilson 95% intervals over tasks).
 
-The measurement itself is an open item.
+| benchmark, version | tasks | null agent | refusal agent | how the number was obtained |
+|---|---|---|---|---|
+| BFCL V4, bfcl-eval 2026.3.23 | 5,106 entries | 10.00 of 100 overall points | 10.00 of 100 | evaluator run on all 22 scoring categories |
+| tau-bench (original) `59a200c6`, airline test | 50 | 19 (38.0%, 25.9–51.8%) | 19 | reward code; the reference replay passes 50/50 |
+| the same, retail test | 115 | 7 (6.1%, 3.0–12.0%) | 7 | reward code; 115/115 |
+| the same, retail train | 500 | 5 (1.0%, 0.4–2.3%) | 5 | reward code; 500/500 |
+| the same, retail dev | 20 | 1 (5.0%, 0.9–23.6%) | 1 | reward code; 20/20 |
+| OSWorld-Verified, task files as released (`00804f81`) | 369 | not measured (needs the virtual machine) | 30 (8.1%, 5.8–11.4%) | counted from the task files and the quoted scoring code |
+| OSWorld-Verified, current task files (`044bc339`) | 369 | not measured | 26 (7.0%, 4.9–10.1%) | counted |
+| WebArena-Verified v1.2.3 | 812 | 0 (0.0–0.5%) | 24 (3.0%, 2.0–4.4%) for the best fixed refusal; 31 (3.8%) with the right refusal chosen per task | evaluator, with a synthetic start-page network trace |
+| WebArena, original task file | 812 | not measured (needs the live sites) | 36 (4.4%, 3.2–6.1%) for the answer "N/A" | counted from the task file and the quoted scoring code |
+
+- **BFCL V4.** All 10 points come from the two irrelevance subsets (240 and 884 entries), where making no function call is the correct answer; every other category scores 0. A refusal sentence scores the same. The live relevance subset, which would penalise never calling a function, carries no weight in the overall score.
+- **tau-bench (original).** An agent that does nothing passes 19 of the 50 airline test tasks, and a hand-over to a human at step 0 passes the same 19, because it ends the episode with the database untouched. The tau2 airline tasks were rewritten and reordered, so 19 against tau2's 23 compares counts only. In retail, six tasks pass for doing nothing because their single reference write is rejected on replay (test 106; train 161, 214, 229, 288, 349), so the scored target is the starting state. Test task 106 is tau2 retail task 105: same order, items and gift card, and the tau2 action id still reads `106_0`. The original benchmark gives this task to an agent that does nothing; tau2 added an assertion that demands the exchange, which turned the free pass into a task no conversation can pass (Section 5).
+- **OSWorld-Verified.** The environment returns success for a `FAIL` action on every task marked infeasible, so an agent that gives up at step 0 scores the infeasible share. That share depends on the task-file version: 30 of 369 as released and 26 of 369 at the current head, after five tasks received real checkers and one became infeasible. A published score therefore carries a refusal floor of 8.1% or 7.0%, depending on the version it was scored on.
+- **WebArena.** In the original task file 36 tasks expect the answer "N/A" and score it by exact match, so that one answer passes all 36. WebArena-Verified closes most of this: the best single fixed refusal passes 24 tasks. Its evaluator has defects of its own: task 319 cannot be passed by any response tried, including the expected one; tasks 699, 700 and 811 end in an evaluator error on every response; and 10 map tasks pass for reporting success at step 0, because their only network check is met by loading the start page.
+
+Outside tau2 the floor runs from 0 (WebArena-Verified, null agent) to 38% of tasks (original tau-bench airline), plus 10 of 100 points on BFCL V4.
 
 ## 7. Strong vs weak: does the exam separate a stronger agent?
 
@@ -301,7 +317,7 @@ Two facts stand side by side. The examination has reproducible faults: a pass fo
 
 The repair itself is instructive. The deterministic faults exist (they fire on perturbed trajectories) but did not flip a single recorded conversation, because the recorded agents happened not to hit them. The one fix that failed, task 32, failed because a sentence added to make the scenario consistent with the reference exposed a second agent error that the pre-test could not see. Both say the same thing: an examination has to be validated as an instrument, with pre-registered expectations and adversarial review, before its numbers are read.
 
-Retail tests the claim on a whole domain (interpretation). Its scorer closes airline's largest hole, yet 44 of 114 tasks still carry an adversarially reviewed defect. The new holes sit in places a leaderboard never shows: a tool that stores the wrong item, an order rule only the policy text enforces, and a judge that would crash the stock parser on most replies. The conversations add a second lesson. In retail, the user simulator decides more outcomes than the reference does: it explains 12 of 23 ground-truth failures and 23 of 32 flips. A pass rate on this benchmark therefore measures the agent and the simulator together. The null-agent table puts the same point in one line: the score of an agent that does nothing ranges from 0% to 46% across domains of one benchmark, depending only on how each domain's exam is built. The strong-vs-weak check adds the consequence for model comparison. On the stock exam a stronger model is ahead on 6 of the 7 tasks where the two differ, yet the difference is not significant, because 9 of the 20 tasks tie both models by construction.
+Retail tests the claim on a whole domain (interpretation). Its scorer closes airline's largest hole, yet 44 of 114 tasks still carry an adversarially reviewed defect. The new holes sit in places a leaderboard never shows: a tool that stores the wrong item, an order rule only the policy text enforces, and a judge that would crash the stock parser on most replies. The conversations add a second lesson. In retail, the user simulator decides more outcomes than the reference does: it explains 12 of 23 ground-truth failures and 23 of 32 flips. A pass rate on this benchmark therefore measures the agent and the simulator together. The null-agent table puts the same point in one line: the score of an agent that does nothing ranges from 0% to 46% across domains of one benchmark, depending only on how each domain's exam is built. Four external benchmarks show the same spread, from 0 to 38% of tasks, and on OSWorld-Verified the refusal floor changed between two versions of the same task files. The strong-vs-weak check adds the consequence for model comparison. On the stock exam a stronger model is ahead on 6 of the 7 tasks where the two differ, yet the difference is not significant, because 9 of the 20 tasks tie both models by construction.
 
 ## 10. Limits
 
@@ -311,18 +327,20 @@ Retail tests the claim on a whole domain (interpretation). Its scorer closes air
 - **What v2 is.** The refusal pass is documented as intended, so v2 is a stricter alternative protocol rather than a bug fix.
 - **Run-to-run noise.** Single-trial ground-truth runs flipped on 4 of 13 unchanged airline tasks between two runs, so ground-truth totals are read against that floor.
 - **Strong vs weak.** One run per model and 20 tasks. The two runs are a day apart and the user simulator samples, so each run is one draw.
+- **External floors.** Three of the nine external rows are counted from task files and quoted scoring code rather than measured by running the evaluator (OSWorld-Verified twice, original WebArena). The WebArena-Verified agents were scored with a synthetic start-page network trace, because its evaluator rejects an empty one.
 - **Cost figures.** Dollar figures are own estimates from token counts at the published per-token prices. They were not reconciled with billing row by row; the account's billing was about $11 when the own estimate was $10.79.
 
 ## 11. Reproducibility and cost
 
-Every number is rebuilt by the command sequences in `STRUCTURE.md`; the judge stages replay from cached votes without a model call. Provenance stamps on every v2 output record the overlay commit and a dirty-tree flag; the live runs record the runner configuration and its empty diff against block 1. Spend, own estimate from token counts: block 1 about $1.36, block 2 about $2.27, retail about $7.16 (runs $6.86, re-judge $0.30, probe below one cent); the strong-vs-weak check about $17.21; about $27.99 in total (`cost.md`). The null-agent table and the demo make no model call.
+Every number is rebuilt by the command sequences in `STRUCTURE.md`; the judge stages replay from cached votes without a model call. Provenance stamps on every v2 output record the overlay commit and a dirty-tree flag; the live runs record the runner configuration and its empty diff against block 1. Spend, own estimate from token counts: block 1 about $1.36, block 2 about $2.27, retail about $7.16 (runs $6.86, re-judge $0.30, probe below one cent); the strong-vs-weak check about $17.21; about $27.99 in total (`cost.md`). The null-agent tables and the demo make no model call; the external benchmarks are installed in their own folders outside the repository, with the commands in `results/null_agent/external.md`.
 
 ## 12. Open items
 
 Not done, candidates for a next iteration:
 
 - **Strong vs weak, more power.** Repeat the comparison on all 50 airline tasks or with a second run per model, so that a gap of the observed size can reach significance.
-- **External null agent.** Measure the null-agent floor on three or four external benchmarks chosen from `null_agent/external_candidates.md`.
+- **External null agent, remaining runs.** Run the do-nothing agent on OSWorld-Verified (needs its virtual machine) and on the original WebArena (needs the live sites). Check whether published tau-bench airline scores use the 50 original test tasks and this reward code: the HAL leaderboard lists 28.00% for a cheap model, which would then sit 10 points below the do-nothing floor of 38.0%.
+- **External defects.** The defects found in tau-bench (six retail tasks whose single reference write is rejected) and in WebArena-Verified (tasks 319, 699, 700, 811 and the 10 map tasks) are recorded in `results/null_agent/external.md`; no issue text is drafted for them.
 - **Retail run rows.** Give the retail run rows an adversarial pass.
 - **Task 32.** Run a counterfactual ground-truth conversation on airline task 32 without the payment-method sentence, to isolate its effect.
 - **Judge hand-check.** Hand-check about 20 fresh judge-only verdicts blind.
