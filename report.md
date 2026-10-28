@@ -1,6 +1,6 @@
-# Report: validation audit of tau2-bench airline and the v2 protocol
+# Report: validation audit of tau2-bench (airline, retail) and the v2 protocol
 
-Target: tau2-bench, tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`, domain airline (50 tasks). All numbers below are copied from the generated files `summary_numbers.md` (block 1) and `block2/summary_v2.md` (block 2); intervals are 95% Wilson. Where this report interprets, it says so.
+Target: tau2-bench, tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`, domains airline (50 tasks, 20 sampled) and retail (all 114 tasks). All numbers below are copied from the generated files `summary_numbers.md` (block 1), `block2/summary_v2.md` (block 2), `retail/summary_numbers.md` and `retail/comparison.md` (retail) and `results/null_agent/tau2_null_agent.md` (null agent); intervals are 95% Wilson. Where this report interprets, it says so.
 
 ## 1. Question
 
@@ -113,7 +113,145 @@ The three scorer switches changed no fresh reward (last two columns equal on eve
 
 The judge is the agent's own model, which is a self-evaluation risk. What was done about it: three votes per assertion; transcript with tool calls (the stock transcript view hid tool-call arguments and produced a false failure on task 9 trial 1, issue I9); every reward-changing, process-type and communication-type verdict on the recorded conversations hand-checked by two readers, 46/46 agreement with the judge; verdicts reported with the number of determined ballots. The results review found a parser gap: the upstream JSON extractor rejects a reply that is a bare JSON array, which the judge model returned in 53 of 610 replies, and those ballots had been dropped. The parser was fixed; an offline re-parse of the discarded replies recovered 32 ballots and changed no majority verdict, so the cached rewards stand. Six passes rested on one or two ballots and are named in `summary_v2.md`. Fresh-run verdicts were not hand-checked; 35 of the 66 fresh passes contain at least one assertion only the judge decides, and no fresh failure rests on the judge alone.
 
-## 5. Issue candidates
+## 5. Retail: the same checklist on a whole domain
+
+### 5.1 Design
+
+The retail audit was pre-registered in `retail/PLAN.md` before any paid run: the question, the protocol, predictions P1–P7 and a budget ceiling of $15. Deviations were appended there with dates as the work went. It covers all 114 tasks of the split `base` without sampling, so the shares below are values for the whole domain, not estimates.
+
+Retail is scored differently from airline. The reward is the database hash times a judge's verdict on the free-text `nl_assertions`; 40 tasks carry such assertions. `communicate_info` is never scored (`retail/checklist.md`). The stock judge is an OpenAI model. It was replaced by `claude-haiku-5-5` with the stock prompt and evaluator, and every judge reply is logged.
+
+The steps:
+
+1. A static scan and mechanical probes on all 114 tasks: WRITE-order permutations, argument perturbations, hidden and forbidden write orders, and a probe of a tool bug the reviewers found.
+2. Twelve independent reviewers on the task cards.
+3. An adversarial review of every medium or high row: 80 rows, 69 confirmed, 8 re-filed, 3 rejected as duplicates, 4 added.
+4. A blind second pass on 12 tasks.
+5. Paid runs: Pass^3 on 114 tasks and the ground-truth agent on 112.
+6. Five reviewers read every failed trajectory (89) and the successful trials of every flipped task.
+7. A 3-vote re-judge of every simulation whose reward depends on assertions.
+
+The adversarial pass over the rows from the runs stopped on a usage limit and was not rerun. Those rows are reported separately below.
+
+### 5.2 What the audit found
+
+Table 4. Retail headline shares (all 114 tasks).
+
+| quantity | share |
+|---|---|
+| tasks with ≥1 medium/high defect, static reading and probes (every row adversarially reviewed) | 44/114 = 0.39 [0.30, 0.48] |
+| tasks with ≥1 medium/high defect, all checks (the run rows not adversarially reviewed) | 67/114 = 0.59 [0.50, 0.67] |
+| the same, without the rows that attribute the failure to the user simulator (5c, 5d) | 48/114 = 0.42 [0.33, 0.51] |
+| tasks an empty trajectory passes (no write and no assertion) | 6/114 = 0.05 [0.02, 0.11] |
+| blind second pass against the corrected labels | 98/98, kappa 1.00 (97/98, kappa 0.85, against the first reviewers) |
+
+The mechanisms, each reproduced by a script or a replay:
+
+- **A forbidden write order passes (2e, 14 tasks; I12).** The policy forbids any change to an order after its items were modified. `modify_pending_order_address` still accepts the status `pending (item modified)`, because it tests the status by substring. The reversed sequence reaches the gold hash in all 14 tasks whose reference changes an address and then items, and several of these scenarios are written to test exactly this rule.
+- **A tool stores the wrong item (1g, 5 tasks; I11).** `modify_pending_order_items` writes the price and options of the last new variant into every modified item. In the scored target, 9 items in 5 tasks carry another variant's data. The target hash then depends on the order of the (old, new) pairs inside the call (2h, 5 tasks), so a correct agent that lists the same swaps in another order scores 0. This falsified prediction P3.
+- **The reference fixes a choice the scenario leaves open (4c, 11 tasks).** The open choice is a payment method, a cancellation reason or a product variant; only the reference's choice matches the hash.
+- **A reference that cannot be reached (1b, 4b, 4e: task 105; I13).** The only reference action pays a 21.10 difference with a gift card that holds 17.00, so it raises. The scored target is the unchanged database, while the assertion demands the exchange, and no conversation can satisfy both.
+- **Requirements without a scorer (2k, 2m).** In 3 tasks a required fact sits only in `communicate_info`, which nothing scores. Authentication and explicit confirmation leave no trace in the database, and none of the 61 assertions names them; this matters in 5 scenarios built around such a rule.
+- **The no-op class is small (2a, 2b: 6 tasks).** Retail's assertions close most of airline's pass for doing nothing. Six tasks have neither a write nor an assertion. In 5 more, the verdict on an empty answer is left to the judge, which failed all 5 in the probe.
+
+### 5.3 Agent runs and what the failed conversations show
+
+Table 5. Retail runs (`claude-haiku-5-5` as agent and as user simulator; stock scorer with the substituted judge).
+
+| quantity | value |
+|---|---|
+| tau2 pass^1 (average reward) | 0.807 |
+| tasks passed 3/3 (pass^3) | 75/114 = 0.66 [0.57, 0.74] |
+| tasks solved in 0/3; unstable tasks (1 or 2 of 3) | 7/114; 32/114 |
+| ground-truth agent reaches reward 1.0 | 89/112 = 0.79 [0.71, 0.86] |
+| failures caused by the judge alone (database matched) | 9 of 342 trials; 3 of 112 ground-truth runs |
+
+The reviewers read every failed trajectory and named its cause.
+
+- **Ground-truth failures.** Of the 23 ground-truth failures, 8 trace to the task or its scoring (1e). In tasks 52 and 105 (high) no compliant conversation reaches the reference; tasks 1, 16, 38, 64, 98 and 100 are medium. Another 12 trace to the user simulator and 3 to agent errors.
+- **Unstable tasks.** The flip traces to the simulator in 23 of the 32 unstable tasks (5c). Deviations from the scenario appear on 36 of the 45 reviewed tasks (5d). The text-mode simulator instructions lack the "do not end the conversation prematurely" rule that the voice-mode instructions carry (I15).
+- **New task-level findings.** The runs added six findings the static reading missed (4f: tasks 0, 1, 15, 31, 34 and 100; I16). Tasks 0 and 1, for example, require "Google Home" compatibility, which appears nowhere in the catalogue.
+
+These run rows were not adversarially reviewed. The threshold for 5d differs between reviewer batches, and the rule for "the simulator makes a choice the scenario leaves open" was applied differently (tasks 0, 1 and 98 against 15 and 100). The static-and-probe figure (44/114) carries no such caveat.
+
+### 5.4 The judge inside the score
+
+Table 6. The judge as part of the reward (check 2j).
+
+| quantity | value |
+|---|---|
+| live judge replies the stock strict parser would reject | 103/169 = 0.61 |
+| assertion verdicts where the live single vote differs from a 3-vote majority | 1/243 |
+| rewards that flip under the majority | 1 of 159 (task 110, fail → pass) |
+
+With the substituted judge, the stock code would have rejected most replies, because they came in a code fence or as a bare array. In a live run such a simulation is retried and then dropped from the denominator as an infrastructure error. The overlay's tolerant parser kept these replies and marked each one.
+
+The single vote is stable on these transcripts: 1 disagreement in 243 verdicts. The one flip is on task 110, whose reference writes the address the user already has while the assertion asks the agent to change it (I13). The judge passes the same agent behaviour in one trial and fails it in two.
+
+### 5.5 Predictions and upstream issues
+
+Table 7. Pre-registered predictions against the measurements.
+
+| id | prediction | outcome |
+|---|---|---|
+| P1 | no-op pass on 6/114 | held: 6/114 |
+| P2 | 2k only where no assertion covers the fact; certain for 30, 31, 32 | held: exactly 30, 31, 32 |
+| P3 | no task flips on WRITE order | **failed**: 5 tasks, through the tool bug of I11 |
+| P4 | process requirements unscored | held: the benchmark-level 2m row, and 5 tasks |
+| P5 | the three upstream-recorded issues (tasks 4, 5, 7) re-found | **not met** at task level (see below) |
+| P6 | some replies fail the strict parser, and re-judging flips some verdicts | held: 103/169 rejected; 1 flip |
+| P7 | defective share | no numeric prediction; 44/114 static, 67/114 all checks |
+
+P5 in detail:
+
+- **Task 4:** the issue does not reproduce at the pinned commit. The scenario asks for the exact count, and all four runs pass.
+- **Task 5:** the missing authentication check appears only as the benchmark-level 2m row.
+- **Task 7:** the issue was not found.
+
+The rows that sit on tasks 4 and 5 describe other mechanisms (`results/retail/upstream_issue_match.csv`).
+
+### 5.6 Airline beside retail
+
+Table 8. The same checklist on two domains (`retail/comparison.md`; airline is a sample of 20, retail the whole domain).
+
+| quantity | airline | retail |
+|---|---|---|
+| tasks with ≥1 medium/high defect, static and probe checks | 13/20 = 0.65 | 44/114 = 0.39 |
+| tasks with ≥1 medium/high defect, all checks | 18/20 = 0.90 | 67/114 = 0.59 |
+| empty answer gets full reward (whole domain) | 23/50 = 0.46 | 6/114 = 0.05 |
+| agent pass^3 | 12/20 = 0.60 | 75/114 = 0.66 |
+| ground-truth agent reaches reward 1.0 | 11/16 | 89/112 |
+
+Reading (interpretation): the two domains fail in different places. Airline's largest hole is the pass for doing nothing. Retail closes most of it with judged assertions and moves the weight onto the judge and the tools: an order rule the tools do not enforce, and a tool that stores the wrong item. The agent's pass^3 is similar in both domains while the defects underneath differ in kind. This repeats the block-1 observation: the headline number does not show the state of the exam.
+
+## 6. What an agent that does nothing scores, across tau2
+
+Table 9. Null agent: an empty trajectory pushed through the stock evaluators of every task set, with no model call (`results/null_agent/tau2_null_agent.md`).
+
+| task set | tasks | reward basis | passes by doing nothing | 95% CI |
+|---|---|---|---|---|
+| airline base | 50 | DB × COMMUNICATE | 23 (46.0%) | 33.0–59.6% |
+| retail base | 114 | DB (× NL judge) | 6 (5.3%); 5 more depend on the judge, which failed them | 2.4–11.0% |
+| telecom base | 114 | ENV_ASSERTION (× ACTION) | 0 | 0.0–3.3% |
+| telecom full | 2,285 | ENV_ASSERTION (× ACTION) | 0 | 0.0–0.2% |
+| intake base | 200 | DB | 0 | 0.0–1.9% |
+| banking_knowledge | 97 | DB / ACTION / NL | not measured: the environment needs a package the pinned environment lacks | — |
+
+The floor differs by an order of magnitude across domains of the same benchmark. Telecom asserts on the device state, so an empty answer fails everywhere; airline's hash design passes it on almost half the tasks.
+
+The same script also runs a positive control: it replays every reference and checks the task's own assertions.
+
+- **Telecom:** the control passes once the agent and user state are synchronised after every action, as the orchestrator does.
+- **Retail:** 15 references contain a raising action. Most are intended negative steps; task 105 is the one that matters.
+
+A desk survey of nine external agent benchmarks (`null_agent/external_candidates.md`) lists where the same floor can be measured offline at no API cost. Two numbers follow from scoring code and task files alone; they are cited there and were not measured here:
+
+- **BFCL V4:** an empty response earns 10 of 100 overall points, because the irrelevance subsets count "no call" as success.
+- **OSWorld-Verified:** answering "infeasible" alone scores 30/369 = 8.1%.
+
+The measurement itself is an open item.
+
+## 7. Issue candidates
 
 Drafted in `issues_draft.md`, none filed:
 
@@ -129,21 +267,42 @@ Drafted in `issues_draft.md`, none filed:
 | I8 | task 32's scenario forbids the reference path |
 | I9 | the assertion judge's transcript view hides tool-call arguments; verdict parsing has no fallback |
 | I10 | the assertion evaluator and the JSON extractor fail on a bare top-level JSON array, which the judge model returns in about 9% of replies |
+| I11 | retail: `modify_pending_order_items` stores the last variant's price and options in every modified item; the target hash depends on the pair order |
+| I12 | retail: an address or payment change after an item change is accepted although the policy forbids it; 14 references reach the same hash in the forbidden order |
+| I13 | retail reference defects: a product id that exists nowhere (2, 3, 4), an unreachable exchange (105), a transfer summary from another task (26), a no-op address write (110) |
+| I14 | retail scoring path: an assertion the judge omits counts as met; the strict parser rejects most replies of the substituted judge |
+| I15 | the text-mode user simulator lacks the "do not end prematurely" rule of the voice mode; the simulator is the largest cause of retail failures and flips |
+| I16 | retail task texts a faithful simulator cannot follow to the reference (0, 1, 15, 34, 52, 100) |
 
-## 6. What the numbers mean
+## 8. What the numbers mean
 
 Two facts stand side by side. The examination has reproducible faults: a pass for doing nothing on 23 of 50 tasks, an end-state check that fails valid solutions, a string check that passes by accident, a wrong reference answer, a scenario that forbids its own reference, requirements nobody scores, a simulator that improvises. And the agent's headline number barely moves when the examination is repaired: pass^3 0.60 in both runs, pass^1 within the noise floor. The leaderboard cannot show what is wrong with the exam. Finding it took a checklist applied to the procedure, probes with known answers, and reviews whose job was to overturn the findings.
 
 The repair itself is instructive. The deterministic faults exist (they fire on perturbed trajectories) but did not flip a single recorded conversation, because the recorded agents happened not to hit them. The one fix that failed, task 32, failed because a sentence added to make the scenario consistent with the reference exposed a second agent error that the pre-test could not see. Both say the same thing: an examination has to be validated as an instrument, with pre-registered expectations and adversarial review, before its numbers are read.
 
-## 7. Limits
+Retail tests the claim on a whole domain (interpretation). Its scorer closes airline's largest hole, yet 44 of 114 tasks still carry an adversarially reviewed defect. The new holes sit in places a leaderboard never shows: a tool that stores the wrong item, an order rule only the policy text enforces, and a judge that would crash the stock parser on most replies. The conversations add a second lesson. In retail, the user simulator decides more outcomes than the reference does: it explains 12 of 23 ground-truth failures and 23 of 32 flips. A pass rate on this benchmark therefore measures the agent and the simulator together. The null-agent table puts the same point in one line: the score of an agent that does nothing ranges from 0% to 46% across domains of one benchmark, depending only on how each domain's exam is built.
 
-One domain of one benchmark; 20 sampled tasks; one agent model and one simulator model; a judge from the same model family; the 30 unsampled tasks' assertions unaudited; the refusal pass is documented as intended, so v2 is a stricter alternative protocol rather than a bug fix; dollar figures are own estimates at an assumed price. Single-trial ground-truth runs flipped on 4 of 13 unchanged tasks between the two runs, so ground-truth totals are read against that floor.
+## 9. Limits
 
-## 8. Reproducibility and cost
+- **Scope.** Two domains of one benchmark: airline with 20 of 50 tasks sampled (its 30 unsampled tasks' assertions unaudited), retail with all 114 tasks.
+- **Models.** One agent model and one simulator model, and a judge from the same family. In retail that judge replaces the stock OpenAI judge, so the parser figures describe the substitution.
+- **Unreviewed rows.** The retail rows from the runs (1e, 4f, 5c, 5d) were not adversarially reviewed, and their 5d threshold differs between reviewer batches.
+- **What v2 is.** The refusal pass is documented as intended, so v2 is a stricter alternative protocol rather than a bug fix.
+- **Run-to-run noise.** Single-trial ground-truth runs flipped on 4 of 13 unchanged airline tasks between two runs, so ground-truth totals are read against that floor.
+- **Cost figures.** Dollar figures are own estimates at an assumed price.
 
-Every number is rebuilt by the command sequences in `STRUCTURE.md`; the judge stages replay from cached votes without a model call. Provenance stamps on every v2 output record the overlay commit and a dirty-tree flag; the live runs record the runner configuration and its empty diff against block 1. Spend, own estimate from token counts: block 1 about $1.36, block 2 about $2.27 (`cost.md`).
+## 10. Reproducibility and cost
 
-## 9. Open items
+Every number is rebuilt by the command sequences in `STRUCTURE.md`; the judge stages replay from cached votes without a model call. Provenance stamps on every v2 output record the overlay commit and a dirty-tree flag; the live runs record the runner configuration and its empty diff against block 1. Spend, own estimate from token counts: block 1 about $1.36, block 2 about $2.27, retail about $7.16 (runs $6.86, re-judge $0.30, probe below one cent); about $10.79 in total against a hard stop of $30 (`cost.md`). The null-agent table makes no model call.
 
-Not done, candidates for a next iteration: a counterfactual ground-truth run on task 32 without the payment-method sentence, to isolate its effect; a blind hand-check of about 20 fresh judge-only verdicts; the assertions of the 30 unsampled tasks; the same audit on a second domain.
+## 11. Open items
+
+Not done, candidates for a next iteration:
+
+- **Stronger agent.** Run a stronger agent model on the 20 airline tasks to test whether the exam separates it from the audited one; the script is ready and was checked without an API call (`scripts/runs/run_sonnet20.ps1`).
+- **External null agent.** Measure the null-agent floor on three or four external benchmarks chosen from `null_agent/external_candidates.md`.
+- **Retail run rows.** Give the retail run rows an adversarial pass.
+- **Task 32.** Run a counterfactual ground-truth conversation on airline task 32 without the payment-method sentence, to isolate its effect.
+- **Judge hand-check.** Hand-check about 20 fresh judge-only verdicts blind.
+- **Airline coverage.** Audit the assertions of the 30 unsampled airline tasks.
+- **Upstream issues.** Decide which of the issue drafts I1–I16 to file.

@@ -1,6 +1,6 @@
-# How an agent exam fails: a validation audit of tau2-bench airline, and a stricter protocol laid over it
+# How an agent exam fails: a validation audit of tau2-bench (airline and retail), and a stricter protocol laid over it
 
-This repository asks one question of a widely used agent benchmark: when a task is marked "passed", did the agent do the job, or did the examination procedure let it through? It audits the airline domain of [tau2-bench](https://github.com/sierra-research/tau2-bench) at tag `v2.0.0` (commit `989d3285ae669e49503324bdb9981bf14fccedeb`), then builds a stricter scoring protocol ("v2") as an overlay, re-scores the recorded conversations under both, and runs the benchmark again under v2. Every number is rebuilt from the CSV and JSON files by script; every paid run carries a provenance stamp; two adversarial reviews (one of the design, one of the results) are part of the record.
+This repository asks one question of a widely used agent benchmark: when a task is marked "passed", did the agent do the job, or did the examination procedure let it through? It audits the airline domain of [tau2-bench](https://github.com/sierra-research/tau2-bench) at tag `v2.0.0` (commit `989d3285ae669e49503324bdb9981bf14fccedeb`), then builds a stricter scoring protocol ("v2") as an overlay, re-scores the recorded conversations under both, and runs the benchmark again under v2. It then applies the same checklist to every task of the retail domain, and it measures what an agent that does nothing scores in every task set of the benchmark. Every number is rebuilt from the CSV and JSON files by script; every paid run carries a provenance stamp; two adversarial reviews (one of the design, one of the results) are part of the record.
 
 ## Headline results
 
@@ -29,7 +29,30 @@ Block 2, the stricter protocol and the re-run (pre-registered hypotheses H1–H5
 
 Read together: the benchmark's defects are real and reproducible, and they are nearly invisible in the headline numbers. An agent's score moved by less than the noise floor while the examination underneath it changed substantially. That is the point of the audit: the procedure has to be checked directly, because the leaderboard will not show its faults.
 
-Ten issue candidates are drafted in `issues_draft.md` (I1–I10, with file and line references and reproduction paths); none has been filed yet.
+Retail, the whole domain (all 114 tasks, pre-registered in `retail/PLAN.md`):
+
+| quantity | value |
+|---|---|
+| tasks with at least one medium/high defect, static reading and probes (every row adversarially reviewed) | 44/114 = 0.39 [0.30, 0.48] |
+| the same, all checks including the agent runs (run rows not adversarially reviewed) | 67/114 = 0.59 [0.50, 0.67] |
+| all checks without the rows that blame the user simulator | 48/114 = 0.42 [0.33, 0.51] |
+| tasks an agent passes by doing nothing | 6/114 = 0.05 |
+| agent solve rate (claude-haiku-5-5), tasks passed 3/3; ground-truth agent | 75/114 = 0.66; 89/112 |
+| judge replies the stock strict parser would reject (judge substituted by claude-haiku-5-5) | 103/169 = 0.61 |
+
+Retail's judged assertions close most of airline's pass for doing nothing. The weight moves onto the tools, the judge and the user simulator:
+
+- **Order rule.** 14 tasks reach the target through an order of changes that the policy forbids and the tools accept.
+- **Tool bug.** One tool stores the wrong item in 5 tasks, so the score depends on the order of items inside a call.
+- **User simulator.** It explains 12 of the 23 ground-truth failures and the flips of 23 of the 32 unstable tasks.
+
+What an agent that does nothing scores, by task set (stock scorer, no model call; `results/null_agent/tau2_null_agent.md`):
+
+| airline | retail | telecom (base / full) | intake |
+|---|---|---|---|
+| 23/50 = 46% | 6/114 = 5% | 0/114 / 0/2,285 | 0/200 |
+
+Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file and line references and reproduction paths); none has been filed yet.
 
 ## What is in the repository
 
@@ -38,7 +61,9 @@ Ten issue candidates are drafted in `issues_draft.md` (I1–I10, with file and l
 - `checklist.md`, `schema.md`, `sample.json`, `audit_log.csv`: the checklist, the row schema, the sample, and the audit itself (one row per task and check).
 - `summary_numbers.md`, `fig_defects.png`, `analysis.ipynb`: block-1 numbers and figure, generated.
 - `block2/`: pre-registration (`PLAN.md`, with dated deviations), task fixes with their audit rows, the two adversarial reviews (`skeptic_design.md`, `skeptic_results.md`), the hand-check of judge verdicts, and the generated `summary_v2.md`.
-- `scripts/`, `scripts/v2/`: every script that produced a number; `scripts/runs/` and `scripts/v2/run_v2.py` are the paid runs.
+- `retail/`, `scripts/retail/`, `results/retail/`: the retail audit. It holds the pre-registration with dated deviations, the per-check readings, the audit log, the generated `summary_numbers.md` and `comparison.md`, every script, the reviewer files, the runs and the re-judge.
+- `scripts/null_agent/`, `results/null_agent/`, `null_agent/`: the null-agent table over every tau2 task set, and a desk survey of external benchmarks where the same floor can be measured.
+- `scripts/`, `scripts/v2/`: every script that produced a number; `scripts/runs/`, `scripts/v2/run_v2.py` and `scripts/retail/run_retail.py` are the paid runs.
 - `results/`, `results/v2/`: recorded runs (`results.json` of every simulation), re-scores, gates, judge votes and raw replies, provenance stamps, probe transcripts.
 - `issues_draft.md`, `cost.md`, `COMMIT_MAP.md`.
 
@@ -46,10 +71,10 @@ Not in the repository: the upstream clone (pinned by commit; clone it next to th
 
 ## Reproducing
 
-Offline parts need the tau2 virtual environment (for the scripts that import tau2) and Python 3.11 with `statsmodels` (for the summaries). The exact command sequences are in `STRUCTURE.md` ("Block 1 rebuild", "Block 2 rebuild"). The judge and probe scripts replay from cached votes and make no model call once the caches exist; the live runs are the only steps that spend money and are listed in `cost.md` with their token counts.
+Offline parts need the tau2 virtual environment (for the scripts that import tau2) and Python 3.11 with `statsmodels` (for the summaries). The exact command sequences are in `STRUCTURE.md` ("Block 1 rebuild", "Block 2 rebuild", "Retail domain audit"). The judge and probe scripts replay from cached votes and make no model call once the caches exist; the live runs are the only steps that spend money and are listed in `cost.md` with their token counts.
 
-Models used: `claude-haiku-5-5` as the agent, as the user simulator and as the judge of free-text assertions (the latter is a known self-evaluation risk; the reward-changing judge verdicts were hand-checked by two readers, 46/46 agreement).
+Models used: `claude-haiku-5-5` as the agent, as the user simulator and as the judge of free-text assertions (the latter is a known self-evaluation risk; the reward-changing judge verdicts of block 2 were hand-checked by two readers, 46/46 agreement). In retail the same model replaces the stock judge, an OpenAI model, with the stock prompt and evaluator.
 
 ## Limits
 
-One domain, 20 of 50 tasks sampled before any run, one agent model, one user-simulator model. The free-text assertions of the 30 unsampled tasks were not audited. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. Dollar figures are own estimates from token counts at an assumed price and were not reconciled with billing.
+Airline: 20 of 50 tasks sampled before any run, and the free-text assertions of the 30 unsampled tasks were not audited. Retail: all 114 tasks, but the rows from its agent runs were not adversarially reviewed. One agent model and one user-simulator model throughout. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. Dollar figures are own estimates from token counts at an assumed price and were not reconciled with billing.
