@@ -1,0 +1,100 @@
+key,assertion_idx,assertion,vote,met,mode
+d3f41c9dcdf53561,0,Agent does not cancel reservation S61CZX as the user is healthy.,0,1,index
+d3f41c9dcdf53561,0,Agent does not cancel reservation S61CZX as the user is healthy.,1,1,index
+d3f41c9dcdf53561,0,Agent does not cancel reservation S61CZX as the user is healthy.,2,1,index
+d3f41c9dcdf53561,1,The total cost that the agent mentions is between $1380 and $1390.,0,1,index
+d3f41c9dcdf53561,1,The total cost that the agent mentions is between $1380 and $1390.,1,1,index
+d3f41c9dcdf53561,1,The total cost that the agent mentions is between $1380 and $1390.,2,1,index
+d3f41c9dcdf53561,2,Agent upgrades NM1VX1 to business.,0,1,index
+d3f41c9dcdf53561,2,Agent upgrades NM1VX1 to business.,1,1,index
+d3f41c9dcdf53561,2,Agent upgrades NM1VX1 to business.,2,1,index
+d3f41c9dcdf53561,3,Agent upgrades H8Q05L to business.,0,1,index
+d3f41c9dcdf53561,3,Agent upgrades H8Q05L to business.,1,1,index
+d3f41c9dcdf53561,3,Agent upgrades H8Q05L to business.,2,1,index
+d3f41c9dcdf53561,4,Agent updates KC18K6 to business.,0,1,index
+d3f41c9dcdf53561,4,Agent updates KC18K6 to business.,1,1,index
+d3f41c9dcdf53561,4,Agent updates KC18K6 to business.,2,1,index
+8c122b6750a076c0,0,Agent upgrades XEHM4B to business.,0,1,index
+8c122b6750a076c0,0,Agent upgrades XEHM4B to business.,1,1,index
+8c122b6750a076c0,0,Agent upgrades XEHM4B to business.,2,1,index
+8c122b6750a076c0,1,Agent cancels XEHM4B (as it is business flight).,0,1,index
+8c122b6750a076c0,1,Agent cancels XEHM4B (as it is business flight).,1,1,index
+8c122b6750a076c0,1,Agent cancels XEHM4B (as it is business flight).,2,1,index
+8c122b6750a076c0,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,0,1,index
+8c122b6750a076c0,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,1,1,index
+8c122b6750a076c0,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,2,1,index
+8c122b6750a076c0,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,0,1,index
+8c122b6750a076c0,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,1,1,index
+8c122b6750a076c0,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,2,1,index
+d565e03ee51a4c14,0,Agent update reservation OWZ4XL to economy.,0,1,index
+d565e03ee51a4c14,0,Agent update reservation OWZ4XL to economy.,1,1,index
+d565e03ee51a4c14,0,Agent update reservation OWZ4XL to economy.,2,1,index
+d565e03ee51a4c14,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+d565e03ee51a4c14,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+d565e03ee51a4c14,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+37538818662d04a2,0,Agent upgrades XEHM4B to business.,0,1,index
+37538818662d04a2,0,Agent upgrades XEHM4B to business.,1,1,index
+37538818662d04a2,0,Agent upgrades XEHM4B to business.,2,1,index
+37538818662d04a2,1,Agent cancels XEHM4B (as it is business flight).,0,1,index
+37538818662d04a2,1,Agent cancels XEHM4B (as it is business flight).,1,1,index
+37538818662d04a2,1,Agent cancels XEHM4B (as it is business flight).,2,1,index
+37538818662d04a2,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,0,1,index
+37538818662d04a2,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,1,1,index
+37538818662d04a2,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,2,1,index
+37538818662d04a2,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,0,1,index
+37538818662d04a2,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,1,1,index
+37538818662d04a2,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,2,1,index
+497d82bbab420bbd,0,Agent update reservation OWZ4XL to economy.,0,0,index
+497d82bbab420bbd,0,Agent update reservation OWZ4XL to economy.,1,0,index
+497d82bbab420bbd,0,Agent update reservation OWZ4XL to economy.,2,0,index
+497d82bbab420bbd,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+497d82bbab420bbd,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+497d82bbab420bbd,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+0031c2e846107427,0,Agent does not cancel reservation S61CZX as the user is healthy.,0,1,index
+0031c2e846107427,0,Agent does not cancel reservation S61CZX as the user is healthy.,1,1,index
+0031c2e846107427,0,Agent does not cancel reservation S61CZX as the user is healthy.,2,1,index
+0031c2e846107427,1,The total cost that the agent mentions is between $1380 and $1390.,0,1,index
+0031c2e846107427,1,The total cost that the agent mentions is between $1380 and $1390.,1,1,index
+0031c2e846107427,1,The total cost that the agent mentions is between $1380 and $1390.,2,1,index
+0031c2e846107427,2,Agent upgrades NM1VX1 to business.,0,1,index
+0031c2e846107427,2,Agent upgrades NM1VX1 to business.,1,1,index
+0031c2e846107427,2,Agent upgrades NM1VX1 to business.,2,1,index
+0031c2e846107427,3,Agent upgrades H8Q05L to business.,0,1,index
+0031c2e846107427,3,Agent upgrades H8Q05L to business.,1,1,index
+0031c2e846107427,3,Agent upgrades H8Q05L to business.,2,1,index
+0031c2e846107427,4,Agent updates KC18K6 to business.,0,1,index
+0031c2e846107427,4,Agent updates KC18K6 to business.,1,1,index
+0031c2e846107427,4,Agent updates KC18K6 to business.,2,1,index
+7e56feb97fe7a45f,0,Agent upgrades XEHM4B to business.,0,1,index
+7e56feb97fe7a45f,0,Agent upgrades XEHM4B to business.,1,,missing
+7e56feb97fe7a45f,0,Agent upgrades XEHM4B to business.,2,1,index
+7e56feb97fe7a45f,1,Agent cancels XEHM4B (as it is business flight).,0,1,index
+7e56feb97fe7a45f,1,Agent cancels XEHM4B (as it is business flight).,1,,missing
+7e56feb97fe7a45f,1,Agent cancels XEHM4B (as it is business flight).,2,1,index
+7e56feb97fe7a45f,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,0,1,index
+7e56feb97fe7a45f,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,1,,missing
+7e56feb97fe7a45f,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,2,1,index
+7e56feb97fe7a45f,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,0,1,index
+7e56feb97fe7a45f,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,1,,missing
+7e56feb97fe7a45f,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,2,1,index
+51f5304da09d9cac,0,Agent update reservation OWZ4XL to economy.,0,0,index
+51f5304da09d9cac,0,Agent update reservation OWZ4XL to economy.,1,0,index
+51f5304da09d9cac,0,Agent update reservation OWZ4XL to economy.,2,0,index
+51f5304da09d9cac,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+51f5304da09d9cac,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+51f5304da09d9cac,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+1c2701a19b832dd0,0,Agent does not cancel reservation S61CZX as the user is healthy.,0,1,index
+1c2701a19b832dd0,0,Agent does not cancel reservation S61CZX as the user is healthy.,1,1,index
+1c2701a19b832dd0,0,Agent does not cancel reservation S61CZX as the user is healthy.,2,1,index
+1c2701a19b832dd0,1,The total cost that the agent mentions is between $1380 and $1390.,0,1,index
+1c2701a19b832dd0,1,The total cost that the agent mentions is between $1380 and $1390.,1,1,index
+1c2701a19b832dd0,1,The total cost that the agent mentions is between $1380 and $1390.,2,1,index
+1c2701a19b832dd0,2,Agent upgrades NM1VX1 to business.,0,1,index
+1c2701a19b832dd0,2,Agent upgrades NM1VX1 to business.,1,1,index
+1c2701a19b832dd0,2,Agent upgrades NM1VX1 to business.,2,1,index
+1c2701a19b832dd0,3,Agent upgrades H8Q05L to business.,0,1,index
+1c2701a19b832dd0,3,Agent upgrades H8Q05L to business.,1,1,index
+1c2701a19b832dd0,3,Agent upgrades H8Q05L to business.,2,1,index
+1c2701a19b832dd0,4,Agent updates KC18K6 to business.,0,1,index
+1c2701a19b832dd0,4,Agent updates KC18K6 to business.,1,1,index
+1c2701a19b832dd0,4,Agent updates KC18K6 to business.,2,1,index

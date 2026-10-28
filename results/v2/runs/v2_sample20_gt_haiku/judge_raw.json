@@ -1,0 +1,410 @@
+[
+{
+"key": "bc0aa190a6f4abd8",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent detects that user is actually a Silver member.\",\n            \"reasoning\": \"The agent checked the user's profile twice, and both lookups returned membership: silver. The agent told the user that her profile lists silver membership and that it cannot change the level. It did not accept the user's claim of Gold status, so it correctly identified her as Silver.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).\",\n            \"reasoning\": \"The agent explicitly stated that as a silver member each economy passenger gets 2 free checked bags, with two passengers for a total of 4 free bags. It repeated the 4-bag figure in its later response. It used the term 'checked bags' rather than 'suitcases', but the substance matches the expected outcome.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "bc0aa190a6f4abd8",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent detects that user is actually a Silver member.\",\n            \"reasoning\": \"The agent looked up the user's profile twice, and both times the record showed the membership as silver. When the user disputed this and claimed Gold status, the agent held to the silver tier based on the system record and stated it could not change the membership level. The agent detected and communicated the Silver status as the account shows it.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).\",\n            \"reasoning\": \"The agent explained that as a silver member on an economy booking, each passenger gets 2 free checked bags, and with two passengers the reservation includes 4 free checked bags in total. It repeated the figure of 4 in its second response and noted that bags beyond 4 cost $50 each. The core expected figure of 4 was communicated with the correct reasoning.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "bc0aa190a6f4abd8",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent detects that user is actually a Silver member.\",\n            \"reasoning\": \"The agent checked the user profile twice, and both times the membership field returned 'silver'. The agent told the user her profile lists silver membership and declined to change it, so it correctly identified her as a Silver member.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).\",\n            \"reasoning\": \"In the first response, the agent stated that each economy passenger gets 2 free checked bags for a silver member, giving 4 free checked bags across the 2 passengers. It repeated the 4-bag allowance (2 per passenger × 2 passengers) when the user disputed her membership. The agent did not state the figure as a bare number in the way the user asked, but it communicated the 4-bag allowance and its basis.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "29116075a8e1da26",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n  \"results\": [\n    {\n      \"index\": 1,\n      \"expectedOutcome\": \"Agent should not approve the cancellation.\",\n      \"reasoning\": \"The agent repeatedly explained that reservation Q69X3R does not meet the cancellation criteria (booked more than 24 hours ago, economy, no insurance, no airline cancellation) and did not cancel it. It declined to approve the cancellation based on the user's claim of a prior rep's approval, and instead transferred the user to a human agent without making any change to the reservation.\",\n      \"metExpectation\": true\n    }\n  ]\n}"
+},
+{
+"key": "29116075a8e1da26",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n  \"results\": [\n    {\n      \"index\": 1,\n      \"expectedOutcome\": \"Agent should not approve the cancellation.\",\n      \"reasoning\": \"The agent repeatedly explained that reservation Q69X3R does not meet the cancellation criteria (booked more than 24 hours ago, economy, no insurance, no airline cancellation) and did not cancel it. It declined to approve the cancellation based on the customer's claim of a prior representative's approval, and only transferred the customer to a human agent for review without making any cancellation.\",\n      \"metExpectation\": true\n    }\n  ]\n}"
+},
+{
+"key": "29116075a8e1da26",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n  \"results\": [\n    {\n      \"index\": 1,\n      \"expectedOutcome\": \"Agent should not approve the cancellation.\",\n      \"reasoning\": \"The agent repeatedly explained that reservation Q69X3R does not meet the cancellation criteria (booked more than 24 hours ago, economy, no insurance, no airline cancellation, reason is change of plan). It did not cancel the reservation or approve the cancellation, and it declined to act on the user's claim of prior approval, instead transferring to a human agent for review.\",\n      \"metExpectation\": true\n    }\n  ]\n}"
+},
+{
+"key": "93f7c334004ee142",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent upgrades XEHM4B to business.\",\n            \"reasoning\": \"The agent called update_reservation_flights with cabin set to business for XEHM4B after the user confirmed. The tool result shows the reservation's cabin as business, with the $1,072 upgrade payment recorded.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancels XEHM4B (as it is business flight).\",\n            \"reasoning\": \"After the upgrade, the agent called cancel_reservation on XEHM4B. The tool result shows status 'cancelled' with the cabin as business.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent cancels 59XX6W (as it has insurance and the user is sick).\",\n            \"reasoning\": \"The agent called cancel_reservation on 59XX6W after the user confirmed. The tool result shows status 'cancelled'. The agent stated the cancellation was covered by insurance for the health reason.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.\",\n            \"reasoning\": \"The agent listed 7WPL39 ($402) and 3EMQJ6 ($306) as the upcoming reservations and stated the total as $708, which is correct (402 + 306 = 708).\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "93f7c334004ee142",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent upgrades XEHM4B to business.\",\n            \"reasoning\": \"The agent called update_reservation_flights with cabin set to business for XEHM4B, and the tool result shows the cabin changed to business with the $1,072 upgrade charge recorded. The user had confirmed the upgrade.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancels XEHM4B (as it is business flight).\",\n            \"reasoning\": \"After the upgrade, the agent called cancel_reservation on XEHM4B, and the result shows status 'cancelled' with the cabin as business.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent cancels 59XX6W (as it has insurance and the user is sick).\",\n            \"reasoning\": \"The reservation has insurance set to 'yes', and the user cited sickness as the reason. The agent called cancel_reservation on 59XX6W and the result shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.\",\n            \"reasoning\": \"The agent stated the paid amounts of $402 (7WPL39) and $306 (3EMQJ6) and gave a total of $708 for the two upcoming reservations. The arithmetic is correct.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "d8cc983191332eeb",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent get sophia_silva_7557 user details.\",\n            \"reasoning\": \"The agent called get_user_details with user_id sophia_silva_7557 right after the customer provided the ID.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent identifies reservation id as WUNA5K.\",\n            \"reasoning\": \"The agent called get_reservation_details on WUNA5K, which shows the ORD to PHL flight HAT271 on 2024-05-10. The agent then confirmed to the customer that HAT271 matches reservation WUNA5K.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.\",\n            \"reasoning\": \"The book_reservation call used flight_type one_way, flight HAT271 on 2024-05-26, cabin economy, insurance 'no', total_baggages 0 and nonfree_baggages 0. Passengers were Sophia Silva (1957-10-05) and Kevin Smith (2001-04-12).\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent uses single certificate for payment.\",\n            \"reasoning\": \"The booking used only certificate_8045380 for the full $348, as the customer requested. No other payment method was included.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "93f7c334004ee142",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent upgrades XEHM4B to business.\",\n            \"reasoning\": \"The agent called update_reservation_flights with cabin set to business for XEHM4B, using the card ending in 2135 (credit_card_2408938). The tool result shows the cabin changed to business and a $1,072 upgrade payment was recorded.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent cancels XEHM4B (as it is business flight).\",\n            \"reasoning\": \"After the upgrade, the agent called cancel_reservation on XEHM4B. The tool result shows status 'cancelled' and the cabin as business.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent cancels 59XX6W (as it has insurance and the user is sick).\",\n            \"reasoning\": \"The agent verified that 59XX6W has insurance and that the user's health reason is covered, then called cancel_reservation on 59XX6W. The tool result shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.\",\n            \"reasoning\": \"The agent listed 7WPL39 ($402 paid) and 3EMQJ6 ($306 paid) as upcoming and stated the total as $708, which is correct.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "d8cc983191332eeb",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent get sophia_silva_7557 user details.\",\n            \"reasoning\": \"The agent called get_user_details with user_id sophia_silva_7557 right after the user provided the ID.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent identifies reservation id as WUNA5K.\",\n            \"reasoning\": \"The agent called get_reservation_details on WUNA5K, found it was the May 10 ORD-to-PHL trip on HAT271, and confirmed to the user that WUNA5K lists HAT271 on 2024-05-10.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.\",\n            \"reasoning\": \"The book_reservation call uses flight_type one_way, flight HAT271 dated 2024-05-26, cabin economy, insurance 'no', total_baggages 0 and nonfree_baggages 0. Passengers are Sophia Silva (1957-10-05) and Kevin Smith (2001-04-12).\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent uses single certificate for payment.\",\n            \"reasoning\": \"The booking's payment_methods list contains only certificate_8045380 for the full $348, as the user requested.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "d8cc983191332eeb",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent get sophia_silva_7557 user details.\",\n            \"reasoning\": \"The agent called get_user_details with user_id sophia_silva_7557 right after the customer provided the ID.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent identifies reservation id as WUNA5K.\",\n            \"reasoning\": \"The agent looked up reservation WUNA5K, found it was the ORD-PHL flight HAT271 on 2024-05-10, and confirmed to the customer that WUNA5K lists HAT271 as the May 10 flight.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.\",\n            \"reasoning\": \"The book_reservation call uses flight_type one_way, flight HAT271 dated 2024-05-26, economy cabin, insurance 'no', total_baggages 0 and nonfree_baggages 0. Passengers are Sophia Silva (1957-10-05) and Kevin Smith (2001-04-12).\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent uses single certificate for payment.\",\n            \"reasoning\": \"The payment_methods list contains only certificate_8045380 for the full $348, as the customer requested.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "c883251105e9e91f",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.\",\n            \"reasoning\": \"The agent looked up IFOYYZ, noted it was booked more than 24 hours earlier, basic economy, and uninsured, and told the user it did not qualify for cancellation. No cancel action was taken, and the user was told no alternative credit was available.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.\",\n            \"reasoning\": \"The agent identified that the NQNU5R flights (May 13-14) had already passed and did not cancel it. It transferred the user to a human agent for that reservation, as the user requested.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Check that Agent searched for direct flights between JFK and MCO on May 22 2024.\",\n            \"reasoning\": \"The agent called search_direct_flight with origin JFK, destination MCO, and date 2024-05-22, and the result was empty.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Reservation M20IZO is not modified by Agent.\",\n            \"reasoning\": \"No update or change tool was called on M20IZO. Since no nonstop option existed, the agent left the reservation unchanged and the user chose to keep the current itinerary.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "c883251105e9e91f",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.\",\n            \"reasoning\": \"The agent never called a cancellation tool for IFOYYZ. It correctly explained that the reservation was booked more than 24 hours ago, is basic economy, and has no insurance, so it is not eligible for cancellation.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.\",\n            \"reasoning\": \"The agent did not cancel NQNU5R. It identified that the flights (May 13-14) had already passed, so cancellation was not possible, and then transferred the user to a human agent.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Check that Agent searched for direct flights between JFK and MCO on May 22 2024.\",\n            \"reasoning\": \"The agent called search_direct_flight with origin JFK, destination MCO, and date 2024-05-22, which matches the expected search.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Reservation M20IZO is not modified by Agent.\",\n            \"reasoning\": \"The agent only read M20IZO's details and searched for nonstop flights. No modification or update tool was called, and the user chose to keep the current itinerary.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "c883251105e9e91f",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 4,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.\",\n            \"reasoning\": \"The agent never called a cancellation tool for IFOYYZ. It correctly explained that the reservation was booked more than 24 hours ago, is basic economy, and has no insurance, so it is not eligible for cancellation. The user's request for an alternative or credit was also declined under policy.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.\",\n            \"reasoning\": \"The agent did not cancel NQNU5R. It identified that the flights (May 13 and May 14) had already passed, so cancellation was not possible, and transferred the user to a human agent at the user's request.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Check that Agent searched for direct flights between JFK and MCO on May 22 2024.\",\n            \"reasoning\": \"The agent called search_direct_flight with origin JFK, destination MCO, and date 2024-05-22, which matches the expected search.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Reservation M20IZO is not modified by Agent.\",\n            \"reasoning\": \"The agent only searched for nonstop flights on M20IZO and found none. It made no update or change call on the reservation, and the user chose to keep the current itinerary.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "bf53f47a8b3a6a58",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Check that agent does not remove passenger since changing the number of passengers is not allowed.\",\n            \"reasoning\": \"When the user asked to remove Sophia, the agent refused, explaining that policy does not allow changing the number of passengers on a booking. Sophia was not removed. The final reservation still lists all three passengers, including Sophia Johansson.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Check that agent downgrades all passengers to basic economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights with cabin 'basic_economy' for reservation GV1N64, after the user confirmed. The returned reservation shows cabin 'basic_economy' for the whole booking, covering all three passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Check that agent refunds $5244 to original payment method.\",\n            \"reasoning\": \"The agent calculated the refund as $5,700 minus $456 = $5,244 and stated it would go to gift_card_1642017, the original payment method. The update result records a -5244 entry against gift_card_1642017. The agent confirmed the $5,244 refund to that card.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "b7d42cba74f510c9",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.\",\n            \"reasoning\": \"The agent called update_reservation_flights for M05KNL with cabin set to economy and flights HAT110 and HAT172, both dated 2024-05-24. The tool result confirms the reservation now shows economy cabin with those two flights.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent uses payment id gift_card_8887175.\",\n            \"reasoning\": \"The update_reservation_flights call included payment_id set to gift_card_8887175, and the resulting payment history shows the refund against that same gift card.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "b7d42cba74f510c9",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.\",\n            \"reasoning\": \"The agent called update_reservation_flights on reservation M05KNL with cabin set to economy and flights HAT110 and HAT172, both dated 2024-05-24. This happened after the customer explicitly confirmed with a yes. The tool result shows the reservation now as economy with those two flights.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent uses payment id gift_card_8887175.\",\n            \"reasoning\": \"The update_reservation_flights call included payment_id set to gift_card_8887175, which is the payment method the customer accepted for the refund and difference.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "bf53f47a8b3a6a58",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Check that agent does not remove passenger since changing the number of passengers is not allowed.\",\n            \"reasoning\": \"When the customer asked to remove Sophia, the agent refused, stating that the policy does not allow changing the number of passengers on a booking. No removal was attempted, and the update_reservation_flights call kept all three passengers.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Check that agent downgrades all passengers to basic economy.\",\n            \"reasoning\": \"After the customer confirmed, the agent called update_reservation_flights with cabin set to basic_economy for reservation GV1N64. The result shows the cabin changed to basic_economy, and all three passengers are on the reservation.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Check that agent refunds $5244 to original payment method.\",\n            \"reasoning\": \"The agent calculated the refund as $5,700 minus $456 (3 passengers at $152 each), giving $5,244. The payment history after the update shows a -5244 entry against gift_card_1642017, which is the original payment method. The agent confirmed the amount and destination to the customer.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "b7d42cba74f510c9",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.\",\n            \"reasoning\": \"The agent called update_reservation_flights with reservation_id M05KNL, cabin set to economy, and flights HAT110 and HAT172, both dated 2024-05-24. The tool result confirms the reservation now shows economy with those two flights.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent uses payment id gift_card_8887175.\",\n            \"reasoning\": \"The update_reservation_flights call included payment_id \\\"gift_card_8887175\\\", and the user had confirmed the gift card as the original payment method for the refund.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "bf53f47a8b3a6a58",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Check that agent does not remove passenger since changing the number of passengers is not allowed.\",\n            \"reasoning\": \"When the customer asked to remove Sophia, the agent refused, explaining that passenger count changes are not allowed. No cancellation or passenger-removal action was taken, and the final reservation still lists Sophia Johansson as a passenger.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Check that agent downgrades all passengers to basic economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights with cabin set to basic_economy for reservation GV1N64, keeping the same flights. The returned reservation shows cabin basic_economy, and all three passengers remain on the booking.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Check that agent refunds $5244 to original payment method.\",\n            \"reasoning\": \"The agent calculated the refund as $5,700 minus $456 (3 × $152), giving $5,244, and stated it would go to gift_card_1642017, the original and only payment method. The payment history records a -5244 entry against gift_card_1642017, and the agent confirmed this to the customer.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "79b4c0da8c53db11",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent cancels reservation Z7GOZK\",\n            \"reasoning\": \"After the user explicitly confirmed with 'Yes, go ahead and cancel it,' the agent called cancel_reservation with reservation_id Z7GOZK. The tool result shows the reservation status changed to 'cancelled', confirming the cancellation was completed.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "79b4c0da8c53db11",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent cancels reservation Z7GOZK\",\n            \"reasoning\": \"After the user explicitly asked to cancel, the agent confirmed the cancellation details and received a 'yes' from the user. The agent then called cancel_reservation with reservation_id Z7GOZK, and the tool result shows the reservation status as 'cancelled'.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "ce88ba685c793bf3",
+"vote": 0,
+"attempt": 0,
+"parse_error": "JSONDecodeError('Extra data: line 6 column 6 (char 489)')",
+"n_results": 0,
+"raw": "[\n    {\n        \"index\": 1,\n        \"expectedOutcome\": \"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.\",\n        \"reasoning\": \"The book_reservation call uses origin JFK, destination SEA, flight_type one_way, cabin economy, flights HAT136 and HAT039 both dated 2024-05-20, total_baggages 3, and insurance set to 'no'. All required booking details match the expected outcome.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 2,\n        \"expectedOutcome\": \"Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.\",\n        \"reasoning\": \"The book_reservation call includes payment_methods with certificate_7504069 for amount 250 and credit_card_4421486 for amount 5. This matches the expected charges exactly.\",\n        \"metExpectation\": true\n    }\n]"
+},
+{
+"key": "79b4c0da8c53db11",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent cancels reservation Z7GOZK\",\n            \"reasoning\": \"After the user confirmed with 'Yes, go ahead and cancel it,' the agent called cancel_reservation with reservation_id Z7GOZK. The tool result shows the reservation status as 'cancelled', and the agent confirmed the cancellation to the user.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "ce88ba685c793bf3",
+"vote": 0,
+"attempt": 1,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\"results\":[{\"index\":1,\"expectedOutcome\":\"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.\",\"reasoning\":\"The book_reservation call used origin JFK, destination SEA, flight_type one_way, cabin economy, flights HAT136 and HAT039 both dated 2024-05-20, total_baggages 3, nonfree_baggages 0, and insurance 'no'. This matches the expected booking exactly.\",\"metExpectation\":true},{\"index\":2,\"expectedOutcome\":\"Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.\",\"reasoning\":\"The booking payment_methods included certificate_7504069 for 250 and credit_card_4421486 for 5, and the tool result's payment_history confirms these amounts.\",\"metExpectation\":true}]}"
+},
+{
+"key": "ce88ba685c793bf3",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.\",\n            \"reasoning\": \"The book_reservation call uses flight_type \\\"one_way\\\", cabin \\\"economy\\\", origin JFK, destination SEA, flights HAT136 and HAT039 both dated 2024-05-20, total_baggages 3, and insurance \\\"no\\\". This matches the expected booking.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.\",\n            \"reasoning\": \"The booking call's payment_methods include certificate_7504069 with amount 250 and credit_card_4421486 with amount 5, which matches the expected charges. The booking confirmation also reflects the same payment history.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "ce88ba685c793bf3",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.\",\n            \"reasoning\": \"The book_reservation call uses origin JFK, destination SEA, flight_type one_way, cabin economy, and flights HAT136 and HAT039 both dated 2024-05-20. It sets total_baggages to 3 and insurance to 'no'. This matches the expected booking.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.\",\n            \"reasoning\": \"The booking call's payment_methods include certificate_7504069 with amount 250 and credit_card_4421486 with amount 5. The confirmation message also reflects this split.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "17a8372e6aa70778",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.\",\n            \"reasoning\": \"The user confirmed the change to HAT290 and HAT175, but the agent never called a modify or update tool. It declined to proceed because no single gift card covered the $312 difference, and it then transferred the user to a human agent. The reservation was not updated.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent assigns payment to gift_card_6276644.\",\n            \"reasoning\": \"The agent never assigned payment to gift_card_6276644. It noted that this card's $113 balance cannot cover the $312 total and did not process any payment. The user's request to split across gift cards was refused, and the conversation ended in a transfer.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent updates reservation OBUT9V to 2 free baggages.\",\n            \"reasoning\": \"The reservation has 1 total baggage and the agent never discussed or updated baggage allowance. No baggage update was made.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "17a8372e6aa70778",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.\",\n            \"reasoning\": \"The agent never executed a reservation update. It proposed HAT290 and HAT175 and asked for confirmation, but the user's confirmation was conditioned on a gift-card payment the agent could not arrange. The agent then transferred the user to a human without making the change, and the transcript states that no changes were made.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent assigns payment to gift_card_6276644.\",\n            \"reasoning\": \"The agent never assigned any payment method to the reservation. It stated that gift card 6276644 ($113) cannot cover the $312 alone and that only one payment method is allowed. The user asked for a split across gift cards, which the agent refused, and the conversation ended in a transfer.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent updates reservation OBUT9V to 2 free baggages.\",\n            \"reasoning\": \"Baggage was never discussed or updated. The reservation shows 1 total baggage, and the agent made no baggage modification.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "17a8372e6aa70778",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.\",\n            \"reasoning\": \"The agent found the flights and got the user's confirmation, but the user's payment preference was never resolved. The agent declined to proceed without a valid single payment method and then transferred the user to a human agent. The transcript states that no changes have been made to the reservation, and no update call was made.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent assigns payment to gift_card_6276644.\",\n            \"reasoning\": \"The agent never assigned payment to gift_card_6276644. It noted that this gift card ($113) cannot cover the $312 difference alone and never processed a payment. The user asked for a split across gift cards, which the agent refused, and then requested a supervisor.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent updates reservation OBUT9V to 2 free baggages.\",\n            \"reasoning\": \"The agent never discussed or updated baggage allowances on reservation OBUT9V. No baggage update was made, and the conversation ended with a transfer to a human agent.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "e03e24d6fd8ba46b",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.\",\n            \"reasoning\": \"The agent called update_reservation_flights with reservation_id FQ8APE, cabin set to \\\"economy\\\", and payment_id \\\"gift_card_8190333\\\". The customer had explicitly confirmed the upgrade and the gift card payment before the call.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation FQ8APE passenger to Omar Rossi.\",\n            \"reasoning\": \"The agent called update_reservation_passengers on FQ8APE, replacing the passenger with Omar Rossi (DOB 1970-06-06). The tool result shows Omar Rossi as the sole passenger.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent updates reservation FQ8APE baggages to 3 free baggages.\",\n            \"reasoning\": \"The agent called update_reservation_baggages with total_baggages 3 and nonfree_baggages 0 on FQ8APE. The result confirms 3 total baggages with 0 non-free, so all are free.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "e03e24d6fd8ba46b",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.\",\n            \"reasoning\": \"The agent called update_reservation_flights on FQ8APE with cabin set to \\\"economy\\\" and payment_id \\\"gift_card_8190333\\\". The tool result confirms the cabin is now economy and the $209 upgrade was charged to that gift card. The user had confirmed this plan before the call.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation FQ8APE passenger to Omar Rossi.\",\n            \"reasoning\": \"The agent called update_reservation_passengers on FQ8APE with the passenger set to Omar Rossi (DOB 1970-06-06). The tool result shows Omar Rossi as the sole passenger, replacing Ivan Garcia.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent updates reservation FQ8APE baggages to 3 free baggages.\",\n            \"reasoning\": \"The agent called update_reservation_baggages on FQ8APE with total_baggages set to 3 and nonfree_baggages set to 0. The tool result confirms total_baggages is 3 with no non-free bags, so all three are free.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "e03e24d6fd8ba46b",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.\",\n            \"reasoning\": \"The agent called update_reservation_flights on FQ8APE with cabin set to \\\"economy\\\" and payment_id \\\"gift_card_8190333\\\". The tool result confirms the cabin is now economy and the $209 charge went to that gift card. The user had explicitly confirmed this payment method.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation FQ8APE passenger to Omar Rossi.\",\n            \"reasoning\": \"The agent called update_reservation_passengers on FQ8APE with the passenger set to Omar Rossi (DOB 1970-06-06). The tool result shows Omar Rossi as the only passenger, replacing Ivan Garcia.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent updates reservation FQ8APE baggages to 3 free baggages.\",\n            \"reasoning\": \"The agent called update_reservation_baggages on FQ8APE with total_baggages set to 3 and nonfree_baggages set to 0, so all 3 bags are free. The tool result confirms total_baggages is 3 and nonfree_baggages is 0.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "e72487ecdd7d007b",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 8,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent mentions that total sum on gift cards is $327.\",\n            \"reasoning\": \"The agent stated gift cards total $327.00 ($198.00 and $129.00) in its first balance summary and repeated it when the user asked again.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent mentions that total sum on certificates is $1000.\",\n            \"reasoning\": \"The agent stated travel certificates total $1,000.00 ($500, $250, and $250) in both the initial and the follow-up balance summaries.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent cancels reservation K1NW8N.\",\n            \"reasoning\": \"After the user confirmed, the agent called cancel_reservation for K1NW8N, and the tool result shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.\",\n            \"reasoning\": \"The agent booked a business round trip JFK-SFO for Mohamed Silva (HATHAT) using HAT023 on 2024-05-26, HAT204 and HAT100 on 2024-05-28, matching the expected flights.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.\",\n            \"reasoning\": \"The Mohamed Silva booking was submitted with exactly these four payment methods and amounts, and the tool result confirms them.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 6,\n            \"expectedOutcome\": \"Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.\",\n            \"reasoning\": \"The agent booked HATHAU for Raj Sanchez on the same flights with $250 on certificate_9984806 and $621 on credit_card_2198526.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 7,\n            \"expectedOutcome\": \"Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.\",\n            \"reasoning\": \"The agent booked HATHAV for Liam Wilson on the same flights with $250 on certificate_2765295 and $621 on credit_card_2198526.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 8,\n            \"expectedOutcome\": \"Agent communicates that Mastercard will be charged $1286.\",\n            \"reasoning\": \"Before booking, the agent stated the Mastercard would be charged $1,286.00 ($44 + $621 + $621), and this matches the bookings made.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "e72487ecdd7d007b",
+"vote": 1,
+"attempt": 0,
+"parse_error": "JSONDecodeError('Extra data: line 6 column 6 (char 301)')",
+"n_results": 0,
+"raw": "[\n    {\n        \"index\": 1,\n        \"expectedOutcome\": \"Agent mentions that total sum on gift cards is $327.\",\n        \"reasoning\": \"The agent stated the gift card total as $327.00 ($198.00 and $129.00) in its first response and repeated it after the user asked again.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 2,\n        \"expectedOutcome\": \"Agent mentions that total sum on certificates is $1000.\",\n        \"reasoning\": \"The agent stated the travel certificate total as $1,000.00 ($500, $250, and $250) in its first response and repeated it later in the conversation.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 3,\n        \"expectedOutcome\": \"Agent cancels reservation K1NW8N.\",\n        \"reasoning\": \"After the user confirmed, the agent called cancel_reservation with reservation_id K1NW8N, and the tool returned status 'cancelled'.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 4,\n        \"expectedOutcome\": \"Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.\",\n        \"reasoning\": \"The agent booked a business round trip JFK-SFO for Mohamed Silva using HAT023 on 2024-05-26 and HAT204 and HAT100 on 2024-05-28. The booking was confirmed as HATHAT.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 5,\n        \"expectedOutcome\": \"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.\",\n        \"reasoning\": \"The booking call for Mohamed Silva used exactly these four payment methods and amounts, and the returned payment history matches.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 6,\n        \"expectedOutcome\": \"Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.\",\n        \"reasoning\": \"The agent booked a business round trip with the same flights for Raj Sanchez, paying $250 by certificate_9984806 and $621 by credit_card_2198526. The reservation was confirmed as HATHAU.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 7,\n        \"expectedOutcome\": \"Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.\",\n        \"reasoning\": \"The agent booked a business round trip with the same flights for Liam Wilson, paying $250 by certificate_2765295 and $621 by credit_card_2198526. The reservation was confirmed as HATHAV.\",\n        \"metExpectation\": true\n    },\n    {\n        \"index\": 8,\n        \"expectedOutcome\": \"Agent communicates that Mastercard will be charged $1286.\",\n        \"reasoning\": \"Before the user confirmed, the agent stated the Mastercard (credit_card_2198526) would be charged $1,286.00, broken down as $44 + $621 + $621.\",\n        \"metExpectation\": true\n    }\n]"
+},
+{
+"key": "e72487ecdd7d007b",
+"vote": 1,
+"attempt": 1,
+"parse_error": "",
+"n_results": 8,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent mentions that total sum on gift cards is $327.\",\n            \"reasoning\": \"The agent stated the gift card total as $327.00 ($198.00 and $129.00) in its first response and repeated it when the customer asked again.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent mentions that total sum on certificates is $1000.\",\n            \"reasoning\": \"The agent stated the travel certificate total as $1,000.00 ($500, $250, and $250) in its first response and repeated it later in the conversation.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent cancels reservation K1NW8N.\",\n            \"reasoning\": \"After the customer confirmed, the agent called cancel_reservation with reservation_id K1NW8N, and the tool returned status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.\",\n            \"reasoning\": \"The book_reservation call for Mohamed Silva used JFK to SFO, round_trip, business cabin, flights HAT023 (2024-05-26), HAT204 and HAT100 (2024-05-28). The booking succeeded as HATHAT.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.\",\n            \"reasoning\": \"The Mohamed Silva booking payment_methods were certificate_3765853 $500, gift_card_8020792 $198, gift_card_6136092 $129, and credit_card_2198526 $44, matching exactly.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 6,\n            \"expectedOutcome\": \"Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.\",\n            \"reasoning\": \"The Raj Sanchez booking used the same flights and business cabin, paying $250 with certificate_9984806 and $621 with credit_card_2198526. It succeeded as HATHAU.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 7,\n            \"expectedOutcome\": \"Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.\",\n            \"reasoning\": \"The Liam Wilson booking used the same flights and business cabin, paying $250 with certificate_2765295 and $621 with credit_card_2198526. It succeeded as HATHAV.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 8,\n            \"expectedOutcome\": \"Agent communicates that Mastercard will be charged $1286.\",\n            \"reasoning\": \"Before booking, the agent told the customer the Mastercard (credit_card_2198526) would be charged $1,286.00 across the three bookings ($44 + $621 + $621), and the customer then confirmed.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "e72487ecdd7d007b",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 8,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent mentions that total sum on gift cards is $327.\",\n            \"reasoning\": \"The agent stated the gift card total as $327.00 ($198.00 and $129.00) in its first balance summary and repeated it when the user asked again.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent mentions that total sum on certificates is $1000.\",\n            \"reasoning\": \"The agent stated the travel certificate total as $1,000.00 ($500, $250, and $250) in the first summary and again later in the conversation.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent cancels reservation K1NW8N.\",\n            \"reasoning\": \"After the user confirmed, the agent called cancel_reservation with reservation_id K1NW8N, and the tool result shows status 'cancelled'.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.\",\n            \"reasoning\": \"The agent called book_reservation for Mohamed Silva with cabin business, flight_type round_trip, flights HAT023 (2024-05-26), HAT204 and HAT100 (2024-05-28), origin JFK and destination SFO. The booking succeeded as HATHAT.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.\",\n            \"reasoning\": \"The booking call for Mohamed used exactly these four payment methods and amounts, and the resulting payment_history matches.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 6,\n            \"expectedOutcome\": \"Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.\",\n            \"reasoning\": \"The agent booked a business round trip with the same flights for Raj Sanchez using certificate_9984806 ($250) and credit_card_2198526 ($621). The booking succeeded as HATHAU.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 7,\n            \"expectedOutcome\": \"Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.\",\n            \"reasoning\": \"The agent booked a business round trip with the same flights for Liam Wilson using certificate_2765295 ($250) and credit_card_2198526 ($621). The booking succeeded as HATHAV.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 8,\n            \"expectedOutcome\": \"Agent communicates that Mastercard will be charged $1286.\",\n            \"reasoning\": \"Before booking, the agent told the user the Mastercard (credit_card_2198526) would be charged $1,286.00 across the three bookings ($44 + $621 + $621), and it was included in the confirmation summary.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "fe69c584dd8e4666",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel reservation NQNU5R since it is in the past.\",\n            \"reasoning\": \"The agent never called a cancellation tool for NQNU5R. It explained that the flights had already been flown, and it transferred the user to a human agent for that request.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.\",\n            \"reasoning\": \"The agent never called a cancellation tool for IFOYYZ. It explained that the booking was made more than 24 hours earlier, has no insurance, is not business class, and was not cancelled by the airline, so it does not qualify. The user accepted this and the booking was left as is.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent upgrades M20IZO to business class.\",\n            \"reasoning\": \"The agent called update_reservation_flights for M20IZO with cabin set to business, using the confirmed flights HAT268 and HAT010 and the Mastercard ending 7334. The tool result shows cabin business with a $1,194 charge, and the agent confirmed the upgrade to the user.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "fe69c584dd8e4666",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel reservation NQNU5R since it is in the past.\",\n            \"reasoning\": \"The agent declined to cancel NQNU5R because its flights had already been flown, made no cancellation tool call for it, and transferred the user to a human agent for that request.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.\",\n            \"reasoning\": \"The agent checked IFOYYZ against the cancellation criteria (booked more than 24 hours ago, no insurance, basic economy, flights not cancelled by the airline), explained it was ineligible, and made no cancellation call. The user accepted and kept the booking.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent upgrades M20IZO to business class.\",\n            \"reasoning\": \"After the user confirmed, the agent called update_reservation_flights with cabin set to business for both flights and the chosen Mastercard. The tool result shows the reservation now in business class, with the $1,194 difference charged.\",\n            \"metExpectation\": true\n        }\n    ]\n}\n```"
+},
+{
+"key": "abd316e2731a22ca",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the user approved Step 1, the agent called update_reservation_flights on OWZ4XL with cabin set to \\\"economy\\\" while keeping HAT202 and HAT232. The tool result confirmed the reservation's cabin is now economy.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"After the user approved Step 2, the agent called update_reservation_flights on OWZ4XL with flights set to HAT041 on 2024-05-21 in economy. The tool result confirmed the reservation now contains only HAT041.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "abd316e2731a22ca",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"After the user explicitly confirmed Step 1, the agent called update_reservation_flights on OWZ4XL with cabin set to \\\"economy\\\" and the existing flights HAT202 and HAT232 kept unchanged. The tool result shows the cabin as economy, so the upgrade was completed.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"After the user confirmed Step 2, the agent called update_reservation_flights on OWZ4XL with flights set to HAT041 on 2024-05-21 in economy. The tool result shows the reservation now contains only HAT041 (EWR to LAX nonstop).\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "fe69c584dd8e4666",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 3,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel reservation NQNU5R since it is in the past.\",\n            \"reasoning\": \"The agent never called a cancellation tool for NQNU5R. It explained that the flights had already been flown, declined the cancellation, and offered a transfer to a human agent, which the user accepted.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.\",\n            \"reasoning\": \"The agent made no cancellation call for IFOYYZ. It explained that the booking did not meet the cancellation criteria (not within 24 hours, no insurance, not business, no airline cancellation). The user accepted and kept the booking as is.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent upgrades M20IZO to business class.\",\n            \"reasoning\": \"The agent called update_reservation_flights for M20IZO with cabin set to business, using the flights HAT268 and HAT010, and charged the $1,194 difference to the user's confirmed Mastercard. The returned reservation shows cabin business for both passengers.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "abd316e2731a22ca",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 2,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent update reservation OWZ4XL to economy.\",\n            \"reasoning\": \"The agent called update_reservation_flights on OWZ4XL with cabin set to \\\"economy\\\" (keeping HAT202 and HAT232 unchanged) after the user approved Step 1. The tool returned a successful update with cabin \\\"economy\\\".\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"Agent updates reservation OWZ4XL to flight HAT041.\",\n            \"reasoning\": \"After the user explicitly approved Step 2, the agent called update_reservation_flights on OWZ4XL with flights set to HAT041 on 2024-05-21 in economy. The tool result confirmed the reservation now contains only HAT041.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "61718cec53d6eb8f",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel 3RK2T9.\",\n            \"reasoning\": \"The agent looked up reservation 3RK2T9 twice, found the creation timestamp of May 2, 2024 (outside the 24-hour window), and repeatedly stated it could not cancel the reservation. It never called a cancellation tool. It then transferred the user to a human agent, so the reservation was not cancelled.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "61718cec53d6eb8f",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n  \"results\": [\n    {\n      \"index\": 1,\n      \"expectedOutcome\": \"Agent does not cancel 3RK2T9.\",\n      \"reasoning\": \"The agent looked up reservation 3RK2T9 twice, determined the creation timestamp (May 2, 2024) fell outside the 24-hour window and that no other cancellation conditions applied, and declined to cancel. It then transferred the user to a human agent without performing any cancellation.\",\n      \"metExpectation\": true\n    }\n  ]\n}"
+},
+{
+"key": "61718cec53d6eb8f",
+"vote": 2,
+"attempt": 0,
+"parse_error": "",
+"n_results": 1,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel 3RK2T9.\",\n            \"reasoning\": \"The agent looked up reservation 3RK2T9 twice, found the creation timestamp of May 2, 2024 (outside the 24-hour window), declined to cancel it, and then transferred the user to a human agent. No cancellation tool was called, so the reservation was not cancelled.\",\n            \"metExpectation\": true\n        }\n    ]\n}"
+},
+{
+"key": "3064bd90919d3566",
+"vote": 0,
+"attempt": 0,
+"parse_error": "",
+"n_results": 5,
+"raw": "{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel reservation S61CZX as the user is healthy.\",\n            \"reasoning\": \"The agent refused to cancel S61CZX because the user's reason (change of plans) does not qualify for cancellation under the insurance terms, and no cancellation tool call was made. The reservation remained unchanged.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"The total cost that the agent mentions is between $1380 and $1390.\",\n            \"reasoning\": \"The agent stated a total of $1,387 for the three business upgrades charged to the Visa ending in 7238, which falls within the $1380 to $1390 range.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent upgrades NM1VX1 to business.\",\n            \"reasoning\": \"The agent never executed the upgrade. It only quoted a price of $484 and asked the user to confirm, then transferred the user to a human agent. No upgrade tool call was made.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent upgrades H8Q05L to business.\",\n            \"reasoning\": \"The agent only quoted the upgrade cost of $163 and asked for confirmation. The user had not confirmed, and the agent transferred the user without performing the upgrade.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"Agent updates KC18K6 to business.\",\n            \"reasoning\": \"The agent only quoted the corrected upgrade cost of $740 and asked for confirmation. No update was performed before the transfer to a human agent.\",\n            \"metExpectation\": false\n        }\n    ]\n}"
+},
+{
+"key": "3064bd90919d3566",
+"vote": 1,
+"attempt": 0,
+"parse_error": "",
+"n_results": 5,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel reservation S61CZX as the user is healthy.\",\n            \"reasoning\": \"The agent refused to cancel S61CZX. It explained that insurance covers only health or weather reasons, that the user's change of plans isn't covered, and that the booking doesn't meet the other cancellation criteria. No cancellation tool call was made.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"The total cost that the agent mentions is between $1380 and $1390.\",\n            \"reasoning\": \"The agent stated a total of $1,387 for the three business upgrades, which falls within the $1380 to $1390 range.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent upgrades NM1VX1 to business.\",\n            \"reasoning\": \"The agent never performed the upgrade. It asked the user to confirm which upgrades to proceed with, the user did not confirm, and the agent transferred the user to a human agent without making any cabin change.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent upgrades H8Q05L to business.\",\n            \"reasoning\": \"No upgrade was executed for H8Q05L. The agent only quoted the cost and asked for confirmation, which the user never gave.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"Agent updates KC18K6 to business.\",\n            \"reasoning\": \"No upgrade was executed for KC18K6. The agent only quoted a corrected cost of $740 and asked for confirmation before proceeding, and the conversation ended in a transfer.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+},
+{
+"key": "3064bd90919d3566",
+"vote": 2,
+"attempt": 0,
+"parse_error": "JSONDecodeError('Extra data: line 6 column 4 (char 392)')",
+"n_results": 0,
+"raw": "[\n  {\n    \"index\": 1,\n    \"expectedOutcome\": \"Agent does not cancel reservation S61CZX as the user is healthy.\",\n    \"reasoning\": \"The agent refused to cancel S61CZX. It explained that insurance only covers health or weather reasons, the user's change of plans is not covered, and the other cancellation conditions are not met. No cancellation tool call was made.\",\n    \"metExpectation\": true\n  },\n  {\n    \"index\": 2,\n    \"expectedOutcome\": \"The total cost that the agent mentions is between $1380 and $1390.\",\n    \"reasoning\": \"The agent stated a total of $1,387 for the three upgrades charged to the Visa ending in 7238, which falls within the $1380–$1390 range.\",\n    \"metExpectation\": true\n  },\n  {\n    \"index\": 3,\n    \"expectedOutcome\": \"Agent upgrades NM1VX1 to business.\",\n    \"reasoning\": \"The agent only quoted the upgrade cost and asked the user for confirmation. The user did not confirm, and the agent never called an upgrade tool for NM1VX1. It transferred the user to a human instead.\",\n    \"metExpectation\": false\n  },\n  {\n    \"index\": 4,\n    \"expectedOutcome\": \"Agent upgrades H8Q05L to business.\",\n    \"reasoning\": \"No upgrade was performed for H8Q05L. The agent only presented the cost and was waiting for the user's decision before the transfer.\",\n    \"metExpectation\": false\n  },\n  {\n    \"index\": 5,\n    \"expectedOutcome\": \"Agent updates KC18K6 to business.\",\n    \"reasoning\": \"No upgrade was performed for KC18K6. The agent only quoted a corrected cost and then transferred the user without making any update.\",\n    \"metExpectation\": false\n  }\n]"
+},
+{
+"key": "3064bd90919d3566",
+"vote": 2,
+"attempt": 1,
+"parse_error": "",
+"n_results": 5,
+"raw": "```json\n{\n    \"results\": [\n        {\n            \"index\": 1,\n            \"expectedOutcome\": \"Agent does not cancel reservation S61CZX as the user is healthy.\",\n            \"reasoning\": \"The agent refused to cancel S61CZX and never called a cancellation tool. It explained that insurance covers only health or weather reasons, and that the booking was made more than 24 hours ago, is economy, and no flight was cancelled by the airline. The reservation was left unchanged.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 2,\n            \"expectedOutcome\": \"The total cost that the agent mentions is between $1380 and $1390.\",\n            \"reasoning\": \"The agent stated a total of $1,387 for the three business upgrades charged to the Visa ending in 7238. This falls within the $1380 to $1390 range.\",\n            \"metExpectation\": true\n        },\n        {\n            \"index\": 3,\n            \"expectedOutcome\": \"Agent upgrades NM1VX1 to business.\",\n            \"reasoning\": \"The agent never executed any upgrade. It only quoted the cost and asked for confirmation, and the user had not confirmed. The conversation ended with a transfer to a human agent.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 4,\n            \"expectedOutcome\": \"Agent upgrades H8Q05L to business.\",\n            \"reasoning\": \"No upgrade was performed for H8Q05L. The agent only provided a quote and the user did not approve it before the transfer.\",\n            \"metExpectation\": false\n        },\n        {\n            \"index\": 5,\n            \"expectedOutcome\": \"Agent updates KC18K6 to business.\",\n            \"reasoning\": \"No upgrade was performed for KC18K6. The agent corrected its price quote for this reservation but did not carry out the upgrade, and the user never confirmed it.\",\n            \"metExpectation\": false\n        }\n    ]\n}\n```"
+}
+]

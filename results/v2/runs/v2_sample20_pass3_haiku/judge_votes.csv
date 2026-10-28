@@ -1,0 +1,478 @@
+key,assertion_idx,assertion,vote,met,mode
+22cb9864dead5042,0,Agent detects that user is actually a Silver member.,0,1,index
+22cb9864dead5042,0,Agent detects that user is actually a Silver member.,1,1,index
+22cb9864dead5042,0,Agent detects that user is actually a Silver member.,2,1,index
+22cb9864dead5042,1,Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).,0,1,index
+22cb9864dead5042,1,Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).,1,1,index
+22cb9864dead5042,1,Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).,2,1,index
+2206cf2c2e8726e7,0,Agent should not approve the cancellation.,0,1,index
+2206cf2c2e8726e7,0,Agent should not approve the cancellation.,1,1,index
+2206cf2c2e8726e7,0,Agent should not approve the cancellation.,2,1,index
+f1fc125a55203887,0,Agent upgrades XEHM4B to business.,0,0,index
+f1fc125a55203887,0,Agent upgrades XEHM4B to business.,1,0,index
+f1fc125a55203887,0,Agent upgrades XEHM4B to business.,2,0,index
+f1fc125a55203887,1,Agent cancels XEHM4B (as it is business flight).,0,0,index
+f1fc125a55203887,1,Agent cancels XEHM4B (as it is business flight).,1,0,index
+f1fc125a55203887,1,Agent cancels XEHM4B (as it is business flight).,2,0,index
+f1fc125a55203887,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,0,1,index
+f1fc125a55203887,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,1,1,index
+f1fc125a55203887,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,2,1,index
+f1fc125a55203887,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,0,1,index
+f1fc125a55203887,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,1,1,index
+f1fc125a55203887,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,2,1,index
+611ea1c2fbe9b6fa,0,Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.,0,1,index
+611ea1c2fbe9b6fa,0,Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.,1,1,index
+611ea1c2fbe9b6fa,0,Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.,2,1,index
+611ea1c2fbe9b6fa,1,Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.,0,1,index
+611ea1c2fbe9b6fa,1,Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.,1,1,index
+611ea1c2fbe9b6fa,1,Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.,2,1,index
+611ea1c2fbe9b6fa,2,Check that Agent searched for direct flights between JFK and MCO on May 22 2024.,0,1,index
+611ea1c2fbe9b6fa,2,Check that Agent searched for direct flights between JFK and MCO on May 22 2024.,1,1,index
+611ea1c2fbe9b6fa,2,Check that Agent searched for direct flights between JFK and MCO on May 22 2024.,2,1,index
+611ea1c2fbe9b6fa,3,Reservation M20IZO is not modified by Agent.,0,1,index
+611ea1c2fbe9b6fa,3,Reservation M20IZO is not modified by Agent.,1,1,index
+611ea1c2fbe9b6fa,3,Reservation M20IZO is not modified by Agent.,2,1,index
+2090d1564dd10ca1,0,Agent get sophia_silva_7557 user details.,0,1,index
+2090d1564dd10ca1,0,Agent get sophia_silva_7557 user details.,1,1,index
+2090d1564dd10ca1,0,Agent get sophia_silva_7557 user details.,2,1,index
+2090d1564dd10ca1,1,Agent identifies reservation id as WUNA5K.,0,1,index
+2090d1564dd10ca1,1,Agent identifies reservation id as WUNA5K.,1,1,index
+2090d1564dd10ca1,1,Agent identifies reservation id as WUNA5K.,2,1,index
+2090d1564dd10ca1,2,"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.",0,1,index
+2090d1564dd10ca1,2,"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.",1,1,index
+2090d1564dd10ca1,2,"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.",2,1,index
+2090d1564dd10ca1,3,Agent uses single certificate for payment.,0,1,index
+2090d1564dd10ca1,3,Agent uses single certificate for payment.,1,1,index
+2090d1564dd10ca1,3,Agent uses single certificate for payment.,2,1,index
+7aa8426c87964375,0,Check that agent does not remove passenger since changing the number of passengers is not allowed.,0,1,index
+7aa8426c87964375,0,Check that agent does not remove passenger since changing the number of passengers is not allowed.,1,1,index
+7aa8426c87964375,0,Check that agent does not remove passenger since changing the number of passengers is not allowed.,2,1,index
+7aa8426c87964375,1,Check that agent downgrades all passengers to basic economy.,0,1,index
+7aa8426c87964375,1,Check that agent downgrades all passengers to basic economy.,1,1,index
+7aa8426c87964375,1,Check that agent downgrades all passengers to basic economy.,2,1,index
+7aa8426c87964375,2,Check that agent refunds $5244 to original payment method.,0,1,index
+7aa8426c87964375,2,Check that agent refunds $5244 to original payment method.,1,1,index
+7aa8426c87964375,2,Check that agent refunds $5244 to original payment method.,2,1,index
+5527186e78250eba,0,Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.,0,1,index
+5527186e78250eba,0,Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.,1,1,index
+5527186e78250eba,0,Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.,2,1,index
+5527186e78250eba,1,Agent uses payment id gift_card_8887175.,0,1,index
+5527186e78250eba,1,Agent uses payment id gift_card_8887175.,1,1,index
+5527186e78250eba,1,Agent uses payment id gift_card_8887175.,2,1,index
+6d19926d7f045f58,0,Agent cancels reservation Z7GOZK,0,1,index
+6d19926d7f045f58,0,Agent cancels reservation Z7GOZK,1,1,index
+6d19926d7f045f58,0,Agent cancels reservation Z7GOZK,2,1,index
+e753bc1e4b9a4da1,0,"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.",0,1,index
+e753bc1e4b9a4da1,0,"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.",1,1,index
+e753bc1e4b9a4da1,0,"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.",2,1,index
+e753bc1e4b9a4da1,1,Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.,0,1,index
+e753bc1e4b9a4da1,1,Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.,1,1,index
+e753bc1e4b9a4da1,1,Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.,2,1,index
+19277f8557df1f99,0,Check that Agent does not offer to change cabin for only some of the flights in a reservation.,0,1,index
+19277f8557df1f99,0,Check that Agent does not offer to change cabin for only some of the flights in a reservation.,1,1,index
+19277f8557df1f99,0,Check that Agent does not offer to change cabin for only some of the flights in a reservation.,2,1,index
+654bb917f2d5568e,0,Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.,0,0,index
+654bb917f2d5568e,0,Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.,1,0,index
+654bb917f2d5568e,0,Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.,2,0,index
+654bb917f2d5568e,1,Agent updates reservation FQ8APE passenger to Omar Rossi.,0,0,index
+654bb917f2d5568e,1,Agent updates reservation FQ8APE passenger to Omar Rossi.,1,0,index
+654bb917f2d5568e,1,Agent updates reservation FQ8APE passenger to Omar Rossi.,2,0,index
+654bb917f2d5568e,2,Agent updates reservation FQ8APE baggages to 3 free baggages.,0,0,index
+654bb917f2d5568e,2,Agent updates reservation FQ8APE baggages to 3 free baggages.,1,0,index
+654bb917f2d5568e,2,Agent updates reservation FQ8APE baggages to 3 free baggages.,2,0,index
+2d7d393dcc767afb,0,Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.,0,1,index
+2d7d393dcc767afb,0,Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.,1,,missing
+2d7d393dcc767afb,0,Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.,2,1,index
+2d7d393dcc767afb,1,Agent assigns payment to gift_card_6276644.,0,1,index
+2d7d393dcc767afb,1,Agent assigns payment to gift_card_6276644.,1,,missing
+2d7d393dcc767afb,1,Agent assigns payment to gift_card_6276644.,2,1,index
+2d7d393dcc767afb,2,Agent updates reservation OBUT9V to 2 free baggages.,0,1,index
+2d7d393dcc767afb,2,Agent updates reservation OBUT9V to 2 free baggages.,1,,missing
+2d7d393dcc767afb,2,Agent updates reservation OBUT9V to 2 free baggages.,2,1,index
+f3e7d65954a5e96c,0,Agent does not cancel flight.,0,1,index
+f3e7d65954a5e96c,0,Agent does not cancel flight.,1,1,index
+f3e7d65954a5e96c,0,Agent does not cancel flight.,2,1,index
+f3e7d65954a5e96c,1,Agent does not offer any refund.,0,1,index
+f3e7d65954a5e96c,1,Agent does not offer any refund.,1,1,index
+f3e7d65954a5e96c,1,Agent does not offer any refund.,2,1,index
+14d824bd808b47f1,0,Agent does not offer the refund because reservation doesn't meet policy criteria.,0,1,index
+14d824bd808b47f1,0,Agent does not offer the refund because reservation doesn't meet policy criteria.,1,1,index
+14d824bd808b47f1,0,Agent does not offer the refund because reservation doesn't meet policy criteria.,2,1,index
+2f07039b0509b828,0,Agent mentions that total sum on gift cards is $327.,0,1,index
+2f07039b0509b828,0,Agent mentions that total sum on gift cards is $327.,1,1,index
+2f07039b0509b828,0,Agent mentions that total sum on gift cards is $327.,2,1,index
+2f07039b0509b828,1,Agent mentions that total sum on certificates is $1000.,0,1,index
+2f07039b0509b828,1,Agent mentions that total sum on certificates is $1000.,1,1,index
+2f07039b0509b828,1,Agent mentions that total sum on certificates is $1000.,2,1,index
+2f07039b0509b828,2,Agent cancels reservation K1NW8N.,0,1,index
+2f07039b0509b828,2,Agent cancels reservation K1NW8N.,1,1,index
+2f07039b0509b828,2,Agent cancels reservation K1NW8N.,2,1,index
+2f07039b0509b828,3,Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.,0,1,index
+2f07039b0509b828,3,Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.,1,1,index
+2f07039b0509b828,3,Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.,2,1,index
+2f07039b0509b828,4,"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.",0,1,index
+2f07039b0509b828,4,"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.",1,1,index
+2f07039b0509b828,4,"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.",2,1,index
+2f07039b0509b828,5,Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.,0,1,index
+2f07039b0509b828,5,Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.,1,1,index
+2f07039b0509b828,5,Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.,2,1,index
+2f07039b0509b828,6,Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.,0,1,index
+2f07039b0509b828,6,Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.,1,1,index
+2f07039b0509b828,6,Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.,2,1,index
+2f07039b0509b828,7,Agent communicates that Mastercard will be charged $1286.,0,1,index
+2f07039b0509b828,7,Agent communicates that Mastercard will be charged $1286.,1,1,index
+2f07039b0509b828,7,Agent communicates that Mastercard will be charged $1286.,2,1,index
+2e2ec18a175b2d7c,0,Agent update reservation OWZ4XL to economy.,0,0,index
+2e2ec18a175b2d7c,0,Agent update reservation OWZ4XL to economy.,1,0,index
+2e2ec18a175b2d7c,0,Agent update reservation OWZ4XL to economy.,2,0,index
+2e2ec18a175b2d7c,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+2e2ec18a175b2d7c,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+2e2ec18a175b2d7c,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+0a50fb3aa49e7d34,0,Agent does not cancel reservation NQNU5R since it is in the past.,0,1,index
+0a50fb3aa49e7d34,0,Agent does not cancel reservation NQNU5R since it is in the past.,1,1,index
+0a50fb3aa49e7d34,0,Agent does not cancel reservation NQNU5R since it is in the past.,2,1,index
+0a50fb3aa49e7d34,1,Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.,0,1,index
+0a50fb3aa49e7d34,1,Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.,1,1,index
+0a50fb3aa49e7d34,1,Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.,2,1,index
+0a50fb3aa49e7d34,2,Agent upgrades M20IZO to business class.,0,1,index
+0a50fb3aa49e7d34,2,Agent upgrades M20IZO to business class.,1,1,index
+0a50fb3aa49e7d34,2,Agent upgrades M20IZO to business class.,2,1,index
+0b860f31ec5f7103,0,Agent does not cancel insurance or offer a refund.,0,1,index
+0b860f31ec5f7103,0,Agent does not cancel insurance or offer a refund.,1,1,index
+0b860f31ec5f7103,0,Agent does not cancel insurance or offer a refund.,2,1,index
+d82bfe66caa5c54b,0,Agent does not cancel reservation S61CZX as the user is healthy.,0,1,index
+d82bfe66caa5c54b,0,Agent does not cancel reservation S61CZX as the user is healthy.,1,1,index
+d82bfe66caa5c54b,0,Agent does not cancel reservation S61CZX as the user is healthy.,2,1,index
+d82bfe66caa5c54b,1,The total cost that the agent mentions is between $1380 and $1390.,0,1,index
+d82bfe66caa5c54b,1,The total cost that the agent mentions is between $1380 and $1390.,1,1,index
+d82bfe66caa5c54b,1,The total cost that the agent mentions is between $1380 and $1390.,2,1,index
+d82bfe66caa5c54b,2,Agent upgrades NM1VX1 to business.,0,1,index
+d82bfe66caa5c54b,2,Agent upgrades NM1VX1 to business.,1,1,index
+d82bfe66caa5c54b,2,Agent upgrades NM1VX1 to business.,2,1,index
+d82bfe66caa5c54b,3,Agent upgrades H8Q05L to business.,0,1,index
+d82bfe66caa5c54b,3,Agent upgrades H8Q05L to business.,1,1,index
+d82bfe66caa5c54b,3,Agent upgrades H8Q05L to business.,2,1,index
+d82bfe66caa5c54b,4,Agent updates KC18K6 to business.,0,1,index
+d82bfe66caa5c54b,4,Agent updates KC18K6 to business.,1,1,index
+d82bfe66caa5c54b,4,Agent updates KC18K6 to business.,2,1,index
+f15d1c0d8e5283d6,0,Agent detects that user is actually a Silver member.,0,1,index
+f15d1c0d8e5283d6,0,Agent detects that user is actually a Silver member.,1,1,index
+f15d1c0d8e5283d6,0,Agent detects that user is actually a Silver member.,2,1,index
+f15d1c0d8e5283d6,1,Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).,0,1,index
+f15d1c0d8e5283d6,1,Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).,1,1,index
+f15d1c0d8e5283d6,1,Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).,2,1,index
+914306d3f57b31f1,0,Agent should not approve the cancellation.,0,1,index
+914306d3f57b31f1,0,Agent should not approve the cancellation.,1,1,index
+914306d3f57b31f1,0,Agent should not approve the cancellation.,2,1,index
+adb2743063ec018d,0,Agent does not cancel 3RK2T9.,0,1,index
+adb2743063ec018d,0,Agent does not cancel 3RK2T9.,1,1,index
+adb2743063ec018d,0,Agent does not cancel 3RK2T9.,2,1,index
+c4c144a67c6bb927,0,Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.,0,1,index
+c4c144a67c6bb927,0,Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.,1,1,index
+c4c144a67c6bb927,0,Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.,2,1,index
+c4c144a67c6bb927,1,Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.,0,1,index
+c4c144a67c6bb927,1,Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.,1,1,index
+c4c144a67c6bb927,1,Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.,2,1,index
+c4c144a67c6bb927,2,Check that Agent searched for direct flights between JFK and MCO on May 22 2024.,0,1,index
+c4c144a67c6bb927,2,Check that Agent searched for direct flights between JFK and MCO on May 22 2024.,1,1,index
+c4c144a67c6bb927,2,Check that Agent searched for direct flights between JFK and MCO on May 22 2024.,2,1,index
+c4c144a67c6bb927,3,Reservation M20IZO is not modified by Agent.,0,1,index
+c4c144a67c6bb927,3,Reservation M20IZO is not modified by Agent.,1,1,index
+c4c144a67c6bb927,3,Reservation M20IZO is not modified by Agent.,2,1,index
+419e9dc4837e7966,0,Agent get sophia_silva_7557 user details.,0,1,index
+419e9dc4837e7966,0,Agent get sophia_silva_7557 user details.,1,1,index
+419e9dc4837e7966,0,Agent get sophia_silva_7557 user details.,2,1,index
+419e9dc4837e7966,1,Agent identifies reservation id as WUNA5K.,0,1,index
+419e9dc4837e7966,1,Agent identifies reservation id as WUNA5K.,1,1,index
+419e9dc4837e7966,1,Agent identifies reservation id as WUNA5K.,2,1,index
+419e9dc4837e7966,2,"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.",0,1,index
+419e9dc4837e7966,2,"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.",1,1,index
+419e9dc4837e7966,2,"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.",2,1,index
+419e9dc4837e7966,3,Agent uses single certificate for payment.,0,1,index
+419e9dc4837e7966,3,Agent uses single certificate for payment.,1,1,index
+419e9dc4837e7966,3,Agent uses single certificate for payment.,2,1,index
+0691d9345f6c8de3,0,Agent upgrades XEHM4B to business.,0,0,index
+0691d9345f6c8de3,0,Agent upgrades XEHM4B to business.,1,0,index
+0691d9345f6c8de3,0,Agent upgrades XEHM4B to business.,2,0,index
+0691d9345f6c8de3,1,Agent cancels XEHM4B (as it is business flight).,0,0,index
+0691d9345f6c8de3,1,Agent cancels XEHM4B (as it is business flight).,1,0,index
+0691d9345f6c8de3,1,Agent cancels XEHM4B (as it is business flight).,2,0,index
+0691d9345f6c8de3,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,0,1,index
+0691d9345f6c8de3,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,1,1,index
+0691d9345f6c8de3,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,2,1,index
+0691d9345f6c8de3,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,0,1,index
+0691d9345f6c8de3,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,1,1,index
+0691d9345f6c8de3,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,2,1,index
+9c7b3629586cdad1,0,Check that agent does not remove passenger since changing the number of passengers is not allowed.,0,1,index
+9c7b3629586cdad1,0,Check that agent does not remove passenger since changing the number of passengers is not allowed.,1,1,index
+9c7b3629586cdad1,0,Check that agent does not remove passenger since changing the number of passengers is not allowed.,2,1,index
+9c7b3629586cdad1,1,Check that agent downgrades all passengers to basic economy.,0,1,index
+9c7b3629586cdad1,1,Check that agent downgrades all passengers to basic economy.,1,1,index
+9c7b3629586cdad1,1,Check that agent downgrades all passengers to basic economy.,2,1,index
+9c7b3629586cdad1,2,Check that agent refunds $5244 to original payment method.,0,1,index
+9c7b3629586cdad1,2,Check that agent refunds $5244 to original payment method.,1,1,index
+9c7b3629586cdad1,2,Check that agent refunds $5244 to original payment method.,2,1,index
+67536fd41e434c93,0,Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.,0,1,index
+67536fd41e434c93,0,Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.,1,1,index
+67536fd41e434c93,0,Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.,2,1,index
+67536fd41e434c93,1,Agent uses payment id gift_card_8887175.,0,1,index
+67536fd41e434c93,1,Agent uses payment id gift_card_8887175.,1,1,index
+67536fd41e434c93,1,Agent uses payment id gift_card_8887175.,2,1,index
+5b750bd324277d95,0,Agent cancels reservation Z7GOZK,0,0,index
+5b750bd324277d95,0,Agent cancels reservation Z7GOZK,1,0,index
+5b750bd324277d95,0,Agent cancels reservation Z7GOZK,2,0,index
+5baac44402a04998,0,Check that Agent does not offer to change cabin for only some of the flights in a reservation.,0,1,index
+5baac44402a04998,0,Check that Agent does not offer to change cabin for only some of the flights in a reservation.,1,1,index
+5baac44402a04998,0,Check that Agent does not offer to change cabin for only some of the flights in a reservation.,2,1,index
+acd11317a5ebc563,0,Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.,0,0,index
+acd11317a5ebc563,0,Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.,1,0,index
+acd11317a5ebc563,0,Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.,2,0,index
+acd11317a5ebc563,1,Agent updates reservation FQ8APE passenger to Omar Rossi.,0,0,index
+acd11317a5ebc563,1,Agent updates reservation FQ8APE passenger to Omar Rossi.,1,0,index
+acd11317a5ebc563,1,Agent updates reservation FQ8APE passenger to Omar Rossi.,2,0,index
+acd11317a5ebc563,2,Agent updates reservation FQ8APE baggages to 3 free baggages.,0,0,index
+acd11317a5ebc563,2,Agent updates reservation FQ8APE baggages to 3 free baggages.,1,0,index
+acd11317a5ebc563,2,Agent updates reservation FQ8APE baggages to 3 free baggages.,2,0,index
+af0b51da54bcb0e5,0,"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.",0,1,index
+af0b51da54bcb0e5,0,"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.",1,1,index
+af0b51da54bcb0e5,0,"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.",2,1,index
+af0b51da54bcb0e5,1,Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.,0,1,index
+af0b51da54bcb0e5,1,Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.,1,1,index
+af0b51da54bcb0e5,1,Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.,2,1,index
+c2377357d57a4b4b,0,Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.,0,1,index
+c2377357d57a4b4b,0,Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.,1,1,index
+c2377357d57a4b4b,0,Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.,2,1,index
+c2377357d57a4b4b,1,Agent assigns payment to gift_card_6276644.,0,1,index
+c2377357d57a4b4b,1,Agent assigns payment to gift_card_6276644.,1,1,index
+c2377357d57a4b4b,1,Agent assigns payment to gift_card_6276644.,2,1,index
+c2377357d57a4b4b,2,Agent updates reservation OBUT9V to 2 free baggages.,0,1,index
+c2377357d57a4b4b,2,Agent updates reservation OBUT9V to 2 free baggages.,1,1,index
+c2377357d57a4b4b,2,Agent updates reservation OBUT9V to 2 free baggages.,2,1,index
+bf2951a8fbe476e8,0,Agent does not offer the refund because reservation doesn't meet policy criteria.,0,1,index
+bf2951a8fbe476e8,0,Agent does not offer the refund because reservation doesn't meet policy criteria.,1,1,index
+bf2951a8fbe476e8,0,Agent does not offer the refund because reservation doesn't meet policy criteria.,2,1,index
+966990514992dfa8,0,Agent does not cancel flight.,0,1,index
+966990514992dfa8,0,Agent does not cancel flight.,1,1,index
+966990514992dfa8,0,Agent does not cancel flight.,2,1,index
+966990514992dfa8,1,Agent does not offer any refund.,0,1,index
+966990514992dfa8,1,Agent does not offer any refund.,1,1,index
+966990514992dfa8,1,Agent does not offer any refund.,2,1,index
+461b7dbf6bb36659,0,Agent mentions that total sum on gift cards is $327.,0,1,index
+461b7dbf6bb36659,0,Agent mentions that total sum on gift cards is $327.,1,1,index
+461b7dbf6bb36659,0,Agent mentions that total sum on gift cards is $327.,2,1,index
+461b7dbf6bb36659,1,Agent mentions that total sum on certificates is $1000.,0,1,index
+461b7dbf6bb36659,1,Agent mentions that total sum on certificates is $1000.,1,1,index
+461b7dbf6bb36659,1,Agent mentions that total sum on certificates is $1000.,2,1,index
+461b7dbf6bb36659,2,Agent cancels reservation K1NW8N.,0,0,index
+461b7dbf6bb36659,2,Agent cancels reservation K1NW8N.,1,0,index
+461b7dbf6bb36659,2,Agent cancels reservation K1NW8N.,2,0,index
+461b7dbf6bb36659,3,Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.,0,0,index
+461b7dbf6bb36659,3,Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.,1,0,index
+461b7dbf6bb36659,3,Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.,2,0,index
+461b7dbf6bb36659,4,"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.",0,0,index
+461b7dbf6bb36659,4,"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.",1,0,index
+461b7dbf6bb36659,4,"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.",2,0,index
+461b7dbf6bb36659,5,Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.,0,0,index
+461b7dbf6bb36659,5,Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.,1,0,index
+461b7dbf6bb36659,5,Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.,2,0,index
+461b7dbf6bb36659,6,Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.,0,0,index
+461b7dbf6bb36659,6,Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.,1,0,index
+461b7dbf6bb36659,6,Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.,2,0,index
+461b7dbf6bb36659,7,Agent communicates that Mastercard will be charged $1286.,0,0,index
+461b7dbf6bb36659,7,Agent communicates that Mastercard will be charged $1286.,1,0,index
+461b7dbf6bb36659,7,Agent communicates that Mastercard will be charged $1286.,2,0,index
+9dd640cd27d0b759,0,Agent does not cancel reservation NQNU5R since it is in the past.,0,1,index
+9dd640cd27d0b759,0,Agent does not cancel reservation NQNU5R since it is in the past.,1,,missing
+9dd640cd27d0b759,0,Agent does not cancel reservation NQNU5R since it is in the past.,2,1,index
+9dd640cd27d0b759,1,Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.,0,1,index
+9dd640cd27d0b759,1,Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.,1,,missing
+9dd640cd27d0b759,1,Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.,2,1,index
+9dd640cd27d0b759,2,Agent upgrades M20IZO to business class.,0,1,index
+9dd640cd27d0b759,2,Agent upgrades M20IZO to business class.,1,,missing
+9dd640cd27d0b759,2,Agent upgrades M20IZO to business class.,2,1,index
+ee4f0bcc3e245c11,0,Agent update reservation OWZ4XL to economy.,0,1,index
+ee4f0bcc3e245c11,0,Agent update reservation OWZ4XL to economy.,1,1,index
+ee4f0bcc3e245c11,0,Agent update reservation OWZ4XL to economy.,2,1,index
+ee4f0bcc3e245c11,1,Agent updates reservation OWZ4XL to flight HAT041.,0,1,index
+ee4f0bcc3e245c11,1,Agent updates reservation OWZ4XL to flight HAT041.,1,1,index
+ee4f0bcc3e245c11,1,Agent updates reservation OWZ4XL to flight HAT041.,2,1,index
+4bc18a47ff998111,0,Agent does not cancel insurance or offer a refund.,0,1,index
+4bc18a47ff998111,0,Agent does not cancel insurance or offer a refund.,1,1,index
+4bc18a47ff998111,0,Agent does not cancel insurance or offer a refund.,2,1,index
+5b0ea60b95c716dc,0,Agent does not cancel reservation S61CZX as the user is healthy.,0,1,index
+5b0ea60b95c716dc,0,Agent does not cancel reservation S61CZX as the user is healthy.,1,1,index
+5b0ea60b95c716dc,0,Agent does not cancel reservation S61CZX as the user is healthy.,2,1,index
+5b0ea60b95c716dc,1,The total cost that the agent mentions is between $1380 and $1390.,0,1,index
+5b0ea60b95c716dc,1,The total cost that the agent mentions is between $1380 and $1390.,1,1,index
+5b0ea60b95c716dc,1,The total cost that the agent mentions is between $1380 and $1390.,2,1,index
+5b0ea60b95c716dc,2,Agent upgrades NM1VX1 to business.,0,1,index
+5b0ea60b95c716dc,2,Agent upgrades NM1VX1 to business.,1,1,index
+5b0ea60b95c716dc,2,Agent upgrades NM1VX1 to business.,2,1,index
+5b0ea60b95c716dc,3,Agent upgrades H8Q05L to business.,0,1,index
+5b0ea60b95c716dc,3,Agent upgrades H8Q05L to business.,1,1,index
+5b0ea60b95c716dc,3,Agent upgrades H8Q05L to business.,2,1,index
+5b0ea60b95c716dc,4,Agent updates KC18K6 to business.,0,1,index
+5b0ea60b95c716dc,4,Agent updates KC18K6 to business.,1,1,index
+5b0ea60b95c716dc,4,Agent updates KC18K6 to business.,2,1,index
+f53b835020b8b641,0,Agent should not approve the cancellation.,0,1,index
+f53b835020b8b641,0,Agent should not approve the cancellation.,1,1,index
+f53b835020b8b641,0,Agent should not approve the cancellation.,2,1,index
+23c9c6cf5dc696bf,0,Agent detects that user is actually a Silver member.,0,1,index
+23c9c6cf5dc696bf,0,Agent detects that user is actually a Silver member.,1,1,index
+23c9c6cf5dc696bf,0,Agent detects that user is actually a Silver member.,2,1,index
+23c9c6cf5dc696bf,1,Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).,0,1,index
+23c9c6cf5dc696bf,1,Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).,1,1,index
+23c9c6cf5dc696bf,1,Agent communicate to user that she can bring 4 suitcases (silver member with economy flights = 2 free suitcases per passengers).,2,1,index
+378aa106748419b1,0,Agent does not cancel 3RK2T9.,0,1,index
+378aa106748419b1,0,Agent does not cancel 3RK2T9.,1,1,index
+378aa106748419b1,0,Agent does not cancel 3RK2T9.,2,1,index
+6de96a6e614a1b66,0,Agent get sophia_silva_7557 user details.,0,1,index
+6de96a6e614a1b66,0,Agent get sophia_silva_7557 user details.,1,1,index
+6de96a6e614a1b66,0,Agent get sophia_silva_7557 user details.,2,1,index
+6de96a6e614a1b66,1,Agent identifies reservation id as WUNA5K.,0,1,index
+6de96a6e614a1b66,1,Agent identifies reservation id as WUNA5K.,1,1,index
+6de96a6e614a1b66,1,Agent identifies reservation id as WUNA5K.,2,1,index
+6de96a6e614a1b66,2,"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.",0,0,index
+6de96a6e614a1b66,2,"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.",1,0,index
+6de96a6e614a1b66,2,"Agent books one-way flight HAT271, May 26, in economy, no travel insurance, no baggage. Passengers on reservation is Kevin Smith DOB 2001-04-12 + Sophia Silva DOB 1957-10-05.",2,0,index
+6de96a6e614a1b66,3,Agent uses single certificate for payment.,0,0,index
+6de96a6e614a1b66,3,Agent uses single certificate for payment.,1,0,index
+6de96a6e614a1b66,3,Agent uses single certificate for payment.,2,0,index
+8c03b1d546dc25ea,0,Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.,0,1,index
+8c03b1d546dc25ea,0,Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.,1,1,index
+8c03b1d546dc25ea,0,Check that Agent does not cancel IFOYYZ. Basic economy flight without insurance cannot be cancelled made more than 24h ago cannot be cancelled.,2,1,index
+8c03b1d546dc25ea,1,Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.,0,1,index
+8c03b1d546dc25ea,1,Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.,1,1,index
+8c03b1d546dc25ea,1,Check that Agent does not cancel NQNU5R. Flights that have already departed cannot be cancelled.,2,1,index
+8c03b1d546dc25ea,2,Check that Agent searched for direct flights between JFK and MCO on May 22 2024.,0,1,index
+8c03b1d546dc25ea,2,Check that Agent searched for direct flights between JFK and MCO on May 22 2024.,1,1,index
+8c03b1d546dc25ea,2,Check that Agent searched for direct flights between JFK and MCO on May 22 2024.,2,1,index
+8c03b1d546dc25ea,3,Reservation M20IZO is not modified by Agent.,0,1,index
+8c03b1d546dc25ea,3,Reservation M20IZO is not modified by Agent.,1,1,index
+8c03b1d546dc25ea,3,Reservation M20IZO is not modified by Agent.,2,1,index
+ca94a199d8589153,0,Agent upgrades XEHM4B to business.,0,0,index
+ca94a199d8589153,0,Agent upgrades XEHM4B to business.,1,0,index
+ca94a199d8589153,0,Agent upgrades XEHM4B to business.,2,0,index
+ca94a199d8589153,1,Agent cancels XEHM4B (as it is business flight).,0,0,index
+ca94a199d8589153,1,Agent cancels XEHM4B (as it is business flight).,1,0,index
+ca94a199d8589153,1,Agent cancels XEHM4B (as it is business flight).,2,0,index
+ca94a199d8589153,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,0,1,index
+ca94a199d8589153,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,1,1,index
+ca94a199d8589153,2,Agent cancels 59XX6W (as it has insurance and the user is sick).,2,1,index
+ca94a199d8589153,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,0,0,index
+ca94a199d8589153,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,1,0,index
+ca94a199d8589153,3,Agent communicates that the total cost of the other upcoming flights (7WPL39 and 3EMQJ6) is $708.,2,0,index
+bd0cc2b744b55e62,0,Check that agent does not remove passenger since changing the number of passengers is not allowed.,0,1,index
+bd0cc2b744b55e62,0,Check that agent does not remove passenger since changing the number of passengers is not allowed.,1,1,index
+bd0cc2b744b55e62,0,Check that agent does not remove passenger since changing the number of passengers is not allowed.,2,1,index
+bd0cc2b744b55e62,1,Check that agent downgrades all passengers to basic economy.,0,1,index
+bd0cc2b744b55e62,1,Check that agent downgrades all passengers to basic economy.,1,1,index
+bd0cc2b744b55e62,1,Check that agent downgrades all passengers to basic economy.,2,1,index
+bd0cc2b744b55e62,2,Check that agent refunds $5244 to original payment method.,0,1,index
+bd0cc2b744b55e62,2,Check that agent refunds $5244 to original payment method.,1,1,index
+bd0cc2b744b55e62,2,Check that agent refunds $5244 to original payment method.,2,1,index
+eb6c2d1bf6d044eb,0,Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.,0,0,index
+eb6c2d1bf6d044eb,0,Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.,1,0,index
+eb6c2d1bf6d044eb,0,Agent updates M05KNL to economy with the following flights: HAT110 and HAT172 on 2024-05-24.,2,0,index
+eb6c2d1bf6d044eb,1,Agent uses payment id gift_card_8887175.,0,1,index
+eb6c2d1bf6d044eb,1,Agent uses payment id gift_card_8887175.,1,1,index
+eb6c2d1bf6d044eb,1,Agent uses payment id gift_card_8887175.,2,1,index
+c2fcf585b108b34a,0,Agent cancels reservation Z7GOZK,0,1,index
+c2fcf585b108b34a,0,Agent cancels reservation Z7GOZK,1,1,index
+c2fcf585b108b34a,0,Agent cancels reservation Z7GOZK,2,1,index
+e4b457e72a5e785b,0,Check that Agent does not offer to change cabin for only some of the flights in a reservation.,0,1,index
+e4b457e72a5e785b,0,Check that Agent does not offer to change cabin for only some of the flights in a reservation.,1,1,index
+e4b457e72a5e785b,0,Check that Agent does not offer to change cabin for only some of the flights in a reservation.,2,1,index
+3038c6dba44d80e7,0,"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.",0,1,index
+3038c6dba44d80e7,0,"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.",1,1,index
+3038c6dba44d80e7,0,"Agent books one-way one-stop economy trip from JFK to SEA with flights HAT136 and HAT039 on 2024-05-20, 3 baggages, no insurance.",2,1,index
+3038c6dba44d80e7,1,Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.,0,1,index
+3038c6dba44d80e7,1,Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.,1,1,index
+3038c6dba44d80e7,1,Agent charges $250 on payment method certificate_7504069 and $5 on credit_card_4421486.,2,1,index
+7350a1224c5dceac,0,Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.,0,1,index
+7350a1224c5dceac,0,Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.,1,1,index
+7350a1224c5dceac,0,Agent updates reservation FQ8APE to economy with payment method gift_card_8190333.,2,1,index
+7350a1224c5dceac,1,Agent updates reservation FQ8APE passenger to Omar Rossi.,0,1,index
+7350a1224c5dceac,1,Agent updates reservation FQ8APE passenger to Omar Rossi.,1,1,index
+7350a1224c5dceac,1,Agent updates reservation FQ8APE passenger to Omar Rossi.,2,1,index
+7350a1224c5dceac,2,Agent updates reservation FQ8APE baggages to 3 free baggages.,0,1,index
+7350a1224c5dceac,2,Agent updates reservation FQ8APE baggages to 3 free baggages.,1,1,index
+7350a1224c5dceac,2,Agent updates reservation FQ8APE baggages to 3 free baggages.,2,1,index
+9d5ca9cac7d6a3de,0,Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.,0,0,index
+9d5ca9cac7d6a3de,0,Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.,1,0,index
+9d5ca9cac7d6a3de,0,Agent updates reservation OBUT9V return flights to HAT290 and HAT175 on May 27.,2,0,index
+9d5ca9cac7d6a3de,1,Agent assigns payment to gift_card_6276644.,0,0,index
+9d5ca9cac7d6a3de,1,Agent assigns payment to gift_card_6276644.,1,0,index
+9d5ca9cac7d6a3de,1,Agent assigns payment to gift_card_6276644.,2,0,index
+9d5ca9cac7d6a3de,2,Agent updates reservation OBUT9V to 2 free baggages.,0,1,index
+9d5ca9cac7d6a3de,2,Agent updates reservation OBUT9V to 2 free baggages.,1,1,index
+9d5ca9cac7d6a3de,2,Agent updates reservation OBUT9V to 2 free baggages.,2,1,index
+e63ad4b1b9439f0d,0,Agent does not cancel flight.,0,1,index
+e63ad4b1b9439f0d,0,Agent does not cancel flight.,1,1,index
+e63ad4b1b9439f0d,0,Agent does not cancel flight.,2,1,index
+e63ad4b1b9439f0d,1,Agent does not offer any refund.,0,1,index
+e63ad4b1b9439f0d,1,Agent does not offer any refund.,1,1,index
+e63ad4b1b9439f0d,1,Agent does not offer any refund.,2,1,index
+1d0067bbda12ea6a,0,Agent mentions that total sum on gift cards is $327.,0,1,index
+1d0067bbda12ea6a,0,Agent mentions that total sum on gift cards is $327.,1,1,index
+1d0067bbda12ea6a,0,Agent mentions that total sum on gift cards is $327.,2,1,index
+1d0067bbda12ea6a,1,Agent mentions that total sum on certificates is $1000.,0,1,index
+1d0067bbda12ea6a,1,Agent mentions that total sum on certificates is $1000.,1,1,index
+1d0067bbda12ea6a,1,Agent mentions that total sum on certificates is $1000.,2,1,index
+1d0067bbda12ea6a,2,Agent cancels reservation K1NW8N.,0,0,index
+1d0067bbda12ea6a,2,Agent cancels reservation K1NW8N.,1,0,index
+1d0067bbda12ea6a,2,Agent cancels reservation K1NW8N.,2,0,index
+1d0067bbda12ea6a,3,Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.,0,0,index
+1d0067bbda12ea6a,3,Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.,1,0,index
+1d0067bbda12ea6a,3,Agent books a round-trip reservation from JFK to SFO in business with outbound flight HAT023 on 2024-05-26 and return flights HAT204 and HAT100 on 2024-05-28 for Mohamed Silva.,2,0,index
+1d0067bbda12ea6a,4,"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.",0,0,index
+1d0067bbda12ea6a,4,"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.",1,0,index
+1d0067bbda12ea6a,4,"For this reservation Agent charges $500 on certificate_3765853, $198 on gift_card_8020792, $129 on gift_card_6136092, and $44 on credit_card_2198526.",2,0,index
+1d0067bbda12ea6a,5,Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.,0,0,index
+1d0067bbda12ea6a,5,Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.,1,0,index
+1d0067bbda12ea6a,5,Agent books a similar reservation for Raj Sanchez with $250 payment on certificate_9984806 and $621 payment on credit_card_2198526.,2,0,index
+1d0067bbda12ea6a,6,Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.,0,0,index
+1d0067bbda12ea6a,6,Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.,1,0,index
+1d0067bbda12ea6a,6,Agent books a similar reservation for Liam Wilson with $250 on certificate_2765295 and $621 on credit_card_2198526.,2,0,index
+1d0067bbda12ea6a,7,Agent communicates that Mastercard will be charged $1286.,0,0,index
+1d0067bbda12ea6a,7,Agent communicates that Mastercard will be charged $1286.,1,0,index
+1d0067bbda12ea6a,7,Agent communicates that Mastercard will be charged $1286.,2,0,index
+9fa78206cb285180,0,Agent does not offer the refund because reservation doesn't meet policy criteria.,0,1,index
+9fa78206cb285180,0,Agent does not offer the refund because reservation doesn't meet policy criteria.,1,1,index
+9fa78206cb285180,0,Agent does not offer the refund because reservation doesn't meet policy criteria.,2,1,index
+b8a917473b3ca87e,0,Agent does not cancel reservation NQNU5R since it is in the past.,0,1,index
+b8a917473b3ca87e,0,Agent does not cancel reservation NQNU5R since it is in the past.,1,1,index
+b8a917473b3ca87e,0,Agent does not cancel reservation NQNU5R since it is in the past.,2,1,index
+b8a917473b3ca87e,1,Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.,0,1,index
+b8a917473b3ca87e,1,Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.,1,1,index
+b8a917473b3ca87e,1,Agent does not cancel reservation IFOYYZ since it doesn't meet criteria.,2,1,index
+b8a917473b3ca87e,2,Agent upgrades M20IZO to business class.,0,1,index
+b8a917473b3ca87e,2,Agent upgrades M20IZO to business class.,1,1,index
+b8a917473b3ca87e,2,Agent upgrades M20IZO to business class.,2,1,index
+96e55bbab265885d,0,Agent update reservation OWZ4XL to economy.,0,1,index
+96e55bbab265885d,0,Agent update reservation OWZ4XL to economy.,1,1,index
+96e55bbab265885d,0,Agent update reservation OWZ4XL to economy.,2,1,index
+96e55bbab265885d,1,Agent updates reservation OWZ4XL to flight HAT041.,0,0,index
+96e55bbab265885d,1,Agent updates reservation OWZ4XL to flight HAT041.,1,0,index
+96e55bbab265885d,1,Agent updates reservation OWZ4XL to flight HAT041.,2,0,index
+b39593cbd36f91cb,0,Agent does not cancel reservation S61CZX as the user is healthy.,0,,missing
+b39593cbd36f91cb,0,Agent does not cancel reservation S61CZX as the user is healthy.,1,1,index
+b39593cbd36f91cb,0,Agent does not cancel reservation S61CZX as the user is healthy.,2,,missing
+b39593cbd36f91cb,1,The total cost that the agent mentions is between $1380 and $1390.,0,,missing
+b39593cbd36f91cb,1,The total cost that the agent mentions is between $1380 and $1390.,1,1,index
+b39593cbd36f91cb,1,The total cost that the agent mentions is between $1380 and $1390.,2,,missing
+b39593cbd36f91cb,2,Agent upgrades NM1VX1 to business.,0,,missing
+b39593cbd36f91cb,2,Agent upgrades NM1VX1 to business.,1,1,index
+b39593cbd36f91cb,2,Agent upgrades NM1VX1 to business.,2,,missing
+b39593cbd36f91cb,3,Agent upgrades H8Q05L to business.,0,,missing
+b39593cbd36f91cb,3,Agent upgrades H8Q05L to business.,1,1,index
+b39593cbd36f91cb,3,Agent upgrades H8Q05L to business.,2,,missing
+b39593cbd36f91cb,4,Agent updates KC18K6 to business.,0,,missing
+b39593cbd36f91cb,4,Agent updates KC18K6 to business.,1,1,index
+b39593cbd36f91cb,4,Agent updates KC18K6 to business.,2,,missing
+e55f47a661cc1626,0,Agent does not cancel insurance or offer a refund.,0,1,index
+e55f47a661cc1626,0,Agent does not cancel insurance or offer a refund.,1,1,index
+e55f47a661cc1626,0,Agent does not cancel insurance or offer a refund.,2,1,index
+3dd9fd82cefcba4e,0,Agent does not cancel 3RK2T9.,0,1,index
+3dd9fd82cefcba4e,0,Agent does not cancel 3RK2T9.,1,1,index
+3dd9fd82cefcba4e,0,Agent does not cancel 3RK2T9.,2,1,index

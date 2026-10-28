@@ -450,13 +450,32 @@ def _call_judge(trajectory_str: str, nl_assertions: list[str]) -> tuple[list, st
         JUDGE_COST["in_tokens"] += int((usage.get("prompt_tokens") if isinstance(usage, dict) else getattr(usage, "prompt_tokens", 0)) or 0)
         JUDGE_COST["out_tokens"] += int((usage.get("completion_tokens") if isinstance(usage, dict) else getattr(usage, "completion_tokens", 0)) or 0)
     raw = reply.content or ""
-    try:
-        data = json.loads(extract_json_from_llm_response(raw))
-        results = data.get("results", []) if isinstance(data, dict) else []
-        err = ""
-    except Exception as e:  # noqa: BLE001
-        results, err = [], repr(e)[:120]
+    results, err = parse_judge_reply(raw)
     return results, raw, err
+
+
+def parse_judge_reply(raw: str) -> tuple[list, str]:
+    """Judge reply -> list of result objects. Accepts {"results": [...]}, a bare top-level JSON array (Haiku returns one in
+    ~9% of replies; tau2's extract_json_from_llm_response slices from the first '{' to the last '}' and then fails with
+    'Extra data'), with or without a code fence. Returns ([], error) when nothing parses."""
+    text = raw.strip()
+    m = re.search(r"```(?:json)?\s*([\s\S]*?)```", text)
+    candidates = [m.group(1).strip()] if m else []
+    candidates += [text, extract_json_from_llm_response(raw)]
+    last_err = ""
+    for cand in candidates:
+        try:
+            data = json.loads(cand)
+        except Exception as e:  # noqa: BLE001
+            last_err = repr(e)[:120]
+            continue
+        if isinstance(data, list):
+            return [r for r in data if isinstance(r, dict)], ""
+        if isinstance(data, dict):
+            res = data.get("results", [])
+            return ([r for r in res if isinstance(r, dict)] if isinstance(res, list) else []), ""
+        last_err = f"unexpected JSON type {type(data).__name__}"
+    return [], last_err or "no JSON found"
 
 
 def _one_vote(trajectory_str: str, nl_assertions: list[str], vote: int, key: str = "") -> list[dict]:
@@ -702,6 +721,14 @@ def _selftest() -> int:
         me.generate = fake_bad  # type: ignore[assignment]
         v = _one_vote("assistant: hi", ["A"], 0)
         check(calls["n"] == 1 + JUDGE_RETRIES and v[0]["met"] is None and v[0]["mode"] == "missing", "unparseable reply: re-asked once, then undetermined")
+        r, e = parse_judge_reply('[{"index": 1, "expectedOutcome": "x", "metExpectation": true, "reasoning": "r"}]')
+        check(e == "" and len(r) == 1 and r[0]["metExpectation"] is True, "bare top-level JSON array parsed (the shape tau2's extractor rejects)")
+        r, e = parse_judge_reply('```json' + chr(10) + '[{"index": 1, "metExpectation": false}]' + chr(10) + '```')
+        check(e == "" and len(r) == 1 and r[0]["metExpectation"] is False, "fenced JSON array parsed")
+        r, e = parse_judge_reply('{"results": [{"index": 1, "metExpectation": true}]}')
+        check(e == "" and len(r) == 1, "object with results list parsed")
+        r, e = parse_judge_reply("not json at all")
+        check(r == [] and e != "", "non-JSON reply -> empty results with an error")
         good = {"results": [{"index": 1, "expectedOutcome": "A", "reasoning": "r", "metExpectation": True}]}
         me.generate = lambda *a, **k: AssistantMessage(role="assistant", content="```json\n" + json.dumps(good) + "\n```")  # type: ignore[assignment]
         check(_one_vote("assistant: hi", ["A"], 0)[0]["met"] is True, "fenced JSON reply parsed")

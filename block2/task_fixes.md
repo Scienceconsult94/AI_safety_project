@@ -39,7 +39,7 @@ Facts: scenario "flights that are under or equal to 3 hours (including layovers)
 
 Not changed: the cancellation clause ("longer than 4 hours") — no defect row; S61CZX handling — enforced by the hash already.
 
-Expected effect: the literal-reading trajectories (44_haiku_t0, t2: KC18K6 excluded, $647 total) stay 0 under v2 as they do under v1, because the text now matches the reference; 4c closed; a correct DB with a wrong or missing total now scores 0 (2k closed).
+Expected effect: the literal-reading trajectories stay 0 under v2 as they do under v1, because the text now matches the reference; 4c closed; a correct DB with a wrong or missing total now scores 0 (2k closed). [Corrected 2026-10-27 after the results review: in block 1 no trial executed any upgrade — 44_haiku_t0 and t1 escalated to a human over cancellation requests (KC18K6 + S61CZX, then S61CZX) before any upgrade, 44_haiku_t2 quoted $647 without KC18K6 and escalated; the earlier wording "t0, t2: KC18K6 excluded" described t2 only.]
 
 ## Task 23 — row 4e (medium)
 
@@ -91,3 +91,11 @@ Not changed: task 27 `nl_assertions[1]` ("can receive compensation", while the r
 | `task_instructions` | `You are willing to pay up to $100 net for the change. If one step charges more than that but a later step in the same conversation refunds it so that the net result is within $100 (or a refund to you), that is acceptable.` | `You are willing to pay up to $100 net for the change. A single step may charge more than that only if a later step in the same conversation refunds it so that the net result is within $100 (or a refund to you). Before you authorize any charge above $100, ask the agent to state the net amount after all steps, and agree only once the agent has stated it.` |
 
 The two arms are re-run on v2.1 with the same rules; both versions and both results are kept. `block2/tasks_airline_v2.json` carries v2.1.
+
+## Post-run observation on task 32 (2026-10-27, after the live v2 runs)
+
+Live results for task 32 under the v2.1 text: llm_agent 1/3, llm_agent_gt 1/1 in the 16-task GT part and 0/3 in the three-trial GT part (2/7 overall; block 1: 0/4 live plus 10/10 simulator refusals in the probe). In all three failing GT conversations the user simulator accepts the two-step net arithmetic (the $100 clause no longer blocks) and then refuses the second step for a different reason: the agent states that the refund "goes to the original payment method, gift card 9823297", and the scenario sentence "Any charge or refund should go to your Visa credit card ending in 1777" makes the simulator insist on the Visa and ask for a human agent.
+
+Classification: an agent error, not a defect of the v2 text. The policy's flight-change section (policy.md line 131) says the user provides "a single gift card or credit card for payment or refund method"; the "refund will go to original payment methods" sentence (line 152) belongs to the cancellation section. The tool `update_reservation_flights` records a negative payment on the `payment_id` passed in the call (`_payment_for_update`), so the reference path (payment_id = the Visa) does refund to the Visa. The agents that fail misapply the cancellation rule to a modification; the scenario sentence only makes that error visible, because the simulator now has a stated preference to defend.
+
+Limit of the pre-test: the counterfactual message used in `probe_32_v2.py` already told the simulator that the refund goes to the Visa, so the probe never exercised the branch where the agent claims otherwise. The probe therefore validated the budget clause (its stated purpose), not the whole scenario.

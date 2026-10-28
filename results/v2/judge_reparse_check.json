@@ -1,0 +1,202 @@
+{
+ "totals": {
+  "replies": 610,
+  "discarded": 53,
+  "arrays": 53,
+  "recovered": 32,
+  "pairs": 27,
+  "changed": 0
+ },
+ "changed": [],
+ "thin": [
+  {
+   "set": "recorded (judge pass 2)",
+   "key": "10dfa6b369787669",
+   "assertion_idx": 0,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "recorded (judge pass 2)",
+   "key": "10dfa6b369787669",
+   "assertion_idx": 1,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "recorded (judge pass 2)",
+   "key": "b8400bd11397d249",
+   "assertion_idx": 0,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "recorded (judge pass 2)",
+   "key": "b8400bd11397d249",
+   "assertion_idx": 1,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "recorded (judge pass 2)",
+   "key": "b8400bd11397d249",
+   "assertion_idx": 2,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "recorded (judge pass 2)",
+   "key": "b8400bd11397d249",
+   "assertion_idx": 3,
+   "determined_ballots": 2,
+   "verdict": false
+  },
+  {
+   "set": "recorded (judge pass 2)",
+   "key": "5c87d3a34ed5a28b",
+   "assertion_idx": 0,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "recorded (judge pass 2)",
+   "key": "5c87d3a34ed5a28b",
+   "assertion_idx": 1,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "fresh re-score",
+   "key": "fff3aba8f33b20d2",
+   "assertion_idx": 0,
+   "determined_ballots": 2,
+   "verdict": false
+  },
+  {
+   "set": "fresh re-score",
+   "key": "fff3aba8f33b20d2",
+   "assertion_idx": 1,
+   "determined_ballots": 2,
+   "verdict": false
+  },
+  {
+   "set": "fresh re-score",
+   "key": "fff3aba8f33b20d2",
+   "assertion_idx": 2,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "fresh re-score",
+   "key": "fff3aba8f33b20d2",
+   "assertion_idx": 3,
+   "determined_ballots": 2,
+   "verdict": false
+  },
+  {
+   "set": "live pass3",
+   "key": "2d7d393dcc767afb",
+   "assertion_idx": 0,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "live pass3",
+   "key": "2d7d393dcc767afb",
+   "assertion_idx": 1,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "live pass3",
+   "key": "2d7d393dcc767afb",
+   "assertion_idx": 2,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "live pass3",
+   "key": "9dd640cd27d0b759",
+   "assertion_idx": 0,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "live pass3",
+   "key": "9dd640cd27d0b759",
+   "assertion_idx": 1,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "live pass3",
+   "key": "9dd640cd27d0b759",
+   "assertion_idx": 2,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "live pass3",
+   "key": "b39593cbd36f91cb",
+   "assertion_idx": 0,
+   "determined_ballots": 1,
+   "verdict": true
+  },
+  {
+   "set": "live pass3",
+   "key": "b39593cbd36f91cb",
+   "assertion_idx": 1,
+   "determined_ballots": 1,
+   "verdict": true
+  },
+  {
+   "set": "live pass3",
+   "key": "b39593cbd36f91cb",
+   "assertion_idx": 2,
+   "determined_ballots": 1,
+   "verdict": true
+  },
+  {
+   "set": "live pass3",
+   "key": "b39593cbd36f91cb",
+   "assertion_idx": 3,
+   "determined_ballots": 1,
+   "verdict": true
+  },
+  {
+   "set": "live pass3",
+   "key": "b39593cbd36f91cb",
+   "assertion_idx": 4,
+   "determined_ballots": 1,
+   "verdict": true
+  },
+  {
+   "set": "live gt3",
+   "key": "7e56feb97fe7a45f",
+   "assertion_idx": 0,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "live gt3",
+   "key": "7e56feb97fe7a45f",
+   "assertion_idx": 1,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "live gt3",
+   "key": "7e56feb97fe7a45f",
+   "assertion_idx": 2,
+   "determined_ballots": 2,
+   "verdict": true
+  },
+  {
+   "set": "live gt3",
+   "key": "7e56feb97fe7a45f",
+   "assertion_idx": 3,
+   "determined_ballots": 2,
+   "verdict": true
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+[two_step] persona=mamadou_diallo prefix=8 msgs; system prompt chars=4039
+[32m2026-10-27 15:45:50.551[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [0] 179 chars
+[32m2026-10-27 15:45:52.509[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [1] 159 chars
+[32m2026-10-27 15:45:54.412[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [2] 211 chars
+[32m2026-10-27 15:45:56.055[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [3] 285 chars
+[32m2026-10-27 15:45:58.023[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [4] 200 chars
+[32m2026-10-27 15:45:59.841[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [5] 206 chars
+[32m2026-10-27 15:46:02.158[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [6] 132 chars
+[32m2026-10-27 15:46:03.774[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [7] 169 chars
+[32m2026-10-27 15:46:05.493[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [8] 177 chars
+[32m2026-10-27 15:46:07.349[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [9] 152 chars
+  tokens in/out 29300/2285; cost estimate $0.0041 -> results/v2/probe_32_v2/two_step_samples.md
+[step1_only] persona=mamadou_diallo prefix=8 msgs; system prompt chars=4039
+[32m2026-10-27 15:46:10.671[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [0] 259 chars
+[32m2026-10-27 15:46:14.587[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [1] 336 chars
+[32m2026-10-27 15:46:17.756[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [2] 164 chars
+[32m2026-10-27 15:46:21.252[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [3] 310 chars
+[32m2026-10-27 15:46:25.999[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [4] 280 chars
+[32m2026-10-27 15:46:28.762[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [5] 269 chars
+[32m2026-10-27 15:46:32.870[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [6] 424 chars
+[32m2026-10-27 15:46:36.284[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [7] 171 chars
+[32m2026-10-27 15:46:40.781[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [8] 501 chars
+[32m2026-10-27 15:46:44.164[0m | [31m[1mERROR   [0m | [36mtau2.utils.llm_utils[0m:[36mget_response_cost[0m:[36m156[0m - [31m[1mlitellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=claude-haiku-5-5
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers[0m
+  [9] 212 chars
+  tokens in/out 27930/5365; cost estimate $0.0055 -> results/v2/probe_32_v2/step1_only_samples.md
+exit 0

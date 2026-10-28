@@ -1,0 +1,57 @@
+{
+ "part": "gt3",
+ "agent": "llm_agent_gt",
+ "task_set": "airline_v2",
+ "n_tasks": 3,
+ "task_ids": [
+  "7",
+  "32",
+  "44"
+ ],
+ "num_trials": 3,
+ "seed": 300,
+ "provenance": {
+  "scorer_version": "v2",
+  "overlay_commit": "d55bd49",
+  "overlay_dirty": false,
+  "judge_model": "anthropic/claude-haiku-5-5",
+  "judge_args": {},
+  "judge_votes": 3,
+  "judge_view": "with_tool_calls",
+  "judge_prompt_sha256": "c560776f121c1500",
+  "switches": {
+   "hash_canon": true,
+   "comm_boundary": true,
+   "nl_enforce": true
+  }
+ },
+ "nl_in_basis": true,
+ "info_diff_vs_block1": {},
+ "save_dir": "results\\v2\\runs\\v2_gt3_haiku",
+ "seconds": 268,
+ "n_sims": 9,
+ "infra_errors": 0,
+ "avg_reward": 0.6666666666666666,
+ "pass_hat_k": {
+  "1": 0.6666666666666666,
+  "2": 0.6666666666666666,
+  "3": 0.6666666666666666
+ },
+ "usage": {
+  "agent_in": 1621343,
+  "agent_out": 69893,
+  "user_in": 206411,
+  "user_out": 20203,
+  "agent_cost": 0.0,
+  "user_cost": 0.0,
+  "own_estimate_usd": 0.22782340000000004
+ },
+ "judge": {
+  "calls": 32,
+  "cost": 0.0,
+  "in_tokens": 284789,
+  "out_tokens": 23686,
+  "retries": 6,
+  "own_estimate_usd": 0.0403219
+ }
+}
