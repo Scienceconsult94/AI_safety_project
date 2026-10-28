@@ -1,0 +1,151 @@
+task_id,check,haiku_pass,defect,severity,evidence,note
+0,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[79, 15, 17]",haiku_pass = successes/evaluated trials
+0,1e,,0,,static_scan gt_eligible=0 (no reference actions); llm_agent_gt skips the task (registry task_filter),n/a
+0,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[79, 15, 17]",stable
+0,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=-",
+0,5f,,0,,reward_info present for every normal-stop simulation (3); no replay/mismatch line in the run log names this task,
+2,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[64, 29, 37]",haiku_pass = successes/evaluated trials
+2,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=44 tool_calls=10,
+2,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[64, 29, 37]",stable
+2,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+2,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+4,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 20, 20]",haiku_pass = successes/evaluated trials
+4,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=22 tool_calls=7,
+4,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 20, 20]",stable
+4,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+4,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+5,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 23, 23]",haiku_pass = successes/evaluated trials
+5,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=23 tool_calls=7,
+5,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 23, 23]",stable
+5,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+5,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+6,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[30, 24, 17]",haiku_pass = successes/evaluated trials
+6,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=14 tool_calls=1,
+6,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[30, 24, 17]",stable
+6,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+6,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+12,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 22, 30]",haiku_pass = successes/evaluated trials
+12,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=22 tool_calls=6,
+12,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 22, 30]",stable
+12,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+12,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+13,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 17, 23]",haiku_pass = successes/evaluated trials
+13,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=56 tool_calls=1,
+13,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 17, 23]",stable
+13,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+13,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+14,1f,1/3,0,,"rest30_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[37, 25, 39]",haiku_pass = successes/evaluated trials
+14,1e,,1,high,rest30_gt_haiku: reward=0.0 db_match=False communicate_failed=- termination=user_stop msgs=57 tool_calls=18,PROVISIONAL (mechanical): GT agent did not reach the target; REVIEW whether the cause is the task or an agent slip
+14,5c,1/3,0,,"rest30_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[37, 25, 39]",REVIEW: flip 1/3; decide whether it traces to the user simulator (then defect=1 medium) or to the agent
+14,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+14,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+15,1f,2/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 30, 24]",haiku_pass = successes/evaluated trials
+15,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=23 tool_calls=7,
+15,5c,2/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 30, 24]",REVIEW: flip 2/3; decide whether it traces to the user simulator (then defect=1 medium) or to the agent
+15,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+15,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+17,1f,2/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 27, 15]",haiku_pass = successes/evaluated trials
+17,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=23 tool_calls=8,
+17,5c,2/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 27, 15]",REVIEW: flip 2/3; decide whether it traces to the user simulator (then defect=1 medium) or to the agent
+17,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+17,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+18,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[35, 44, 29]",haiku_pass = successes/evaluated trials
+18,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=31 tool_calls=12,
+18,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[35, 44, 29]",stable
+18,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+18,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+24,1f,2/3,0,,"rest30_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[36, 46, 39]",haiku_pass = successes/evaluated trials
+24,1e,,1,high,rest30_gt_haiku: reward=0.0 db_match=False communicate_failed=- termination=user_stop msgs=27 tool_calls=3,PROVISIONAL (mechanical): GT agent did not reach the target; REVIEW whether the cause is the task or an agent slip
+24,5c,2/3,0,,"rest30_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[36, 46, 39]",REVIEW: flip 2/3; decide whether it traces to the user simulator (then defect=1 medium) or to the agent
+24,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+24,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+25,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[24, 19, 18]",haiku_pass = successes/evaluated trials
+25,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=22 tool_calls=5,
+25,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[24, 19, 18]",stable
+25,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+25,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+27,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 127, 30]",haiku_pass = successes/evaluated trials
+27,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=39 tool_calls=13,
+27,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 127, 30]",stable
+27,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+27,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+29,1f,0/3,0,,"rest30_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 25, 34]",haiku_pass = successes/evaluated trials
+29,1e,,1,high,rest30_gt_haiku: reward=0.0 db_match=False communicate_failed=- termination=user_stop msgs=26 tool_calls=4,PROVISIONAL (mechanical): GT agent did not reach the target; REVIEW whether the cause is the task or an agent slip
+29,5c,0/3,0,,"rest30_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 25, 34]",stable
+29,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+29,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+30,1f,2/3,0,,"rest30_pass3_haiku: rewards=[1.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 19, 21]",haiku_pass = successes/evaluated trials
+30,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=18 tool_calls=3,
+30,5c,2/3,0,,"rest30_pass3_haiku: rewards=[1.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 19, 21]",REVIEW: flip 2/3; decide whether it traces to the user simulator (then defect=1 medium) or to the agent
+30,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+30,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+31,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 16, 22]",haiku_pass = successes/evaluated trials
+31,1e,,0,,static_scan gt_eligible=0 (no reference actions); llm_agent_gt skips the task (registry task_filter),n/a
+31,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 16, 22]",stable
+31,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=-",
+31,5f,,0,,reward_info present for every normal-stop simulation (3); no replay/mismatch line in the run log names this task,
+33,1f,1/3,0,,"rest30_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 22, 42]",haiku_pass = successes/evaluated trials
+33,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=44 tool_calls=9,
+33,5c,1/3,0,,"rest30_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 22, 42]",REVIEW: flip 1/3; decide whether it traces to the user simulator (then defect=1 medium) or to the agent
+33,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+33,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+34,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 33, 20]",haiku_pass = successes/evaluated trials
+34,1e,,0,,static_scan gt_eligible=0 (no reference actions); llm_agent_gt skips the task (registry task_filter),n/a
+34,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 33, 20]",stable
+34,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=-",
+34,5f,,0,,reward_info present for every normal-stop simulation (3); no replay/mismatch line in the run log names this task,
+35,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[35, 31, 33]",haiku_pass = successes/evaluated trials
+35,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=28 tool_calls=8,
+35,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[35, 31, 33]",stable
+35,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+35,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+36,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 19, 17]",haiku_pass = successes/evaluated trials
+36,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=8 tool_calls=1,
+36,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 19, 17]",stable
+36,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+36,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+38,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 42, 45]",haiku_pass = successes/evaluated trials
+38,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=53 tool_calls=7,
+38,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 42, 45]",stable
+38,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+38,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+39,1f,1/3,0,,"rest30_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 23, 27]",haiku_pass = successes/evaluated trials
+39,1e,,1,high,rest30_gt_haiku: reward=0.0 db_match=False communicate_failed=- termination=user_stop msgs=28 tool_calls=11,PROVISIONAL (mechanical): GT agent did not reach the target; REVIEW whether the cause is the task or an agent slip
+39,5c,1/3,0,,"rest30_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 23, 27]",REVIEW: flip 1/3; decide whether it traces to the user simulator (then defect=1 medium) or to the agent
+39,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+39,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+40,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 24, 21]",haiku_pass = successes/evaluated trials
+40,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=23 tool_calls=5,
+40,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 24, 21]",stable
+40,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+40,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+41,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 24, 21]",haiku_pass = successes/evaluated trials
+41,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=20 tool_calls=9,
+41,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 24, 21]",stable
+41,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+41,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+42,1f,2/3,0,,"rest30_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[31, 22, 26]",haiku_pass = successes/evaluated trials
+42,1e,,1,high,rest30_gt_haiku: reward=0.0 db_match=False communicate_failed=- termination=user_stop msgs=28 tool_calls=12,PROVISIONAL (mechanical): GT agent did not reach the target; REVIEW whether the cause is the task or an agent slip
+42,5c,2/3,0,,"rest30_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[31, 22, 26]",REVIEW: flip 2/3; decide whether it traces to the user simulator (then defect=1 medium) or to the agent
+42,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+42,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+43,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 24, 21]",haiku_pass = successes/evaluated trials
+43,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=25 tool_calls=7,
+43,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 24, 21]",stable
+43,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+43,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+45,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[23, 19, 26]",haiku_pass = successes/evaluated trials
+45,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=18 tool_calls=3,
+45,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[23, 19, 26]",stable
+45,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+45,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+47,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 23, 17]",haiku_pass = successes/evaluated trials
+47,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=14 tool_calls=2,
+47,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 23, 17]",stable
+47,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+47,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+49,1f,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[39, 15, 15]",haiku_pass = successes/evaluated trials
+49,1e,,0,,rest30_gt_haiku: reward=1.0 db_match=True communicate_failed=- termination=user_stop msgs=15 tool_calls=3,
+49,5c,3/3,0,,"rest30_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[39, 15, 15]",stable
+49,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+49,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,

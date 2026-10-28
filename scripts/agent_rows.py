@@ -15,6 +15,9 @@ Outputs (results/):
 Rows that need a human/LLM reading (4f, 5d, and 1e/5c triage) are written as defect=0 with note
 "REVIEW" here; the reviewer's verdicts go to results/review_agent.csv, which build_audit_log.py reads last.
 Usage (from ==Project):  python -I scripts/agent_rows.py [--pass3 sample20_pass3_haiku] [--gt sample20_gt_haiku] [--log path ...]
+  --ids rest: the 30 tasks outside the sample (airline_full/PLAN.md, Q1); defaults --pass3 rest30_pass3_haiku
+  --gt rest30_gt_haiku; outputs haiku_pass_rest30.csv, agent_runs_summary_rest30.md, agent_triage_rest30.md (no ALL row);
+  reviewer verdicts go to results/review_agent_rest30.csv.
 No LLM calls, no file under tau2-bench/ is modified.
 """
 
@@ -113,13 +116,20 @@ def render_transcript(s: dict, path: Path) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pass3", default="sample20_pass3_haiku")
-    ap.add_argument("--gt", default="sample20_gt_haiku")
+    ap.add_argument("--ids", choices=("sample", "rest"), default="sample")
+    ap.add_argument("--pass3", default=None)
+    ap.add_argument("--gt", default=None)
     ap.add_argument("--log", nargs="*", default=[])
     a = ap.parse_args()
+    rest = a.ids == "rest"
+    a.pass3 = a.pass3 or ("rest30_pass3_haiku" if rest else "sample20_pass3_haiku")
+    a.gt = a.gt or ("rest30_gt_haiku" if rest else "sample20_gt_haiku")
+    sfx = "_rest30" if rest else ""
 
     sample = json.loads((ROOT / "sample.json").read_text(encoding="utf-8"))
     ids = [str(i) for i in sample["task_ids"]]
+    if rest:
+        ids = sorted((str(i) for i in sample["population_ids"] if str(i) not in ids), key=int)
     with open(RES / "static_scan.csv", encoding="utf-8", newline="") as fp:
         scan = {r["task_id"]: r for r in csv.DictReader(fp)}
 
@@ -156,7 +166,7 @@ def main() -> int:
         rows.append({"task_id": task_id, "check": check, "haiku_pass": hp, "defect": int(defect),
                      "severity": severity if defect else "", "evidence": evidence, "note": note})
 
-    summary = ["# Agent runs on the 20 sampled tasks (claude-haiku-5-5 agent and user, substring scorer)", "",
+    summary = [f"# Agent runs on the {'30 rest' if rest else '20 sampled'} tasks (claude-haiku-5-5 agent and user, substring scorer)", "",
                f"pass3 dir: `{a.pass3}`; gt dir: `{a.gt}`; infrastructure_error simulations: {infra}", "",
                "| task | n_write | pass3 rewards | haiku_pass | terminations | gt_eligible | gt reward | gt termination | gt db_match |",
                "|---|---|---|---|---|---|---|---|---|"]
@@ -227,26 +237,29 @@ def main() -> int:
         p, nn = pk(k)
         summary.append(f"- pass^{k} = {p:.3f} (n={nn} tasks)")
     gt_e = [g for t, g in gt.items() if t in ids and g["termination"] != "infrastructure_error"]
-    summary.append(f"- GT agent: {sum(1 for g in gt_e if g['reward'] == 1.0)}/{len(gt_e)} eligible sampled tasks reach the target state")
+    summary.append(f"- GT agent: {sum(1 for g in gt_e if g['reward'] == 1.0)}/{len(gt_e)} eligible {'rest' if rest else 'sampled'} tasks reach the target state")
     tin = sum(f["usage_in"] for f in p3) + sum(g["usage_in"] for g in gt.values())
     tout = sum(f["usage_out"] for f in p3) + sum(g["usage_out"] for g in gt.values())
     summary.append(f"- tokens (all messages, agent+user): in={tin:,} out={tout:,}; cost at $0.10/$0.50 per MTok, cache ignored (upper bound): ${tin * PRICE_IN + tout * PRICE_OUT:.3f}")
     summary.append(f"- benchmark-wide log hits (replay/mismatch): {len(log_hits.get('ALL', []))}")
 
-    add("ALL", "6e", 0, "", f"infrastructure_error simulations in these runs: {infra}; tau2 prints 'Infra Errors N (excluded from metrics below)' above Average Reward (display.py)",
-        note="disclosed next to the score in tau2 view/CLI; the audit report must repeat the count" if infra else "no exclusion in these runs")
+    if not rest:  # benchmark-level row: written once, from the sample runs
+        add("ALL", "6e", 0, "", f"infrastructure_error simulations in these runs: {infra}; tau2 prints 'Infra Errors N (excluded from metrics below)' above Average Reward (display.py)",
+            note="disclosed next to the score in tau2 view/CLI; the audit report must repeat the count" if infra else "no exclusion in these runs")
+    else:
+        summary.append(f"- infrastructure_error simulations in these runs: {infra}")
 
-    with open(RES / "haiku_pass.csv", "w", encoding="utf-8", newline="") as fp:
+    with open(RES / f"haiku_pass{sfx}.csv", "w", encoding="utf-8", newline="") as fp:
         w = csv.DictWriter(fp, fieldnames=COLS)
         w.writeheader()
         w.writerows(rows)
-    (RES / "agent_runs_summary.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
-    (RES / "agent_triage.md").write_text(
+    (RES / f"agent_runs_summary{sfx}.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
+    (RES / f"agent_triage{sfx}.md").write_text(
         "# Trajectories for manual review (checks 4f, 5c, 5d; 1e triage)\n\n"
         "Each line: one failed Haiku trial or failed GT run; flipped tasks (1 or 2 of 3) have all their trials rendered.\n\n"
         + ("\n".join(triage) if triage else "- none: every evaluated trajectory succeeded") + "\n", encoding="utf-8")
     print("\n".join(summary))
-    print(f"rows written: {len(rows)} -> results/haiku_pass.csv; triage items: {len(triage)}")
+    print(f"rows written: {len(rows)} -> results/haiku_pass{sfx}.csv; triage items: {len(triage)}")
     return 0
 
 
