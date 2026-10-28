@@ -60,4 +60,5 @@ Written and committed on 2026-10-28, before any result of the work below was pro
 
 ## Deviations
 
-(none yet)
+- 2026-10-28, before any rest row was written: the account owner approved the adversarial review for the rest rows, as block 1 applied it (static-phase rows after batches 5-10; agent-run rows after the trajectory review).
+- 2026-10-28, Q4: the first labelling round was only partially blind.  stated that the pool consisted of judge-met assertions, and  carried the class, so a reader could infer the judge's verdict (reader A flagged it). Both round-1 readers labelled all 20 items met. Round 2 re-labels the same 20 items mixed with 10 judge-unmet decoys from the same fresh runs, in a random order, without the pool statement and without the class, by two new readers. Round 2 is the result that decides P8; round 1 is reported as partially blind.
