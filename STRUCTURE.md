@@ -7,6 +7,8 @@ Each sampled task is checked against a fixed checklist (static reading, mechanic
 
 ```
 .
+├── README.md                   what this is, headline results, how to reproduce
+├── report.md                   the full write-up of blocks 1 and 2
 ├── STRUCTURE.md                this map
 ├── COMMIT_MAP.md               old -> new commit hashes after the one-time rewrite of commit messages (provenance stamps cite the old ones)
 ├── checklist.md                the validation checklist (check ids 1a..6e, method per check)
