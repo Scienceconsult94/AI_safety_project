@@ -1,0 +1,16 @@
+== HEAD_044bc33: <external benchmarks folder>/osworld/repo/evaluation_examples
+  test_all: 26/369 = 7.0% [Wilson 95% 4.9-10.1] by domain {'chrome': 3, 'gimp': 9, 'libreoffice_calc': 1, 'libreoffice_writer': 1, 'multi_apps': 1, 'os': 5, 'vlc': 2, 'vs_code': 4}
+  test_nogdrive: 26/361 = 7.2% [Wilson 95% 5.0-10.3] by domain {'chrome': 3, 'gimp': 9, 'libreoffice_calc': 1, 'libreoffice_writer': 1, 'multi_apps': 1, 'os': 5, 'vlc': 2, 'vs_code': 4}
+  test_infeasible: 25 listed, of which 25 have evaluator func 'infeasible' in test_all
+  infeasible in test_all but not in test_infeasible.json: [('chrome', '480bcfea-d68f-4aaa-a0a9-2589ef319381')]
+== release_00804f8: <external benchmarks folder>/osworld/repo_2025-07-28/evaluation_examples
+  test_all: 30/369 = 8.1% [Wilson 95% 5.8-11.4] by domain {'chrome': 3, 'gimp': 10, 'libreoffice_calc': 1, 'libreoffice_writer': 1, 'multi_apps': 1, 'os': 5, 'thunderbird': 1, 'vlc': 3, 'vs_code': 5}
+  test_nogdrive: 30/361 = 8.3% [Wilson 95% 5.9-11.6] by domain {'chrome': 3, 'gimp': 10, 'libreoffice_calc': 1, 'libreoffice_writer': 1, 'multi_apps': 1, 'os': 5, 'thunderbird': 1, 'vlc': 3, 'vs_code': 5}
+== infeasible in HEAD_044bc33 only: [('chrome', '480bcfea-d68f-4aaa-a0a9-2589ef319381')]
+     ('chrome', '480bcfea-d68f-4aaa-a0a9-2589ef319381'): release_00804f8 func = ['check_enabled_experiments']
+== infeasible in release_00804f8 only: [('chrome', '93eabf48-6a27-4cb6-b963-7d5fe1e0d3a9'), ('gimp', 'dbbf4b99-2253-4b10-9274-45f246af2466'), ('thunderbird', 'a1af9f1c-50d5-4bc3-a51e-4d9b425ff638'), ('vlc', '5ac2891a-eacd-4954-b339-98abba077adb'), ('vs_code', '7aeae0e2-70ee-4705-821d-1bba5d5b2ddd')]
+     ('chrome', '93eabf48-6a27-4cb6-b963-7d5fe1e0d3a9'): HEAD_044bc33 func = ['match_in_list']
+     ('gimp', 'dbbf4b99-2253-4b10-9274-45f246af2466'): HEAD_044bc33 func = ['check_include_exclude']
+     ('thunderbird', 'a1af9f1c-50d5-4bc3-a51e-4d9b425ff638'): HEAD_044bc33 func = ['check_thunderbird_smtp_only']
+     ('vlc', '5ac2891a-eacd-4954-b339-98abba077adb'): HEAD_044bc33 func = ['check_play_and_exit']
+     ('vs_code', '7aeae0e2-70ee-4705-821d-1bba5d5b2ddd'): HEAD_044bc33 func = ['check_include_exclude']

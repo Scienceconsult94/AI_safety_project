@@ -1,0 +1,88 @@
+variant,decoder_model,category,correct,total,accuracy_pct
+null_prompt,Qwen/Qwen3-8B,simple_python,0,400,0.00
+null_prompt,Qwen/Qwen3-8B,simple_java,0,100,0.00
+null_prompt,Qwen/Qwen3-8B,simple_javascript,0,50,0.00
+null_prompt,Qwen/Qwen3-8B,multiple,0,200,0.00
+null_prompt,Qwen/Qwen3-8B,parallel,0,200,0.00
+null_prompt,Qwen/Qwen3-8B,parallel_multiple,0,200,0.00
+null_prompt,Qwen/Qwen3-8B,irrelevance,240,240,100.00
+null_prompt,Qwen/Qwen3-8B,live_simple,0,258,0.00
+null_prompt,Qwen/Qwen3-8B,live_multiple,0,1053,0.00
+null_prompt,Qwen/Qwen3-8B,live_parallel,0,16,0.00
+null_prompt,Qwen/Qwen3-8B,live_parallel_multiple,0,24,0.00
+null_prompt,Qwen/Qwen3-8B,live_irrelevance,884,884,100.00
+null_prompt,Qwen/Qwen3-8B,live_relevance,0,16,0.00
+null_prompt,Qwen/Qwen3-8B,multi_turn_base,0,200,0.00
+null_prompt,Qwen/Qwen3-8B,multi_turn_miss_func,0,200,0.00
+null_prompt,Qwen/Qwen3-8B,multi_turn_miss_param,0,200,0.00
+null_prompt,Qwen/Qwen3-8B,multi_turn_long_context,0,200,0.00
+null_prompt,Qwen/Qwen3-8B,memory_kv,0,155,0.00
+null_prompt,Qwen/Qwen3-8B,memory_vector,0,155,0.00
+null_prompt,Qwen/Qwen3-8B,memory_rec_sum,0,155,0.00
+null_prompt,Qwen/Qwen3-8B,web_search_base,0,100,0.00
+null_prompt,Qwen/Qwen3-8B,web_search_no_snippet,0,100,0.00
+null_prompt,Qwen/Qwen3-8B,SUMMARY non_live,,,0.00
+null_prompt,Qwen/Qwen3-8B,SUMMARY live,,,0.00
+null_prompt,Qwen/Qwen3-8B,SUMMARY irrelevance (hallucination),,,100.00
+null_prompt,Qwen/Qwen3-8B,SUMMARY multi_turn,,,0.00
+null_prompt,Qwen/Qwen3-8B,SUMMARY agentic,,,0.00
+null_prompt,Qwen/Qwen3-8B,SUMMARY overall (recomputed),,,10.00
+null_prompt,Qwen/Qwen3-8B,SUMMARY overall (evaluator data_overall.csv),,,10.00
+null_fc,Qwen/Qwen3-8B-FC,simple_python,0,400,0.00
+null_fc,Qwen/Qwen3-8B-FC,simple_java,0,100,0.00
+null_fc,Qwen/Qwen3-8B-FC,simple_javascript,0,50,0.00
+null_fc,Qwen/Qwen3-8B-FC,multiple,0,200,0.00
+null_fc,Qwen/Qwen3-8B-FC,parallel,0,200,0.00
+null_fc,Qwen/Qwen3-8B-FC,parallel_multiple,0,200,0.00
+null_fc,Qwen/Qwen3-8B-FC,irrelevance,240,240,100.00
+null_fc,Qwen/Qwen3-8B-FC,live_simple,0,258,0.00
+null_fc,Qwen/Qwen3-8B-FC,live_multiple,0,1053,0.00
+null_fc,Qwen/Qwen3-8B-FC,live_parallel,0,16,0.00
+null_fc,Qwen/Qwen3-8B-FC,live_parallel_multiple,0,24,0.00
+null_fc,Qwen/Qwen3-8B-FC,live_irrelevance,884,884,100.00
+null_fc,Qwen/Qwen3-8B-FC,live_relevance,0,16,0.00
+null_fc,Qwen/Qwen3-8B-FC,multi_turn_base,0,200,0.00
+null_fc,Qwen/Qwen3-8B-FC,multi_turn_miss_func,0,200,0.00
+null_fc,Qwen/Qwen3-8B-FC,multi_turn_miss_param,0,200,0.00
+null_fc,Qwen/Qwen3-8B-FC,multi_turn_long_context,0,200,0.00
+null_fc,Qwen/Qwen3-8B-FC,memory_kv,0,155,0.00
+null_fc,Qwen/Qwen3-8B-FC,memory_vector,0,155,0.00
+null_fc,Qwen/Qwen3-8B-FC,memory_rec_sum,0,155,0.00
+null_fc,Qwen/Qwen3-8B-FC,web_search_base,0,100,0.00
+null_fc,Qwen/Qwen3-8B-FC,web_search_no_snippet,0,100,0.00
+null_fc,Qwen/Qwen3-8B-FC,SUMMARY non_live,,,0.00
+null_fc,Qwen/Qwen3-8B-FC,SUMMARY live,,,0.00
+null_fc,Qwen/Qwen3-8B-FC,SUMMARY irrelevance (hallucination),,,100.00
+null_fc,Qwen/Qwen3-8B-FC,SUMMARY multi_turn,,,0.00
+null_fc,Qwen/Qwen3-8B-FC,SUMMARY agentic,,,0.00
+null_fc,Qwen/Qwen3-8B-FC,SUMMARY overall (recomputed),,,10.00
+null_fc,Qwen/Qwen3-8B-FC,SUMMARY overall (evaluator data_overall.csv),,,10.00
+refusal_prompt,Qwen/Qwen3-8B,simple_python,0,400,0.00
+refusal_prompt,Qwen/Qwen3-8B,simple_java,0,100,0.00
+refusal_prompt,Qwen/Qwen3-8B,simple_javascript,0,50,0.00
+refusal_prompt,Qwen/Qwen3-8B,multiple,0,200,0.00
+refusal_prompt,Qwen/Qwen3-8B,parallel,0,200,0.00
+refusal_prompt,Qwen/Qwen3-8B,parallel_multiple,0,200,0.00
+refusal_prompt,Qwen/Qwen3-8B,irrelevance,240,240,100.00
+refusal_prompt,Qwen/Qwen3-8B,live_simple,0,258,0.00
+refusal_prompt,Qwen/Qwen3-8B,live_multiple,0,1053,0.00
+refusal_prompt,Qwen/Qwen3-8B,live_parallel,0,16,0.00
+refusal_prompt,Qwen/Qwen3-8B,live_parallel_multiple,0,24,0.00
+refusal_prompt,Qwen/Qwen3-8B,live_irrelevance,884,884,100.00
+refusal_prompt,Qwen/Qwen3-8B,live_relevance,0,16,0.00
+refusal_prompt,Qwen/Qwen3-8B,multi_turn_base,0,200,0.00
+refusal_prompt,Qwen/Qwen3-8B,multi_turn_miss_func,0,200,0.00
+refusal_prompt,Qwen/Qwen3-8B,multi_turn_miss_param,0,200,0.00
+refusal_prompt,Qwen/Qwen3-8B,multi_turn_long_context,0,200,0.00
+refusal_prompt,Qwen/Qwen3-8B,memory_kv,0,155,0.00
+refusal_prompt,Qwen/Qwen3-8B,memory_vector,0,155,0.00
+refusal_prompt,Qwen/Qwen3-8B,memory_rec_sum,0,155,0.00
+refusal_prompt,Qwen/Qwen3-8B,web_search_base,0,100,0.00
+refusal_prompt,Qwen/Qwen3-8B,web_search_no_snippet,0,100,0.00
+refusal_prompt,Qwen/Qwen3-8B,SUMMARY non_live,,,0.00
+refusal_prompt,Qwen/Qwen3-8B,SUMMARY live,,,0.00
+refusal_prompt,Qwen/Qwen3-8B,SUMMARY irrelevance (hallucination),,,100.00
+refusal_prompt,Qwen/Qwen3-8B,SUMMARY multi_turn,,,0.00
+refusal_prompt,Qwen/Qwen3-8B,SUMMARY agentic,,,0.00
+refusal_prompt,Qwen/Qwen3-8B,SUMMARY overall (recomputed),,,10.00
+refusal_prompt,Qwen/Qwen3-8B,SUMMARY overall (evaluator data_overall.csv),,,10.00
