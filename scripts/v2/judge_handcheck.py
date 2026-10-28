@@ -9,7 +9,7 @@ Each item gets the judge-visible transcript (the with_tool_calls view) and the a
 is written to a separate answer key so that readers label blind.
 
   --build   -> block2/handcheck/items.md (transcripts), items.csv (blank labels), key.csv (judge verdicts)
-  --score   -> reads labels_a.csv (author) and labels_b.csv (blind second reader), writes block2/judge_handcheck.md
+  --score   -> reads labels_a.csv (first model reader) and labels_b.csv (blind second model reader), writes block2/judge_handcheck.md
 Run --build from inside tau2-bench; --score needs only Python 3.11.
 """
 
@@ -118,7 +118,7 @@ def score() -> int:
     both_vs_j = sum(1 for k in items if la[k]["label"] == lb[k]["label"] == jm(k))
     L = ["# Hand-check of judge verdicts (V2, recorded simulations)", "",
          f"{n} items selected by `scripts/v2/judge_handcheck.py` (reasons: {dict(Counter(w for r in items.values() for w in r['why'].split('+')))}). "
-         "Reader A = author; reader B = blind second reader (Opus), both labelled from the judge-visible transcript without seeing the judge's verdict.", "",
+         "Reader A = the first model reader; reader B = a blind second model reader (Opus), both labelled from the judge-visible transcript without seeing the judge's verdict.", "",
          "| comparison | agreement |", "|---|---|", f"| A vs B | {agree_ab}/{n} |", f"| A vs judge | {agree_aj}/{n} |", f"| B vs judge | {agree_bj}/{n} |", f"| A = B = judge | {both_vs_j}/{n} |", "",
          "| item | agent | task | trial | assertion | class | why | judge | A | B | notes |", "|---|---|---|---|---|---|---|---|---|---|---|"]
     for k, r in items.items():

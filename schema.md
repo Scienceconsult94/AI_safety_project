@@ -18,5 +18,5 @@ One row per `(task_id, check)`. Columns, in this order:
 | date | ISO `yyyy-mm-dd`, the day the row was written |
 | note | optional free text; `patched=nl_judge_haiku` whenever the row's run used the recorded patch |
 
-Derived rule: a task is **defective** iff it has ≥1 row with defect=1 and severity ∈ {high, medium}.
+Derived rule: a task is **defective** iff it has ≥1 row with defect=1 and severity ∈ {high, medium}. Headline counts leave out the documented no-op class (checks 2a, 2b; in retail also 2c) and report it on its own line; the counts that include it are listed beside them (report Section 2, counting rule).
 Validation: `python -I scripts/validate_audit_log.py` (exit code 0 = all rules hold).

@@ -4,13 +4,13 @@ Same pinned benchmark (`989d3285ae669e49503324bdb9981bf14fccedeb`), same checkli
 
 | quantity | airline (20 of 50, sampled) | retail (all 114) |
 |---|---|---|
-| tasks with ≥1 medium/high defect (all checks) | 18/20 = 0.900 [0.699, 0.972] | 67/114 = 0.588 [0.496, 0.674] |
-| … all checks without the simulator-attributed rows (5c, 5d) | 15/20 = 0.750 [0.531, 0.888] | 46/114 = 0.404 [0.318, 0.495] |
-| … static and probe checks only | 14/20 = 0.700 [0.481, 0.855] | 44/114 = 0.386 [0.302, 0.478] |
+| tasks with ≥1 medium/high defect (all checks; no-op class reported separately) | 16/20 = 0.800 [0.584, 0.919] | 61/114 = 0.535 [0.444, 0.624] |
+| … all checks without the simulator-attributed rows (5c, 5d) | 13/20 = 0.650 [0.433, 0.819] | 40/114 = 0.351 [0.269, 0.442] |
+| … static and probe checks only | 12/20 = 0.600 [0.387, 0.781] | 38/114 = 0.333 [0.253, 0.424] |
 | … agent_run checks only | 9/20 = 0.450 [0.258, 0.658] | 41/114 = 0.360 [0.277, 0.451] |
-| … excluding the no-op class (2a, 2b[, 2c]) | 16/20 = 0.800 [0.584, 0.919] | 61/114 = 0.535 [0.444, 0.624] |
+| … counting the no-op class (2a, 2b[, 2c]), all checks | 18/20 = 0.900 [0.699, 0.972] | 67/114 = 0.588 [0.496, 0.674] |
 | category 1 Solvability | 1/20 = 0.050 [0.009, 0.236] | 14/114 = 0.123 [0.075, 0.196] |
-| category 2 Scoring validity | 13/20 = 0.650 [0.433, 0.819] | 31/114 = 0.272 [0.199, 0.360] |
+| category 2 Scoring validity | 11/20 = 0.550 [0.342, 0.742] | 25/114 = 0.219 [0.153, 0.304] |
 | category 3 Isolation and leaks | 0/20 = 0.000 [0.000, 0.161] | 0/114 = 0.000 [0.000, 0.033] |
 | category 4 Specification clarity | 4/20 = 0.200 [0.081, 0.416] | 21/114 = 0.184 [0.124, 0.265] |
 | category 5 Determinism | 8/20 = 0.400 [0.219, 0.613] | 34/114 = 0.298 [0.222, 0.388] |
@@ -21,13 +21,13 @@ Same pinned benchmark (`989d3285ae669e49503324bdb9981bf14fccedeb`), same checkli
 | agent pass^1 (claude-haiku-5-5; tau2 estimator, mean of C(c,k)/C(n,k) over tasks) | 0.733 (n = 20) | 0.807 (n = 114) |
 | agent pass^3 (claude-haiku-5-5; tau2 estimator, mean of C(c,k)/C(n,k) over tasks) | 0.600 (n = 20) | 0.658 (n = 114) |
 | ground-truth agent reaches reward 1.0 | 11/16 = 0.688 [0.444, 0.858] | 89/112 = 0.795 [0.711, 0.859] |
-| tasks with ≥1 medium/high defect, retail without the checks airline did not log per task (2c, 2d, 2e, 2m, 2j) | — | 60/114 = 0.526 [0.435, 0.616] |
+| tasks with ≥1 medium/high defect, retail without the checks airline did not log per task (2c, 2d, 2e, 2m, 2j; no-op class reported separately) | — | 54/114 = 0.474 [0.384, 0.565] |
 | Haiku trials failed by the judge alone (DB matched) | — (no judge in airline scoring) | 9/342 = 0.026 [0.014, 0.049] |
 
 Reading notes
 
 - Airline's share is a sample estimate with a wide interval; retail's is the population value of the domain. The two are not the same quantity, and the retail figure carries no sampling error.
-- Every airline defect row passed an adversarial review. In retail only the static and probe rows did; the agent-run rows (1e, 4f, 5c, 5d) are as filed by the trajectory reviewers (retail/PLAN.md, deviation of 2026-10-28).
-- Airline's no-op class (23/50 tasks passable by an empty answer) is the domain's largest defect class; retail's scorer enforces assertions on 40 tasks, which shrinks that class to the 6 tasks that have neither a write nor an assertion.
+- Every defect row in both domains went through an adversarial review; in retail the agent-run rows (1e, 4f, 5c, 5d) went through a second one in four parts (results/retail/skeptic_report_agent.md).
+- The defect counts leave out the no-op class, which is reported separately. Airline's no-op class (23/50 tasks passable by an empty answer) is the domain's largest single mechanism; retail's scorer enforces assertions on 40 tasks, which shrinks that class to the 6 tasks that have neither a write nor an assertion.
 - Retail moves the weight onto the judge: whether a trial passes depends on one LLM vote whose reply the stock parser would often reject (Table 6 of retail/summary_numbers.md).
 - Agent numbers are not comparable across domains (different tasks, different scorer); they are listed to show the noise floor each domain carries.

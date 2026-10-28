@@ -218,7 +218,7 @@ def main() -> int:
               f"{rp.get('totals', {}).get('recovered', '?')} ballots recovered, {rp.get('totals', {}).get('changed', '?')} majority verdicts changed, so the cached rewards stand. "
               f"Passes whose NL part rests on fewer than 3 determined ballots: {', '.join(thin_pass) or 'none'}.", "",
               f"Hand-check (`block2/judge_handcheck.md`): {len(hc)} items = all reward-changing, process-class and communication-class verdicts of the recorded conversations "
-              f"(classes: {', '.join(f'{k} {v}' for k, v in sorted(hcc.items()))}; negative-class verdicts 0; the mandatory classes exceeded the fill target, so no random item was drawn); author and blind second reader agree with the judge 46/46. "
+              f"(classes: {', '.join(f'{k} {v}' for k, v in sorted(hcc.items()))}; negative-class verdicts 0; the mandatory classes exceeded the fill target, so no random item was drawn); the first model reader and the blind second model reader agree with the judge 46/46. "
               f"Fresh-run verdicts were not hand-checked: {judge_only} of {len(fresh_pass)} fresh passes contain at least one assertion that only the judge decides (not duplicated by the DB check); fresh failures decided by the judge alone: "
               f"{sum(1 for r in fr_ if r.get('V2_reward') == '0.0' and r.get('V2_db') == '1' and r.get('V2_comm') in ('1', '', None))}. Unanimity measures repeatability, not validity (the stock-view pass was 255/255 unanimous and wrong on task 9 t1).", ""]
 

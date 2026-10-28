@@ -1,6 +1,6 @@
 # Task 32 — pre-test of the text fix (counterfactual simulator probe), result
 
-Design and rules: `scripts/v2/probe_32_v2.py` docstring (fixed before any call). Two independent classifications per arm: `*_classification_a.csv` (author) and `*_classification_b.csv` (blind second reader, Opus, saw only the samples). Simulator: claude-haiku-5-5, persona as in the recorded run, prefix = 32_haiku_t0 up to the user's two-step request.
+Design and rules: `scripts/v2/probe_32_v2.py` docstring (fixed before any call). Two independent classifications per arm: `*_classification_a.csv` (first model reader) and `*_classification_b.csv` (blind second reader, Opus, saw only the samples). Simulator: claude-haiku-5-5, persona as in the recorded run, prefix = 32_haiku_t0 up to the user's two-step request.
 
 | task text | arm | ACCEPT | REFUSE | UNCLEAR | agreement a/b | rule | verdict |
 |---|---|---|---|---|---|---|---|

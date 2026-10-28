@@ -1,6 +1,6 @@
 # Hand-check of judge verdicts (V2, recorded simulations)
 
-46 items selected by `scripts/v2/judge_handcheck.py` (reasons: {'communication': 28, 'process': 12, 'flip': 8, 'reward-changing': 1}). Reader A = author; reader B = blind second reader (Opus), both labelled from the judge-visible transcript without seeing the judge's verdict.
+46 items selected by `scripts/v2/judge_handcheck.py` (reasons: {'communication': 28, 'process': 12, 'flip': 8, 'reward-changing': 1}). Reader A = the first model reader; reader B = a blind second model reader (Opus), both labelled from the judge-visible transcript without seeing the judge's verdict.
 
 | comparison | agreement |
 |---|---|

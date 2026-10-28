@@ -42,12 +42,13 @@ def main() -> int:
     def add(label, ka, nna, kr, nnr):
         rows.append((label, fmt_share(ka, nna) if nna else "n/a", fmt_share(kr, nnr) if nnr else "n/a", (ka, nna, kr, nnr)))
 
-    add("tasks with ≥1 medium/high defect (all checks)", defective_tasks(a_audit, a_ids), na, defective_tasks(r_audit, r_ids), nr)
-    add("… all checks without the simulator-attributed rows (5c, 5d)", defective_tasks(a_audit, a_ids, ("5c", "5d")), na, defective_tasks(r_audit, r_ids, ("5c", "5d")), nr)
-    add("… static and probe checks only", defective_tasks(a_audit, a_ids, exclude_methods=(AGENT_RUN,)), na, defective_tasks(r_audit, r_ids, exclude_methods=(AGENT_RUN,)), nr)
+    a_noop, r_noop = ("2a", "2b"), ("2a", "2b", "2c")  # the no-op class, reported separately (row "empty answer gets full reward")
+    add("tasks with ≥1 medium/high defect (all checks; no-op class reported separately)", defective_tasks(a_audit, a_ids, a_noop), na, defective_tasks(r_audit, r_ids, r_noop), nr)
+    add("… all checks without the simulator-attributed rows (5c, 5d)", defective_tasks(a_audit, a_ids, a_noop + ("5c", "5d")), na, defective_tasks(r_audit, r_ids, r_noop + ("5c", "5d")), nr)
+    add("… static and probe checks only", defective_tasks(a_audit, a_ids, a_noop, exclude_methods=(AGENT_RUN,)), na, defective_tasks(r_audit, r_ids, r_noop, exclude_methods=(AGENT_RUN,)), nr)
     add("… agent_run checks only", defective_tasks(a_audit, a_ids, methods=(AGENT_RUN,)), na, defective_tasks(r_audit, r_ids, methods=(AGENT_RUN,)), nr)
-    add("… excluding the no-op class (2a, 2b[, 2c])", defective_tasks(a_audit, a_ids, ("2a", "2b")), na, defective_tasks(r_audit, r_ids, ("2a", "2b", "2c")), nr)
-    ca, cr = per_category(a_audit, a_ids), per_category(r_audit, r_ids)
+    add("… counting the no-op class (2a, 2b[, 2c]), all checks", defective_tasks(a_audit, a_ids), na, defective_tasks(r_audit, r_ids), nr)
+    ca, cr = per_category(a_audit, a_ids, exclude_checks=a_noop), per_category(r_audit, r_ids, exclude_checks=r_noop)
     for c, name in CATEGORIES.items():
         add(f"category {c} {name}", ca[c], na, cr[c], nr)
     add("empty answer gets full reward (whole domain)", int(a_scan["noop_pass"].sum()), len(a_scan), int(r_scan["noop_pass"].sum()), len(r_scan))
@@ -70,12 +71,12 @@ def main() -> int:
          f"| quantity | airline (20 of 50, sampled) | retail (all 114) |", "|---|---|---|"]
     L += [f"| {lab} | {x} | {y} |" for lab, x, y, _ in rows]
     extra = ("2c", "2d", "2e", "2m", "2j")
-    L.append(f"| tasks with ≥1 medium/high defect, retail without the checks airline did not log per task ({', '.join(extra)}) | — | {fmt_share(defective_tasks(r_audit, r_ids, extra), nr)} |")
+    L.append(f"| tasks with ≥1 medium/high defect, retail without the checks airline did not log per task ({', '.join(extra)}; no-op class reported separately) | — | {fmt_share(defective_tasks(r_audit, r_ids, extra + ('2a', '2b')), nr)} |")
     L.append(f"| Haiku trials failed by the judge alone (DB matched) | — (no judge in airline scoring) | {fmt_share(*jo_r) if jo_r[1] else 'n/a'} |")
     L += ["", "Reading notes", "",
           "- Airline's share is a sample estimate with a wide interval; retail's is the population value of the domain. The two are not the same quantity, and the retail figure carries no sampling error.",
-          "- Every airline defect row passed an adversarial review. In retail only the static and probe rows did; the agent-run rows (1e, 4f, 5c, 5d) are as filed by the trajectory reviewers (retail/PLAN.md, deviation of 2026-10-28).",
-          "- Airline's no-op class (23/50 tasks passable by an empty answer) is the domain's largest defect class; retail's scorer enforces assertions on 40 tasks, which shrinks that class to the 6 tasks that have neither a write nor an assertion.",
+          "- Every defect row in both domains went through an adversarial review; in retail the agent-run rows (1e, 4f, 5c, 5d) went through a second one in four parts (results/retail/skeptic_report_agent.md).",
+          "- The defect counts leave out the no-op class, which is reported separately. Airline's no-op class (23/50 tasks passable by an empty answer) is the domain's largest single mechanism; retail's scorer enforces assertions on 40 tasks, which shrinks that class to the 6 tasks that have neither a write nor an assertion.",
           "- Retail moves the weight onto the judge: whether a trial passes depends on one LLM vote whose reply the stock parser would often reject (Table 6 of retail/summary_numbers.md).",
           "- Agent numbers are not comparable across domains (different tasks, different scorer); they are listed to show the noise floor each domain carries."]
     (ROOT / "retail" / "comparison.md").write_text("\n".join(L) + "\n", encoding="utf-8")

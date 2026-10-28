@@ -3,7 +3,8 @@
 Inputs (next to this script): audit_log.csv, results/static_scan.csv, sample.json.
 Outputs: summary_numbers.md (numbers only) and fig_defects.png.
 Defect rule (schema.md): a task is defective iff it has >=1 row with defect=1
-and severity in {high, medium}. All intervals: 95% Wilson.
+and severity in {high, medium}. Headline counts leave out the documented no-op class (checks 2a, 2b), which is
+reported separately as the no-op pass; the counts that include it are listed as their own rows. All intervals: 95% Wilson.
 Run:  python -I scripts/make_summary.py            (write outputs)
       python -I scripts/make_summary.py --selftest (check the counting rules on fake data)
 """
@@ -23,7 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]  # repo root (this file lives in scri
 CATEGORIES = {1: "Solvability", 2: "Scoring validity", 3: "Isolation and leaks",
               4: "Specification clarity", 5: "Determinism", 6: "Reporting"}
 CONFIRMED = {"high", "medium"}
-NOOP_CHECKS = ("2a", "2b")  # documented no-op class
+NOOP_CHECKS = ("2a", "2b")  # documented no-op class: reported separately from the headline defect counts
 AGENT_RUN = "agent_run"  # method of rows from live runs; static and probe come from the static phase
 USER_SIM_CHECKS = ("5d",)  # user-simulator deviations
 SUBSTRING_CHECKS = ("2g",)  # apply only to the substring communicate scorer the runs selected
@@ -94,9 +95,10 @@ def defective_tasks_noop_free(audit, ids, noop_ids) -> int:
     return rows.loc[~derived, "task_id"].nunique()
 
 
-def per_category(audit, ids, severities=CONFIRMED) -> dict:
-    """Category -> number of distinct tasks in `ids` with >=1 matching defect row."""
+def per_category(audit, ids, severities=CONFIRMED, exclude_checks=()) -> dict:
+    """Category -> number of distinct tasks in `ids` with >=1 matching defect row, ignoring rows whose check is excluded."""
     rows = defect_rows(audit, ids, severities)
+    rows = rows[~rows["check"].isin(exclude_checks)]
     return {c: rows.loc[rows["category"] == c, "task_id"].nunique() for c in CATEGORIES}
 
 
@@ -240,11 +242,12 @@ def build_markdown(audit, scan, sample, runs=None) -> str:
          "Intervals: 95% Wilson.", "", "Table 1. Headline shares", "",
          "| quantity | share |", "|---|---|"]
     empty = len(audit) == 0
-    L.append("| defective tasks, sampled tasks | "
-             + ("no rows yet" if empty else fmt_share(defective_tasks(audit, ids), n)) + " |")
+    L.append("| defective tasks, sampled tasks (headline; the documented no-op class, checks 2a and 2b, is reported "
+             "separately as the no-op pass below) | "
+             + ("no rows yet" if empty else fmt_share(defective_tasks(audit, ids, NOOP_CHECKS), n)) + " |")
     split = [] if empty else [
         ("static and probe checks only (method ≠ agent_run)",
-         defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,))),
+         defective_tasks(audit, ids, NOOP_CHECKS, exclude_methods=(AGENT_RUN,))),
         ("agent_run checks only (1e, 4f, 5c, 5d, 5e, 5f)", defective_tasks(audit, ids, methods=(AGENT_RUN,))),
         ("agent_run checks excluding 5d (user-simulator deviations)",
          defective_tasks(audit, ids, USER_SIM_CHECKS, methods=(AGENT_RUN,)))]
@@ -253,11 +256,13 @@ def build_markdown(audit, scan, sample, runs=None) -> str:
     k_new = None if empty else agent_run_only_tasks(audit, ids)
     L.append("| tasks whose only confirmed defects come from agent_run checks (new versus the static phase) | "
              + ("no rows yet" if empty else fmt_share(k_new, n)) + " |")
-    k_ex = None if empty else defective_tasks(audit, ids, NOOP_CHECKS)
-    L.append("| defective tasks, sampled tasks, excluding the documented no-op class (checks 2a, 2b) | "
+    k_ex = None if empty else defective_tasks(audit, ids)
+    L.append("| defective tasks, sampled tasks, counting the documented no-op class (checks 2a, 2b), all checks | "
              + ("no rows yet" if empty else fmt_share(k_ex, n)) + " |")
-    k_sub = None if empty else defective_tasks(audit, ids, SUBSTRING_CHECKS)
-    L.append("| defective tasks, sampled tasks, excluding check 2g (it applies only to the substring communicate "
+    L.append("| defective tasks, sampled tasks, counting the documented no-op class, static and probe checks only | "
+             + ("no rows yet" if empty else fmt_share(defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,)), n)) + " |")
+    k_sub = None if empty else defective_tasks(audit, ids, NOOP_CHECKS + SUBSTRING_CHECKS)
+    L.append("| defective tasks, sampled tasks, also excluding check 2g (it applies only to the substring communicate "
              "scorer the runs selected; the v2.0.0 default is a semantic judge) | "
              + ("no rows yet" if empty else fmt_share(k_sub, n)) + " |")
     noop_ids = scan.loc[scan["noop_pass"] == 1, "task_id"]
@@ -274,12 +279,13 @@ def build_markdown(audit, scan, sample, runs=None) -> str:
               "no rows yet", "", "Table 3. Low-severity defects, by category (informational)", "",
               "no rows yet"]
     else:
-        k_def = defective_tasks(audit, ids)
+        k_def = defective_tasks(audit, ids, NOOP_CHECKS)
         notes += rule_of_three(k_def, n, "defective tasks")
-        notes += rule_of_three(k_ex, n, "defective tasks excluding checks 2a, 2b")
+        notes += rule_of_three(k_ex, n, "defective tasks counting checks 2a, 2b")
         notes += rule_of_three(k_nf, n, "defective tasks excluding no-op-derived defects")
-        conf = per_category(audit, ids)
-        L += ["", "Table 2. Sampled tasks with ≥1 confirmed defect (high/medium), by category", "",
+        conf = per_category(audit, ids, exclude_checks=NOOP_CHECKS)
+        L += ["", "Table 2. Sampled tasks with ≥1 confirmed defect (high/medium), by category "
+              "(the no-op class, checks 2a and 2b, is reported separately)", "",
               "| category | share of sampled tasks |", "|---|---|"]
         for c, name in CATEGORIES.items():
             L.append(f"| {c} {name} | {fmt_share(conf[c], n)} |")
@@ -301,9 +307,9 @@ def build_markdown(audit, scan, sample, runs=None) -> str:
 def make_figure(audit, scan, sample, out: Path):
     ids, n = sample["task_ids"], len(sample["task_ids"])
     _, _, k_all, n_all = noop_counts(scan, ids)
-    bars = [(f"No-op pass: empty answer gets full score\n(all {n_all} tasks)", k_all, n_all)]
+    bars = [(f"No-op pass: empty answer gets full score\n(all {n_all} tasks; reported separately)", k_all, n_all)]
     if len(audit):
-        conf = per_category(audit, ids)
+        conf = per_category(audit, ids, exclude_checks=NOOP_CHECKS)
         bars = [(f"{c}. {name}", conf[c], n) for c, name in CATEGORIES.items()] + bars
     labels = [b[0] for b in bars][::-1]
     p = [b[1] / b[2] for b in bars][::-1]

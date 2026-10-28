@@ -172,7 +172,7 @@ def predictions_table(audit, scan, ids, runs) -> list:
            f"| P4 | process requirements unscored (benchmark-level 2m) | 2m benchmark-level defect rows: {k2m_all}; per-task 2m: {rows.loc[rows['check'] == '2m', 'task_id'].nunique()} |",
            f"| P5 | upstream issues on 4, 5, 7 re-found | {' / '.join(ln.strip('| ').split(' | ')[0] + ': ' + ln.strip('| ').split(' | ')[3] for ln in issues)} (Table 7; the rows on tasks 4 and 5 describe other mechanisms) |",
            f"| P6 | some judge replies fail the strict parser; re-judge flips some verdicts | {j[5].strip('| ').split(' | ')[1] if len(j) > 5 else 'n/a'} rejected; reward flips {j[-1].strip('| ').split(' | ')[1] if len(j) > 5 else 'n/a'} |",
-           f"| P7 | defective share, no numeric prediction | {fmt_share(defective_tasks(audit, ids), n)} (airline sample: 18/20) |"]
+           f"| P7 | defective share, no numeric prediction | {fmt_share(defective_tasks(audit, ids, ('2a', '2b', '2c')), n)} without the no-op class (airline sample: 16/20); counting it {fmt_share(defective_tasks(audit, ids), n)} (airline sample: 18/20) |"]
     return out
 
 
@@ -183,18 +183,20 @@ def build_markdown(audit, scan, sample, runs) -> str:
     needs = int(scan["noop_needs_judge"].sum())
     L = ["# Summary numbers — retail", "", f"bench_commit: `{sample['bench_commit']}`; all {n} tasks of the base split (no sampling).", "", "Intervals: 95% Wilson.", "",
          "Table 1. Headline shares", "", "| quantity | share |", "|---|---|"]
-    k_def = defective_tasks(audit, ids)
-    L.append(f"| defective tasks (≥1 medium/high defect row, all checks) | {fmt_share(k_def, n)} |")
-    for label, k in (("static and probe checks only (method ≠ agent_run; every row passed the adversarial review)", defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,))),
-                     ("all checks without the simulator-attributed rows (5c, 5d)", defective_tasks(audit, ids, ("5c", "5d"))),
+    noop_checks = NOOP_CHECKS + ("2c",)  # retail adds the transfer-only probe to the no-op class
+    k_def = defective_tasks(audit, ids, noop_checks)
+    L.append(f"| defective tasks (headline: ≥1 medium/high defect row, all checks; the no-op class 2a, 2b, 2c is reported separately) | {fmt_share(k_def, n)} |")
+    for label, k in (("static and probe checks only (method ≠ agent_run; every row passed the adversarial review)", defective_tasks(audit, ids, noop_checks, exclude_methods=(AGENT_RUN,))),
+                     ("all checks without the simulator-attributed rows (5c, 5d)", defective_tasks(audit, ids, noop_checks + ("5c", "5d"))),
                      ("agent_run checks only (1e, 4f, 5c, 5d, 5e, 5f)", defective_tasks(audit, ids, methods=(AGENT_RUN,))),
                      ("agent_run checks excluding 5d (user-simulator deviations)", defective_tasks(audit, ids, USER_SIM_CHECKS, methods=(AGENT_RUN,))),
                      ("agent_run checks excluding 5c and 5d (simulator-attributed rows)", defective_tasks(audit, ids, ("5c", "5d"), methods=(AGENT_RUN,)))):
         L.append(f"| defective tasks, {label} | {fmt_share(k, n)} |")
     L.append(f"| tasks whose only defects come from agent_run checks | {fmt_share(agent_run_only_tasks(audit, ids), n)} |")
-    noop_checks = NOOP_CHECKS + ("2c",)  # retail adds the transfer-only probe to the no-op class
-    k_ex = defective_tasks(audit, ids, noop_checks)
-    L.append(f"| defective tasks, excluding the no-op class (checks 2a, 2b, 2c) | {fmt_share(k_ex, n)} |")
+    k_ex = defective_tasks(audit, ids)
+    L.append(f"| defective tasks, counting the no-op class (checks 2a, 2b, 2c), all checks | {fmt_share(k_ex, n)} |")
+    L.append(f"| defective tasks, counting the no-op class, static and probe checks only | {fmt_share(defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,)), n)} |")
+    L.append(f"| defective tasks, counting the no-op class, all checks without 5c, 5d | {fmt_share(defective_tasks(audit, ids, ('5c', '5d')), n)} |")
     rows = defect_rows(audit, ids, CONFIRMED)
     noop_ids = set(scan.loc[scan["noop_pass"] == 1, "task_id"].astype(str))
     derived = rows["check"].isin(noop_checks) | ((rows["check"] == "2k") & rows["task_id"].isin(noop_ids))
@@ -206,9 +208,9 @@ def build_markdown(audit, scan, sample, runs) -> str:
     L += ["", "Verification status: the static and probe rows passed the adversarial review (results/retail/skeptic_report.md). "
           "The agent-run rows (1e, 4f, 5c, 5d and 2j per task) passed a second adversarial review in four parts "
           "(results/retail/skeptic_report_agent_p1.md to _p4.md; retail/PLAN.md, deviations of 2026-10-28)."]
-    notes = rule_of_three(noop, n, "no-op pass") + rule_of_three(k_def, n, "defective tasks") + rule_of_three(k_ex, n, "defective tasks excluding the no-op class")
-    conf = per_category(audit, ids)
-    L += ["", "Table 2. Tasks with ≥1 defect (high/medium, all checks), by category", "", "| category | share of all tasks |", "|---|---|"]
+    notes = rule_of_three(noop, n, "no-op pass") + rule_of_three(k_def, n, "defective tasks") + rule_of_three(k_ex, n, "defective tasks counting the no-op class")
+    conf = per_category(audit, ids, exclude_checks=noop_checks)
+    L += ["", "Table 2. Tasks with ≥1 defect (high/medium, all checks), by category (the no-op class 2a, 2b, 2c is reported separately)", "", "| category | share of all tasks |", "|---|---|"]
     for c, name in CATEGORIES.items():
         L.append(f"| {c} {name} | {fmt_share(conf[c], n)} |")
         notes += rule_of_three(conf[c], n, f"category {c} {name}")
@@ -232,11 +234,12 @@ def build_markdown(audit, scan, sample, runs) -> str:
 
 def make_figure(audit, scan, sample, runs, out: Path):
     ids, n = sample["task_ids"], len(sample["task_ids"])
-    bars = [("Empty answer gets full score\n(no-op pass, by construction)", int(scan["noop_pass"].sum()), n),
-            ("≥1 defect (all checks)", defective_tasks(audit, ids), n),
-            ("≥1 defect without the\nsimulator rows (5c, 5d)", defective_tasks(audit, ids, ("5c", "5d")), n),
-            ("≥1 defect, static and\nprobe checks only", defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,)), n)]
-    conf = per_category(audit, ids)
+    noop_checks = ("2a", "2b", "2c")  # the no-op class, reported separately (first bar)
+    bars = [("Empty answer gets full score\n(no-op pass, by construction;\nreported separately)", int(scan["noop_pass"].sum()), n),
+            ("≥1 defect (all checks)", defective_tasks(audit, ids, noop_checks), n),
+            ("≥1 defect without the\nsimulator rows (5c, 5d)", defective_tasks(audit, ids, noop_checks + ("5c", "5d")), n),
+            ("≥1 defect, static and\nprobe checks only", defective_tasks(audit, ids, noop_checks, exclude_methods=(AGENT_RUN,)), n)]
+    conf = per_category(audit, ids, exclude_checks=noop_checks)
     bars += [(f"category {c}: {name}", conf[c], n) for c, name in CATEGORIES.items()]
     if runs is not None:
         st = agent_run_stats(runs, ids)

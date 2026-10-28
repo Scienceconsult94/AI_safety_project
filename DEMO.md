@@ -17,7 +17,7 @@ Audience: someone who knows what an LLM agent is but has not seen tau2-bench. Ev
 ## Script
 
 **0:00–0:30 — The claim.**
-Agent benchmarks are exams, and their pass rates feed leaderboards and deployment decisions. This project checks the exam itself. The target is tau2-bench v2.0.0, a widely used customer-service agent benchmark: airline (20 of 50 tasks sampled) and retail (all 114 tasks). The tools are a fixed checklist of 52 checks, probes with known answers, paid agent runs and an adversarial review of every finding from reading and probes.
+Agent benchmarks are exams, and their pass rates feed leaderboards and deployment decisions. This project checks the exam itself. The target is tau2-bench v2.0.0, a widely used customer-service agent benchmark: airline (all 50 tasks; 20 sampled first) and retail (all 114 tasks). The tools are a fixed checklist of 52 checks, probes with known answers, paid agent runs and an adversarial review of every finding.
 
 **0:30–1:30 — An agent that says nothing.**
 Run `--only 1`. On screen: full reward on 23 of 50 airline tasks for an empty conversation.
@@ -45,7 +45,7 @@ A pass rate measures the agent, the user simulator and the exam together. The ex
 ## Likely questions
 
 - **Isn't the pass for doing nothing documented as intended?** The documentation calls the refusal outcome intended. The finding is about resolution: the exam cannot distinguish a refusal from inaction. Block 2 shows a stricter protocol in which an empty conversation scores 0 on all 50 airline tasks.
-- **How solid are the defect counts?** In retail, every static and probe row passed an adversarial review, and a blind second pass agreed with the corrected labels on 98 of 98 rows. The rows from the agent runs, which attribute failures to the simulator, were not adversarially reviewed; they are reported separately (44 of 114 tasks defective without them, 67 with them).
+- **How solid are the defect counts?** In retail, every defect row went through an adversarial review: the rows from reading and probes first, the rows from the agent runs later, in a second review in four parts. A second model reader re-labelled 12 tasks blind and agreed with the first reviewers on 97 of 98 labels; the adversarial review settled the one difference in favour of the blind reader. With the 6 tasks that pass for doing nothing counted on their own line, 38 of 114 tasks are defective from reading and probes, and 61 counting the agent runs.
 - **Is the tool bug fixed upstream?** Not at the pinned commit. The fix takes a few lines; the patch and its description are drafted in `upstream/` and have not been filed.
 - **Does this generalize beyond tau2-bench?** See the external null-agent table in `results/null_agent/external.md`.
 - **What did it cost?** About $28 of API calls in total (`cost.md`).

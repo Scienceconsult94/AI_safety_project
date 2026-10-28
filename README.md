@@ -8,22 +8,23 @@ Block 1, the audit of the pinned benchmark (20 sampled tasks of 50, fixed checkl
 
 | quantity | value |
 |---|---|
-| sampled tasks with at least one confirmed medium/high defect | 18/20 = 0.90 [0.70, 0.97] |
-| by static reading and mechanical probes alone | 14/20 |
+| sampled tasks with at least one confirmed medium/high defect (the pass for doing nothing counted on its own line) | 16/20 = 0.80 [0.58, 0.92]; 18/20 counting the pass for doing nothing |
+| by static reading and mechanical probes alone | 12/20 |
 | tasks of the whole domain that an agent passes by doing nothing | 23/50 = 0.46 |
 | agent solve rate (claude-haiku-5-5 as agent and user simulator), tasks passed 3/3 | 12/20 = 0.60 |
 | ground-truth agent (sees the reference actions) reaches the target state | 11/16 |
-| blind re-review agreement with the corrected labels | 29/29, Cohen's kappa 1.00 |
+| blind re-review by a second model reader, agreement with the original labels | 27/29, Cohen's kappa (agreement corrected for chance) 0.76; the adversarial review settled the 2 differences in favour of the blind reader |
 
-The defects concentrate in two categories: scoring validity (13/20 tasks: an end-state hash that depends on list order, a substring check that matches by accident, requirements stated only in free-text assertions that the default scorer never reads, an arithmetic error in a reference answer) and determinism (8/20: the user simulator departs from its scenario). The substring check concerns the substring scorer, which every run here selected; the v2.0.0 default is a semantic judge, and without that check the headline is 17/20.
+The defects concentrate in two categories: scoring validity (11/20 tasks: an end-state hash that depends on list order, a substring check that matches by accident, requirements stated only in free-text assertions that the default scorer never reads, an arithmetic error in a reference answer) and determinism (8/20: the user simulator departs from its scenario). The substring check concerns the substring scorer, which every run here selected; the v2.0.0 default is a semantic judge, and without that check the headline is 15/20.
 
 The whole airline domain (report Section 13; pre-registration `airline_full/PLAN.md`): the same pipeline on the other 30 tasks, an adversarial review of every new defect row, and a consistency pass across the two blocks.
 
 | quantity | sample (20) | rest (30) | all 50 |
 |---|---|---|---|
-| tasks with at least one confirmed medium/high defect | 18/20 | 26/30 | 44/50 = 0.88 [0.76, 0.94] |
-| by static reading and mechanical probes alone | 14/20 | 23/30 | 37/50 |
+| tasks with at least one confirmed medium/high defect (the pass for doing nothing counted on its own line) | 16/20 | 18/30 | 34/50 = 0.68 [0.54, 0.79] |
+| by static reading and mechanical probes alone | 12/20 | 15/30 | 27/50 |
 | tasks an agent passes by doing nothing | 7/20 | 16/30 | 23/50 |
+| tasks with a defect, counting the pass for doing nothing | 18/20 | 26/30 | 44/50 |
 | agent tasks passed 3/3, stock protocol | 12/20 | 21/30 | 33/50 = 0.66 |
 | ground-truth agent reaches the target state | 11/16 | 22/27 | 33/43 |
 
@@ -31,7 +32,7 @@ Eight of ten pre-registered predictions hold. Two do not:
 - removing the payment sentence from task 32 does not help the ground-truth agent (2/10 with it and 2/10 without it);
 - under the full v2 protocol the rest drops from 21/30 to 15/30 tasks passed 3/3, more than the predicted 0.10.
 
-The consistency pass changed one block-1 row (task 22, check 2h). That moves the sample count from reading and probes from 13/20 to 14/20; the headline is unchanged.
+The consistency pass changed one block-1 row (task 22, check 2h). That moves the sample count from reading and probes from 11/20 to 12/20; the headline is unchanged.
 
 Block 2, the stricter protocol and the re-run (pre-registered hypotheses H1–H5, one variable at a time):
 
@@ -49,10 +50,10 @@ Retail, the whole domain (all 114 tasks, pre-registered in `retail/PLAN.md`):
 
 | quantity | value |
 |---|---|
-| tasks with at least one medium/high defect, static reading and probes (every row adversarially reviewed) | 44/114 = 0.39 [0.30, 0.48] |
-| the same, all checks including the agent runs (run rows also adversarially reviewed) | 67/114 = 0.59 [0.50, 0.67] |
-| all checks without the rows that blame the user simulator | 46/114 = 0.40 [0.32, 0.50] |
-| tasks an agent passes by doing nothing | 6/114 = 0.05 |
+| tasks with at least one medium/high defect, static reading and probes (every row adversarially reviewed) | 38/114 = 0.33 [0.25, 0.42] |
+| the same, all checks including the agent runs (run rows also adversarially reviewed) | 61/114 = 0.54 [0.44, 0.62] |
+| all checks without the rows that blame the user simulator | 40/114 = 0.35 [0.27, 0.44] |
+| tasks an agent passes by doing nothing (counted on its own line; with them the three counts above are 44, 67 and 46) | 6/114 = 0.05 |
 | agent solve rate (claude-haiku-5-5), tasks passed 3/3; ground-truth agent | 75/114 = 0.66; 89/112 |
 | judge replies the stock strict parser would reject (judge substituted by claude-haiku-5-5) | 103/169 = 0.61 |
 

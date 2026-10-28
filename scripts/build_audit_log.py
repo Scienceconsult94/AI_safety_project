@@ -165,8 +165,9 @@ def main() -> int:
     n_def = sum(r["defect"] == "1" for r in rows)
     by_sev = {s: sum(1 for r in rows if r["defect"] == "1" and r["severity"] == s) for s in ("high", "medium", "low")}
     tasks_def = sorted({r["task_id"] for r in rows if r["defect"] == "1" and r["severity"] in ("high", "medium") and r["task_id"] != "ALL"}, key=int)
+    tasks_head = [t for t in tasks_def if any(r["task_id"] == t and r["defect"] == "1" and r["severity"] in ("high", "medium") and r["check"] not in ("2a", "2b") for r in rows)]  # headline: the no-op class is reported separately
     print(f"{out.relative_to(ROOT).as_posix()}: {len(rows)} rows; defect=1 rows: {n_def} {by_sev}; "
-          f"defective tasks: {len(tasks_def)}/{len(sample)} -> {tasks_def}")
+          f"defective tasks without the no-op class (2a, 2b): {len(tasks_head)}/{len(sample)}; counting it: {len(tasks_def)}/{len(sample)} -> {tasks_def}")
     return subprocess.call([sys.executable, "-I", str(Path(__file__).resolve().parent / "validate_audit_log.py"), str(out)])
 
 
