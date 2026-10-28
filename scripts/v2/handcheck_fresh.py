@@ -172,7 +172,8 @@ def score_round2() -> int:
     L = ["# Hand-check of judge-only verdicts in the fresh v2 passes, round 2 (blind, with decoys)", "",
          "The 20 round-1 items mixed with 10 judge-unmet decoys from the same fresh runs, shuffled; the readers saw neither "
          "the pool nor the class (`scripts/v2/handcheck_fresh.py --round 2`; airline_full/PLAN.md, Q4 and its deviation). "
-         "Readers C and D labelled blind and independently.", "",
+         "Readers C and D labelled blind and independently, each on a copy of items.md, items.csv and sims/ in a separate folder "
+         "without key.csv.", "",
          "| items | n | C vs judge | D vs judge | C vs D | C = D = judge |", "|---|---|---|---|---|---|"]
     for name, sel in (("targets (judge-only, judge met)", "1"), ("decoys (judge unmet)", "0")):
         ks = [k for k in items if key[k]["target"] == sel]
