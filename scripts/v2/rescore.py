@@ -24,7 +24,7 @@ Reading rule (design review E3): a flip is attributed to its component (criteria
 the task-7 trial that flips 0 -> 1 under tasks v2 does so by construction of the fix.
 
 Run from inside tau2-bench (tau2 venv; .env is read by tau2 for the judge):
-    uv run --no-sync python ../scripts/v2/rescore.py [--set recorded|fresh|sonnet] [--no-judge] [--force] [--workers 3]
+    uv run --no-sync python ../scripts/v2/rescore.py [--set recorded|fresh|sonnet|rest30|fresh_rest30] [--no-judge] [--force] [--workers 3]
 """
 
 from __future__ import annotations
@@ -70,6 +70,11 @@ SETS = {
     # strong-vs-weak check (strong_vs_weak/PLAN.md): the Sonnet agent on the 20 sampled tasks x 3, recorded under the stock scorer
     "sonnet": {"dir": RUNS, "files": {"sonnet": "sample20_sonnet_t3.results.json"},
                "gate_cfg": "v1", "suffix": "_sonnet", "cache": OUT / "judge_cache_sonnet.json", "label": "sonnet"},
+    # the 30 airline tasks outside the sample (airline_full/PLAN.md, Q5): stock runs under the stock scorer, fresh v2 runs
+    "rest30": {"dir": RUNS, "files": {"haiku": "rest30_pass3_haiku.results.json", "gt": "rest30_gt_haiku.results.json"},
+               "gate_cfg": "v1", "suffix": "_rest30", "cache": OUT / "judge_cache_rest30.json"},
+    "fresh_rest30": {"dir": OUT / "runs", "files": {"haiku": "v2_rest30_pass3_haiku/results.json", "gt": "v2_rest30_gt_haiku/results.json"},
+                     "gate_cfg": "V2", "suffix": "_fresh_rest30", "cache": OUT / "judge_cache_live.json"},
 }
 PASS3_AGENTS = ("haiku", "sonnet")  # run keys of Pass^3 runs; every other key is a ground-truth run
 CONFIGS = [  # name, tasks, hash, comm, nl
@@ -227,7 +232,7 @@ def main() -> int:
             print(f"missing {p} - skipped")
             continue
         res = Results.load(p)
-        if args.set in ("recorded", "sonnet"):  # runs on the pinned tasks: the embedded tasks must equal the loader's
+        if args.set in ("recorded", "sonnet", "rest30"):  # runs on the pinned tasks: the embedded tasks must equal the loader's
             t1 = {t.id: t for t in res.tasks}
             assert all(t1[k].model_dump() == t1_stock[k].model_dump() for k in t1), "embedded tasks differ from the pinned loader"
         else:
