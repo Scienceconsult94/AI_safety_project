@@ -1,0 +1,799 @@
+task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_equals_gold
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,3616838507,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,8484921793,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,6342039236,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,1421289881,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,7867398203,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,4402162122,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,2299424241,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,9991484137,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,9665000388,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,9570044148,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[0],7706410293,7658724607,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[1],7747408585,4953074738,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[1],7747408585,9480266227,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[1],7747408585,6243148452,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,new_item_ids[1],7747408585,3377900078,other available variant of the same product,,0
+0,2d,0_4,exchange_delivered_order_items,item_ids[-0],1151293680,(dropped),one item fewer,,0
+0,2d,0_4,exchange_delivered_order_items,item_ids[-1],4983901480,(dropped),one item fewer,,0
+1,2d,1_4,exchange_delivered_order_items,new_item_ids[0],7747408585,4953074738,other available variant of the same product,,0
+1,2d,1_4,exchange_delivered_order_items,new_item_ids[0],7747408585,9480266227,other available variant of the same product,,0
+1,2d,1_4,exchange_delivered_order_items,new_item_ids[0],7747408585,6243148452,other available variant of the same product,,0
+1,2d,1_4,exchange_delivered_order_items,new_item_ids[0],7747408585,3377900078,other available variant of the same product,,0
+2,2d,2_11,return_delivered_order_items,item_ids[-0],4602305039,(dropped),one item fewer,get_product_details: ValueError: Product not found,
+2,2d,2_11,return_delivered_order_items,item_ids[-1],4202497723,(dropped),one item fewer,get_product_details: ValueError: Product not found,
+2,2d,2_11,return_delivered_order_items,item_ids[-2],9408160950,(dropped),one item fewer,get_product_details: ValueError: Product not found,
+3,2d,3_12,modify_pending_order_items,new_item_ids[0],9647292434,9612497925,other available variant of the same product,get_product_details: ValueError: Product not found,
+3,2d,3_12,modify_pending_order_items,new_item_ids[0],9647292434,8124970213,other available variant of the same product,get_product_details: ValueError: Product not found,
+3,2d,3_12,modify_pending_order_items,new_item_ids[0],9647292434,9354168549,other available variant of the same product,get_product_details: ValueError: Product not found,
+3,2d,3_12,modify_pending_order_items,new_item_ids[0],9647292434,5253880258,other available variant of the same product,get_product_details: ValueError: Product not found,
+3,2d,3_12,modify_pending_order_items,new_item_ids[0],9647292434,1176194968,other available variant of the same product,get_product_details: ValueError: Product not found,
+3,2d,3_12,modify_pending_order_items,new_item_ids[0],9647292434,3799046073,other available variant of the same product,get_product_details: ValueError: Product not found,
+3,2d,3_12,modify_pending_order_items,new_item_ids[0],9647292434,3234800602,other available variant of the same product,get_product_details: ValueError: Product not found,
+3,2d,3_12,modify_pending_order_items,new_item_ids[0],9647292434,2060066974,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_12,modify_pending_order_items,new_item_ids[0],9647292434,9612497925,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_12,modify_pending_order_items,new_item_ids[0],9647292434,8124970213,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_12,modify_pending_order_items,new_item_ids[0],9647292434,9354168549,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_12,modify_pending_order_items,new_item_ids[0],9647292434,5253880258,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_12,modify_pending_order_items,new_item_ids[0],9647292434,1176194968,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_12,modify_pending_order_items,new_item_ids[0],9647292434,8349118980,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_12,modify_pending_order_items,new_item_ids[0],9647292434,3234800602,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_12,modify_pending_order_items,new_item_ids[0],9647292434,2060066974,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_13,modify_pending_order_items,new_item_ids[0],9647292434,9612497925,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_13,modify_pending_order_items,new_item_ids[0],9647292434,8124970213,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_13,modify_pending_order_items,new_item_ids[0],9647292434,9354168549,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_13,modify_pending_order_items,new_item_ids[0],9647292434,5253880258,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_13,modify_pending_order_items,new_item_ids[0],9647292434,1176194968,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_13,modify_pending_order_items,new_item_ids[0],9647292434,3799046073,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_13,modify_pending_order_items,new_item_ids[0],9647292434,3234800602,other available variant of the same product,get_product_details: ValueError: Product not found,
+4,2d,4_13,modify_pending_order_items,new_item_ids[0],9647292434,2060066974,other available variant of the same product,get_product_details: ValueError: Product not found,
+6,2d,6_5,exchange_delivered_order_items,new_item_ids[0],7453605304,9083642334,other available variant of the same product,,0
+6,2d,6_5,exchange_delivered_order_items,new_item_ids[0],7453605304,7624783998,other available variant of the same product,,0
+6,2d,6_5,exchange_delivered_order_items,new_item_ids[0],7453605304,5320792178,other available variant of the same product,,0
+6,2d,6_5,exchange_delivered_order_items,new_item_ids[0],7453605304,5370728469,other available variant of the same product,,0
+6,2d,6_5,exchange_delivered_order_items,new_item_ids[0],7453605304,6805564527,other available variant of the same product,,0
+6,2d,6_5,exchange_delivered_order_items,new_item_ids[0],7453605304,1569765161,other available variant of the same product,,0
+6,2d,6_5,exchange_delivered_order_items,new_item_ids[0],7453605304,9190635437,other available variant of the same product,,0
+7,2d,7_5,exchange_delivered_order_items,new_item_ids[0],1569765161,9083642334,other available variant of the same product,,0
+7,2d,7_5,exchange_delivered_order_items,new_item_ids[0],1569765161,7624783998,other available variant of the same product,,0
+7,2d,7_5,exchange_delivered_order_items,new_item_ids[0],1569765161,5320792178,other available variant of the same product,,0
+7,2d,7_5,exchange_delivered_order_items,new_item_ids[0],1569765161,5370728469,other available variant of the same product,,0
+7,2d,7_5,exchange_delivered_order_items,new_item_ids[0],1569765161,6805564527,other available variant of the same product,,0
+7,2d,7_5,exchange_delivered_order_items,new_item_ids[0],1569765161,7453605304,other available variant of the same product,,0
+7,2d,7_5,exchange_delivered_order_items,new_item_ids[0],1569765161,9190635437,other available variant of the same product,,0
+8,2d,8_5,exchange_delivered_order_items,new_item_ids[0],9083642334,7624783998,other available variant of the same product,,0
+8,2d,8_5,exchange_delivered_order_items,new_item_ids[0],9083642334,5320792178,other available variant of the same product,,0
+8,2d,8_5,exchange_delivered_order_items,new_item_ids[0],9083642334,5370728469,other available variant of the same product,,0
+8,2d,8_5,exchange_delivered_order_items,new_item_ids[0],9083642334,6805564527,other available variant of the same product,,0
+8,2d,8_5,exchange_delivered_order_items,new_item_ids[0],9083642334,1569765161,other available variant of the same product,,0
+8,2d,8_5,exchange_delivered_order_items,new_item_ids[0],9083642334,7453605304,other available variant of the same product,,0
+8,2d,8_5,exchange_delivered_order_items,new_item_ids[0],9083642334,9190635437,other available variant of the same product,,0
+9,2d,9_5,exchange_delivered_order_items,new_item_ids[0],7624783998,9083642334,other available variant of the same product,,0
+9,2d,9_5,exchange_delivered_order_items,new_item_ids[0],7624783998,5320792178,other available variant of the same product,,0
+9,2d,9_5,exchange_delivered_order_items,new_item_ids[0],7624783998,5370728469,other available variant of the same product,,0
+9,2d,9_5,exchange_delivered_order_items,new_item_ids[0],7624783998,6805564527,other available variant of the same product,,0
+9,2d,9_5,exchange_delivered_order_items,new_item_ids[0],7624783998,1569765161,other available variant of the same product,,0
+9,2d,9_5,exchange_delivered_order_items,new_item_ids[0],7624783998,7453605304,other available variant of the same product,,0
+9,2d,9_5,exchange_delivered_order_items,new_item_ids[0],7624783998,9190635437,other available variant of the same product,,0
+11,2d,11_4,return_delivered_order_items,payment_method_id,credit_card_3124723,paypal_9497703,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+11,2d,11_4,return_delivered_order_items,item_ids[-0],4579334072,(dropped),one item fewer,,0
+11,2d,11_4,return_delivered_order_items,item_ids[-1],1421289881,(dropped),one item fewer,,0
+11,2d,11_4,return_delivered_order_items,item_ids[-2],6117189161,(dropped),one item fewer,,0
+11,2d,11_4,return_delivered_order_items,item_ids[-3],4947717507,(dropped),one item fewer,,0
+11,2d,11_5,return_delivered_order_items,payment_method_id,paypal_9497703,credit_card_3124723,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+13,2d,13_4,return_delivered_order_items,payment_method_id,credit_card_3124723,paypal_9497703,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+13,2d,13_4,return_delivered_order_items,item_ids[-0],4579334072,(dropped),one item fewer,,0
+13,2d,13_4,return_delivered_order_items,item_ids[-1],6117189161,(dropped),one item fewer,,0
+13,2d,13_4,return_delivered_order_items,item_ids[-2],4947717507,(dropped),one item fewer,,0
+14,2d,14_4,return_delivered_order_items,payment_method_id,credit_card_3124723,paypal_9497703,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+14,2d,14_5,return_delivered_order_items,payment_method_id,paypal_9497703,credit_card_3124723,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+15,2d,15_6,modify_pending_order_items,payment_method_id,paypal_5364164,gift_card_1675628,other payment method of the same user,,0
+15,2d,15_6,modify_pending_order_items,new_item_ids[0],3613716226,8106223139,other available variant of the same product,,0
+15,2d,15_6,modify_pending_order_items,new_item_ids[0],3613716226,3812493782,other available variant of the same product,,0
+15,2d,15_6,modify_pending_order_items,new_item_ids[0],3613716226,4582956489,other available variant of the same product,,0
+15,2d,15_6,modify_pending_order_items,new_item_ids[0],3613716226,6159919747,other available variant of the same product,,0
+15,2d,15_6,modify_pending_order_items,new_item_ids[0],3613716226,1437889264,other available variant of the same product,,0
+15,2d,15_6,modify_pending_order_items,new_item_ids[0],3613716226,8277474082,other available variant of the same product,,0
+15,2d,15_6,modify_pending_order_items,new_item_ids[0],3613716226,5676696062,other available variant of the same product,,0
+16,2d,16_6,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+16,2d,16_7,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+16,2d,16_8,return_delivered_order_items,payment_method_id,paypal_5364164,gift_card_1675628,other payment method of the same user,,0
+17,2d,17_5,modify_pending_order_address,address,123 Elm Street,123 Elm Street,user's default address instead of the requested one,,0
+17,2e,17_5,modify_pending_order_address,address,123 Elm Street,1 Probe Street,"wrong address written first, then the reference write",,1
+18,2d,18_4,exchange_delivered_order_items,new_item_ids[0],1071497737,1793929609,other available variant of the same product,,0
+18,2d,18_4,exchange_delivered_order_items,new_item_ids[0],1071497737,4274709903,other available variant of the same product,,0
+18,2d,18_4,exchange_delivered_order_items,new_item_ids[0],1071497737,8426249116,other available variant of the same product,,0
+18,2d,18_4,exchange_delivered_order_items,new_item_ids[0],1071497737,4168944673,other available variant of the same product,,0
+18,2d,18_4,exchange_delivered_order_items,new_item_ids[0],1071497737,3704016729,other available variant of the same product,,0
+18,2d,18_4,exchange_delivered_order_items,new_item_ids[0],1071497737,8323284863,other available variant of the same product,,0
+18,2d,18_4,exchange_delivered_order_items,new_item_ids[0],1071497737,4648362606,other available variant of the same product,,0
+18,2d,18_4,exchange_delivered_order_items,new_item_ids[0],1071497737,2386562819,other available variant of the same product,,0
+18,2d,18_4,exchange_delivered_order_items,new_item_ids[0],1071497737,3915604618,other available variant of the same product,,0
+18,2d,18_4,exchange_delivered_order_items,new_item_ids[0],1071497737,9459890810,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,payment_method_id,gift_card_4332117,paypal_3798357,order's original payment method,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,3453331371,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,2439754078,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,7843064651,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,5758737025,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,7533802601,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,3229676465,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,6974536207,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,6777246137,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,8538875209,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,7661609223,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[0],4579334072,7199146548,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,7706410293,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,3616838507,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,8484921793,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,6342039236,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,1421289881,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,7867398203,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,4402162122,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,2299424241,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,9991484137,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,9665000388,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,9570044148,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[1],1151293680,7658724607,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[2],4107812777,4153505238,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[2],4107812777,1775591963,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[2],4107812777,9635758562,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[3],2882812427,1573035764,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[3],2882812427,6254646215,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[3],2882812427,3017803871,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[3],2882812427,5012998807,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,new_item_ids[3],2882812427,7902309762,other available variant of the same product,,0
+20,2d,20_8,modify_pending_order_items,item_ids[-0],2366567022,(dropped),one item fewer,,0
+20,2d,20_8,modify_pending_order_items,item_ids[-1],1340995114,(dropped),one item fewer,,0
+20,2d,20_8,modify_pending_order_items,item_ids[-2],9791469541,(dropped),one item fewer,,0
+20,2d,20_8,modify_pending_order_items,item_ids[-3],1763705424,(dropped),one item fewer,,0
+21,2d,21_11,modify_pending_order_items,payment_method_id,gift_card_4332117,paypal_3798357,order's original payment method,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[0],4107812777,4153505238,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[0],4107812777,1775591963,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[0],4107812777,9635758562,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,7706410293,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,3616838507,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,8484921793,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,6342039236,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,7867398203,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,4402162122,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,1151293680,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,2299424241,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,9991484137,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,9665000388,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,9570044148,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,new_item_ids[1],1421289881,7658724607,other available variant of the same product,,0
+21,2d,21_11,modify_pending_order_items,item_ids[-0],9791469541,(dropped),one item fewer,,0
+21,2d,21_11,modify_pending_order_items,item_ids[-1],1340995114,(dropped),one item fewer,,0
+22,2d,22_1,modify_user_address,address,101 Highway,667 Highland Drive,address of the user's first order instead of the requested one,,1
+22,2e,22_1,modify_user_address,address,101 Highway,1 Probe Street,"wrong address written first, then the reference write",,1
+22,2d,22_5,modify_pending_order_address,address,101 Highway,667 Highland Drive,user's default address instead of the requested one,,0
+22,2e,22_5,modify_pending_order_address,address,101 Highway,1 Probe Street,"wrong address written first, then the reference write",,1
+22,2e,22_6,modify_user_address,address,667 Highland Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+23,2d,23_7,exchange_delivered_order_items,new_item_ids[0],8573379326,7811981098,other available variant of the same product,,0
+23,2d,23_7,exchange_delivered_order_items,new_item_ids[0],8573379326,8591113813,other available variant of the same product,,0
+23,2d,23_7,exchange_delivered_order_items,new_item_ids[0],8573379326,5537798301,other available variant of the same product,,0
+23,2d,23_7,exchange_delivered_order_items,new_item_ids[0],8573379326,9013366374,other available variant of the same product,,0
+23,2d,23_7,exchange_delivered_order_items,new_item_ids[0],8573379326,1596993217,other available variant of the same product,,0
+23,2d,23_7,exchange_delivered_order_items,new_item_ids[0],8573379326,1719127154,other available variant of the same product,,0
+23,2d,23_7,exchange_delivered_order_items,new_item_ids[0],8573379326,1665571435,other available variant of the same product,,0
+23,2d,23_7,exchange_delivered_order_items,new_item_ids[0],8573379326,5886093635,other available variant of the same product,,0
+23,2d,23_7,exchange_delivered_order_items,new_item_ids[0],8573379326,6697922351,other available variant of the same product,,0
+23,2d,23_9,exchange_delivered_order_items,new_item_ids[0],8926329222,8759627937,other available variant of the same product,,0
+23,2d,23_9,exchange_delivered_order_items,new_item_ids[0],8926329222,9956648681,other available variant of the same product,,0
+23,2d,23_9,exchange_delivered_order_items,new_item_ids[0],8926329222,8964750292,other available variant of the same product,,0
+23,2d,23_9,exchange_delivered_order_items,new_item_ids[0],8926329222,7160999700,other available variant of the same product,,0
+23,2d,23_11,modify_pending_order_items,new_item_ids[0],7082455361,4404981319,other available variant of the same product,,0
+23,2d,23_11,modify_pending_order_items,new_item_ids[0],7082455361,3876764226,other available variant of the same product,,0
+23,2d,23_11,modify_pending_order_items,new_item_ids[0],7082455361,5745575001,other available variant of the same product,,0
+23,2d,23_11,modify_pending_order_items,new_item_ids[0],7082455361,9724317332,other available variant of the same product,,0
+23,2d,23_11,modify_pending_order_items,new_item_ids[0],7082455361,7848293342,other available variant of the same product,,0
+23,2d,23_11,modify_pending_order_items,new_item_ids[0],7082455361,5105441284,other available variant of the same product,,0
+26,2d,26_6,return_delivered_order_items,item_ids[-0],7602931732,(dropped),one item fewer,,0
+26,2d,26_6,return_delivered_order_items,item_ids[-1],9570044148,(dropped),one item fewer,,0
+27,2d,27_5,exchange_delivered_order_items,new_item_ids[0],8277474082,1615379700,other available variant of the same product,,0
+27,2d,27_5,exchange_delivered_order_items,new_item_ids[0],8277474082,8106223139,other available variant of the same product,,0
+27,2d,27_5,exchange_delivered_order_items,new_item_ids[0],8277474082,3812493782,other available variant of the same product,,0
+27,2d,27_5,exchange_delivered_order_items,new_item_ids[0],8277474082,4582956489,other available variant of the same product,,0
+27,2d,27_5,exchange_delivered_order_items,new_item_ids[0],8277474082,6159919747,other available variant of the same product,,0
+27,2d,27_5,exchange_delivered_order_items,new_item_ids[0],8277474082,1437889264,other available variant of the same product,,0
+27,2d,27_5,exchange_delivered_order_items,new_item_ids[0],8277474082,5676696062,other available variant of the same product,,0
+27,2d,27_5,exchange_delivered_order_items,new_item_ids[0],8277474082,3613716226,other available variant of the same product,,0
+28,2d,28_7,return_delivered_order_items,item_ids[-0],5753502325,(dropped),one item fewer,,0
+28,2d,28_7,return_delivered_order_items,item_ids[-1],9851293632,(dropped),one item fewer,,0
+28,2d,28_8,return_delivered_order_items,item_ids[-0],9570044148,(dropped),one item fewer,,0
+28,2d,28_8,return_delivered_order_items,item_ids[-1],6857426243,(dropped),one item fewer,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,6843647669,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,3232433601,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,3098764622,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,3541421151,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,4545791457,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,6313971174,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,3877188862,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,5038485381,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,9594745976,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,6673921677,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,6956751343,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,5489028872,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,5120532699,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,5312063289,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,2819462352,other available variant of the same product,,0
+29,2d,29_4,exchange_delivered_order_items,new_item_ids[0],8176740019,2177997696,other available variant of the same product,,0
+29,2d,29_5,exchange_delivered_order_items,new_item_ids[0],5206946487,8481719475,other available variant of the same product,,0
+29,2d,29_5,exchange_delivered_order_items,new_item_ids[0],5206946487,9829827210,other available variant of the same product,,0
+29,2d,29_5,exchange_delivered_order_items,new_item_ids[0],5206946487,3369928769,other available variant of the same product,,0
+29,2d,29_5,exchange_delivered_order_items,new_item_ids[0],5206946487,4024196380,other available variant of the same product,,0
+29,2d,29_5,exchange_delivered_order_items,new_item_ids[0],5206946487,3230708338,other available variant of the same product,,0
+30,2d,30_8,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+31,2d,31_8,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+32,2d,32_8,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+32,2d,32_10,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+33,2e,33_5,modify_user_address,address,517 Lakeview Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+34,2e,34_5,modify_pending_order_address,address,224 Elm Street,1 Probe Street,"wrong address written first, then the reference write",,1
+35,2d,35_6,modify_pending_order_items,new_item_ids[0],5052031638,2216662955,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+35,2d,35_6,modify_pending_order_items,new_item_ids[0],5052031638,2913673670,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+35,2d,35_6,modify_pending_order_items,new_item_ids[0],5052031638,6056040996,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+35,2d,35_6,modify_pending_order_items,new_item_ids[0],5052031638,6017636844,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+35,2d,35_6,modify_pending_order_items,new_item_ids[0],5052031638,1657832319,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+35,2d,35_6,modify_pending_order_items,new_item_ids[0],5052031638,3265035808,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+35,2d,35_6,modify_pending_order_items,new_item_ids[0],5052031638,9844888101,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+36,2d,36_9,modify_pending_order_items,new_item_ids[0],6700049080,5925362855,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[0],6700049080,7523669277,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[0],6700049080,9391733462,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[1],5320792178,9083642334,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[1],5320792178,7624783998,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[1],5320792178,5370728469,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[1],5320792178,6805564527,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[1],5320792178,1569765161,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[1],5320792178,9190635437,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[2],3234800602,9612497925,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[2],3234800602,8124970213,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[2],3234800602,9354168549,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[2],3234800602,5253880258,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[2],3234800602,1176194968,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[2],3234800602,9647292434,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[2],3234800602,8349118980,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,new_item_ids[2],3234800602,2060066974,other available variant of the same product,,0
+36,2d,36_9,modify_pending_order_items,item_ids[-0],6117189161,(dropped),one item fewer,,0
+36,2d,36_9,modify_pending_order_items,item_ids[-1],7453605304,(dropped),one item fewer,,0
+36,2d,36_9,modify_pending_order_items,item_ids[-2],3799046073,(dropped),one item fewer,,0
+37,2d,37_9,modify_pending_order_items,new_item_ids[0],6700049080,5925362855,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[0],6700049080,7523669277,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[0],6700049080,9391733462,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[1],5320792178,9083642334,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[1],5320792178,7624783998,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[1],5320792178,5370728469,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[1],5320792178,6805564527,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[1],5320792178,1569765161,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[1],5320792178,9190635437,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[2],3234800602,9612497925,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[2],3234800602,8124970213,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[2],3234800602,9354168549,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[2],3234800602,5253880258,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[2],3234800602,1176194968,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[2],3234800602,9647292434,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[2],3234800602,8349118980,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,new_item_ids[2],3234800602,2060066974,other available variant of the same product,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,item_ids[-0],6117189161,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,item_ids[-1],7453605304,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+37,2d,37_9,modify_pending_order_items,item_ids[-2],3799046073,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+38,2d,38_10,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,find_user_id_by_email: ValueError: User not found,
+39,2e,39_4,modify_user_address,address,157 Oak Street,1 Probe Street,"wrong address written first, then the reference write",find_user_id_by_name_zip: ValueError: User not found,
+40,2d,40_3,modify_pending_order_payment,payment_method_id,credit_card_8897086,gift_card_8245350,other payment method of the same user,modify_pending_order_payment: ValueError: Insufficient gift card balance to pay for the order,
+40,2d,40_3,modify_pending_order_payment,payment_method_id,credit_card_8897086,credit_card_8554680,order's original payment method,modify_pending_order_payment: ValueError: The new payment method should be different from the current one,
+40,2d,40_3,modify_pending_order_payment,payment_method_id,credit_card_8897086,paypal_1621947,other payment method of the same user,,0
+41,2d,41_4,modify_pending_order_address,address,445 Maple Drive,443 Maple Drive,user's default address instead of the requested one,,0
+41,2e,41_4,modify_pending_order_address,address,445 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+41,2d,41_5,modify_pending_order_address,address,445 Maple Drive,443 Maple Drive,user's default address instead of the requested one,,0
+41,2e,41_5,modify_pending_order_address,address,445 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+41,2d,41_6,modify_user_address,address,445 Maple Drive,443 Maple Drive,address of the user's first order instead of the requested one,,0
+41,2e,41_6,modify_user_address,address,445 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+41,2d,41_9,modify_pending_order_items,payment_method_id,paypal_4768213,credit_card_9503061,other payment method of the same user,,0
+41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,4068787148,other available variant of the same product,,0
+41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,3112842858,other available variant of the same product,,0
+41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,9237024510,other available variant of the same product,,0
+41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,5546244844,other available variant of the same product,,0
+41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,6245746168,other available variant of the same product,,0
+41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,9665100170,other available variant of the same product,,0
+41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,4572024853,other available variant of the same product,,0
+41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,5645314103,other available variant of the same product,,0
+42,2d,42_4,modify_pending_order_address,address,445 Maple Drive,443 Maple Drive,user's default address instead of the requested one,,0
+42,2e,42_4,modify_pending_order_address,address,445 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+42,2d,42_5,modify_pending_order_address,address,445 Maple Drive,443 Maple Drive,user's default address instead of the requested one,,0
+42,2e,42_5,modify_pending_order_address,address,445 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+42,2d,42_6,modify_user_address,address,445 Maple Drive,443 Maple Drive,address of the user's first order instead of the requested one,,0
+42,2e,42_6,modify_user_address,address,445 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+42,2d,42_9,modify_pending_order_items,payment_method_id,paypal_4768213,credit_card_9503061,other payment method of the same user,,0
+42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,4068787148,other available variant of the same product,,0
+42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,3112842858,other available variant of the same product,,0
+42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,9237024510,other available variant of the same product,,0
+42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,5546244844,other available variant of the same product,,0
+42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,6245746168,other available variant of the same product,,0
+42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,9665100170,other available variant of the same product,,0
+42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,4572024853,other available variant of the same product,,0
+42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,5645314103,other available variant of the same product,,0
+43,2d,43_4,modify_user_address,address,943 Maple Drive,986 Lakeview Drive,address of the user's first order instead of the requested one,,0
+43,2e,43_4,modify_user_address,address,943 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+44,2d,44_4,modify_pending_order_items,new_item_ids[0],5320792178,9083642334,other available variant of the same product,,0
+44,2d,44_4,modify_pending_order_items,new_item_ids[0],5320792178,7624783998,other available variant of the same product,,0
+44,2d,44_4,modify_pending_order_items,new_item_ids[0],5320792178,5370728469,other available variant of the same product,,0
+44,2d,44_4,modify_pending_order_items,new_item_ids[0],5320792178,6805564527,other available variant of the same product,,0
+44,2d,44_4,modify_pending_order_items,new_item_ids[0],5320792178,1569765161,other available variant of the same product,,0
+44,2d,44_4,modify_pending_order_items,new_item_ids[0],5320792178,7453605304,other available variant of the same product,,0
+45,2d,45_4,exchange_delivered_order_items,new_item_ids[0],7958300294,4602305039,other available variant of the same product,,0
+45,2d,45_4,exchange_delivered_order_items,new_item_ids[0],7958300294,1345513440,other available variant of the same product,,0
+45,2d,45_4,exchange_delivered_order_items,new_item_ids[0],7958300294,4806644905,other available variant of the same product,,0
+45,2d,45_4,exchange_delivered_order_items,new_item_ids[0],7958300294,7407609582,other available variant of the same product,,0
+45,2d,45_4,exchange_delivered_order_items,new_item_ids[0],7958300294,4965355367,other available variant of the same product,,0
+45,2d,45_4,exchange_delivered_order_items,new_item_ids[0],7958300294,3526747930,other available variant of the same product,,0
+45,2d,45_4,exchange_delivered_order_items,new_item_ids[0],7958300294,2872451762,other available variant of the same product,,0
+45,2d,45_4,exchange_delivered_order_items,new_item_ids[0],7958300294,4725166838,other available variant of the same product,,0
+46,2d,46_5,return_delivered_order_items,item_ids[-0],6259501109,(dropped),one item fewer,get_order_details: ValueError: Order not found,
+46,2d,46_5,return_delivered_order_items,item_ids[-1],9534205511,(dropped),one item fewer,get_order_details: ValueError: Order not found,
+47,2d,47_5,return_delivered_order_items,item_ids[-0],2872451762,(dropped),one item fewer,get_order_details: ValueError: Order not found,
+47,2d,47_5,return_delivered_order_items,item_ids[-1],9534205511,(dropped),one item fewer,get_order_details: ValueError: Order not found,
+49,2d,49_9,exchange_delivered_order_items,new_item_ids[0],1646531091,9580569596,other available variant of the same product,,0
+49,2d,49_9,exchange_delivered_order_items,new_item_ids[0],1646531091,8555936349,other available variant of the same product,,0
+49,2d,49_9,exchange_delivered_order_items,new_item_ids[0],1646531091,6077640618,other available variant of the same product,,0
+49,2d,49_9,exchange_delivered_order_items,new_item_ids[0],1646531091,4063058357,other available variant of the same product,,0
+49,2d,49_9,exchange_delivered_order_items,new_item_ids[0],1646531091,6452271382,other available variant of the same product,,0
+49,2d,49_9,exchange_delivered_order_items,new_item_ids[0],1646531091,2052249669,other available variant of the same product,,0
+51,2d,51_6,return_delivered_order_items,payment_method_id,credit_card_8105988,paypal_8194385,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+51,2d,51_6,return_delivered_order_items,payment_method_id,credit_card_8105988,credit_card_3951670,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+52,2d,52_4,exchange_delivered_order_items,payment_method_id,paypal_8194385,credit_card_3951670,other payment method of the same user,,0
+52,2d,52_4,exchange_delivered_order_items,payment_method_id,paypal_8194385,credit_card_8105988,order's original payment method,,0
+52,2d,52_4,exchange_delivered_order_items,new_item_ids[0],9228757377,6384525445,other available variant of the same product,,0
+52,2d,52_4,exchange_delivered_order_items,new_item_ids[0],9228757377,1804581713,other available variant of the same product,,0
+52,2d,52_4,exchange_delivered_order_items,new_item_ids[0],9228757377,9644439410,other available variant of the same product,,0
+52,2d,52_4,exchange_delivered_order_items,new_item_ids[0],9228757377,7255224608,other available variant of the same product,,0
+52,2d,52_4,exchange_delivered_order_items,new_item_ids[0],9228757377,4326528037,other available variant of the same product,,0
+52,2d,52_4,exchange_delivered_order_items,new_item_ids[0],9228757377,8363011723,other available variant of the same product,,0
+53,2d,53_5,return_delivered_order_items,payment_method_id,credit_card_8105988,paypal_8194385,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+53,2d,53_5,return_delivered_order_items,payment_method_id,credit_card_8105988,credit_card_3951670,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+54,2d,54_9,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,find_user_id_by_email: ValueError: User not found,
+54,2d,54_10,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,find_user_id_by_email: ValueError: User not found,
+54,2d,54_11,return_delivered_order_items,item_ids[-0],5669664287,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+54,2d,54_11,return_delivered_order_items,item_ids[-1],4900990404,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+54,2d,54_11,return_delivered_order_items,item_ids[-2],9862136885,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+54,2d,54_11,return_delivered_order_items,item_ids[-3],6777246137,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+55,2d,55_9,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,find_user_id_by_email: ValueError: User not found,
+55,2d,55_10,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,find_user_id_by_email: ValueError: User not found,
+55,2d,55_11,return_delivered_order_items,item_ids[-0],5669664287,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+55,2d,55_11,return_delivered_order_items,item_ids[-1],4900990404,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+55,2d,55_11,return_delivered_order_items,item_ids[-2],9862136885,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+55,2d,55_11,return_delivered_order_items,item_ids[-3],6777246137,(dropped),one item fewer,find_user_id_by_email: ValueError: User not found,
+56,2d,56_6,modify_pending_order_items,payment_method_id,gift_card_9368765,credit_card_7455506,order's original payment method,,0
+56,2d,56_6,modify_pending_order_items,new_item_ids[0],9534205511,3676786561,other available variant of the same product,,0
+56,2d,56_6,modify_pending_order_items,new_item_ids[0],9534205511,5669664287,other available variant of the same product,,0
+56,2d,56_6,modify_pending_order_items,new_item_ids[0],9534205511,3076708684,other available variant of the same product,,0
+56,2d,56_6,modify_pending_order_items,new_item_ids[0],9534205511,7166996157,other available variant of the same product,,0
+56,2d,56_6,modify_pending_order_items,new_item_ids[0],9534205511,1327854740,other available variant of the same product,,0
+56,2d,56_6,modify_pending_order_items,new_item_ids[0],9534205511,9375701158,other available variant of the same product,,0
+58,2d,58_5,exchange_delivered_order_items,payment_method_id,gift_card_9368765,credit_card_7455506,order's original payment method,,0
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,3709608322,other available variant of the same product,,0
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,7407838442,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,1157853815,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,2190871011,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,3714494375,other available variant of the same product,,0
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,7806008610,other available variant of the same product,,0
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,7774234341,other available variant of the same product,,0
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,3951031513,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,6200867091,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,9884666842,other available variant of the same product,,0
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[0],3815173328,3379843752,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[1],6017636844,2216662955,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[1],6017636844,1684786391,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[1],6017636844,2913673670,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[1],6017636844,6056040996,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[1],6017636844,1657832319,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[1],6017636844,5052031638,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[1],6017636844,3265035808,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,new_item_ids[1],6017636844,9844888101,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+58,2d,58_5,exchange_delivered_order_items,item_ids[-0],7441167885,(dropped),one item fewer,,0
+58,2d,58_5,exchange_delivered_order_items,item_ids[-1],3478699712,(dropped),one item fewer,,0
+59,2d,59_3,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+59,2d,59_4,modify_pending_order_address,address,1234 Elm St,163 Cedar Street,user's default address instead of the requested one,,0
+59,2e,59_4,modify_pending_order_address,address,1234 Elm St,1 Probe Street,"wrong address written first, then the reference write",,1
+60,2d,60_3,modify_pending_order_items,payment_method_id,paypal_3742148,gift_card_3406421,other payment method of the same user,,0
+60,2d,60_3,modify_pending_order_items,new_item_ids[0],6077640618,9580569596,other available variant of the same product,,0
+60,2d,60_3,modify_pending_order_items,new_item_ids[0],6077640618,1646531091,other available variant of the same product,,0
+60,2d,60_3,modify_pending_order_items,new_item_ids[0],6077640618,8555936349,other available variant of the same product,,0
+60,2d,60_3,modify_pending_order_items,new_item_ids[0],6077640618,4063058357,other available variant of the same product,,0
+60,2d,60_3,modify_pending_order_items,new_item_ids[0],6077640618,6452271382,other available variant of the same product,,0
+60,2d,60_3,modify_pending_order_items,new_item_ids[0],6077640618,2052249669,other available variant of the same product,,0
+61,2d,61_4,modify_pending_order_items,payment_method_id,paypal_3742148,gift_card_3406421,other payment method of the same user,,0
+61,2d,61_4,modify_pending_order_items,new_item_ids[0],8555936349,9580569596,other available variant of the same product,,0
+61,2d,61_4,modify_pending_order_items,new_item_ids[0],8555936349,1646531091,other available variant of the same product,,0
+61,2d,61_4,modify_pending_order_items,new_item_ids[0],8555936349,6077640618,other available variant of the same product,,0
+61,2d,61_4,modify_pending_order_items,new_item_ids[0],8555936349,4063058357,other available variant of the same product,,0
+61,2d,61_4,modify_pending_order_items,new_item_ids[0],8555936349,6452271382,other available variant of the same product,,0
+61,2d,61_4,modify_pending_order_items,new_item_ids[0],8555936349,2052249669,other available variant of the same product,,0
+63,2d,63_6,modify_pending_order_items,payment_method_id,paypal_3742148,gift_card_3406421,other payment method of the same user,,0
+63,2d,63_6,modify_pending_order_items,new_item_ids[0],2635605237,9440686670,other available variant of the same product,,0
+63,2d,63_6,modify_pending_order_items,new_item_ids[0],2635605237,4716977452,other available variant of the same product,,0
+63,2d,63_6,modify_pending_order_items,new_item_ids[0],2635605237,7751905257,other available variant of the same product,,0
+63,2d,63_6,modify_pending_order_items,new_item_ids[0],2635605237,6704763132,other available variant of the same product,,0
+63,2d,63_6,modify_pending_order_items,new_item_ids[0],2635605237,7617930199,other available variant of the same product,,0
+63,2d,63_6,modify_pending_order_items,new_item_ids[0],2635605237,1052700637,other available variant of the same product,,0
+63,2d,63_6,modify_pending_order_items,new_item_ids[0],2635605237,1689914594,other available variant of the same product,,0
+64,2d,64_6,exchange_delivered_order_items,new_item_ids[0],6700049080,5925362855,other available variant of the same product,exchange_delivered_order_items: ValueError: Non-delivered order cannot be exchanged,
+64,2d,64_6,exchange_delivered_order_items,new_item_ids[0],6700049080,6117189161,other available variant of the same product,exchange_delivered_order_items: ValueError: Non-delivered order cannot be exchanged,
+64,2d,64_6,exchange_delivered_order_items,new_item_ids[0],6700049080,7523669277,other available variant of the same product,exchange_delivered_order_items: ValueError: Non-delivered order cannot be exchanged,
+64,2d,64_6,exchange_delivered_order_items,new_item_ids[0],6700049080,9391733462,other available variant of the same product,exchange_delivered_order_items: ValueError: Non-delivered order cannot be exchanged,
+64,2d,64_7,modify_pending_order_items,new_item_ids[0],6700049080,5925362855,other available variant of the same product,exchange_delivered_order_items: ValueError: Non-delivered order cannot be exchanged,
+64,2d,64_7,modify_pending_order_items,new_item_ids[0],6700049080,6117189161,other available variant of the same product,exchange_delivered_order_items: ValueError: Non-delivered order cannot be exchanged,
+64,2d,64_7,modify_pending_order_items,new_item_ids[0],6700049080,7523669277,other available variant of the same product,exchange_delivered_order_items: ValueError: Non-delivered order cannot be exchanged,
+64,2d,64_7,modify_pending_order_items,new_item_ids[0],6700049080,9391733462,other available variant of the same product,exchange_delivered_order_items: ValueError: Non-delivered order cannot be exchanged,
+66,2d,66_4,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+69,2d,69_3,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+70,2d,70_0,exchange_delivered_order_items,new_item_ids[0],9013366374,8573379326,other available variant of the same product,,0
+70,2d,70_0,exchange_delivered_order_items,new_item_ids[0],9013366374,7811981098,other available variant of the same product,,0
+70,2d,70_0,exchange_delivered_order_items,new_item_ids[0],9013366374,8591113813,other available variant of the same product,,0
+70,2d,70_0,exchange_delivered_order_items,new_item_ids[0],9013366374,5537798301,other available variant of the same product,,0
+70,2d,70_0,exchange_delivered_order_items,new_item_ids[0],9013366374,1596993217,other available variant of the same product,,0
+70,2d,70_0,exchange_delivered_order_items,new_item_ids[0],9013366374,1719127154,other available variant of the same product,,0
+70,2d,70_0,exchange_delivered_order_items,new_item_ids[0],9013366374,1665571435,other available variant of the same product,,0
+70,2d,70_0,exchange_delivered_order_items,new_item_ids[0],9013366374,5886093635,other available variant of the same product,,0
+70,2d,70_0,exchange_delivered_order_items,new_item_ids[0],9013366374,6697922351,other available variant of the same product,,0
+71,2e,71_0,modify_pending_order_address,address,159 Hickory Lane,1 Probe Street,"wrong address written first, then the reference write",,1
+71,2d,71_1,modify_pending_order_items,payment_method_id,paypal_7729105,gift_card_1711656,order's original payment method,,0
+71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,3928046918,other available variant of the same product,,0
+71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,7251508981,other available variant of the same product,,0
+71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,5726859009,other available variant of the same product,,0
+71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,3557711149,other available variant of the same product,,0
+71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,6309044598,other available variant of the same product,,0
+71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,8054888773,other available variant of the same product,,0
+71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,9851293632,other available variant of the same product,,0
+71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,6906307980,other available variant of the same product,,0
+71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,8084436579,other available variant of the same product,,0
+72,2e,72_0,modify_pending_order_address,address,159 Hickory Lane,1 Probe Street,"wrong address written first, then the reference write",,1
+72,2d,72_1,modify_pending_order_items,payment_method_id,paypal_7729105,gift_card_1711656,order's original payment method,,0
+72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,3928046918,other available variant of the same product,,0
+72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,7251508981,other available variant of the same product,,0
+72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,5726859009,other available variant of the same product,,0
+72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,3557711149,other available variant of the same product,,0
+72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,6309044598,other available variant of the same product,,0
+72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,8054888773,other available variant of the same product,,0
+72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,9851293632,other available variant of the same product,,0
+72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,6906307980,other available variant of the same product,,0
+72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,8084436579,other available variant of the same product,,0
+73,2d,73_0,return_delivered_order_items,item_ids[-0],7228247242,(dropped),one item fewer,,0
+73,2d,73_0,return_delivered_order_items,item_ids[-1],2698416822,(dropped),one item fewer,,0
+73,2d,73_0,return_delivered_order_items,item_ids[-2],8098621301,(dropped),one item fewer,,0
+73,2d,73_0,return_delivered_order_items,item_ids[-3],3320557165,(dropped),one item fewer,,0
+74,2d,74_0,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+74,2d,74_1,modify_pending_order_items,payment_method_id,credit_card_4466831,gift_card_8049813,other payment method of the same user,,0
+74,2d,74_1,modify_pending_order_items,payment_method_id,credit_card_4466831,paypal_5914760,order's original payment method,,0
+74,2d,74_1,modify_pending_order_items,new_item_ids[0],3265035808,2216662955,other available variant of the same product,,0
+74,2d,74_1,modify_pending_order_items,new_item_ids[0],3265035808,1684786391,other available variant of the same product,,0
+74,2d,74_1,modify_pending_order_items,new_item_ids[0],3265035808,2913673670,other available variant of the same product,,0
+74,2d,74_1,modify_pending_order_items,new_item_ids[0],3265035808,6056040996,other available variant of the same product,,0
+74,2d,74_1,modify_pending_order_items,new_item_ids[0],3265035808,6017636844,other available variant of the same product,,0
+74,2d,74_1,modify_pending_order_items,new_item_ids[0],3265035808,1657832319,other available variant of the same product,,0
+74,2d,74_1,modify_pending_order_items,new_item_ids[0],3265035808,5052031638,other available variant of the same product,,0
+74,2d,74_1,modify_pending_order_items,new_item_ids[0],3265035808,9844888101,other available variant of the same product,,0
+75,2d,75_0,exchange_delivered_order_items,new_item_ids[0],4063058357,9580569596,other available variant of the same product,,0
+75,2d,75_0,exchange_delivered_order_items,new_item_ids[0],4063058357,1646531091,other available variant of the same product,,0
+75,2d,75_0,exchange_delivered_order_items,new_item_ids[0],4063058357,6077640618,other available variant of the same product,,0
+75,2d,75_0,exchange_delivered_order_items,new_item_ids[0],4063058357,6452271382,other available variant of the same product,,0
+75,2d,75_0,exchange_delivered_order_items,new_item_ids[0],4063058357,2052249669,other available variant of the same product,,0
+76,2d,76_0,cancel_pending_order,reason,ordered by mistake,no longer needed,other allowed cancel reason,,0
+76,2d,76_1,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+77,2d,77_0,exchange_delivered_order_items,new_item_ids[0],3399869890,9007697085,other available variant of the same product,,0
+77,2d,77_0,exchange_delivered_order_items,new_item_ids[0],3399869890,1325156478,other available variant of the same product,,0
+77,2d,77_0,exchange_delivered_order_items,new_item_ids[0],3399869890,5421902839,other available variant of the same product,,0
+77,2d,77_0,exchange_delivered_order_items,new_item_ids[0],3399869890,8316205423,other available variant of the same product,,0
+78,2d,78_0,modify_pending_order_address,address,380 Maple Drive,575 Oak Street,user's default address instead of the requested one,,0
+78,2e,78_0,modify_pending_order_address,address,380 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+78,2d,78_1,modify_pending_order_items,new_item_ids[0],1573035764,6254646215,other available variant of the same product,,0
+78,2d,78_1,modify_pending_order_items,new_item_ids[0],1573035764,3017803871,other available variant of the same product,,0
+78,2d,78_1,modify_pending_order_items,new_item_ids[0],1573035764,5012998807,other available variant of the same product,,0
+78,2d,78_1,modify_pending_order_items,new_item_ids[0],1573035764,2882812427,other available variant of the same product,,0
+78,2d,78_1,modify_pending_order_items,new_item_ids[0],1573035764,1763705424,other available variant of the same product,,0
+78,2d,78_2,cancel_pending_order,reason,ordered by mistake,no longer needed,other allowed cancel reason,,0
+79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,4579334072,other available variant of the same product,,0
+79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,7843064651,other available variant of the same product,,0
+79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,5758737025,other available variant of the same product,,0
+79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,7533802601,other available variant of the same product,,0
+79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,3229676465,other available variant of the same product,,0
+79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,6974536207,other available variant of the same product,,0
+79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,6777246137,other available variant of the same product,,0
+79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,8538875209,other available variant of the same product,,0
+79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,7661609223,other available variant of the same product,,0
+79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,7199146548,other available variant of the same product,,0
+80,2d,80_0,exchange_delivered_order_items,new_item_ids[0],9354168549,9612497925,other available variant of the same product,,0
+80,2d,80_0,exchange_delivered_order_items,new_item_ids[0],9354168549,8124970213,other available variant of the same product,,0
+80,2d,80_0,exchange_delivered_order_items,new_item_ids[0],9354168549,5253880258,other available variant of the same product,,0
+80,2d,80_0,exchange_delivered_order_items,new_item_ids[0],9354168549,1176194968,other available variant of the same product,,0
+80,2d,80_0,exchange_delivered_order_items,new_item_ids[0],9354168549,9647292434,other available variant of the same product,,0
+80,2d,80_0,exchange_delivered_order_items,new_item_ids[0],9354168549,8349118980,other available variant of the same product,,0
+80,2d,80_0,exchange_delivered_order_items,new_item_ids[0],9354168549,3799046073,other available variant of the same product,,0
+80,2d,80_0,exchange_delivered_order_items,new_item_ids[0],9354168549,3234800602,other available variant of the same product,,0
+80,2d,80_0,exchange_delivered_order_items,new_item_ids[0],9354168549,2060066974,other available variant of the same product,,0
+81,2d,81_0,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+81,2d,81_1,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+82,2d,82_0,return_delivered_order_items,payment_method_id,gift_card_7250692,credit_card_1565124,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+82,2d,82_0,return_delivered_order_items,item_ids[-0],5952720925,(dropped),one item fewer,,0
+82,2d,82_0,return_delivered_order_items,item_ids[-1],9973034634,(dropped),one item fewer,,0
+82,2d,82_0,return_delivered_order_items,item_ids[-2],7381052709,(dropped),one item fewer,,0
+82,2d,82_0,return_delivered_order_items,item_ids[-3],6065192424,(dropped),one item fewer,,0
+83,2d,83_0,return_delivered_order_items,payment_method_id,gift_card_7250692,credit_card_1565124,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+84,2d,84_0,return_delivered_order_items,payment_method_id,gift_card_7250692,credit_card_1565124,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+85,2d,85_0,modify_pending_order_items,new_item_ids[0],8733974883,8590708195,other available variant of the same product,,0
+85,2d,85_0,modify_pending_order_items,new_item_ids[0],8733974883,5992316252,other available variant of the same product,,0
+85,2d,85_0,modify_pending_order_items,new_item_ids[0],8733974883,8161321868,other available variant of the same product,,0
+85,2d,85_0,modify_pending_order_items,new_item_ids[0],8733974883,7528037711,other available variant of the same product,,0
+86,2d,86_0,modify_pending_order_items,new_item_ids[0],8733974883,8590708195,other available variant of the same product,,0
+86,2d,86_0,modify_pending_order_items,new_item_ids[0],8733974883,5992316252,other available variant of the same product,,0
+86,2d,86_0,modify_pending_order_items,new_item_ids[0],8733974883,8161321868,other available variant of the same product,,0
+86,2d,86_0,modify_pending_order_items,new_item_ids[0],8733974883,7528037711,other available variant of the same product,,0
+86,2d,86_1,modify_user_address,address,565 Maple Drive,580 Broadway,address of the user's first order instead of the requested one,,0
+86,2e,86_1,modify_user_address,address,565 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+87,2d,87_0,modify_pending_order_address,address,565 Maple Drive,580 Broadway,user's default address instead of the requested one,,0
+87,2e,87_0,modify_pending_order_address,address,565 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+87,2d,87_1,modify_pending_order_address,address,565 Maple Drive,580 Broadway,user's default address instead of the requested one,,0
+87,2e,87_1,modify_pending_order_address,address,565 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+87,2d,87_2,modify_pending_order_address,address,565 Maple Drive,580 Broadway,user's default address instead of the requested one,,0
+87,2e,87_2,modify_pending_order_address,address,565 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+87,2d,87_3,modify_user_address,address,565 Maple Drive,580 Broadway,address of the user's first order instead of the requested one,,0
+87,2e,87_3,modify_user_address,address,565 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+88,2d,88_0,cancel_pending_order,reason,ordered by mistake,no longer needed,other allowed cancel reason,,0
+90,2d,90_0,cancel_pending_order,reason,ordered by mistake,no longer needed,other allowed cancel reason,,0
+91,2d,91_0,return_delivered_order_items,item_ids[-0],4545791457,(dropped),one item fewer,,0
+91,2d,91_0,return_delivered_order_items,item_ids[-1],3098764622,(dropped),one item fewer,,0
+91,2d,91_0,return_delivered_order_items,item_ids[-2],1631806422,(dropped),one item fewer,,0
+91,2d,91_1,exchange_delivered_order_items,new_item_ids[0],7609274509,4273929280,other available variant of the same product,,0
+91,2d,91_1,exchange_delivered_order_items,new_item_ids[0],7609274509,5510402676,other available variant of the same product,,0
+91,2d,91_1,exchange_delivered_order_items,new_item_ids[0],7609274509,5418781403,other available variant of the same product,,0
+92,2d,92_0,return_delivered_order_items,item_ids[-0],4545791457,(dropped),one item fewer,,0
+92,2d,92_0,return_delivered_order_items,item_ids[-1],3098764622,(dropped),one item fewer,,0
+92,2d,92_0,return_delivered_order_items,item_ids[-2],1631806422,(dropped),one item fewer,,0
+93,2d,93_0,exchange_delivered_order_items,new_item_ids[0],9844888101,1684786391,other available variant of the same product,,0
+93,2d,93_0,exchange_delivered_order_items,new_item_ids[0],9844888101,2913673670,other available variant of the same product,,0
+93,2d,93_0,exchange_delivered_order_items,new_item_ids[0],9844888101,6056040996,other available variant of the same product,,0
+93,2d,93_0,exchange_delivered_order_items,new_item_ids[0],9844888101,6017636844,other available variant of the same product,,0
+93,2d,93_0,exchange_delivered_order_items,new_item_ids[0],9844888101,1657832319,other available variant of the same product,,0
+93,2d,93_0,exchange_delivered_order_items,new_item_ids[0],9844888101,5052031638,other available variant of the same product,,0
+93,2d,93_0,exchange_delivered_order_items,new_item_ids[0],9844888101,3265035808,other available variant of the same product,,0
+94,2d,94_0,exchange_delivered_order_items,new_item_ids[0],9844888101,2216662955,other available variant of the same product,,0
+94,2d,94_0,exchange_delivered_order_items,new_item_ids[0],9844888101,1684786391,other available variant of the same product,,0
+94,2d,94_0,exchange_delivered_order_items,new_item_ids[0],9844888101,2913673670,other available variant of the same product,,0
+94,2d,94_0,exchange_delivered_order_items,new_item_ids[0],9844888101,6056040996,other available variant of the same product,,0
+94,2d,94_0,exchange_delivered_order_items,new_item_ids[0],9844888101,6017636844,other available variant of the same product,,0
+94,2d,94_0,exchange_delivered_order_items,new_item_ids[0],9844888101,1657832319,other available variant of the same product,,0
+94,2d,94_0,exchange_delivered_order_items,new_item_ids[0],9844888101,5052031638,other available variant of the same product,,0
+94,2d,94_0,exchange_delivered_order_items,new_item_ids[0],9844888101,3265035808,other available variant of the same product,,0
+95,2d,96_0,exchange_delivered_order_items,new_item_ids[0],9844888101,2216662955,other available variant of the same product,,0
+95,2d,96_0,exchange_delivered_order_items,new_item_ids[0],9844888101,1684786391,other available variant of the same product,,0
+95,2d,96_0,exchange_delivered_order_items,new_item_ids[0],9844888101,2913673670,other available variant of the same product,,0
+95,2d,96_0,exchange_delivered_order_items,new_item_ids[0],9844888101,6056040996,other available variant of the same product,,0
+95,2d,96_0,exchange_delivered_order_items,new_item_ids[0],9844888101,6017636844,other available variant of the same product,,0
+95,2d,96_0,exchange_delivered_order_items,new_item_ids[0],9844888101,1657832319,other available variant of the same product,,0
+95,2d,96_0,exchange_delivered_order_items,new_item_ids[0],9844888101,5052031638,other available variant of the same product,,0
+95,2d,96_0,exchange_delivered_order_items,new_item_ids[0],9844888101,3265035808,other available variant of the same product,,0
+95,2d,96_1,exchange_delivered_order_items,new_item_ids[0],9844888101,1684786391,other available variant of the same product,,0
+95,2d,96_1,exchange_delivered_order_items,new_item_ids[0],9844888101,2913673670,other available variant of the same product,,0
+95,2d,96_1,exchange_delivered_order_items,new_item_ids[0],9844888101,6056040996,other available variant of the same product,,0
+95,2d,96_1,exchange_delivered_order_items,new_item_ids[0],9844888101,6017636844,other available variant of the same product,,0
+95,2d,96_1,exchange_delivered_order_items,new_item_ids[0],9844888101,1657832319,other available variant of the same product,,0
+95,2d,96_1,exchange_delivered_order_items,new_item_ids[0],9844888101,5052031638,other available variant of the same product,,0
+95,2d,96_1,exchange_delivered_order_items,new_item_ids[0],9844888101,3265035808,other available variant of the same product,,0
+96,2d,97_0,modify_pending_order_address,address,476 Maple Drive,909 Spruce Street,user's default address instead of the requested one,,0
+96,2e,97_0,modify_pending_order_address,address,476 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+96,2d,97_1,modify_pending_order_items,new_item_ids[0],9440686670,4716977452,other available variant of the same product,,0
+96,2d,97_1,modify_pending_order_items,new_item_ids[0],9440686670,7751905257,other available variant of the same product,,0
+96,2d,97_1,modify_pending_order_items,new_item_ids[0],9440686670,2635605237,other available variant of the same product,,0
+96,2d,97_1,modify_pending_order_items,new_item_ids[0],9440686670,6704763132,other available variant of the same product,,0
+96,2d,97_1,modify_pending_order_items,new_item_ids[0],9440686670,7617930199,other available variant of the same product,,0
+96,2d,97_1,modify_pending_order_items,new_item_ids[0],9440686670,1052700637,other available variant of the same product,,0
+96,2d,97_1,modify_pending_order_items,new_item_ids[0],9440686670,1689914594,other available variant of the same product,,0
+97,2d,98_0,modify_pending_order_address,address,476 Maple Drive,909 Spruce Street,user's default address instead of the requested one,,0
+97,2e,98_0,modify_pending_order_address,address,476 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,4716977452,other available variant of the same product,,0
+97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,7751905257,other available variant of the same product,,0
+97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,2635605237,other available variant of the same product,,0
+97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,6704763132,other available variant of the same product,,0
+97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,7617930199,other available variant of the same product,,0
+97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,1052700637,other available variant of the same product,,0
+97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,1689914594,other available variant of the same product,,0
+98,2d,99_0,exchange_delivered_order_items,payment_method_id,credit_card_8105988,paypal_8194385,other payment method of the same user,,0
+98,2d,99_0,exchange_delivered_order_items,payment_method_id,credit_card_8105988,credit_card_3951670,other payment method of the same user,,0
+98,2d,99_0,exchange_delivered_order_items,new_item_ids[0],8363011723,6384525445,other available variant of the same product,,0
+98,2d,99_0,exchange_delivered_order_items,new_item_ids[0],8363011723,1804581713,other available variant of the same product,,0
+98,2d,99_0,exchange_delivered_order_items,new_item_ids[0],8363011723,9644439410,other available variant of the same product,,0
+98,2d,99_0,exchange_delivered_order_items,new_item_ids[0],8363011723,7255224608,other available variant of the same product,,0
+98,2d,99_0,exchange_delivered_order_items,new_item_ids[0],8363011723,4326528037,other available variant of the same product,,0
+98,2d,99_0,exchange_delivered_order_items,new_item_ids[0],8363011723,9228757377,other available variant of the same product,,0
+98,2d,99_1,exchange_delivered_order_items,payment_method_id,credit_card_8105988,paypal_8194385,other payment method of the same user,,0
+98,2d,99_1,exchange_delivered_order_items,payment_method_id,credit_card_8105988,credit_card_3951670,other payment method of the same user,,0
+98,2d,99_1,exchange_delivered_order_items,new_item_ids[0],5606522780,3624655057,other available variant of the same product,,0
+98,2d,99_1,exchange_delivered_order_items,new_item_ids[0],5606522780,2143041831,other available variant of the same product,,0
+98,2d,99_1,exchange_delivered_order_items,new_item_ids[1],6245746168,3112842858,other available variant of the same product,,0
+98,2d,99_1,exchange_delivered_order_items,new_item_ids[1],6245746168,1096508426,other available variant of the same product,,0
+98,2d,99_1,exchange_delivered_order_items,new_item_ids[1],6245746168,9237024510,other available variant of the same product,,0
+98,2d,99_1,exchange_delivered_order_items,new_item_ids[1],6245746168,5546244844,other available variant of the same product,,0
+98,2d,99_1,exchange_delivered_order_items,new_item_ids[1],6245746168,9665100170,other available variant of the same product,,0
+98,2d,99_1,exchange_delivered_order_items,new_item_ids[1],6245746168,4572024853,other available variant of the same product,,0
+98,2d,99_1,exchange_delivered_order_items,new_item_ids[1],6245746168,5645314103,other available variant of the same product,,0
+98,2d,99_1,exchange_delivered_order_items,item_ids[-0],7758198585,(dropped),one item fewer,,0
+98,2d,99_1,exchange_delivered_order_items,item_ids[-1],4068787148,(dropped),one item fewer,,0
+98,2d,99_2,cancel_pending_order,reason,no longer needed,ordered by mistake,other allowed cancel reason,,0
+99,2d,100_0,exchange_delivered_order_items,payment_method_id,credit_card_3951670,paypal_8194385,other payment method of the same user,,0
+99,2d,100_0,exchange_delivered_order_items,payment_method_id,credit_card_3951670,credit_card_8105988,order's original payment method,,0
+99,2d,100_0,exchange_delivered_order_items,new_item_ids[0],8363011723,6384525445,other available variant of the same product,,0
+99,2d,100_0,exchange_delivered_order_items,new_item_ids[0],8363011723,1804581713,other available variant of the same product,,0
+99,2d,100_0,exchange_delivered_order_items,new_item_ids[0],8363011723,9644439410,other available variant of the same product,,0
+99,2d,100_0,exchange_delivered_order_items,new_item_ids[0],8363011723,7255224608,other available variant of the same product,,0
+99,2d,100_0,exchange_delivered_order_items,new_item_ids[0],8363011723,4326528037,other available variant of the same product,,0
+99,2d,100_0,exchange_delivered_order_items,new_item_ids[0],8363011723,9228757377,other available variant of the same product,,0
+99,2d,100_1,exchange_delivered_order_items,payment_method_id,credit_card_3951670,paypal_8194385,other payment method of the same user,,0
+99,2d,100_1,exchange_delivered_order_items,payment_method_id,credit_card_3951670,credit_card_8105988,order's original payment method,,0
+99,2d,100_1,exchange_delivered_order_items,new_item_ids[0],5606522780,3624655057,other available variant of the same product,,0
+99,2d,100_1,exchange_delivered_order_items,new_item_ids[0],5606522780,2143041831,other available variant of the same product,,0
+99,2d,100_1,exchange_delivered_order_items,new_item_ids[1],5546244844,3112842858,other available variant of the same product,,0
+99,2d,100_1,exchange_delivered_order_items,new_item_ids[1],5546244844,1096508426,other available variant of the same product,,0
+99,2d,100_1,exchange_delivered_order_items,new_item_ids[1],5546244844,9237024510,other available variant of the same product,,0
+99,2d,100_1,exchange_delivered_order_items,new_item_ids[1],5546244844,6245746168,other available variant of the same product,,0
+99,2d,100_1,exchange_delivered_order_items,new_item_ids[1],5546244844,9665100170,other available variant of the same product,,0
+99,2d,100_1,exchange_delivered_order_items,new_item_ids[1],5546244844,4572024853,other available variant of the same product,,0
+99,2d,100_1,exchange_delivered_order_items,new_item_ids[1],5546244844,5645314103,other available variant of the same product,,0
+99,2d,100_1,exchange_delivered_order_items,item_ids[-0],7758198585,(dropped),one item fewer,,0
+99,2d,100_1,exchange_delivered_order_items,item_ids[-1],4068787148,(dropped),one item fewer,,0
+100,2d,101_0,modify_pending_order_items,payment_method_id,credit_card_3261838,paypal_3650980,order's original payment method,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[0],7160999700,8759627937,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[0],7160999700,6301799585,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[0],7160999700,9956648681,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[0],7160999700,8964750292,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,6843647669,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,3232433601,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,3098764622,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,3541421151,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,4545791457,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,6313971174,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,3877188862,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,5038485381,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,9594745976,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,6673921677,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,5489028872,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,8176740019,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,5120532699,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,4293355847,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,2819462352,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,new_item_ids[1],6956751343,2177997696,other available variant of the same product,,0
+100,2d,101_0,modify_pending_order_items,item_ids[-0],8926329222,(dropped),one item fewer,,0
+100,2d,101_0,modify_pending_order_items,item_ids[-1],5312063289,(dropped),one item fewer,,0
+100,2d,101_1,return_delivered_order_items,payment_method_id,paypal_3650980,credit_card_3261838,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+101,2d,102_0,modify_pending_order_address,address,144 Lakeview Drive,619 Broadway,user's default address instead of the requested one,,0
+101,2e,102_0,modify_pending_order_address,address,144 Lakeview Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+101,2d,102_1,modify_pending_order_items,new_item_ids[0],2407258246,4510078629,other available variant of the same product,,0
+101,2d,102_1,modify_pending_order_items,new_item_ids[0],2407258246,2226219750,other available variant of the same product,,0
+101,2d,102_1,modify_pending_order_items,new_item_ids[0],2407258246,9949163720,other available variant of the same product,,0
+101,2d,102_1,modify_pending_order_items,new_item_ids[0],2407258246,1355937109,other available variant of the same product,,0
+101,2d,102_1,modify_pending_order_items,new_item_ids[0],2407258246,1994478369,other available variant of the same product,,0
+101,2d,102_2,modify_pending_order_items,new_item_ids[0],8302289002,3676786561,other available variant of the same product,,0
+101,2d,102_2,modify_pending_order_items,new_item_ids[0],8302289002,5669664287,other available variant of the same product,,0
+101,2d,102_2,modify_pending_order_items,new_item_ids[0],8302289002,7166996157,other available variant of the same product,,0
+101,2d,102_2,modify_pending_order_items,new_item_ids[0],8302289002,1327854740,other available variant of the same product,,0
+101,2d,102_2,modify_pending_order_items,new_item_ids[0],8302289002,9534205511,other available variant of the same product,,0
+101,2d,102_2,modify_pending_order_items,new_item_ids[0],8302289002,9375701158,other available variant of the same product,,0
+102,2d,103_0,modify_pending_order_address,address,144 Lakeview Drive,619 Broadway,user's default address instead of the requested one,,0
+102,2e,103_0,modify_pending_order_address,address,144 Lakeview Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+102,2d,103_1,modify_pending_order_items,new_item_ids[0],2407258246,4510078629,other available variant of the same product,,0
+102,2d,103_1,modify_pending_order_items,new_item_ids[0],2407258246,2226219750,other available variant of the same product,,0
+102,2d,103_1,modify_pending_order_items,new_item_ids[0],2407258246,9949163720,other available variant of the same product,,0
+102,2d,103_1,modify_pending_order_items,new_item_ids[0],2407258246,1355937109,other available variant of the same product,,0
+102,2d,103_1,modify_pending_order_items,new_item_ids[0],2407258246,1994478369,other available variant of the same product,,0
+102,2d,103_2,exchange_delivered_order_items,new_item_ids[0],8302289002,3676786561,other available variant of the same product,,0
+102,2d,103_2,exchange_delivered_order_items,new_item_ids[0],8302289002,5669664287,other available variant of the same product,,0
+102,2d,103_2,exchange_delivered_order_items,new_item_ids[0],8302289002,3076708684,other available variant of the same product,,0
+102,2d,103_2,exchange_delivered_order_items,new_item_ids[0],8302289002,7166996157,other available variant of the same product,,0
+102,2d,103_2,exchange_delivered_order_items,new_item_ids[0],8302289002,1327854740,other available variant of the same product,,0
+102,2d,103_2,exchange_delivered_order_items,new_item_ids[0],8302289002,9534205511,other available variant of the same product,,0
+102,2d,103_2,exchange_delivered_order_items,new_item_ids[0],8302289002,9375701158,other available variant of the same product,,0
+103,2d,104_0,return_delivered_order_items,item_ids[-0],4900661478,(dropped),one item fewer,,0
+103,2d,104_0,return_delivered_order_items,item_ids[-1],3614853563,(dropped),one item fewer,,0
+103,2e,104_2,modify_pending_order_address,address,921 Park Avenue,1 Probe Street,"wrong address written first, then the reference write",,1
+103,2d,104_3,modify_pending_order_items,new_item_ids[0],8964750292,8759627937,other available variant of the same product,,0
+103,2d,104_3,modify_pending_order_items,new_item_ids[0],8964750292,6301799585,other available variant of the same product,,0
+103,2d,104_3,modify_pending_order_items,new_item_ids[0],8964750292,9956648681,other available variant of the same product,,0
+103,2d,104_3,modify_pending_order_items,new_item_ids[0],8964750292,8926329222,other available variant of the same product,,0
+103,2d,104_3,modify_pending_order_items,new_item_ids[0],8964750292,7160999700,other available variant of the same product,,0
+104,2e,105_2,modify_pending_order_address,address,921 Park Avenue,1 Probe Street,"wrong address written first, then the reference write",,1
+104,2d,105_3,modify_pending_order_items,new_item_ids[0],8964750292,8759627937,other available variant of the same product,,0
+104,2d,105_3,modify_pending_order_items,new_item_ids[0],8964750292,6301799585,other available variant of the same product,,0
+104,2d,105_3,modify_pending_order_items,new_item_ids[0],8964750292,9956648681,other available variant of the same product,,0
+104,2d,105_3,modify_pending_order_items,new_item_ids[0],8964750292,8926329222,other available variant of the same product,,0
+104,2d,105_3,modify_pending_order_items,new_item_ids[0],8964750292,7160999700,other available variant of the same product,,0
+104,2d,action_1746656550382,return_delivered_order_items,item_ids[-0],4900661478,(dropped),one item fewer,,0
+104,2d,action_1746656550382,return_delivered_order_items,item_ids[-1],3614853563,(dropped),one item fewer,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,9647374798,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,4238115171,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,3909406921,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,2820119811,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,9747045638,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,3312883418,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,1906487464,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,3738831434,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,8293778132,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[1],9647374798,4238115171,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[1],9647374798,3909406921,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[1],9647374798,2820119811,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[1],9647374798,3761330360,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[1],9647374798,9747045638,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[1],9647374798,3312883418,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[1],9647374798,1906487464,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[1],9647374798,3738831434,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,new_item_ids[1],9647374798,8293778132,other available variant of the same product,,0
+105,2d,106_0,exchange_delivered_order_items,item_ids[-0],7292993796,(dropped),one item fewer,,0
+105,2d,106_0,exchange_delivered_order_items,item_ids[-1],7292993796,(dropped),one item fewer,,0
+106,2d,107_0,exchange_delivered_order_items,new_item_ids[0],2060066974,9612497925,other available variant of the same product,,0
+106,2d,107_0,exchange_delivered_order_items,new_item_ids[0],2060066974,8124970213,other available variant of the same product,,0
+106,2d,107_0,exchange_delivered_order_items,new_item_ids[0],2060066974,5253880258,other available variant of the same product,,0
+106,2d,107_0,exchange_delivered_order_items,new_item_ids[0],2060066974,1176194968,other available variant of the same product,,0
+106,2d,107_0,exchange_delivered_order_items,new_item_ids[0],2060066974,9647292434,other available variant of the same product,,0
+106,2d,107_0,exchange_delivered_order_items,new_item_ids[0],2060066974,8349118980,other available variant of the same product,,0
+106,2d,107_0,exchange_delivered_order_items,new_item_ids[0],2060066974,3799046073,other available variant of the same product,,0
+106,2d,107_0,exchange_delivered_order_items,new_item_ids[0],2060066974,3234800602,other available variant of the same product,,0
+107,2d,108_0,exchange_delivered_order_items,new_item_ids[0],8106223139,3812493782,other available variant of the same product,,0
+107,2d,108_0,exchange_delivered_order_items,new_item_ids[0],8106223139,4582956489,other available variant of the same product,,0
+107,2d,108_0,exchange_delivered_order_items,new_item_ids[0],8106223139,6159919747,other available variant of the same product,,0
+107,2d,108_0,exchange_delivered_order_items,new_item_ids[0],8106223139,1437889264,other available variant of the same product,,0
+107,2d,108_0,exchange_delivered_order_items,new_item_ids[0],8106223139,8277474082,other available variant of the same product,,0
+107,2d,108_0,exchange_delivered_order_items,new_item_ids[0],8106223139,5676696062,other available variant of the same product,,0
+107,2d,108_0,exchange_delivered_order_items,new_item_ids[0],8106223139,3613716226,other available variant of the same product,,0
+107,2d,108_1,exchange_delivered_order_items,new_item_ids[0],3112842858,4068787148,other available variant of the same product,,0
+107,2d,108_1,exchange_delivered_order_items,new_item_ids[0],3112842858,1096508426,other available variant of the same product,,0
+107,2d,108_1,exchange_delivered_order_items,new_item_ids[0],3112842858,9237024510,other available variant of the same product,,0
+107,2d,108_1,exchange_delivered_order_items,new_item_ids[0],3112842858,5546244844,other available variant of the same product,,0
+107,2d,108_1,exchange_delivered_order_items,new_item_ids[0],3112842858,9665100170,other available variant of the same product,,0
+107,2d,108_1,exchange_delivered_order_items,new_item_ids[0],3112842858,4572024853,other available variant of the same product,,0
+107,2d,108_1,exchange_delivered_order_items,new_item_ids[0],3112842858,5645314103,other available variant of the same product,,0
+108,2d,109_0,return_delivered_order_items,payment_method_id,paypal_3022415,credit_card_7918119,other payment method of the same user,return_delivered_order_items: ValueError: Payment method should be the original payment method,
+108,2d,109_0,return_delivered_order_items,item_ids[-0],9612497925,(dropped),one item fewer,,0
+108,2d,109_0,return_delivered_order_items,item_ids[-1],7127170374,(dropped),one item fewer,,0
+108,2d,109_0,return_delivered_order_items,item_ids[-2],6268080249,(dropped),one item fewer,,0
+109,2d,110_0,modify_pending_order_address,address,592 Elm Avenue,760 Elm Avenue,user's default address instead of the requested one,,0
+109,2e,110_0,modify_pending_order_address,address,592 Elm Avenue,1 Probe Street,"wrong address written first, then the reference write",,1
+109,2d,110_1,modify_user_address,address,592 Elm Avenue,760 Elm Avenue,address of the user's first order instead of the requested one,,0
+109,2e,110_1,modify_user_address,address,592 Elm Avenue,1 Probe Street,"wrong address written first, then the reference write",,1
+109,2d,110_2,modify_pending_order_items,new_item_ids[0],2106335193,2235648106,other available variant of the same product,,0
+109,2d,110_2,modify_pending_order_items,new_item_ids[0],2106335193,6065192424,other available variant of the same product,,0
+109,2d,110_2,modify_pending_order_items,new_item_ids[0],2106335193,4913411651,other available variant of the same product,,0
+109,2d,110_2,modify_pending_order_items,new_item_ids[0],2106335193,4615543240,other available variant of the same product,,0
+109,2d,110_2,modify_pending_order_items,new_item_ids[0],2106335193,6948061616,other available variant of the same product,,0
+110,2e,111_0,modify_pending_order_address,address,760 Elm Avenue,1 Probe Street,"wrong address written first, then the reference write",,1
+110,2e,111_1,modify_user_address,address,760 Elm Avenue,1 Probe Street,"wrong address written first, then the reference write",,1
+110,2d,111_2,modify_pending_order_items,new_item_ids[0],2106335193,2235648106,other available variant of the same product,,0
+110,2d,111_2,modify_pending_order_items,new_item_ids[0],2106335193,6065192424,other available variant of the same product,,0
+110,2d,111_2,modify_pending_order_items,new_item_ids[0],2106335193,4913411651,other available variant of the same product,,0
+110,2d,111_2,modify_pending_order_items,new_item_ids[0],2106335193,4615543240,other available variant of the same product,,0
+110,2d,111_2,modify_pending_order_items,new_item_ids[0],2106335193,6948061616,other available variant of the same product,,0
+111,2d,112_0,modify_pending_order_items,new_item_ids[0],9949163720,4510078629,other available variant of the same product,modify_pending_order_items: ValueError: Insufficient gift card balance to pay for the new item,
+111,2d,112_0,modify_pending_order_items,new_item_ids[0],9949163720,2226219750,other available variant of the same product,,0
+111,2d,112_0,modify_pending_order_items,new_item_ids[0],9949163720,8886009523,other available variant of the same product,,0
+111,2d,112_0,modify_pending_order_items,new_item_ids[0],9949163720,1994478369,other available variant of the same product,,0
+111,2d,112_0,modify_pending_order_items,new_item_ids[0],9949163720,2407258246,other available variant of the same product,,0
+111,2d,112_1,modify_pending_order_address,address,555 Highland Drive,116 Laurel Lane,user's default address instead of the requested one,,0
+111,2e,112_1,modify_pending_order_address,address,555 Highland Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+111,2d,112_2,modify_pending_order_items,new_item_ids[0],2216662955,1684786391,other available variant of the same product,,0
+111,2d,112_2,modify_pending_order_items,new_item_ids[0],2216662955,6056040996,other available variant of the same product,,0
+111,2d,112_2,modify_pending_order_items,new_item_ids[0],2216662955,6017636844,other available variant of the same product,,0
+111,2d,112_2,modify_pending_order_items,new_item_ids[0],2216662955,1657832319,other available variant of the same product,,0
+111,2d,112_2,modify_pending_order_items,new_item_ids[0],2216662955,5052031638,other available variant of the same product,,0
+111,2d,112_2,modify_pending_order_items,new_item_ids[0],2216662955,3265035808,other available variant of the same product,,0
+111,2d,112_2,modify_pending_order_items,new_item_ids[0],2216662955,9844888101,other available variant of the same product,,0
+112,2d,113_0,modify_pending_order_items,new_item_ids[0],9949163720,4510078629,other available variant of the same product,modify_pending_order_items: ValueError: Insufficient gift card balance to pay for the new item,
+112,2d,113_0,modify_pending_order_items,new_item_ids[0],9949163720,2226219750,other available variant of the same product,,0
+112,2d,113_0,modify_pending_order_items,new_item_ids[0],9949163720,8886009523,other available variant of the same product,,0
+112,2d,113_0,modify_pending_order_items,new_item_ids[0],9949163720,1994478369,other available variant of the same product,,0
+112,2d,113_0,modify_pending_order_items,new_item_ids[0],9949163720,2407258246,other available variant of the same product,,0
+112,2d,113_1,modify_pending_order_address,address,555 Highland Drive,116 Laurel Lane,user's default address instead of the requested one,,0
+112,2e,113_1,modify_pending_order_address,address,555 Highland Drive,1 Probe Street,"wrong address written first, then the reference write",,1
+112,2d,113_2,modify_pending_order_items,new_item_ids[0],9844888101,2216662955,other available variant of the same product,,0
+112,2d,113_2,modify_pending_order_items,new_item_ids[0],9844888101,1684786391,other available variant of the same product,,0
+112,2d,113_2,modify_pending_order_items,new_item_ids[0],9844888101,6056040996,other available variant of the same product,,0
+112,2d,113_2,modify_pending_order_items,new_item_ids[0],9844888101,6017636844,other available variant of the same product,,0
+112,2d,113_2,modify_pending_order_items,new_item_ids[0],9844888101,1657832319,other available variant of the same product,,0
+112,2d,113_2,modify_pending_order_items,new_item_ids[0],9844888101,5052031638,other available variant of the same product,,0
+112,2d,113_2,modify_pending_order_items,new_item_ids[0],9844888101,3265035808,other available variant of the same product,,0
+113,2d,114_0,cancel_pending_order,reason,ordered by mistake,no longer needed,other allowed cancel reason,,0
+113,2d,114_1,cancel_pending_order,reason,ordered by mistake,no longer needed,other allowed cancel reason,,0
