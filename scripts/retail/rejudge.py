@@ -59,7 +59,7 @@ def main() -> int:
     args = ap.parse_args()
     jo.install()
     cache = json.loads(CACHE.read_text(encoding="utf-8")) if CACHE.exists() else {}
-    rows, per_sim = [], []
+    rows, per_sim, unparsed = [], [], []
     for run in RUNS:
         p = RES / "runs" / run / "results.json"
         if not p.exists():
@@ -82,9 +82,19 @@ def main() -> int:
             if ballots is None and not args.dry:
                 ballots = []
                 for _ in range(args.votes):
-                    checks = NLAssertionsEvaluator.evaluate_nl_assertions(traj, nl)
-                    jo.drain()
-                    ballots.append({c.nl_assertion: c.met for c in checks})
+                    # a reply without any JSON (the live run would retry the whole simulation up to its error limit): retry the
+                    # vote up to 3 times, then record an empty ballot and count the unparsed reply
+                    for attempt in range(3):
+                        try:
+                            checks = NLAssertionsEvaluator.evaluate_nl_assertions(traj, nl)
+                            jo.drain()
+                            ballots.append({c.nl_assertion: c.met for c in checks})
+                            break
+                        except ValueError as e:
+                            jo.drain()
+                            unparsed.append({"run": run, "task_id": t["id"], "trial": s.get("trial"), "attempt": attempt, "error": str(e)[:80]})
+                    else:
+                        ballots.append({})
                 cache[key] = ballots
                 CACHE.write_text(json.dumps(cache), encoding="utf-8")
             if ballots is None:
@@ -120,6 +130,7 @@ def main() -> int:
     flips = sum(r["flip"] for r in rows)
     rf = [p for p in per_sim if p["live_reward"] is not None and float(p["live_reward"]) != p["majority_reward"]]
     summ = {"strict_parser": strict, "rejudge": {"simulations": len(per_sim), "assertion_verdicts": len(rows), "assertion_flips": flips,
+                                                 "unparsed_replies": len(unparsed), "unparsed_detail": unparsed[:50],
                                                 "live_omitted_assertions": sum(r["live_omitted"] for r in rows),
                                                 "reward_flips": len(rf), "pass_to_fail": sum(1 for p in rf if float(p["live_reward"]) == 1.0),
                                                 "fail_to_pass": sum(1 for p in rf if float(p["live_reward"]) != 1.0),
@@ -131,6 +142,7 @@ def main() -> int:
          f"(a) Stock strict parser over the live judge replies: {strict['strict_rejected']}/{strict['calls']} replies would have been rejected "
          f"(files: {', '.join(strict['files'])}); replies with fewer results than assertions: {strict['results_short']}.", "",
          f"(b) Re-judge with {args.votes} votes (same prompt, same model): {len(per_sim)} simulations, {len(rows)} assertion verdicts; "
+         f"replies without any JSON (retried, counted as a missing vote after 3 attempts): {len(unparsed)}; "
          f"live vote != majority on {flips} assertions; live verdict omitted an assertion {sum(r['live_omitted'] for r in rows)} times; "
          f"reward flips: {len(rf)} (pass->fail {summ['rejudge']['pass_to_fail']}, fail->pass {summ['rejudge']['fail_to_pass']}).", ""]
     for p in rf:
