@@ -260,6 +260,8 @@ python -I scripts\v2\cf32_summary.py
 python -I scripts\airline_full_summary.py
 ```
 
+Rebuild check (2026-10-28, clean tree at 0ef1eb8): the sequence above, followed by the block-1 `build_audit_log.py` and `make_summary.py`, reproduced every output byte for byte except the two re-score runs. Their CSV, summary and provenance files differ only in the overlay-commit stamp and in the count of judge calls made in the run (0, because every vote came from the cache); every reward, verdict and vote is identical. The committed files keep the stamps of the original runs.
+
 Live parts (spend money; recorded in `cost.md`): `scripts/runs/run_rest30.ps1`, the four `run_v2.py` parts above, `probe_29.py` without `--dry`, and any judge call that misses the caches.
 
 ## Where the headline numbers live
