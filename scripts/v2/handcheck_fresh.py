@@ -9,6 +9,12 @@ readers label blind.
 
   --build   -> airline_full/handcheck_fresh/items.md, sims/*.md, items.csv (blank labels), key.csv (judge verdicts)
   --score   -> reads labels_a.csv and labels_b.csv (two blind readers), writes airline_full/judge_handcheck_fresh.md
+Round 2 (airline_full/PLAN.md, deviation of 2026-10-28): round 1 was only partially blind, because items.md stated
+that the pool was judge-met and items.csv carried the class. `--round 2` re-labels the same 20 items mixed with 10
+judge-unmet decoys from the same fresh runs (the 3 communication ones and 7 db_dup ones drawn with the same seed),
+shuffled, with no pool statement and no class column; the key records which items are decoys.
+  --round 2 --build -> airline_full/handcheck_fresh_r2/ (same layout);  --round 2 --score -> labels_c.csv, labels_d.csv
+  -> airline_full/judge_handcheck_fresh_r2.md
 Run --build from inside tau2-bench; --score needs only Python 3.11. No model call.
 """
 
@@ -31,6 +37,8 @@ sys.path.insert(0, str(HERE))
 ROOT = HERE.parents[1]
 V2 = ROOT / "results" / "v2"
 HC = ROOT / "airline_full" / "handcheck_fresh"
+HC2 = ROOT / "airline_full" / "handcheck_fresh_r2"
+N_DECOYS = 10
 CLASSES = ("negative", "communication")
 N_ITEMS, N_NEGATIVE, SEED = 20, 10, 20261028
 
@@ -98,6 +106,91 @@ def build() -> int:
     return 0
 
 
+def build_round2() -> int:
+    """The 20 round-1 items plus 10 judge-unmet decoys, shuffled; readers see neither the pool nor the class."""
+    import scorer_v2 as s2
+    import tasks_v2
+    from tau2.data_model.simulation import Results
+
+    classes = {(r["task_id"], int(r["idx"])): r["class"] for r in csv.DictReader(open(ROOT / "block2" / "nl_assertion_classes.csv", encoding="utf-8"))}
+    rs = list(csv.DictReader(open(V2 / "rescore_fresh.csv", encoding="utf-8")))
+    t2 = {t.id: t for t in tasks_v2.get_tasks_v2(None)}
+    by_sim = {(r["file"].split("/")[0], r["task_id"], r["trial"]): r for r in rs}
+    r1 = list(csv.DictReader(open(HC / "items.csv", encoding="utf-8")))
+    targets = [(r["run"], r["task_id"], r["trial"], int(r["assertion_idx"])) for r in r1]
+    unmet = {"communication": [], "db_dup": []}
+    for r in rs:
+        for d in json.loads(r["V2_nl_detail"]) if r.get("V2_nl_detail") else []:
+            cls = classes.get((r["task_id"], d["i"]), "")
+            if d["met"] is False and cls in unmet:
+                unmet[cls].append((r["file"].split("/")[0], r["task_id"], r["trial"], d["i"]))
+    rng = random.Random(SEED)
+    com = sorted(unmet["communication"])
+    decoys = com + rng.sample(sorted(unmet["db_dup"]), N_DECOYS - len(com))
+    allk = [(k, 1) for k in targets] + [(k, 0) for k in decoys]
+    random.Random(SEED + 2).shuffle(allk)
+    HC2.mkdir(parents=True, exist_ok=True)
+    (HC2 / "sims").mkdir(exist_ok=True)
+    sims = {}
+    for run in sorted({k[0] for k, _ in allk}):
+        for sim in Results.load(V2 / "runs" / run / "results.json").simulations:
+            sims[(run, sim.task_id, str(sim.trial))] = sim
+    md = ["# Hand-check items (blind labelling)", "",
+          "For each item: the transcript exactly as the judge saw it, then ONE assertion about the agent's behaviour. "
+          "Label `met` / `unmet` / `cannot_tell` in your labels file. Do not open key.csv.", ""]
+    items, key, per_sim = [], [], {}
+    for n, ((run, tid, trial, i), is_target) in enumerate(allk, 1):
+        det = {d["i"]: d for d in json.loads(by_sim[(run, tid, trial)]["V2_nl_detail"])}
+        a = t2[tid].evaluation_criteria.nl_assertions[i]
+        per_sim.setdefault((run, tid, trial), []).append((n, i, a))
+        items.append({"item": n, "run": run, "task_id": tid, "trial": trial, "assertion_idx": i, "label": "", "note": ""})
+        key.append({"item": n, "target": is_target, "class": classes.get((tid, i), ""), "judge_met": det[i]["met"],
+                    "votes_met": det[i]["vm"], "votes_unmet": det[i]["vu"], "rule": det[i]["rule"]})
+    for (run, tid, trial), its in sorted(per_sim.items(), key=lambda kv: min(n for n, _, _ in kv[1])):
+        full = s2.trajectory_text(sims[(run, tid, trial)].messages)
+        compact = [(ln[:300] + " …[truncated]") if ln.startswith("tool result:") and len(ln) > 300 else ln for ln in full.split("\n")]
+        body = [f"# {run} task {tid} trial {trial}", "", "Transcript as the judge saw it (tool results shortened to 300 characters):", "", "```", "\n".join(compact), "```", "", "## Items to label", ""]
+        body += [f"- item {n}: (assertion {i + 1}) {a}" for n, i, a in sorted(its)]
+        (HC2 / "sims" / f"{run}_{tid}_t{trial}.md").write_text("\n".join(body), encoding="utf-8")
+        md.append(f"- {run} task {tid} trial {trial}: items {', '.join(str(n) for n, _, _ in sorted(its))} -> sims/{run}_{tid}_t{trial}.md")
+    (HC2 / "items.md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    for name, data in (("items.csv", items), ("key.csv", key)):
+        with open(HC2 / name, "w", newline="", encoding="utf-8") as fp:
+            w = csv.DictWriter(fp, fieldnames=list(data[0]))
+            w.writeheader()
+            w.writerows(data)
+    print(f"{len(items)} items ({sum(k['target'] for k in key)} targets, {len(key) - sum(k['target'] for k in key)} decoys) -> {HC2.relative_to(ROOT)}")
+    return 0
+
+
+def score_round2() -> int:
+    items = {r["item"]: r for r in csv.DictReader(open(HC2 / "items.csv", encoding="utf-8"))}
+    key = {r["item"]: r for r in csv.DictReader(open(HC2 / "key.csv", encoding="utf-8"))}
+    lc = {r["item"]: r for r in csv.DictReader(open(HC2 / "labels_c.csv", encoding="utf-8"))}
+    ld = {r["item"]: r for r in csv.DictReader(open(HC2 / "labels_d.csv", encoding="utf-8"))}
+    jm = lambda k: "met" if key[k]["judge_met"] == "True" else "unmet"  # noqa: E731
+    L = ["# Hand-check of judge-only verdicts in the fresh v2 passes, round 2 (blind, with decoys)", "",
+         "The 20 round-1 items mixed with 10 judge-unmet decoys from the same fresh runs, shuffled; the readers saw neither "
+         "the pool nor the class (`scripts/v2/handcheck_fresh.py --round 2`; airline_full/PLAN.md, Q4 and its deviation). "
+         "Readers C and D labelled blind and independently.", "",
+         "| items | n | C vs judge | D vs judge | C vs D | C = D = judge |", "|---|---|---|---|---|---|"]
+    for name, sel in (("targets (judge-only, judge met)", "1"), ("decoys (judge unmet)", "0")):
+        ks = [k for k in items if key[k]["target"] == sel]
+        L.append(f"| {name} | {len(ks)} | {sum(lc[k]['label'] == jm(k) for k in ks)}/{len(ks)} | "
+                 f"{sum(ld[k]['label'] == jm(k) for k in ks)}/{len(ks)} | {sum(lc[k]['label'] == ld[k]['label'] for k in ks)}/{len(ks)} | "
+                 f"{sum(lc[k]['label'] == ld[k]['label'] == jm(k) for k in ks)}/{len(ks)} |")
+    L += ["", "| item | target | run | task | trial | assertion | class | judge | C | D | notes |", "|---|---|---|---|---|---|---|---|---|---|---|"]
+    for k, r in items.items():
+        L.append(f"| {k} | {key[k]['target']} | {r['run']} | {r['task_id']} | {r['trial']} | {int(r['assertion_idx']) + 1} | {key[k]['class']} | "
+                 f"{jm(k)} ({key[k]['votes_met']}-{key[k]['votes_unmet']}) | {lc[k]['label']} | {ld[k]['label']} | "
+                 f"C: {(lc[k].get('note') or '')[:90]} / D: {(ld[k].get('note') or '')[:90]} |")
+    dis = [k for k in items if lc[k]["label"] == ld[k]["label"] and lc[k]["label"] != jm(k)]
+    L += ["", f"Items where both readers disagree with the judge: {', '.join(dis) or 'none'}.", ""]
+    (ROOT / "airline_full" / "judge_handcheck_fresh_r2.md").write_text("\n".join(L), encoding="utf-8")
+    print("\n".join(L[:9]))
+    return 0
+
+
 def score() -> int:
     items = {r["item"]: r for r in csv.DictReader(open(HC / "items.csv", encoding="utf-8"))}
     key = {r["item"]: r for r in csv.DictReader(open(HC / "key.csv", encoding="utf-8"))}
@@ -131,5 +224,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--build", action="store_true")
     ap.add_argument("--score", action="store_true")
+    ap.add_argument("--round", type=int, choices=(1, 2), default=1)
     a = ap.parse_args()
+    if a.round == 2:
+        sys.exit(build_round2() if a.build else score_round2() if a.score else 1)
     sys.exit(build() if a.build else score() if a.score else 1)
