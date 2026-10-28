@@ -2,7 +2,7 @@
 
 Reviewed 2026-10-27, 14:50–15:25 PT. State reviewed: commit `b0fc614`, plus the changes that appeared during the review and were committed as `55a35c0` at 15:14 (`scripts/v2/scorer_v2.py` with `JUDGE_VIEW`; `scripts/v2/rescore.py` with `--set fresh`; the "Deviations" entry in `block2/PLAN.md`; `scripts/v2/make_summary_v2.py`), and `scripts/v2/run_v2.py`. NL and judge numbers quoted below come from the stock-view judge pass of 15:07, now kept as `results/v2/rescore_stockview.csv`, `judge_votes_stockview.csv` and `judge_cache_stockview.json`. That is the view now being replaced, and the numbers are flagged as such wherever they appear. No judge pass with the new view existed at 15:25 (the current `rescore.csv` is a `--no-judge` run).
 
-Method: read-only. Every check ran inside the tau2 virtual environment with all model entry points patched to raise (`scorer_v2.generate`, `tau2.utils.llm_utils.generate`, the communicate and NL evaluator modules, `litellm.completion`). No model call was made and no project file was edited except this report. The check scripts are in the session scratchpad (paths in the appendix), and condensed snippets are given inline.
+Method: read-only. Every check ran inside the tau2 virtual environment with all model entry points patched to raise (`scorer_v2.generate`, `tau2.utils.llm_utils.generate`, the communicate and NL evaluator modules, `litellm.completion`). No model call was made and no project file was edited except this report. The check scripts are in the temporary folder outside the repository (paths in the appendix), and condensed snippets are given inline.
 
 Abbreviations: DB = database end state; GT = ground-truth agent (`llm_agent_gt`, which sees the reference actions); NL = natural-language assertions (`nl_assertions`); FP / FN = false positive / false negative; v1 = stock tau2 scorer; V2 = tasks v2 plus all three switches.
 
@@ -189,10 +189,10 @@ Battery (`info_in_text`; v1 = `info in text.lower().replace(",", "")`):
 
 ## Appendix — reproduction
 
-Scripts (session scratchpad, read-only, model calls blocked; run from `tau2-bench` with `uv run --no-sync python <path>`):
-- `<temporary folder>\skeptic_design\check_hooks.py`: E1a–E1e, C1, C3, C4, prompt identity.
-- `<temporary folder>\skeptic_design\check_canon_comm.py`: A1, A1b, A1c, A3, A4, the comm battery, task-3 `4` hits.
-- `<temporary folder>\skeptic_design\check_gate.py`: component-wise and strict replay gate.
+Scripts (kept in `block2/skeptic_design_checks/`, read-only, model calls blocked; run from `tau2-bench` with `uv run --no-sync python <path>`):
+- `block2/skeptic_design_checks/check_hooks.py`: E1a–E1e, C1, C3, C4, prompt identity.
+- `block2/skeptic_design_checks/check_canon_comm.py`: A1, A1b, A1c, A3, A4, the comm battery, task-3 `4` hits.
+- `block2/skeptic_design_checks/check_gate.py`: component-wise and strict replay gate.
 
 Condensed E1a (the other perturbations differ only in the edited argument):
 

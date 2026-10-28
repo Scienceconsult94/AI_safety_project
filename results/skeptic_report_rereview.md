@@ -1,6 +1,6 @@
 # Skeptic check of the blind re-review disagreements on task 23 (2g; 4c vs 2h)
 
-Inputs: checklist.md rows 2g, 2h, 4c; results/review_overrides.csv (last row), review_batch_3.csv, rereview.csv; `tau2-bench/src/tau2/evaluator/evaluator_communicate.py`; recorded runs `sample20_gt_haiku` and `sample20_pass3_haiku` (`results.json`). GT = ground-truth agent run, DB = database. Method: tau2's own code without LLM calls (`evaluate_simulation` with `EvaluationType.ALL` on in-memory copies; reference replay through the registry). Nothing under tau2-bench/ was written (checked by file timestamps). Scripts: session scratchpad, folder `skeptic_rereview/` (scan23.py, cf23.py, order23.py).
+Inputs: checklist.md rows 2g, 2h, 4c; results/review_overrides.csv (last row), review_batch_3.csv, rereview.csv; `tau2-bench/src/tau2/evaluator/evaluator_communicate.py`; recorded runs `sample20_gt_haiku` and `sample20_pass3_haiku` (`results.json`). GT = ground-truth agent run, DB = database. Method: tau2's own code without LLM calls (`evaluate_simulation` with `EvaluationType.ALL` on in-memory copies; reference replay through the registry). Nothing under tau2-bench/ was written (checked by file timestamps). Scripts: temporary folder outside the repository, folder `skeptic_rereview/` (scan23.py, cf23.py, order23.py).
 
 ## 1. 23/2g = 1, medium (override row): holds, skeptic_ok = 1
 

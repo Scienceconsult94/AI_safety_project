@@ -11,7 +11,7 @@ Scope: the 27 rows of `audit_log.csv` with defect=1 and severity high or medium 
   - **all 50** target hashes in `static_scan.csv`;
   - **all 13** rows of `probe_2h.csv`, including the exact strings of differing orders.
 
-  Every variant hash quoted below comes from this re-implementation (8-hex prefixes). The scripts are temporary and live outside the project, in the session scratchpad folder `skeptic/` (`emu_hash.py`, `emu_tools.py`, `check_gold.py`, `variants.py`, `probe2h_emu.py`).
+  Every variant hash quoted below comes from this re-implementation (8-hex prefixes). The scripts are temporary and live outside the project, in a temporary folder outside the repository, subfolder `skeptic/` (`emu_hash.py`, `emu_tools.py`, `check_gold.py`, `variants.py`, `probe2h_emu.py`).
 - Prices, balances and times come from `db.json`; policy line numbers refer to `policy.md`.
 
 ## Per-row verdicts
