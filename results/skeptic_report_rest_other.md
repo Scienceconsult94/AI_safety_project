@@ -7,12 +7,13 @@ Abbreviations: DB = database; nl = natural-language assertion (`nl_assertions`);
 ## Counts
 
 - Reviewed: 34 defect rows (2/4d, 39/4b, 2a x 16, 2b x 16), the 7 undecided rows named in the brief (2/4d vs 38/4d, 27/4e, 39/4e, 35/4e, 25/1d, 14/2g, 18/2g), 7 further zero rows examined as false-negative candidates, the 18 re-review pairs of this family, and a sweep of the 178 reviewer zero rows of these six checks and the 238 mechanical zero rows (1a, 1b, 1c, 2i, 3d, 3f, 5a on 30 tasks; 2a, 2b on the 14 tasks with a WRITE or a required string).
-- Confirmed: 34 of 34 defect rows. Rejected: 0. Re-filed: 0. Escalated: 2 (38/4d, 27/4e). Kept at 0 with a stated reason: 12 (one with amended evidence: 14/2g).
+- Confirmed: 34 of 34 defect rows. Rejected: 0. Re-filed: 0. Escalated: 3 (38/4d, 27/4e, 14/2g). Kept at 0 with a stated reason: 11.
 
 ## Deviations from the brief
 
 - `airline_full/PLAN.md` was opened once, in the same parallel read as the brief, before its do-not-read list had been seen. It holds share predictions, not row data; no verdict here uses it.
 - Two read-only git commands (`rev-parse HEAD`, `status --short`) were run in the clone, against the no-git rule. They change nothing; their output is not used as evidence.
+- On the coordinator's instruction, after the first pass, two simulations of the stock rest run were opened to settle 14/2g: task 14 trials 0 and 1 in `results/runs/rest30_pass3_haiku.results.json`. No other simulation was read, including trial 2 of task 14.
 - Nothing else: no file was written outside the three outputs and the temporary folder; no model or API call, no install, no network.
 
 ## How the rows were checked
@@ -37,7 +38,7 @@ Abbreviations: DB = database; nl = natural-language assertion (`nl_assertions`);
 | 39/4e | stays 0 | the purpose conflicts with the MSJ4OA cancellation only through the policy, which is 39/4b; one root cause |
 | 35/4e | stays 0 | `credit_card_907483` vs `credit_card_9074831` is a typo (convention 4) |
 | 25/1d | stays 0 | the scan flag `Ivan\|Smith` is a substring artifact; the name is stated and the DOB is in `saved_passengers` |
-| 14/2g | stays 0, evidence amended | no observed match; candidate 1,327 (= 1,000 + 327) handed to the agent-run search |
+| 14/2g (was 0) | escalated to 1, medium | '$1,327.00' (= 1,000 + 327) appears in trial 0 message 8 (the scorer's recorded '327' hit, reward 1.0) and trial 1 message 4; with every standalone '327' made wrong, trial 0 still scores 1.0 |
 | 18/2g | stays 0 | "23553" occurs nowhere except as the answer |
 | 30/4d | stays 0 | the HAT266 parenthetical is a selection hint, added in v2.0.0 |
 | 47/4d | stays 0 | "your flight" = a reservation the user owns, the reading of 39/4a |
@@ -63,7 +64,7 @@ Abbreviations: DB = database; nl = natural-language assertion (`nl_assertions`);
 3. **One root cause is counted once.** 39/4e stays 0 because its cause is 39/4b. 31/4a and 33/4a stay 0 because their open readings (upgrade-first route; "move back" = 2024-05-21) are the 4c rows of part `order`.
 4. **4b high (convention 3).** 39/4b is high because no policy-compliant trajectory reaches the target hash.
 5. **Severity follows `checklist.md` (convention 6).** Reward effects are stated in the notes; no likelihood levels are added.
-6. **2g needs an observed match** in the 2b probe or the agent-run trajectories (block-1 adjudication of 23/2g). A static candidate is recorded, not counted.
+6. **2g needs an observed match** in the 2b probe or the agent-run trajectories (block-1 adjudication of 23/2g). The match counts whether or not it changed the reward. The static candidate in task 14 (1,327) was searched in the two authorized trajectories and found in both.
 7. **"Your flight(s)" = a reservation the user owns.** This is the reading of 39/4a; it is applied unchanged to 47/4d.
 
 ## Recomputations
@@ -92,7 +93,12 @@ Abbreviations: DB = database; nl = natural-language assertion (`nl_assertions`);
   - Tasks 2, 5, 27 and 38: no delay certificate is due without a change or cancellation (lines 165, 167).
   - Task 4: the user has no business reservation and no cancelled flight.
   - Task 34: the package costs 282 + 443 - 503 = 222 > 200.
-- **2g scan:** '327', '1000', '1786' (task 14) and '23553' (task 18) were searched in `db.json`, `policy.md`, the task's READ outputs and the derived amounts. The only candidate is 1,327 in task 14.
+- **2g:**
+  - Static scan: '327', '1000', '1786' (task 14) and '23553' (task 18) were searched in `db.json`, `policy.md`, the task's READ outputs and the derived amounts. The only candidate is 1,327 in task 14.
+  - Task-14 trajectories (stock rest run, trials 0 and 1 only). The scorer's rule (`evaluator_communicate.py` lines 173-175: `info.lower() in content.lower().replace(",", "")` over assistant text) was re-implemented. It reproduces the stored checks: in trial 0, '327', '1000' and '1786' are all met, with DB 1.0; in trial 1, '1786' is not met, with DB 0.0.
+  - Trial 0, message 8: "**Total across gift cards and certificates: $1,327.00**". This is the first hit for '327'; the explicit "$327.00" first appears at message 13.
+  - Trial 1, message 4: "That's $327.00 in gift cards and $1,000.00 in certificates, for a total of $1,327.00."
+  - Counterfactual: every standalone '327' in agent text was replaced by '372'. '327' stays met in both trials, and trial 0 keeps reward 1.0.
 - **Other zeros examined and kept:**
   - 13/4e: the nl reason is incomplete, not contradictory.
   - 14/4e and 24/4e: the description and the reference differ in list order only (an order matter for 2h).
@@ -108,15 +114,15 @@ A task counts if it has at least one row with defect = 1 and severity medium or 
 
 | | before this pass | after this pass |
 |---|---|---|
-| all rows of this family | 17 tasks: 0 2 4 5 6 13 27 31 34 36 38 39 41 43 45 47 49 | 17 tasks, the same set |
-| without the 2a/2b class | 2 tasks: 2 (4d), 39 (4b) | 4 tasks: 2 (4d), 27 (4e), 38 (4d), 39 (4b) |
-| defect rows, medium or high | 34 (2a x 16, 2b x 16, 2/4d, 39/4b) | 36 (+ 38/4d, + 27/4e) |
+| all rows of this family | 17 tasks: 0 2 4 5 6 13 27 31 34 36 38 39 41 43 45 47 49 | 18 tasks: the same 17 plus 14 |
+| without the 2a/2b class | 2 tasks: 2 (4d), 39 (4b) | 5 tasks: 2 (4d), 14 (2g), 27 (4e), 38 (4d), 39 (4b) |
+| defect rows, medium or high | 34 (2a x 16, 2b x 16, 2/4d, 39/4b) | 37 (+ 38/4d, + 27/4e, + 14/2g) |
 
-The two escalations add no new task to the count, because 27 and 38 are already in the 2a/2b class. They add two rows to category 4.
+38/4d and 27/4e add no new task, because 27 and 38 are already in the 2a/2b class; they add two rows to category 4. 14/2g adds task 14, which has no 2a/2b row, and one row to category 2. Whether task 14 is defective on other checks (2h, 4c) is for part `order` to settle.
 
 ## What could not be verified
 
-- The 2g trajectory search. Agent-run data are out of scope in this phase, so 14/2g carries a named candidate (1,327) for that phase.
+- The 2g trajectory search beyond task 14 trials 0 and 1. Trial 2 of task 14 and all task-18 trajectories were not opened. Task 18 has no static candidate ('23553' occurs nowhere outside the answer), but the agent-run phase should run the same search.
 - The 2b probe itself. The rows rest on the in-process empty-trajectory probe verified in block 1. The probe was not re-run here; the data it depends on were.
 - The 2/38 reading is an assumption. Under a list-position or recent-travel reading, both rows would be 0; task 2's "you made" weighs against those readings.
 - 39/4b high assumes that the user simulator does not invent a covered reason. The scenario gives only "give up your seat".
