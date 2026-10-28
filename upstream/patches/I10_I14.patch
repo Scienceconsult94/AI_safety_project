@@ -1,0 +1,209 @@
+diff --git a/src/tau2/evaluator/evaluator_nl_assertions.py b/src/tau2/evaluator/evaluator_nl_assertions.py
+index 26409e9..c0fc782 100644
+--- a/src/tau2/evaluator/evaluator_nl_assertions.py
++++ b/src/tau2/evaluator/evaluator_nl_assertions.py
+@@ -1,4 +1,6 @@
+ import json
++import re
++from typing import Any, Optional
+ 
+ from tau2.config import DEFAULT_LLM_NL_ASSERTIONS, DEFAULT_LLM_NL_ASSERTIONS_ARGS
+ from tau2.data_model.message import Message, SystemMessage, Tick, UserMessage
+@@ -8,6 +10,81 @@ from tau2.evaluator.evaluator_base import EvaluatorBase
+ from tau2.utils.llm_utils import generate
+ from tau2.utils.transcript.views import speech_messages
+ 
++_CODE_FENCE = re.compile(r"```(?:json)?\s*([\s\S]*?)```")
++
++
++def parse_judge_results(content: Optional[str]) -> list[dict[str, Any]]:
++    """Return the per-assertion results of a judge reply.
++
++    Accepts the requested object ``{"results": [...]}``, a bare JSON array of
++    results, and either form inside a markdown code fence. Raises ``ValueError``
++    (``json.JSONDecodeError`` included) when the reply holds neither.
++    """
++    text = (content or "").strip()
++    fenced = _CODE_FENCE.search(text)
++    if fenced:
++        text = fenced.group(1).strip()
++    data = json.loads(text)
++    if isinstance(data, dict):
++        data = data.get("results", [])
++    if not isinstance(data, list) or not all(isinstance(r, dict) for r in data):
++        raise ValueError(f"Judge reply has no list of results: {content!r}")
++    return data
++
++
++def match_judge_results(
++    nl_assertions: list[str], results: list[dict[str, Any]]
++) -> list[NLAssertionCheck]:
++    """One check per assertion, in assertion order.
++
++    A result belongs to the assertion whose text it echoes (whitespace and case
++    ignored). Results that echo no assertion are paired by position with the
++    assertions left over, when the two counts are equal. An assertion without a
++    result counts as unmet.
++    """
++
++    def norm(text: Any) -> str:
++        return " ".join(str(text).split()).casefold()
++
++    remaining = list(results)
++    matched: list[Optional[dict[str, Any]]] = []
++    for assertion in nl_assertions:
++        hit = next(
++            (
++                r
++                for r in remaining
++                if norm(r.get("expectedOutcome", "")) == norm(assertion)
++            ),
++            None,
++        )
++        if hit is not None:
++            remaining.remove(hit)
++        matched.append(hit)
++    unmatched = [i for i, result in enumerate(matched) if result is None]
++    if unmatched and len(unmatched) == len(remaining):
++        for i, result in zip(unmatched, remaining):
++            matched[i] = result
++
++    checks = []
++    for assertion, result in zip(nl_assertions, matched):
++        if result is None:
++            checks.append(
++                NLAssertionCheck(
++                    nl_assertion=assertion,
++                    met=False,
++                    justification="The judge returned no verdict for this assertion.",
++                )
++            )
++        else:
++            checks.append(
++                NLAssertionCheck(
++                    nl_assertion=assertion,
++                    met=result.get("metExpectation", False),
++                    justification=str(result.get("reasoning", "")),
++                )
++            )
++    return checks
++
+ 
+ class NLAssertionsEvaluator(EvaluatorBase[Message]):
+     """
+@@ -120,15 +197,8 @@ class NLAssertionsEvaluator(EvaluatorBase[Message]):
+             call_name="nl_assertions_eval",
+             **DEFAULT_LLM_NL_ASSERTIONS_ARGS,
+         )
+-        result_data = json.loads(assistant_message.content)
+-        return [
+-            NLAssertionCheck(
+-                nl_assertion=result["expectedOutcome"],
+-                met=result["metExpectation"],
+-                justification=result["reasoning"],
+-            )
+-            for result in result_data.get("results", [])
+-        ]
++        results = parse_judge_results(assistant_message.content)
++        return match_judge_results(nl_assertions, results)
+ 
+ 
+ class FullDuplexNLAssertionsEvaluator(EvaluatorBase[Tick]):
+diff --git a/tests/test_evaluator/test_nl_assertions_reply_parsing.py b/tests/test_evaluator/test_nl_assertions_reply_parsing.py
+new file mode 100644
+index 0000000..901aab3
+--- /dev/null
++++ b/tests/test_evaluator/test_nl_assertions_reply_parsing.py
+@@ -0,0 +1,92 @@
++"""Parsing of NL-assertion judge replies and matching of verdicts to assertions."""
++
++import json
++from types import SimpleNamespace
++
++import pytest
++
++from tau2.data_model.message import AssistantMessage, UserMessage
++from tau2.data_model.tasks import EvaluationCriteria, Task, UserScenario
++from tau2.evaluator.evaluator_nl_assertions import NLAssertionsEvaluator
++
++ASSERTIONS = [
++    "The agent greets the customer.",
++    "The agent confirms the refund amount.",
++]
++TRAJECTORY = [
++    AssistantMessage(role="assistant", content="Hi! How can I help you today?"),
++    UserMessage(role="user", content="###STOP###"),
++]
++TASK = Task(
++    id="nl-reply-parsing",
++    user_scenario=UserScenario(instructions="fixture"),
++    evaluation_criteria=EvaluationCriteria(nl_assertions=ASSERTIONS),
++)
++
++
++def _result(assertion: str, met: bool) -> dict:
++    return {"expectedOutcome": assertion, "reasoning": "fixture", "metExpectation": met}
++
++
++def _reward(monkeypatch, content: str):
++    import tau2.evaluator.evaluator_nl_assertions as module
++
++    monkeypatch.setattr(
++        module, "generate", lambda **kwargs: SimpleNamespace(content=content)
++    )
++    return NLAssertionsEvaluator.calculate_reward(TASK, TRAJECTORY)
++
++
++BOTH_MET = [_result(ASSERTIONS[0], True), _result(ASSERTIONS[1], True)]
++
++
++@pytest.mark.parametrize(
++    "content",
++    [
++        json.dumps({"results": BOTH_MET}),
++        "```json\n" + json.dumps({"results": BOTH_MET}, indent=2) + "\n```",
++        json.dumps(BOTH_MET),
++        "```\n" + json.dumps(BOTH_MET) + "\n```",
++    ],
++    ids=["object", "fenced-object", "bare-array", "fenced-array"],
++)
++def test_accepted_reply_formats(monkeypatch, content):
++    reward = _reward(monkeypatch, content)
++    assert reward.reward == 1.0
++    assert [check.nl_assertion for check in reward.nl_assertions] == ASSERTIONS
++    assert [check.met for check in reward.nl_assertions] == [True, True]
++
++
++def test_omitted_assertion_counts_as_unmet(monkeypatch):
++    reward = _reward(
++        monkeypatch, json.dumps({"results": [_result(ASSERTIONS[0], True)]})
++    )
++    assert reward.reward == 0.0
++    assert [check.met for check in reward.nl_assertions] == [True, False]
++
++
++def test_empty_results_fail_every_assertion(monkeypatch):
++    reward = _reward(monkeypatch, json.dumps({"results": []}))
++    assert reward.reward == 0.0
++    assert [check.nl_assertion for check in reward.nl_assertions] == ASSERTIONS
++    assert not any(check.met for check in reward.nl_assertions)
++
++
++def test_results_are_matched_by_text_not_by_reply_order(monkeypatch):
++    results = [_result(ASSERTIONS[1], False), _result(ASSERTIONS[0], True)]
++    reward = _reward(monkeypatch, json.dumps({"results": results}))
++    assert [check.met for check in reward.nl_assertions] == [True, False]
++
++
++def test_paraphrased_echo_falls_back_to_position(monkeypatch):
++    results = [
++        _result("Agent greets the customer", True),
++        _result("Agent confirms the refund amount", False),
++    ]
++    reward = _reward(monkeypatch, json.dumps(results))
++    assert [check.met for check in reward.nl_assertions] == [True, False]
++
++
++def test_reply_without_results_raises(monkeypatch):
++    with pytest.raises(ValueError):
++        _reward(monkeypatch, "I cannot evaluate this conversation.")

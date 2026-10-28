@@ -1,0 +1,149 @@
+diff --git a/src/tau2/orchestrator/orchestrator.py b/src/tau2/orchestrator/orchestrator.py
+index 09ff006..02bcae7 100644
+--- a/src/tau2/orchestrator/orchestrator.py
++++ b/src/tau2/orchestrator/orchestrator.py
+@@ -148,8 +148,12 @@ class BaseOrchestrator(ABC, Generic[BaseAgentT, BaseUserT, TrajectoryItemT]):
+         """The call's greeting for this mode; None uses the ordinary default."""
+         if self.call_context is None:
+             return None
++        # A fixed greeting, not a model call: cost 0.0 as in
++        # DEFAULT_FIRST_AGENT_MESSAGE, so get_cost() can sum the agent side.
+         return AssistantMessage(
+-            role="assistant", content=self.call_context.language.agent_greeting
++            role="assistant",
++            content=self.call_context.language.agent_greeting,
++            cost=0.0,
+         )
+ 
+     @abstractmethod
+diff --git a/src/tau2/runner/batch.py b/src/tau2/runner/batch.py
+index 4dea032..5c045f0 100644
+--- a/src/tau2/runner/batch.py
++++ b/src/tau2/runner/batch.py
+@@ -33,6 +33,7 @@ from tau2.data_model.simulation import (
+     Results,
+     RunConfig,
+     SimulationRun,
++    TerminationReason,
+     TextRunConfig,
+     UserInfo,
+     VoiceRunConfig,
+@@ -1002,6 +1003,32 @@ def preregister_voice_plugins(config: RunConfig) -> None:
+ # =============================================================================
+ 
+ 
++def completion_message(simulations: list[SimulationRun]) -> str:
++    """End-of-run line; it names infrastructure errors instead of reporting success."""
++    total = len(simulations)
++    failed = sum(
++        1
++        for sim in simulations
++        if sim.termination_reason == TerminationReason.INFRASTRUCTURE_ERROR
++    )
++    review = "To review the simulations, run: [bold blue]tau2 view[/bold blue]"
++    if total and failed == total:
++        return (
++            f"\n[bold red]All {total} simulations ended with an infrastructure "
++            "error; no simulation was evaluated.[/bold red]\n"
++            "Each simulation records its error in `info`. " + review
++        )
++    if failed:
++        return (
++            f"\n[bold yellow]Completed; {failed} of {total} simulations ended with "
++            "an infrastructure error and are excluded from the metrics.[/bold yellow]\n"
++            + review
++        )
++    return (
++        "\n[bold green]Successfully completed all simulations![/bold green]\n" + review
++    )
++
++
+ def run_tasks(
+     config: RunConfig,
+     tasks: list[Task],
+@@ -1078,10 +1105,7 @@ def run_tasks(
+             )
+         finally:
+             monitor.stop()
+-        ConsoleDisplay.console.print(
+-            "\n[bold green]Successfully completed all simulations![/bold green]\n"
+-            "To review the simulations, run: [bold blue]tau2 view[/bold blue]"
+-        )
++        ConsoleDisplay.console.print(completion_message(simulation_results.simulations))
+         return simulation_results
+ 
+     # Pre-register LiveKit plugins on main thread before sim threads spawn
+@@ -1166,10 +1190,7 @@ def run_tasks(
+         if not shutdown_event.is_set():
+             executor.shutdown(wait=True)
+ 
+-    ConsoleDisplay.console.print(
+-        "\n[bold green]Successfully completed all simulations![/bold green]\n"
+-        "To review the simulations, run: [bold blue]tau2 view[/bold blue]"
+-    )
++    ConsoleDisplay.console.print(completion_message(simulation_results.simulations))
+     return simulation_results
+ 
+ 
+diff --git a/tests/test_runner/test_run_reporting.py b/tests/test_runner/test_run_reporting.py
+new file mode 100644
+index 0000000..bc77178
+--- /dev/null
++++ b/tests/test_runner/test_run_reporting.py
+@@ -0,0 +1,56 @@
++"""End-of-run message and agent cost of the greeting."""
++
++import pytest
++
++from tau2.data_model.message import AssistantMessage, UserMessage
++from tau2.data_model.simulation import SimulationRun, TerminationReason, TextRunConfig
++from tau2.registry import registry
++from tau2.runner.batch import completion_message
++from tau2.utils.llm_utils import get_cost
++
++
++def _sim(reason: TerminationReason) -> SimulationRun:
++    return SimulationRun(
++        id="sim",
++        task_id="0",
++        start_time="",
++        end_time="",
++        duration=0.0,
++        termination_reason=reason,
++    )
++
++
++OK = TerminationReason.USER_STOP
++INFRA = TerminationReason.INFRASTRUCTURE_ERROR
++
++
++@pytest.mark.parametrize(
++    "reasons,expected",
++    [
++        ([OK, OK], "Successfully completed all simulations!"),
++        ([OK, INFRA], "1 of 2 simulations ended with an infrastructure error"),
++        ([INFRA, INFRA], "All 2 simulations ended with an infrastructure error"),
++    ],
++)
++def test_completion_message_reports_infrastructure_errors(reasons, expected):
++    message = completion_message([_sim(reason) for reason in reasons])
++    assert expected in message
++    if INFRA in reasons:
++        assert "Successfully" not in message
++
++
++def test_greeting_has_zero_cost_so_agent_cost_is_reported():
++    from tau2.runner.build import build_text_orchestrator
++
++    task = registry.get_tasks_loader("mock")()[0]
++    orchestrator = build_text_orchestrator(TextRunConfig(domain="mock"), task)
++    greeting = orchestrator.initial_agent_message
++    assert greeting.cost == 0.0
++    messages = [
++        greeting,
++        UserMessage(role="user", content="hi", cost=0.002),
++        AssistantMessage(role="assistant", content="ok", cost=0.001),
++    ]
++    agent_cost, user_cost = get_cost(messages)
++    assert agent_cost == pytest.approx(0.001)
++    assert user_cost == pytest.approx(0.002)

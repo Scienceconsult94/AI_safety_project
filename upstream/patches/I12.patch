@@ -1,0 +1,179 @@
+diff --git a/src/tau2/domains/retail/tools.py b/src/tau2/domains/retail/tools.py
+index 4f862f0..7da172b 100644
+--- a/src/tau2/domains/retail/tools.py
++++ b/src/tau2/domains/retail/tools.py
+@@ -162,12 +162,16 @@ class RetailTools(ToolKitBase):  # Tools
+         return user.payment_methods[payment_method_id]
+ 
+     def _is_pending_order(self, order: Order) -> bool:
+-        """Check if the order is pending. This is not a strict check, and not meant to be used for modify_items in pending orders.
++        """Check if the order is pending and can still be modified.
++
++        Only the status 'pending' qualifies. After `modify_pending_order_items` the
++        status is 'pending (item modified)', and the policy allows no further
++        modification or cancellation of the order.
+ 
+         Args:
+             order: The order.
+         """
+-        return "pending" in order.status
++        return order.status == "pending"
+ 
+     @is_tool(ToolType.GENERIC)
+     def calculate(self, expression: str) -> str:
+diff --git a/tests/test_domains/test_retail/test_modify_after_item_change.py b/tests/test_domains/test_retail/test_modify_after_item_change.py
+new file mode 100644
+index 0000000..cb1abe7
+--- /dev/null
++++ b/tests/test_domains/test_retail/test_modify_after_item_change.py
+@@ -0,0 +1,150 @@
++"""No address or payment change after a pending order's items were modified."""
++
++import pytest
++
++from tau2.data_model.message import ToolCall
++from tau2.domains.retail.data_model import (
++    CreditCard,
++    GiftCard,
++    Order,
++    OrderItem,
++    OrderPayment,
++    Product,
++    RetailDB,
++    User,
++    UserAddress,
++    UserName,
++    Variant,
++)
++from tau2.domains.retail.environment import get_environment
++
++ADDRESS = UserAddress(
++    address1="123 Main St",
++    address2="Apt 1",
++    city="San Francisco",
++    state="CA",
++    country="USA",
++    zip="94105",
++)
++
++
++@pytest.fixture
++def retail_db() -> RetailDB:
++    return RetailDB(
++        users={
++            "sara_doe_496": User(
++                user_id="sara_doe_496",
++                name=UserName(first_name="Sara", last_name="Doe"),
++                address=ADDRESS,
++                email="sara.doe@example.com",
++                payment_methods={
++                    "credit_card_0000000": CreditCard(
++                        source="credit_card",
++                        brand="visa",
++                        last_four="1234",
++                        id="credit_card_0000000",
++                    ),
++                    "gift_card_0000000": GiftCard(
++                        source="gift_card",
++                        balance=100.0,
++                        id="gift_card_0000000",
++                    ),
++                },
++                orders=["#W0000000"],
++            )
++        },
++        orders={
++            "#W0000000": Order(
++                order_id="#W0000000",
++                user_id="sara_doe_496",
++                status="pending",
++                items=[
++                    OrderItem(
++                        name="Classic T-Shirt",
++                        product_id="6086499569",
++                        item_id="1008292230",
++                        price=29.99,
++                        options={"size": "M", "color": "blue"},
++                    )
++                ],
++                address=ADDRESS,
++                fulfillments=[],
++                payment_history=[
++                    OrderPayment(
++                        transaction_type="payment",
++                        amount=29.99,
++                        payment_method_id="credit_card_0000000",
++                    )
++                ],
++            )
++        },
++        products={
++            "6086499569": Product(
++                product_id="6086499569",
++                name="Classic T-Shirt",
++                variants={
++                    "1008292230": Variant(
++                        item_id="1008292230",
++                        price=29.99,
++                        available=True,
++                        options={"size": "M", "color": "blue"},
++                    ),
++                    "1008292231": Variant(
++                        item_id="1008292231",
++                        price=29.99,
++                        available=True,
++                        options={"size": "L", "color": "blue"},
++                    ),
++                },
++            )
++        },
++    )
++
++
++MODIFY_ITEMS = ToolCall(
++    id="items",
++    name="modify_pending_order_items",
++    arguments={
++        "order_id": "#W0000000",
++        "item_ids": ["1008292230"],
++        "new_item_ids": ["1008292231"],
++        "payment_method_id": "credit_card_0000000",
++    },
++)
++MODIFY_ADDRESS = ToolCall(
++    id="address",
++    name="modify_pending_order_address",
++    arguments={
++        "order_id": "#W0000000",
++        "address1": "456 New St",
++        "address2": "Apt 2",
++        "city": "San Francisco",
++        "state": "CA",
++        "country": "USA",
++        "zip": "94106",
++    },
++)
++MODIFY_PAYMENT = ToolCall(
++    id="payment",
++    name="modify_pending_order_payment",
++    arguments={"order_id": "#W0000000", "payment_method_id": "gift_card_0000000"},
++)
++
++
++def test_address_change_before_item_change_is_accepted(retail_db: RetailDB):
++    environment = get_environment(retail_db)
++    assert not environment.get_response(MODIFY_ADDRESS).error
++    assert not environment.get_response(MODIFY_ITEMS).error
++
++
++@pytest.mark.parametrize("call", [MODIFY_ADDRESS, MODIFY_PAYMENT])
++def test_no_modification_after_item_change(retail_db: RetailDB, call: ToolCall):
++    environment = get_environment(retail_db)
++    assert not environment.get_response(MODIFY_ITEMS).error
++    order = environment.tools.get_order_details("#W0000000")
++    assert order.status == "pending (item modified)"
++    before = environment.get_db_hash()
++    response = environment.get_response(call)
++    assert response.error
++    assert response.content == "Error: Non-pending order cannot be modified"
++    assert environment.get_db_hash() == before

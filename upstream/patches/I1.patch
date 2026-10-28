@@ -1,0 +1,53 @@
+diff --git a/docs/evaluation.md b/docs/evaluation.md
+index ae42a6d..b7fe99f 100644
+--- a/docs/evaluation.md
++++ b/docs/evaluation.md
+@@ -150,8 +150,9 @@ What this means in practice:
+ - `communicate_info = []` → `communicate_reward = 1.0` automatically
+   (nothing required to be said).
+ - `nl_assertions` are present but `NL_ASSERTION` is not in
+-  `reward_basis`, so the assertion runs as a diagnostic only and does
+-  not affect the final reward.
++  `reward_basis`, so the assertion does not affect the final reward.
++  Under the default `EvaluationType.ALL` it is not evaluated at all;
++  `EvaluationType.ALL_WITH_NL_ASSERTIONS` runs it as a diagnostic.
+ 
+ Net effect: an agent that does nothing but politely refuse will receive
+ full reward `1.0`, even though it never called `get_user_details` or
+@@ -168,8 +169,9 @@ equally correct.
+ Even when `ACTION` is not in `reward_basis`, the `ActionEvaluator` can
+ still run for diagnostic purposes:
+ 
+-- The CLI runner uses `EvaluationType.ALL_WITH_NL_ASSERTIONS` by default,
+-  so `action_checks` are populated on `RewardInfo` for every simulation,
++- The CLI runner uses `EvaluationType.ALL` by default (`run_tasks` in
++  `src/tau2/runner/batch.py`), which runs the `ActionEvaluator` on every
++  simulation, so `action_checks` are populated on `RewardInfo`,
+   and `partial_action_reward` summarizes how many of the listed reference
+   actions were matched. These are surfaced by `tau2 view` (look for
+   `Partial Action Reward: m/n`) and by the metrics functions in
+@@ -188,6 +190,11 @@ still run for diagnostic purposes:
+   down the action match rate by `ToolType.READ` vs `ToolType.WRITE`,
+   which is useful for spotting "DB-passes-but-no-write-was-attempted"
+   scenarios.
++- Under `ALL`, `nl_assertions` are judged only for tasks whose
++  `reward_basis` contains `NL_ASSERTION` (as in retail). To judge them
++  on other tasks as a diagnostic, pass
++  `evaluation_type=EvaluationType.ALL_WITH_NL_ASSERTIONS` to `run_tasks`;
++  `tau2 run` has no option for it.
+ 
+ The official leaderboard score uses the task's `reward_basis` and is not
+ changed by these diagnostic options.
+diff --git a/docs/running_simulations.md b/docs/running_simulations.md
+index 6c1bbef..f63f3bb 100644
+--- a/docs/running_simulations.md
++++ b/docs/running_simulations.md
+@@ -261,7 +261,7 @@ result = run_simulation(orchestrator)
+ ### Layer 3: Batch Execution
+ 
+ - **`run_domain(config)`** -- Run all tasks for a domain from a `RunConfig`. Handles task loading, filtering, save paths, metrics.
+-- **`run_tasks(config, tasks, *, save_path, save_dir, evaluation_type=EvaluationType.ALL_WITH_NL_ASSERTIONS, console_display)`** -- Run a list of tasks with concurrency, checkpointing, and retries. Note: defaults to `ALL_WITH_NL_ASSERTIONS` (unlike `run_simulation` which defaults to `ALL`).
++- **`run_tasks(config, tasks, *, save_path, save_dir, evaluation_type=EvaluationType.ALL, console_display)`** -- Run a list of tasks with concurrency, checkpointing, and retries. Like `run_simulation`, defaults to `ALL`, which judges `nl_assertions` only for tasks whose `reward_basis` contains `NL_ASSERTION`; pass `EvaluationType.ALL_WITH_NL_ASSERTIONS` to judge them on every task.
+ - **`run_single_task(config, task, *, seed, evaluation_type, save_dir, ...)`** -- Run one task with logging and optional side effects (auto-review, audio saving).
+ 
+ ### Helpers

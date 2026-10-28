@@ -1,0 +1,211 @@
+diff --git a/src/tau2/domains/retail/tools.py b/src/tau2/domains/retail/tools.py
+index 4f862f0..024f76b 100644
+--- a/src/tau2/domains/retail/tools.py
++++ b/src/tau2/domains/retail/tools.py
+@@ -538,6 +538,7 @@ class RetailTools(ToolKitBase):  # Tools
+             raise ValueError("The number of items to be exchanged should match")
+ 
+         diff_price = 0
++        new_variants = []
+         for item_id, new_item_id in zip(item_ids, new_item_ids):
+             if item_id == new_item_id:
+                 raise ValueError(
+@@ -550,11 +551,14 @@ class RetailTools(ToolKitBase):  # Tools
+             variant = self._get_variant(product_id, new_item_id)
+             if not variant.available:
+                 raise ValueError(f"New item {new_item_id} not found or available")
++            new_variants.append(variant)
+ 
+             old_price = item.price
+             new_price = variant.price
+             diff_price += new_price - old_price
+ 
++        diff_price = round(diff_price, 2)
++
+         # Check if the payment method exists
+         payment_method = self._get_payment_method(order.user_id, payment_method_id)
+ 
+@@ -574,8 +578,8 @@ class RetailTools(ToolKitBase):  # Tools
+             payment_method.balance -= diff_price
+             payment_method.balance = round(payment_method.balance, 2)
+ 
+-        # Modify the order
+-        for item_id, new_item_id in zip(item_ids, new_item_ids):
++        # Modify the order; each item gets its own new variant's price and options
++        for item_id, new_item_id, variant in zip(item_ids, new_item_ids, new_variants):
+             item = next((item for item in order.items if item.item_id == item_id), None)
+             if item is None:
+                 raise ValueError(f"Item {item_id} not found")
+diff --git a/tests/test_domains/test_retail/test_modify_pending_order_items_variants.py b/tests/test_domains/test_retail/test_modify_pending_order_items_variants.py
+new file mode 100644
+index 0000000..c1c51f6
+--- /dev/null
++++ b/tests/test_domains/test_retail/test_modify_pending_order_items_variants.py
+@@ -0,0 +1,167 @@
++"""modify_pending_order_items with several (old, new) pairs in one call."""
++
++import pytest
++
++from tau2.data_model.message import ToolCall
++from tau2.domains.retail.data_model import (
++    CreditCard,
++    Order,
++    OrderItem,
++    OrderPayment,
++    Product,
++    RetailDB,
++    User,
++    UserAddress,
++    UserName,
++    Variant,
++)
++from tau2.domains.retail.environment import get_environment
++
++ADDRESS = UserAddress(
++    address1="123 Main St",
++    address2="Apt 1",
++    city="San Francisco",
++    state="CA",
++    country="USA",
++    zip="94105",
++)
++
++
++@pytest.fixture
++def retail_db() -> RetailDB:
++    return RetailDB(
++        users={
++            "sara_doe_496": User(
++                user_id="sara_doe_496",
++                name=UserName(first_name="Sara", last_name="Doe"),
++                address=ADDRESS,
++                email="sara.doe@example.com",
++                payment_methods={
++                    "credit_card_0000000": CreditCard(
++                        source="credit_card",
++                        brand="visa",
++                        last_four="1234",
++                        id="credit_card_0000000",
++                    ),
++                },
++                orders=["#W0000000"],
++            )
++        },
++        orders={
++            "#W0000000": Order(
++                order_id="#W0000000",
++                user_id="sara_doe_496",
++                status="pending",
++                items=[
++                    OrderItem(
++                        name="Classic T-Shirt",
++                        product_id="6086499569",
++                        item_id="1008292230",
++                        price=29.99,
++                        options={"size": "M", "color": "blue"},
++                    ),
++                    OrderItem(
++                        name="Water Bottle",
++                        product_id="7000000000",
++                        item_id="2000000000",
++                        price=10.0,
++                        options={"color": "red"},
++                    ),
++                ],
++                address=ADDRESS,
++                fulfillments=[],
++                payment_history=[
++                    OrderPayment(
++                        transaction_type="payment",
++                        amount=39.99,
++                        payment_method_id="credit_card_0000000",
++                    )
++                ],
++            )
++        },
++        products={
++            "6086499569": Product(
++                product_id="6086499569",
++                name="Classic T-Shirt",
++                variants={
++                    "1008292230": Variant(
++                        item_id="1008292230",
++                        price=29.99,
++                        available=True,
++                        options={"size": "M", "color": "blue"},
++                    ),
++                    "1008292231": Variant(
++                        item_id="1008292231",
++                        price=30.10,
++                        available=True,
++                        options={"size": "L", "color": "blue"},
++                    ),
++                },
++            ),
++            "7000000000": Product(
++                product_id="7000000000",
++                name="Water Bottle",
++                variants={
++                    "2000000000": Variant(
++                        item_id="2000000000",
++                        price=10.0,
++                        available=True,
++                        options={"color": "red"},
++                    ),
++                    "2000000001": Variant(
++                        item_id="2000000001",
++                        price=12.5,
++                        available=True,
++                        options={"color": "black"},
++                    ),
++                },
++            ),
++        },
++    )
++
++
++def _modify_call(pairs: list[tuple[str, str]]) -> ToolCall:
++    return ToolCall(
++        id="modify",
++        name="modify_pending_order_items",
++        arguments={
++            "order_id": "#W0000000",
++            "item_ids": [old for old, _ in pairs],
++            "new_item_ids": [new for _, new in pairs],
++            "payment_method_id": "credit_card_0000000",
++        },
++    )
++
++
++PAIRS = [("1008292230", "1008292231"), ("2000000000", "2000000001")]
++
++
++def test_each_item_stores_its_own_new_variant(retail_db: RetailDB):
++    environment = get_environment(retail_db)
++    response = environment.get_response(_modify_call(PAIRS))
++    assert not response.error, response.content
++    order = environment.tools.get_order_details("#W0000000")
++    stored = {item.item_id: (item.price, dict(item.options)) for item in order.items}
++    assert stored == {
++        "1008292231": (30.10, {"size": "L", "color": "blue"}),
++        "2000000001": (12.5, {"color": "black"}),
++    }
++
++
++def test_price_difference_is_stored_in_cents(retail_db: RetailDB):
++    environment = get_environment(retail_db)
++    environment.get_response(_modify_call(PAIRS))
++    order = environment.tools.get_order_details("#W0000000")
++    payment = order.payment_history[-1]
++    assert payment.transaction_type == "payment"
++    assert payment.amount == 2.61  # (30.10 - 29.99) + (12.5 - 10.0)
++
++
++def test_pair_order_inside_the_call_does_not_change_the_db(retail_db: RetailDB):
++    hashes = []
++    for pairs in (PAIRS, PAIRS[::-1]):
++        environment = get_environment(retail_db.model_copy(deep=True))
++        response = environment.get_response(_modify_call(pairs))
++        assert not response.error, response.content
++        hashes.append(environment.get_db_hash())
++    assert hashes[0] == hashes[1]
