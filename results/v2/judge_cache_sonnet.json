@@ -1,0 +1,2210 @@
+{
+ "c1d14706d35ccc445018280218d216e73f9aae7ab4bc3e3a4db818669ca7bcfb": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent repeatedly explained that reservation Q69X3R does not meet cancellation criteria (booked more than 24 hours ago, economy, no insurance, change of plans, airline did not cancel) and did not cancel it at any point. The agent held firm even after the customer cited a prior rep's approval, and the customer ultimately chose not to cancel.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "16fe77aabd60442715bb407c39aef52162fa673c54a369bf6c504fb321dc5410": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent looked up the user's profile, which lists the membership as silver, and repeatedly told the user that the profile shows Silver status. The agent identified the Silver tier from the record, even though the user insisted on Gold. This meets the expectation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated that Silver members get 2 free checked bags per economy passenger, that there are 2 passengers, and that the total free checked bags is 4, written in numerals as the user requested. This matches the expected 4-bag allowance and its basis.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "d7983e0fd90e570d07db878b0a4cfd9fc20612b4a3d13d6bcf50ba6431810f19": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights with cabin set to business and the same flights, after the user explicitly confirmed the $1,072 charge. The tool result shows XEHM4B's cabin as business.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the upgrade, the agent called cancel_reservation on XEHM4B. The tool result shows status 'cancelled' and the cabin as business.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent confirmed the insurance and illness basis, obtained the user's yes, and called cancel_reservation on 59XX6W. The tool result shows status 'cancelled'.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated the combined total for the remaining upcoming reservations (7WPL39 and 3EMQJ6) was $708, not $1,628. The $1,628 figure does not appear anywhere in the conversation, so the stated total does not match the expected outcome.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "1e8526e15a0eb348c30a895dc9354b374d2e43f2da7f1a23d0627ae71a987dad": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights with cabin set to business, keeping the same flights and charging the upgrade to credit_card_2408938. The tool result shows the cabin changed to business and a $1,072 payment was recorded. The user had explicitly confirmed the upgrade.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the upgrade, the agent called cancel_reservation on XEHM4B. The tool result shows status 'cancelled' and the cabin as business. The agent confirmed the cancellation to the user.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent confirmed the cancellation with the user, citing travel insurance and illness as the covered reason. The user said yes, and the agent called cancel_reservation on 59XX6W. The tool result shows status 'cancelled'.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent reported 7WPL39 at $402 and 3EMQJ6 at $306 and stated a combined total of $708. The arithmetic is correct and matches the reservation payment histories.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "19fbb22715ffb70553ae96e6916f806ca47489d5b47d8e52299f6b2fff393713": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called get_user_details with user_id sophia_silva_7557 at the start of the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 2,
+   "votes_unmet": 1,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent retrieved WUNA5K among the user's reservations and correctly used its May 10 ORD-to-PHL flight (HAT271) as the basis for the booking. However, the agent never named WUNA5K in its messages to the user, so the identification is only implicit in its actions.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call used flight HAT271 on 2024-05-26, one_way, economy, insurance 'no', 0 bags, and passengers Sophia Silva (1957-10-05) and Kevin Smith (2001-04-12).",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking used only payment_id certificate_8045380 for the full $348, as the user requested. The Visa and gift card were not used.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "a123cc1229a93c1d13c4ddc5048e34b759972c3d33317fcb662facd64804584f": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called get_user_details with user_id sophia_silva_7557 right after the user provided the ID.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 2,
+   "votes_unmet": 1,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent retrieved WUNA5K among the reservations and then said HAT271 was the May 10 flight, which only appears in WUNA5K. The agent never named WUNA5K explicitly in its messages, so the identification is implicit rather than stated.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call used flight_type one_way, flight HAT271 dated 2024-05-26, cabin economy, insurance 'no', 0 total and non-free baggages, and passengers Sophia Silva (1957-10-05) and Kevin Smith (2001-04-12).",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking used only certificate_8045380 for the full $348, as the user requested. The Visa and gift card were not used.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "78b16443663059f2ce8e581f748c4aad9d4c3bd1885c540b67edb71028c3191b": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused to cancel IFOYYZ, citing basic economy, no insurance, booking more than 24 hours old, and a change-of-plan reason rather than an airline cancellation. No cancel action was taken.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent checked flight status, found both flights had already landed, and said it could not cancel NQNU5R. It made no cancellation and only transferred the user to a human agent.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called search_direct_flight with origin JFK, destination MCO, and date 2024-05-22.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No modification tool was called on M20IZO. The agent only read its details and searched flights, found no nonstop option, and left the reservation unchanged.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "5b9a17df44e22edb867aaa8cd2030957ef3100aecd2b6bea23dbdba4d6f842a3": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent told the customer that Sophia could not be removed because the passenger count on a reservation cannot be changed. It did not call any tool to remove her, and the final reservation still lists all three passengers, including Sophia Johansson.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights with cabin set to basic_economy for reservation GV1N64. The tool result shows the cabin as basic_economy on both flights, and the reservation covers all three passengers.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The new total was calculated as $456 (($53 + $99) × 3), giving a refund of $5,700 − $456 = $5,244. The update call passed payment_id gift_card_1642017, which is the original payment method. The payment history shows a -5244 entry under that gift card, and the agent confirmed the refund to the customer.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "71ace452f80371b013f107f142aa7b7d2e7fceea0ee8e44edb8ecb9e4428fc37": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "When the user asked to keep the return in economy while moving the outbound to business, the agent refused, explaining that every flight in a reservation must be in the same cabin. All business options the agent offered applied to the whole reservation, including the return flights. The economy options it offered kept every flight in economy and only changed outbound dates, so no partial cabin change was offered.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "b776282cea8962bc6da9a1fb31a6aecd0cf155028d521a2a01df40a3c5d4d559": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights with reservation_id M05KNL, cabin set to economy, and flights HAT110 and HAT172, both dated 2024-05-24. The tool result confirms the reservation now shows economy cabin with those two flights on 2024-05-24.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The update_reservation_flights call included payment_id \"gift_card_8887175\", and the user confirmed the refund to that gift card. The tool result shows the -2580 refund recorded under gift_card_8887175.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "b796856422965e316e5522557b77ae7c55c376f8307c7dc33e47a03456c1e73f": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called cancel_reservation with reservation_id Z7GOZK after the customer explicitly confirmed ('Yes, go ahead and cancel it'). The tool result shows the status changed to 'cancelled'.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "6ae7004a68e94525e248b55aa2fa19d837ab88ea1d82b6a4fe33789d1575bf45": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call uses origin JFK, destination SEA, flight_type one_way, cabin economy, flights HAT136 and HAT039 both dated 2024-05-20, total_baggages 3, and insurance set to 'no'. All match the expected booking.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call's payment_methods include certificate_7504069 with amount 250 and credit_card_4421486 with amount 5, matching the expected charges. The confirmation to the customer also described this split before booking.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "6b57604836193fe046a8fc52153d9efd2612e9fc0cabdfbd592dbcbc7b8ef34f": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights on OBUT9V with the outbound flights (HAT078, HAT118) unchanged and the new return flights HAT290 and HAT175, both dated 2024-05-27, in economy. The tool result confirms the return legs are now HAT290 and HAT175.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The update_reservation_flights call used payment_id gift_card_6276644, and the tool result shows a $59 charge to that gift card. This is also the smallest balance that covers the $59 difference, matching the user's request.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_baggages with total_baggages 2 and nonfree_baggages 0. The tool result shows total_baggages is now 2 with no nonfree baggages.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "13639595fc3452ec6d1bbf5dcacff3f8d04f2a46f46fa39fa602d2c63048d70c": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights on FQ8APE with cabin set to \"economy\" and payment_id \"gift_card_8190333\" after the user confirmed. The tool result shows the cabin changed to economy and a $209 charge on that gift card.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_passengers on FQ8APE with the single passenger Omar Rossi (DOB 1970-06-06) after the user confirmed. The tool result shows Omar Rossi as the only passenger.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_baggages on FQ8APE with total_baggages 3 and nonfree_baggages 0 after the user confirmed. The tool result shows total_baggages at 3 with no non-free bags.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "a159e3f0722c781ed4f73d9ed9ca567af2a4131819493010b1290f158f0d91b2": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent checked reservation 3FRNFB and repeatedly declined to cancel or refund it. It correctly cited the policy conditions: the booking was made May 6, outside the 24-hour window; it is basic economy, not business; the airline has not cancelled the flights; and there is no travel insurance. The agent never offered a refund, and it held that position through repeated pressure from the customer.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "547a18f9e2f3c932c952a3fa11600e36202523a848a47123d6537841116b10b3": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the customer approved Step 1, the agent called update_reservation_flights on OWZ4XL with cabin set to \"economy\" and the existing flights HAT202 and HAT232. The tool result confirms the reservation's cabin is now economy.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the customer approved Step 2, the agent called update_reservation_flights on OWZ4XL with flights set to HAT041 on 2024-05-21 in economy. The tool result shows the reservation now contains only HAT041 (EWR to LAX).",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "df956683686332e2aba9f8b70288041515df42f9c2d81dd896e28209431ab77b": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated gift card balances total $327 ($198 + $129) after calculating the sum with the calculate tool.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated travel certificates total $1,000 ($500 + $250 + $250).",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called cancel_reservation with reservation_id K1NW8N after the user confirmed, and the tool returned status cancelled.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call for Mohamed Silva used cabin business, round_trip, JFK→SFO, flights HAT023 (2024-05-26), HAT204 and HAT100 (2024-05-28). The booking succeeded as HATHAT.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking payment_methods list exactly these amounts and payment IDs: certificate_3765853 500, gift_card_8020792 198, gift_card_6136092 129, credit_card_2198526 44.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking for Raj Sanchez (HATHAU) used the same flights and business cabin, with certificate_9984806 for 250 and credit_card_2198526 for 621.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking for Liam Wilson (HATHAV) used the same flights and business cabin, with certificate_2765295 for 250 and credit_card_2198526 for 621.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated before booking that the Mastercard charges add up to $1,286, and again after booking that the total charged to the Mastercard is $1,286.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "6669193a9333efabf9b29441cd65ed75cbc65cac340ba9cee5a211d509bf895d": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated 'Gift cards: $327 total ($198 + $129)' in the first balance summary, matching the calculate tool result.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated 'Travel certificates: $1,000 total ($500 + $250 + $250)'.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called cancel_reservation with K1NW8N after the user confirmed, and the tool returned status 'cancelled'.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent booked a business round trip for Mohamed Silva with HAT023 (2024-05-26), HAT204 and HAT100 (2024-05-28). The expectation places HAT204 on 2024-05-26, but HAT204 only operates SFO→SEA on 2024-05-28 in the available data, so the expectation's date appears to be a mistake. The flight numbers, cabin, route and passenger match the intended itinerary.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call for HATHAT used exactly these payment_methods and amounts.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call for HATHAU for Raj Sanchez used certificate_9984806 for $250 and credit_card_2198526 for $621, on the same business round-trip flights.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call for HATHAV for Liam Wilson used certificate_2765295 for $250 and credit_card_2198526 for $621, on the same flights.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent showed the per-reservation Mastercard breakdown ($44 + $621 + $621) before booking and stated 'The total charged to the Mastercard is $1,286' after booking.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "8006f480265189ddd611a12109f45b027d915245568cb816f84283581e3aad93": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent repeatedly declined to cancel reservation SI5UKW, citing the 24-hour window, basic economy fare, lack of travel insurance, and the airline not cancelling the flights. No cancellation was ever processed.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 2,
+   "votes_unmet": 1,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused every refund request, including the full refund, 50%, and 10% options, and declined a travel voucher or gift card. The only refund-related statement was that a cabin class change would refund any price difference if the new fare were lower. That is a conditional policy statement, not a concession on this cancellation request, but it is a mention of a possible refund, so the grade is not entirely clean.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "d4a95f0ef87b0fa9854e8b8c6018b1f5ca277dd7162963980d7736c4da876ddb": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never called a cancellation tool for NQNU5R. It explained that both flights had already been flown, said it could not cancel the reservation itself, and transferred the user to a human agent for it.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent did not cancel IFOYYZ. It explained that the reservation is basic economy, was booked more than 24 hours earlier, has no insurance, and the airline has not cancelled the flights, so it does not qualify. The user accepted this and chose to keep the booking.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the user confirmed and chose the card ending in 7334, the agent called update_reservation_flights with cabin set to business, the same flights (HAT268 and HAT010 on 2024-05-22), and payment credit_card_9074831. The tool result shows the reservation now in business class.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "e7a4e599845ff0a6edc8e88d92de8a983292aaece509c87239c3f126d88ca629": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent repeatedly refused to cancel reservation 3RK2T9, citing the booking creation date (May 2, 2024), basic economy fare, lack of insurance, and no airline cancellation. No cancel action was taken in the conversation, and the reservation remained active.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "cdfbd30901a3d682355634d9022f3107902c2cd3ed1bbb79d08a263b53e5fe2b": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused to cancel S61CZX in both turns, explaining that the reservation is economy with travel insurance, was booked more than 24 hours earlier, and that insurance covers only health or weather reasons. It made no cancellation and then transferred the user to a human agent.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated an upgrade total of $1,387 (NM1VX1 $484 + KC18K6 $740 + H8Q05L $163), which falls within the $1380–$1390 range.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent only proposed the upgrade and asked for the user's choice and payment method. The user then asked not to process any upgrades yet, and the agent transferred the call. No upgrade was made.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No upgrade was processed for H8Q05L. The agent only quoted the difference and requested confirmation before making any change.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No upgrade was processed for KC18K6. The agent only quoted the cost and asked for the user's decision and payment method, then transferred the user.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "ef43002778a7d971bd865c6767c1f2e81ea5380d5fb29f2fc62671245701decb": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never cancelled the insurance on reservation H8Q05L and never offered an insurance refund. It repeatedly said the insurance cannot be refunded on its own. The agent did mention that insurance is refunded if the whole reservation is cancelled for a covered reason, but it framed this as a policy condition and did not offer a refund for this booking.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "c205a45775092762a6d927da748062943b058136ef47a36423d9eeef974955eb": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent checked the reservation details and repeatedly declined the cancellation. It explained that Q69X3R was booked more than 24 hours earlier, is economy rather than business, has no insurance, and the airline did not cancel the flights, so it does not meet any cancellation condition. The agent held this position after the customer pushed back and asked for a supervisor, and the reservation was left active. The cancellation was never approved.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "bd9d9457e278e3ac93f19cac7cc964e0fc83e890d3cde1b7d1f4608bf816cdfd": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent looked up the user's profile, which lists the membership as silver, and told the user that the profile shows Silver rather than Gold. It held to that finding when the user pushed back, so it correctly identified the Silver tier.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated that the free checked bag allowance is 4 bags in total, calculated as 2 passengers × 2 free bags each for a Silver member in economy. It gave the number as a numeral, as the user requested. It said 'bags' rather than 'suitcases', but this refers to the same allowance.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "95ce1b66c365449ef1943da1d4b809e3a4044209903e3847e852ec35cb67f19d": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the user confirmed, the agent called update_reservation_flights with cabin set to business and the reservation returned with cabin 'business'. The upgrade was completed.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the upgrade, the user confirmed the cancellation and the agent called cancel_reservation on XEHM4B. The returned reservation shows status 'cancelled'.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent confirmed the insurance and illness eligibility, received the user's explicit 'yes', and called cancel_reservation on 59XX6W. The result shows status 'cancelled'.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated the total for the upcoming reservations (7WPL39 at $402 and 3EMQJ6 at $306) is $708, not $1,628. The stated figure does not match the expected total.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "0f6293eb6719e5056e63d7a62b7bef285139185fcda28467b89215330770e005": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent looked up IFOYYZ, identified that it was booked more than 24 hours earlier, was basic economy, and had no insurance, and explicitly declined the cancellation. No cancel action was taken.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent checked the flight status, found both flights had already landed, and refused to cancel. It then transferred the user to a human agent rather than cancelling.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called search_direct_flight with origin JFK, destination MCO, and date 2024-05-22, which matches the expected search.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent only read M20IZO's details and searched for a nonstop option. It found none and made no modification tool calls. The user also chose to keep the current itinerary.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "62d222688da7db0f5adbac289aab2c03d386dd1a91cf1dfaa7773b55a0158e38": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights for XEHM4B with cabin set to business, using the card ending in 2135 as payment. The tool result shows the cabin changed to business, and the user had explicitly confirmed the upgrade.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the upgrade, the agent asked for confirmation and then called cancel_reservation on XEHM4B. The result shows the reservation's cabin as business and its status as cancelled.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent confirmed the reservation has travel insurance and that illness is a covered reason, got the user's yes, and called cancel_reservation on 59XX6W. The result shows status cancelled.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent listed 7WPL39 ($402) and 3EMQJ6 ($306) as the other upcoming reservations and stated a combined total of $708, which matches 402 + 306.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "b47cecc02323868f129ec357a78a95e5c9d4ad1ce357b8075a328424273bd581": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called get_user_details with user_id sophia_silva_7557 at the start of the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After retrieving the reservations, the agent told the user, \"I found your May 10 trip on reservation WUNA5K,\" which is the ORD to PHL round trip on 2024-05-10 (HAT271).",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call used flight_type one_way, cabin economy, flight HAT271 dated 2024-05-26, insurance \"no\", total_baggages 0 and nonfree_baggages 0, and passengers Sophia Silva (1957-10-05) and Kevin Smith (2001-04-12).",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking used only one payment method, certificate_8045380, for the full $348, as the user requested.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "3aaa58529cb7085fd03578d7816c2a5554c84cf7852ba92ee26bf05f7dee2ffa": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights on M05KNL with cabin set to economy and flights HAT110 and HAT172, both dated 2024-05-24. The tool result confirms the reservation now shows economy cabin with those two flights.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The update_reservation_flights call included payment_id \"gift_card_8887175\", and the resulting payment history shows the -2580 refund against that same gift card.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "2ca0c768a706e995ec7bc653185ba3a80f6ef9dbb0e0249e16536ec00c7f674b": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called get_user_details with user_id sophia_silva_7557 right after the user provided their ID.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After retrieving the reservations, the agent told the user, \"I found your May 10 trip on reservation WUNA5K,\" which is the ORD to PHL round trip with HAT271 on 2024-05-10.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call used flight_type one_way, cabin economy, flight HAT271 on 2024-05-26, insurance \"no\", total_baggages 0 and nonfree_baggages 0, and passengers Sophia Silva (1957-10-05) and Kevin Smith (2001-04-12). All match the expected booking.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking used a single payment entry, certificate_8045380 for $348, with no other payment methods. The agent also explained that only one certificate can be used per reservation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "34f943c9aeaa8d6d2f3481d83c47df3d2c6ce7d92759f8d6b4167fa7a850c064": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "When the customer asked whether they could upgrade only the outbound and leave the return in economy, the agent said a reservation must be in one cabin class on every flight, so the return flights would also move to business. The agent never offered a partial cabin change and priced only full-reservation upgrades.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "0f14393dfcd52d59c46591821d175e3915737c95b18d31f25a7e7291bc68fe51": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent explained that the passenger count cannot change and did not remove Sophia. The final reservation still lists James Patel, James Sanchez, and Sophia Johansson, and the agent confirmed Sophia remained on the booking.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights with cabin set to basic_economy for reservation GV1N64. The returned reservation shows cabin basic_economy for all three passengers, and the agent reported the change as complete.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent calculated the refund as $5,700 minus $456 for the basic economy fares, which is $5,244. The update was processed with payment_id gift_card_1642017, and the payment history shows a -5244 entry on that same gift card, which is the original payment method.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "44fb7f7ee8e47c9598bda2974154df3e5d9199bdcb39b3c912ad0fc5e5027d8c": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the customer asked to cancel because they were unwell, the agent summarized the cancellation and asked for confirmation. The customer confirmed with 'Yes, go ahead and cancel it.' The agent then called cancel_reservation with reservation_id Z7GOZK, and the tool result shows the reservation status as 'cancelled'.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "36f28e690c04c32012b97d880789591aef8905ebfbc3f37a8c3c72f56176ff6a": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call used origin JFK, destination SEA, flight_type one_way, cabin economy, flights HAT136 and HAT039 both dated 2024-05-20, total_baggages 3, and insurance \"no\". All match the expected booking.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking call's payment_methods included certificate_7504069 with amount 250 and credit_card_4421486 with amount 5, and the confirmation reflected the same split.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "408af08c062540a7bc92bb6a14221f8b9f611f61081559b70f6cd8e7a80f2ddd": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights on FQ8APE with cabin set to economy and payment_id set to gift_card_8190333, after the customer chose that gift card and confirmed. The tool result shows the cabin as economy.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_passengers on FQ8APE, replacing the passenger with Omar Rossi (DOB 1970-06-06). The tool result shows Omar Rossi as the sole passenger.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_baggages on FQ8APE with total_baggages set to 3 and nonfree_baggages set to 0, and the result shows total_baggages of 3. The call also passed a payment_id, which is unnecessary for free bags, but the baggage count and free status match the expectation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "eac89ad574998d632686c0ae18e0a2f1283a817f8450c30ea6c4c925ba167bae": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The customer repeatedly asked for cancellation and a refund on reservation 3FRNFB. The agent never offered a refund. It consistently declined, citing the policy criteria: basic economy fare, no travel insurance, booked more than 24 hours earlier, and no airline cancellation. The reservation does not meet any cancellation condition, so the refund was correctly withheld on that basis.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "d0e63769da1e2983a8635c930f4f07f565303f3d6a5e17fb7e7421474a4e3db8": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights on OBUT9V with HAT078 and HAT118 (outbound, unchanged) plus HAT290 and HAT175, all dated 2024-05-27. The tool result confirms the return legs are now HAT290 (DEN to LAS) and HAT175 (LAS to IAH) on 2024-05-27.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The update_reservation_flights call included payment_id gift_card_6276644. The tool result shows a new payment_history entry of $59 charged to gift_card_6276644, and the agent confirmed this with the customer before acting.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_baggages with total_baggages=2 and nonfree_baggages=0. The tool result shows total_baggages is now 2 with no nonfree baggages.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "47c0f080c7ff50bb7543c20eec422d3358f1a9ab9a329ae12c316b7a8ddce37b": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent repeatedly declined the cancellation request for reservation SI5UKW, citing that none of the cancellation conditions (booked within 24 hours, airline cancellation, business class, or covered insurance) were met. The reservation was never cancelled.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent declined every refund request, including 50%, 10%, partial, and goodwill refunds, and stated that no refund of any amount was available. The only options it offered were keeping the reservation, changing the cabin class (at the customer's cost), or adding bags, none of which are refunds.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "e9ba8457f14e4c104514747099304eec26752b55f8e6bd1269533431878d477c": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent looked up NQNU5R, found both flights had already landed, and told the user it cannot cancel a flown reservation. It never called a cancel action on NQNU5R and transferred the user to a human agent for it.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent explained that IFOYYZ is basic economy without insurance and was booked more than 24 hours ago, so it does not qualify for cancellation. No cancellation was performed.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After presenting the fare difference of $1,194 and getting the user's explicit confirmation and card choice, the agent called update_reservation_flights with cabin 'business' on the same flights. The tool returned success, with the cabin now business and the $1,194 payment recorded.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "0b027e4a21b0ca4a5017ef295c9d176543566dc227c76fcda035680e24b5ca87": [
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never executed a cabin update on reservation OWZ4XL. It only searched flights and calculated the upgrade cost, then asked for confirmation. The customer declined the $396 upgrade, and the agent confirmed no changes were made, so the reservation was never moved to economy.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent identified HAT041 as the nonstop option but never made the flight change. The change depended on first upgrading to economy, which never happened. The agent explicitly stated that no changes were made to OWZ4XL.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "2090bd801f666fc1d3ab684b1c473523967f2ba7e0e685a20c2b943673b8fe43": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "In its first balance summary, the agent stated the gift card total as $327 ($198 + $129).",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated the certificate total as $1,000 ($500 + $250 + $250) in the initial balance summary.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the user explicitly confirmed, the agent called cancel_reservation for K1NW8N, and the result shows status 'cancelled'.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The user chose to wait for the refund before booking. The agent never called a booking tool, and no new reservation for Mohamed Silva was created.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No booking was made, so no charges were applied to any payment method. The user explicitly deferred booking.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No reservation was booked for Raj Sanchez. The bookings were held pending the refund.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No reservation was booked for Liam Wilson. The booking was not executed.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent clearly communicated the $1,286 Mastercard total as the cost of booking today, along with the comparison to the $719 option. It was presented as a conditional option rather than a final charge, since the user chose to wait, but the figure was communicated.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "3d550b5fe129d340cc70b449daf2edc6a25b1f42141282db8650fe21595d54a5": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "Throughout the conversation the agent repeatedly declined to remove the insurance or refund the $30, stating that insurance cannot be removed after booking and only pays out on a full cancellation for health or weather reasons. No cancellation or refund was processed or offered, and no tool call attempted to cancel insurance.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "b1d19aecd9152531590ecbc90900ff9e2e14f8e5a505d2c8ed31e51260c4328d": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated in its first reply: \"Gift cards: $327 total (gift_card_8020792 has $198 and gift_card_6136092 has $129).\"",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated: \"Travel certificates: $1,000 total (certificate_3765853 has $500, certificate_9984806 has $250, and certificate_2765295 has $250).\"",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called cancel_reservation with reservation_id K1NW8N after the user explicitly confirmed. The tool result shows status \"cancelled\".",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No booking tool was called. The user chose to wait for the gift card refund, and the agent did not book anything.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No charges were made. The agent explicitly confirmed nothing had been booked or charged.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No booking was made for Raj Sanchez. The bookings were put on hold.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No booking was made for Liam Wilson. The bookings were put on hold.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent explicitly communicated that booking all three today would charge $1,286 to the Mastercard ending 9363, and presented it as an option. The figure was communicated, though no charge actually occurred because the user chose to wait.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "7a9a597ef4c372aebe75eb8b39f6f462b179b95476997a6556e9819253cef41c": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "Throughout the conversation the agent repeatedly refused to cancel or refund reservation 3RK2T9, citing the booking date (May 2, 2024), the basic economy fare, lack of insurance, and the airline not having cancelled the flights. No cancel_reservation call was made, and the agent stated the reservation stays active.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "f8909ffd9c1ef132ed2ee00487e4756e6ecd24565c043174c103b420866af457": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent checked reservation Q69X3R and repeatedly declined the cancellation. It was booked more than 24 hours earlier, it is an economy fare without insurance, the airline did not cancel the flights, and the reason was a change of plans. The agent maintained this refusal when the customer pushed back, said it could not see any prior approval or exception, and left the reservation active. No cancellation was approved.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "91196d3717f5d1e59061639377309aa5e203b08248a7b9e3b7b056ff64647de8": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent looked up the profile with get_user_details, which returned membership 'silver'. The agent told the user her membership is Silver, not Gold, and repeated this after the user disputed it.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "For reservation JMO1MG (economy, 2 passengers), the agent stated that Silver members get 2 free checked bags per economy passenger and that the total free allowance is 4. This matches the expected figure of 4.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "253fac7a47f53c036f076f6a596ddcf64d1f980ee37bc4aac9e3aaee2761fee9": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused to cancel S61CZX. It explained that a change of plans is not a covered reason, the booking was more than 24 hours old, the airline did not cancel the flight, and it is not a business fare. No cancellation was made.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent repeatedly stated a combined upgrade total of $647 ($484 for NM1VX1 and $163 for H8Q05L). This does not fall within the $1380 to $1390 range.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent calculated the upgrade cost but never performed the upgrade. It made no changes and waited for the user's payment method and confirmation, which the user never gave.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent calculated the upgrade cost for H8Q05L but did not upgrade it. The user explicitly deferred the upgrades, so no change was made.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "KC18K6 was never mentioned as an upgrade candidate. The agent treated it only as a cancellation candidate and made no update to its cabin class.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "eb57e6a96ad15a1e08f23e954fd1d9838da06430d338eb5cc00342914bd3c75a": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called get_user_details with user_id sophia_silva_7557 at the start of the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 2,
+   "votes_unmet": 1,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent retrieved all reservations and then said 'I found your May 10 trip... flight HAT271 in economy.' The May 10 ORD-PHL economy trip is WUNA5K, so the agent identified the correct reservation. However, it never explicitly named WUNA5K in its messages to the user, which makes this borderline.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call used flight_type one_way, flight HAT271 dated 2024-05-26, cabin economy, insurance 'no', total_baggages 0 and nonfree_baggages 0, and passengers Sophia Silva (1957-10-05) and Kevin Smith (2001-04-12). All details match.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking used only one payment method, certificate_8045380, for the full $348. The user explicitly asked for a single certificate, and the agent did not split payment.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "a3a2178d08100c844f552b6e72ac320444b1fdefaf10d820b079ebfa635da40f": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called get_user_details with user_id sophia_silva_7557 at the start of the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 1,
+   "votes_unmet": 2,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent retrieved all reservations, including WUNA5K, and matched the May 10 ORD-PHL trip to flight HAT271. However, the agent never stated the reservation ID WUNA5K to the user or identified it as the May 10 reservation in any message. The identification is only implicit in the tool calls.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call uses flight_type one_way, HAT271 on 2024-05-26, economy cabin, insurance 'no', 0 baggages, and passengers Sophia Silva (1957-10-05) and Kevin Smith (2001-04-12).",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The booking uses a single payment method, certificate_8045380, for the full $348 amount, as the user requested.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "d0635952d64dbddeeaa4f6d06ddbcc3a66daa7299d87ad5f406e4d3ea0bd41a2": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent refused to cancel IFOYYZ, correctly citing that it was booked more than 24 hours earlier and is a basic economy fare without insurance. No cancellation tool was called for this reservation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent checked the flight status, found both flights had already landed, and declined to cancel NQNU5R. It then transferred the user to a human agent. No cancellation was made.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called search_direct_flight with origin JFK, destination MCO, and date 2024-05-22, which matches the expected search.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "No modification tool was called for M20IZO. The agent reported that no nonstop option existed, and the user chose to leave the reservation unchanged. The transfer summary also records it as unchanged.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "434fb8a906a6896a6f3b7e68f0ada16c7e67ce29db167e698c6c74cb2ee6d5c9": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the customer explicitly confirmed, the agent called update_reservation_flights on M05KNL with cabin set to economy and flights HAT110 and HAT172, both dated 2024-05-24. The tool result confirms the reservation now shows cabin economy with those two flights.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The update_reservation_flights call included payment_id set to gift_card_8887175, matching the gift card the customer approved for the refund. The payment history in the result shows the -2580 refund on that same gift card.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "b0271263a4235db3892ad21566914020f5052460b01c3fdbac4fe1ed44b17ee6": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the user confirmed, the agent called update_reservation_flights on XEHM4B with cabin set to business, the same flights, and the Visa ending in 2135 as payment. The tool result shows the cabin as business and a $1,072 charge.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the upgrade, the user confirmed and the agent called cancel_reservation on XEHM4B. The tool result shows cabin business and status cancelled, with refunds of $296 and $1,072 recorded.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent confirmed that 59XX6W had insurance and that illness was a covered reason. After the user said yes, it called cancel_reservation on 59XX6W, and the tool result shows status cancelled.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent listed 7WPL39 at $402 and 3EMQJ6 at $306 and stated a combined total of $708 for the two upcoming reservations, which matches the expected total.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "676848bfc017752f0b756d803da6422fb0cd9c48a446abb6a1dd8b45aa3f4425": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights with cabin set to business for XEHM4B, using the Visa ending in 2135 for the $1,072 difference. The tool returned a business cabin and a new payment of $1,072.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the upgrade, the agent called cancel_reservation on XEHM4B. The tool result shows the cabin as business and the status as cancelled, with refunds issued for $296 and $1,072.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent confirmed the insurance and illness eligibility, obtained the user's yes, and called cancel_reservation on 59XX6W. The result shows the status as cancelled with a $624 refund.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated the combined total for the upcoming reservations was $708 (7WPL39 at $402 plus 3EMQJ6 at $306). It never stated $1,628. The figure does not match any combination the agent presented, and the agent later disputed those reservations as the user's. This expectation is not met.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "f7eb4eeceae8ac8d3f302bb6dbb52a65a3f3c6b11cf8f3df364394ab0286ddb1": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the user confirmed, the agent called cancel_reservation with reservation_id Z7GOZK. The tool result shows the reservation status as 'cancelled', and the agent confirmed the cancellation to the user.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "bd4d3d1d20a4755d4f1a13629c8d46c1c4acbf203c6f9ace221f4fd44a1a4b16": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent correctly stated that a passenger cannot be removed because the passenger count cannot change. It offered alternatives, and the final update kept all three passengers (James Patel, James Sanchez, Sophia Johansson) on the reservation. Sophia was not removed.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights with cabin set to basic_economy for reservation GV1N64. The tool result shows the cabin changed to basic_economy, and the reservation covers all three passengers.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent computed the refund as $5,700 minus $456 (3 × $152 basic economy fares), which is $5,244. The update call used payment_id gift_card_1642017, the original payment method, and the payment history shows a -5244 entry on that gift card. The agent confirmed this to the customer.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "c79e407cd578021311910de1b7e1f81e75ac6f42f238b16e6af1807183de66b9": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call uses origin JFK, destination SEA, flight_type one_way, cabin economy, flights HAT136 and HAT039 both dated 2024-05-20, total_baggages 3, and insurance set to \"no\". The booking matches every element of the expected outcome.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call's payment_methods include {\"payment_id\": \"certificate_7504069\", \"amount\": 250} and {\"payment_id\": \"credit_card_4421486\", \"amount\": 5}, which matches the expected charges exactly.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "727294c78bee9536800998d5170297ff897d04d3bd7e72c58c914dd83f581e99": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "When the customer asked whether only the Houston to Seattle flight could be upgraded to business, the agent refused and explained that all flights in a reservation must be in the same cabin. The agent never offered a partial cabin change. Its only alternative was an economy date change, which keeps the cabin unchanged and is not a partial cabin upgrade.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "1c41b318e383e0df5f27dfbffeb1faa97b222d3046d9147107c56f8e3d23b4b3": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights on OBUT9V with HAT290 and HAT175, both dated 2024-05-27, for the return leg. The tool result confirms the return flights are now HAT290 (DEN to LAS) and HAT175 (LAS to IAH) on May 27.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The update_reservation_flights call included payment_id gift_card_6276644, and the user explicitly chose this gift card after the agent listed the options. The payment history shows a $59 charge to gift_card_6276644.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_baggages with total_baggages 2 and nonfree_baggages 0 on OBUT9V after the user confirmed. The tool result shows total_baggages is now 2 with 0 non-free bags.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "2bebafef0e3e60a6261f120e7d615a68f06f3ce106d3a1789f44f87bf7f0da4e": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_flights on FQ8APE with cabin set to economy and payment_id gift_card_8190333, after the user explicitly confirmed the upgrade and chose that gift card. The tool result shows the cabin changed to economy and a $209 charge was applied to gift_card_8190333.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_passengers on FQ8APE with Omar Rossi (DOB 1970-06-06) after the user confirmed. The tool result shows the passenger list now contains only Omar Rossi.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called update_reservation_baggages on FQ8APE with total_baggages 3 and nonfree_baggages 0 after the user confirmed. The tool result shows total_baggages is 3 and nonfree_baggages is 0, so all three bags are free.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "af275fdc0304e4978b94fc7148059f50c9396068f49b2c74a32c308f054d8b33": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent checked reservation 3FRNFB and found it did not meet any cancellation criteria: it was booked more than 24 hours earlier, it is basic economy, it has no travel insurance, and the airline did not cancel the flight. The agent repeatedly declined the cancellation and refund, citing policy, and never offered a refund. The expected outcome is met.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "ac8f0466dc3117fc99136321b17696e3dd73460f5a5e54de81df9bdcd3ef2590": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never cancelled reservation SI5UKW. It repeatedly explained that the reservation does not meet the cancellation conditions (booked more than 24 hours ago, basic economy, no insurance, and a change of plans rather than an airline cancellation) and kept the reservation active as booked.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent consistently refused every refund request, including the full refund, the 50% refund, and the 10% partial refund. It also declined the travel voucher and gift card alternatives, stating that no compensation applies to this situation. It never offered any refund amount.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "ec32c38d4fff30671e68fb233261226eab0903d8c52fd3c749eddb35251eaf78": [
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent only quoted the $396 upgrade cost and offered options. The user declined to proceed because it exceeded their $100 limit, and the agent made no reservation update. The cabin change to economy never happened.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The flight change to HAT041 depended on first upgrading to economy. Since the user declined the upgrade, no flight change was made, and the reservation remains on HAT202/HAT232.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "fa1bbe5646a13c0d0d71477f00abc22544db48cd30e48d63618f6851b4a5d1a9": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated the gift card total as $327 ($198 + $129) in its first response and repeated it when the customer asked for the totals again.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated the certificate total as $1,000 ($500 + $250 + $250) in its first response and repeated it later in the conversation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called cancel_reservation with reservation_id K1NW8N after the customer confirmed, and the tool returned status cancelled.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call for Mohamed Silva used JFK to SFO, round_trip, business cabin, HAT023 on 2024-05-26, and HAT204 and HAT100 on 2024-05-28. The booking succeeded as HATHAT.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The Mohamed booking call used exactly these four payment methods and amounts, and the resulting payment history matches.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The Raj Sanchez booking used the same flights and business cabin, with certificate_9984806 for $250 and credit_card_2198526 for $621. The booking succeeded as HATHAU.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The Liam Wilson booking used the same flights and business cabin, with certificate_2765295 for $250 and credit_card_2198526 for $621. The booking succeeded as HATHAV.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "Before booking, the agent stated the Mastercard would be charged $1,286 across the three reservations. After booking, it confirmed the Mastercard ending 9363 was charged $1,286 in total.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "24665b2b1e99b5ece2d406f37400197f698b13226d22b9bd22f94ee6871692ea": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent looked up NQNU5R, saw both flights had already landed, and did not call any cancellation tool. It explained that it could not cancel the reservation and transferred the user to a human agent.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent declined to cancel IFOYYZ, citing that it is a basic economy booking made more than 24 hours ago with no insurance and the airline did not cancel the flights. No cancellation tool was called for this reservation.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the user confirmed and chose the card ending 7334, the agent called update_reservation_flights with cabin set to business, keeping the same flights. The tool result shows the reservation cabin as business with a $1,194 additional payment.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "06aa79fe5158672d932748899046a2b18bd2af3d45496a9a850d86f9c27f7ec1": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated the gift card total as $327 ($198 + $129) in its first response and again when the user asked for the totals a second time.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent stated the certificate total as $1,000 ($500 + $250 + $250) in its first response and repeated it when asked.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent called cancel_reservation with reservation_id K1NW8N after the user explicitly confirmed, and the tool returned status 'cancelled'.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent booked a business round trip JFK to SFO for Mohamed Silva with HAT023 (2024-05-26), HAT204 (2024-05-28) and HAT100 (2024-05-28). The flight combination matches the intended itinerary. The expected outcome lists HAT204 on 2024-05-26, but HAT204 actually departs 2024-05-28 per the search results, so the agent's date is the correct one. The substance matches.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The book_reservation call for Mohamed used exactly these payment methods and amounts: certificate_3765853 $500, gift_card_8020792 $198, gift_card_6136092 $129, credit_card_2198526 $44.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent booked HATHAU for Raj Sanchez with the same business round-trip flights, paying $250 with certificate_9984806 and $621 with credit_card_2198526.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent booked HATHAV for Liam Wilson with the same flights, paying $250 with certificate_2765295 and $621 with credit_card_2198526.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent told the user before booking that the Mastercard total would be $1,286 across the three reservations, and confirmed after booking that the Mastercard ending 9363 was charged $1,286.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "65d50b7c5068502aa3159a15b897ba1ba1c3a580ce9a9f38c1138136307947b6": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "Throughout the conversation the agent never called a cancel function on reservation 3RK2T9. It repeatedly refused to cancel or refund the booking, citing the creation date (May 2, 2024), basic economy fare, lack of insurance, and the airline not having cancelled the flights. The only tool calls were read-only lookups of reservation and user details.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "8d07fafd4166292557dcadf96a665ffb010f32a45fba4752d7e3407d386d5403": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "Throughout the conversation the agent repeatedly refused the insurance-only refund, stating that insurance cannot be refunded or removed separately from an active reservation. It never cancelled the insurance or offered a refund. It did not call any cancellation tool, and its only tool calls were a read-only reservation lookup and a transfer to a human agent.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ],
+ "449275374e3a20893f9a983235685abf84f282ae72735b27132486ff530d107e": [
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never called a cancellation tool for S61CZX. It repeatedly explained that the reservation was ineligible (booked more than 24 hours earlier, economy fare, no airline cancellation, and the reason was not covered by insurance) and left it active and unchanged.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The only total the agent stated was $647, covering the NM1VX1 and H8Q05L upgrades. The agent never mentioned a total in the $1380–$1390 range. KC18K6 was not priced for an upgrade, so no combined figure in that range appears.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the user confirmed, the agent called update_reservation_flights on NM1VX1 with cabin 'business' for both HAT300 and HAT208, and the tool result shows the cabin as business.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": true,
+   "votes_met": 3,
+   "votes_unmet": 0,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "After the user confirmed, the agent called update_reservation_flights on H8Q05L with cabin 'business' for HAT268, and the tool result shows the cabin as business.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  },
+  {
+   "met": false,
+   "votes_met": 0,
+   "votes_unmet": 3,
+   "votes_undetermined": 0,
+   "votes": 3,
+   "reasoning": "The agent never upgraded KC18K6. Its total trip time is 7 hours, which exceeds the 3-hour upgrade threshold, so the agent correctly left it unchanged. No update call was made for KC18K6.",
+   "rule": "judge",
+   "modes": "index/index/index"
+  }
+ ]
+}

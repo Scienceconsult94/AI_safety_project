@@ -186,16 +186,25 @@ def main() -> int:
         s = rescore_per(RESCORE["sonnet"], "sonnet", cfg, ids)
         v2[cfg] = (h, s)
     if all(h is not None and s is not None for h, s in v2.values()):
-        L += ["| configuration | tau2 pass^1 Haiku | tau2 pass^1 Sonnet | gap | tasks 3/3 Haiku | tasks 3/3 Sonnet | sign test p (Sonnet vs Haiku) |", "|---|---|---|---|---|---|---|"]
+        L += ["| configuration | tau2 pass^1 Haiku | tau2 pass^1 Sonnet | gap | tasks 3/3 Haiku | tasks 3/3 Sonnet | Sonnet ahead / behind / equal | sign test p |", "|---|---|---|---|---|---|---|---|"]
         names = {"v1": "stock scorer, tasks v1 (as recorded)", "T2_stock": "stock scorer, tasks v2 (corrected criteria)", "V2": "full v2 (canonical hash, word-boundary check, 3-vote judge on assertions)"}
         for cfg, (h, s) in v2.items():
             pr = paired(h, s, tasks)
             g = tau2_pass(s, tasks, 1) - tau2_pass(h, tasks, 1)
-            L.append(f"| {names[cfg]} | {tau2_pass(h, tasks, 1):.3f} | {tau2_pass(s, tasks, 1):.3f} | {g:+.3f} | {full(h, tasks)[0]} | {full(s, tasks)[0]} | {pr['p_sign']:.3f} |")
+            L.append(f"| {names[cfg]} | {tau2_pass(h, tasks, 1):.3f} | {tau2_pass(s, tasks, 1):.3f} | {g:+.3f} | {full(h, tasks)[0]} | {full(s, tasks)[0]} | {pr['ahead']} / {pr['behind']} / {pr['equal']} | {pr['p_sign']:.3f} |")
         hv1 = v2["v1"][1]
         rec_ok = all(hv1.get(t) == S.get(t) for t in tasks)
         L.append("")
         L.append(f"Replay check: the v1 re-score of the Sonnet run reproduces the recorded rewards on every task: {'yes' if rec_ok else 'NO'}.")
+        L.append("Multiplicity: three configurations are compared on the same conversations, so a p value below 0.05 in one of them is "
+                 "not corrected; with a Bonferroni correction over the three the threshold is 0.017.")
+        diff = []
+        for t in tasks:
+            a1, b1 = sum(v2["v1"][0].get(t, [])), sum(v2["v1"][1].get(t, []))
+            a2, b2 = sum(v2["V2"][0].get(t, [])), sum(v2["V2"][1].get(t, []))
+            if (a1, b1) != (a2, b2):
+                diff.append(f"task {t}: Haiku {a1}→{a2}, Sonnet {b1}→{b2}")
+        L.append("Tasks whose counts change between the stock scorer and full v2: " + ("; ".join(diff) if diff else "none") + ".")
     else:
         L.append("not available yet: run `scripts/v2/rescore.py --set sonnet` from inside tau2-bench")
 
@@ -223,7 +232,8 @@ def main() -> int:
     L.append(f"| P1 | Sonnet's tau2 pass^1 above Haiku's 0.733, likely by +0.05 to +0.15 | {p1h:.3f} → {p1s:.3f} ({d1:+.3f}) | {'held' if d1 > 0 else 'failed'}{'' if 0.05 <= d1 <= 0.15 else ' (outside the expected range)'} |")
     L.append(f"| P2 | the paired sign test does not reach p < 0.05 | p = {pair_all['p_sign']:.3f} ({pair_all['ahead']} ahead, {pair_all['behind']} behind, {pair_all['equal']} equal) | {'held' if pair_all['p_sign'] >= 0.05 else 'failed'} |")
     hn, sn = tau2_pass(H, noop_l, 1), tau2_pass(S, noop_l, 1)
-    L.append(f"| P3 | both close to 3/3 on the {len(noop_l)} no-op tasks; the gap sits in the {len(others)} others | no-op tasks pass^1 {hn:.3f} / {sn:.3f}; others {tau2_pass(H, others, 1):.3f} / {tau2_pass(S, others, 1):.3f}; tasks with a different count: no-op {noop_pr['ahead'] + noop_pr['behind']}, others {oth_pr['ahead'] + oth_pr['behind']} | see the numbers |")
+    p3 = hn >= 0.9 and sn >= 0.9 and (noop_pr['ahead'] + noop_pr['behind']) <= (oth_pr['ahead'] + oth_pr['behind'])
+    L.append(f"| P3 | both close to 3/3 on the {len(noop_l)} no-op tasks; the gap sits in the {len(others)} others | no-op tasks pass^1 {hn:.3f} / {sn:.3f}; others {tau2_pass(H, others, 1):.3f} / {tau2_pass(S, others, 1):.3f}; tasks with a different count: no-op {noop_pr['ahead'] + noop_pr['behind']}, others {oth_pr['ahead'] + oth_pr['behind']} | {'held' if p3 else 'failed'} |")
     L.append(f"| P4 | at least 2 of tasks 7, 32, 44 stay at 0/3 for Sonnet | " + ", ".join(f"{t}: {sum(S.get(t, []))}/3" for t in DEFECT_TASKS) + f" | {'held' if defect_zero >= 2 else 'failed'} |")
     if all(h is not None and s is not None for h, s in v2.values()):
         g1 = tau2_pass(v2['v1'][1], tasks, 1) - tau2_pass(v2['v1'][0], tasks, 1)
@@ -250,7 +260,7 @@ def main() -> int:
     ax.set_xlim(-0.3, 3.3)
     ax.set_xlabel("trials passed out of 3 (stock scorer)")
     ax.set_title("Same exam, two agent models: trials passed per task (20 sampled airline tasks)", fontsize=9.5)
-    ax.legend(loc="lower right", fontsize=8)
+    ax.legend(loc="lower left", fontsize=8)
     fig.text(0.01, 0.005, "Grey rows: tasks an empty conversation passes. * task with a defect found in block 1 (7, 32, 44).", fontsize=7)
     fig.tight_layout(rect=(0, 0.02, 1, 1))
     fig.savefig(OUT / "fig_per_task.png", dpi=150, facecolor="white")
