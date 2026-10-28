@@ -14,6 +14,7 @@ Table 1. Headline shares
 | defective tasks, sampled tasks, agent_run checks excluding 5d (user-simulator deviations) | 6/20 = 0.300 [0.145, 0.519] |
 | tasks whose only confirmed defects come from agent_run checks (new versus the static phase) | 5/20 = 0.250 [0.112, 0.469] |
 | defective tasks, sampled tasks, excluding the documented no-op class (checks 2a, 2b) | 16/20 = 0.800 [0.584, 0.919] |
+| defective tasks, sampled tasks, excluding check 2g (it applies only to the substring communicate scorer the runs selected; the v2.0.0 default is a semantic judge) | 17/20 = 0.850 [0.640, 0.948] |
 | defective tasks, sampled tasks, excluding every defect that derives from the no-op design (checks 2a, 2b, and 2k rows on tasks with noop_pass = 1 in results/static_scan.csv) | 11/20 = 0.550 [0.342, 0.742] |
 | no-op pass, all airline tasks | 23/50 = 0.460 [0.330, 0.596] |
 | no-op pass, sampled tasks | 7/20 = 0.350 [0.181, 0.567] |

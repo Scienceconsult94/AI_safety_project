@@ -26,6 +26,7 @@ CONFIRMED = {"high", "medium"}
 NOOP_CHECKS = ("2a", "2b")  # documented no-op class
 AGENT_RUN = "agent_run"  # method of rows from live runs; static and probe come from the static phase
 USER_SIM_CHECKS = ("5d",)  # user-simulator deviations
+SUBSTRING_CHECKS = ("2g",)  # apply only to the substring communicate scorer the runs selected
 
 
 def load_inputs(root: Path = ROOT):
@@ -255,6 +256,10 @@ def build_markdown(audit, scan, sample, runs=None) -> str:
     k_ex = None if empty else defective_tasks(audit, ids, NOOP_CHECKS)
     L.append("| defective tasks, sampled tasks, excluding the documented no-op class (checks 2a, 2b) | "
              + ("no rows yet" if empty else fmt_share(k_ex, n)) + " |")
+    k_sub = None if empty else defective_tasks(audit, ids, SUBSTRING_CHECKS)
+    L.append("| defective tasks, sampled tasks, excluding check 2g (it applies only to the substring communicate "
+             "scorer the runs selected; the v2.0.0 default is a semantic judge) | "
+             + ("no rows yet" if empty else fmt_share(k_sub, n)) + " |")
     noop_ids = scan.loc[scan["noop_pass"] == 1, "task_id"]
     k_nf = None if empty else defective_tasks_noop_free(audit, ids, noop_ids)
     L.append("| defective tasks, sampled tasks, excluding every defect that derives from the no-op design "

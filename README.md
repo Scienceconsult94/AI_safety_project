@@ -15,7 +15,7 @@ Block 1, the audit of the pinned benchmark (20 sampled tasks of 50, fixed checkl
 | ground-truth agent (sees the reference actions) reaches the target state | 11/16 |
 | blind re-review agreement with the corrected labels | 29/29, Cohen's kappa 1.00 |
 
-The defects concentrate in two categories: scoring validity (12/20 tasks: an end-state hash that depends on list order, a substring check that matches by accident, requirements stated only in free-text assertions that the default scorer never reads, an arithmetic error in a reference answer) and determinism (8/20: the user simulator departs from its scenario).
+The defects concentrate in two categories: scoring validity (12/20 tasks: an end-state hash that depends on list order, a substring check that matches by accident, requirements stated only in free-text assertions that the default scorer never reads, an arithmetic error in a reference answer) and determinism (8/20: the user simulator departs from its scenario). The substring check concerns the substring scorer, which every run here selected; the v2.0.0 default is a semantic judge, and without that check the headline is 17/20.
 
 Block 2, the stricter protocol and the re-run (pre-registered hypotheses H1–H5, one variable at a time):
 
@@ -75,7 +75,7 @@ The same floor on four external agent benchmarks, each scored offline with its o
 
 Original tau-bench retail task 106 is tau2 retail task 105: its only reference action is rejected for an insufficient gift-card balance. The original gives it to an agent that does nothing; tau2 added an assertion that demands the exchange and made it impossible.
 
-Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file and line references and reproduction paths); none has been filed yet.
+Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file and line references and reproduction paths). Texts ready to file for I1 and I3–I16, grouped into nine issues with fourteen reproduction scripts and five patches, are in `upstream/`. Nothing has been filed.
 
 ## What is in the repository
 
@@ -90,7 +90,8 @@ Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file a
 - `scripts/demo/demo.py`: four reproductions for a live demo, offline and without a model call (about 12 seconds).
 - `scripts/`, `scripts/v2/`: every script that produced a number; `scripts/runs/`, `scripts/v2/run_v2.py` and `scripts/retail/run_retail.py` are the paid runs.
 - `results/`, `results/v2/`: recorded runs (`results.json` of every simulation), re-scores, gates, judge votes and raw replies, provenance stamps, probe transcripts.
-- `issues_draft.md`, `cost.md`, `COMMIT_MAP.md`.
+- `ONE_PAGER.md`: the results on one page; `DEMO.md`: the five-minute demo script.
+- `issues_draft.md`, `upstream/` (issue and pull-request texts ready to file, with reproductions and patches; not filed), `cost.md`, `COMMIT_MAP.md`.
 
 Not in the repository: the upstream clone (pinned by commit; clone it next to the scripts as `tau2-bench/`), the API key, and the descriptions of scorer-bypass constructions (kept private by design; the aggregates and the rules are public).
 
@@ -102,4 +103,4 @@ Models used: `claude-haiku-5-5` as the agent, as the user simulator and as the j
 
 ## Limits
 
-Airline: 20 of 50 tasks sampled before any run, and the free-text assertions of the 30 unsampled tasks were not audited. Retail: all 114 tasks, but the rows from its agent runs were not adversarially reviewed. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. The OSWorld-Verified and original WebArena floors are counted from task files, not measured by running the evaluator. Dollar figures are own estimates from token counts at the published per-token prices; they were not reconciled with billing row by row (billing showed about $11 when the own estimate was $10.79).
+Airline: 20 of 50 tasks sampled before any run, and the free-text assertions of the 30 unsampled tasks were not audited. Retail: all 114 tasks, but the rows from its agent runs were not adversarially reviewed. Required information is checked by the substring scorer in every run, not by the v2.0.0 default semantic judge, which was not audited. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. The OSWorld-Verified and original WebArena floors are counted from task files, not measured by running the evaluator. Dollar figures are own estimates from token counts at the published per-token prices; they were not reconciled with billing row by row (billing showed about $11 when the own estimate was $10.79).
