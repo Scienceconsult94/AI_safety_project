@@ -8,7 +8,7 @@ Inputs (results/retail/ unless noted):
   review_batch_*.csv       reviewer verdicts for 1b, 1c, 1d, 2k, 2m, 4a-4e (+ 2h, 2d, 2e where flagged)
   review_ALL.csv           benchmark-level static rows, task_id = ALL
   review_overrides.csv     rows that replace earlier rows after the skeptic review
-  haiku_pass.csv           agent-run rows (agent_rows.py); review_agent.csv, review_agent_overrides.csv: readings of failed trajectories
+  haiku_pass.csv           agent-run rows (agent_rows.py); review_agent.csv, review_agent_overrides*.csv (one per review part): readings of failed trajectories
   review_2j.csv            benchmark-level 2j row written after rejudge.py
   skeptic_verdicts*.csv    task_id,check,skeptic_ok,note
 Output: retail/audit_log.csv (schema.md), then scripts/retail/validate_audit_log.py runs.
@@ -166,7 +166,7 @@ def main() -> int:
     rows += reviewer_rows(sorted(RES.glob("review_batch_*.csv"), key=lambda p: int(p.stem.split("_")[-1]))
                           + [RES / "review_ALL.csv", RES / "review_2j.csv", RES / "haiku_pass.csv", RES / "review_agent.csv"], ids, commit)
     rows += mechanical_overrides(read(RES / "probe_2d.csv"), read(RES / "probe_1g.csv"), read(RES / "probe_1g_pair_order.csv"), commit)
-    rows += reviewer_rows([RES / "review_overrides.csv", RES / "review_agent_overrides.csv"], ids, commit)  # the skeptic's corrections come last
+    rows += reviewer_rows([RES / "review_overrides.csv"] + sorted(RES.glob("review_agent_overrides*.csv")), ids, commit)  # the skeptic's corrections come last
     verdicts = {}
     for p in sorted(RES.glob("skeptic_verdicts*.csv")):
         verdicts.update({(r["task_id"].strip(), r["check"].strip()): r for r in read(p)})
