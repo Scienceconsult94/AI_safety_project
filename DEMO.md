@@ -17,7 +17,7 @@ Audience: someone who knows what an LLM agent is but has not seen tau2-bench. Ev
 ## Script
 
 **0:00–0:30 — The claim.**
-Agent benchmarks are exams, and their pass rates feed leaderboards and deployment decisions. This project checks the exam itself. The target is tau2-bench v2.0.0, a widely used customer-service agent benchmark: airline (20 of 50 tasks sampled) and retail (all 114 tasks). The tools are a fixed checklist of 52 checks, probes with known answers, paid agent runs and an adversarial review of every finding.
+Agent benchmarks are exams, and their pass rates feed leaderboards and deployment decisions. This project checks the exam itself. The target is tau2-bench v2.0.0, a widely used customer-service agent benchmark: airline (20 of 50 tasks sampled) and retail (all 114 tasks). The tools are a fixed checklist of 52 checks, probes with known answers, paid agent runs and an adversarial review of every finding from reading and probes.
 
 **0:30–1:30 — An agent that says nothing.**
 Run `--only 1`. On screen: full reward on 23 of 50 airline tasks for an empty conversation.
