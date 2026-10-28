@@ -1,0 +1,9 @@
+task_id,set,ref_hash,mechanism,variant,variant_hash,hash_differs,replay_errors,reference_replay_errors,detail
+15,rest,c9500f31,split_call,"first call changes cabin, second call the rest",7bb623e0,1,,0,"changed parts: cabin, outbound"
+15,rest,c9500f31,split_call,"first call changes outbound, second call the rest",b5c66933,1,,0,"changed parts: cabin, outbound"
+16,sample,c9500f31,split_call,"first call changes cabin, second call the rest",7bb623e0,1,,0,"changed parts: cabin, outbound"
+16,sample,c9500f31,split_call,"first call changes outbound, second call the rest",b5c66933,1,,0,"changed parts: cabin, outbound"
+17,rest,37ea6df3,bags_vs_cabin,bags before the cabin change basic_economy->economy,edc62003,1,,0,"gold, 1 passenger(s), 3 bags: non-free 1 in the variant, 0 in the reference (policy formula for the reference order: 0)"
+22,sample,37ea6df3,bags_vs_cabin,bags before the cabin change basic_economy->economy,edc62003,1,,0,"gold, 1 passenger(s), 3 bags: non-free 1 in the variant, 0 in the reference (policy formula for the reference order: 0)"
+33,rest,735ba8f1,split_call,"first call changes outbound, second call the rest",e0f444d6,1,,0,"changed parts: outbound, return"
+33,rest,735ba8f1,split_call,"first call changes return, second call the rest",be0bff40,1,,0,"changed parts: outbound, return"

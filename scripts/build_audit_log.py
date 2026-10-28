@@ -121,7 +121,9 @@ def main() -> int:
                           + sorted(RES.glob("review_overrides_rest_*.csv"))
                           + [RES / "haiku_pass.csv", RES / "haiku_pass_rest30.csv",
                              RES / "review_agent.csv", RES / "review_agent_overrides.csv",
-                             RES / "review_agent_rest30.csv", RES / "review_agent_overrides_rest30.csv"], sample, commit)
+                             RES / "review_agent_rest30.csv", RES / "review_agent_overrides_rest30.csv",
+                             # the consistency pass across parts and blocks is read last, so it settles any row it names
+                             RES / "review_overrides_consistency.csv"], sample, commit)
     # skeptic verdicts
     verdicts = {}
     for p in sorted(RES.glob("skeptic_verdicts*.csv")):  # skeptic_verdicts.csv (static phase), skeptic_verdicts_agent.csv (agent runs)
