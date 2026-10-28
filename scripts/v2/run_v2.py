@@ -10,6 +10,9 @@ The dry run also diffs the run Info against the block-1 Info (design review E7).
   --part gt      llm_agent_gt, tasks with reference actions   (16 of the 20), 1 trial
   --part gt3     llm_agent_gt on the three text-fixed tasks 7, 32, 44, 3 trials (H4 by mechanism)
   --part all     pass3, gt, gt3
+  --part pass3_rest30, gt_rest30   the same two runs on the 30 tasks outside the sample (airline_full/PLAN.md, Q5)
+  --part cf32_A, cf32_B            llm_agent_gt on task 32, 10 trials: the v2.1 text, and the same text without
+                                   its payment sentence (airline_full/PLAN.md, Q3)
   --dry-run      build everything, print the plan and the Info diff, call no model
 
 Run from inside tau2-bench:  uv run --no-sync python ../scripts/v2/run_v2.py --part all
@@ -50,7 +53,25 @@ PARTS = {
     "pass3": {"agent": "llm_agent", "trials": 3, "tasks": None, "name": "v2_sample20_pass3_haiku"},
     "gt": {"agent": "llm_agent_gt", "trials": 1, "tasks": None, "name": "v2_sample20_gt_haiku"},
     "gt3": {"agent": "llm_agent_gt", "trials": 3, "tasks": ["7", "32", "44"], "name": "v2_gt3_haiku"},
+    # airline_full/PLAN.md: the rest of the domain (Q5) and the task-32 counterfactual (Q3)
+    "pass3_rest30": {"agent": "llm_agent", "trials": 3, "tasks": "rest", "name": "v2_rest30_pass3_haiku"},
+    "gt_rest30": {"agent": "llm_agent_gt", "trials": 1, "tasks": "rest", "name": "v2_rest30_gt_haiku"},
+    "cf32_A": {"agent": "llm_agent_gt", "trials": 10, "tasks": ["32"], "name": "v2_cf32_A_gt_haiku"},
+    "cf32_B": {"agent": "llm_agent_gt", "trials": 10, "tasks": ["32"], "name": "v2_cf32_B_gt_haiku",
+               "drop_sentence": "Any charge or refund should go to your Visa credit card ending in 1777."},
 }
+BLOCK2_PARTS = ("pass3", "gt", "gt3")  # what --part all runs (block 2 as pre-registered)
+
+
+def drop_sentence(task, sentence: str):
+    """A copy of `task` whose task_instructions lack `sentence` (must occur exactly once); nothing else changes."""
+    instr = task.user_scenario.instructions
+    text = instr.task_instructions
+    assert text.count(sentence) == 1, f"task {task.id}: the sentence must occur exactly once"
+    i = text.index(sentence)
+    new = (text[:i].rstrip(" ") + text[i + len(sentence):].lstrip(" ")).strip()
+    us = task.user_scenario.model_copy(update={"instructions": instr.model_copy(update={"task_instructions": new})})
+    return task.model_copy(update={"user_scenario": us})
 
 
 def make_config(agent: str, task_ids: list[str], trials: int, seed: int, save_to: str) -> TextRunConfig:
@@ -92,16 +113,21 @@ def usage_totals(results) -> dict:
     return tot
 
 
-def run_part(part: str, sample_ids: list[str], seed: int, dry: bool) -> dict:
+def run_part(part: str, sample_ids: list[str], rest_ids: list[str], seed: int, dry: bool) -> dict:
     P = PARTS[part]
-    cfg = make_config(P["agent"], P["tasks"] or sample_ids, P["trials"], seed, P["name"])
+    task_ids = rest_ids if P["tasks"] == "rest" else P["tasks"] or sample_ids
+    cfg = make_config(P["agent"], task_ids, P["trials"], seed, P["name"])
     cfg.validate()
     tasks = _load_run_tasks(cfg)
+    if P.get("drop_sentence"):
+        tasks = [drop_sentence(t, P["drop_sentence"]) for t in tasks]
     save_dir = OUT / P["name"]
     plan = {"part": part, "agent": cfg.agent, "task_set": cfg.task_set_name, "n_tasks": len(tasks), "task_ids": [t.id for t in tasks],
             "num_trials": cfg.num_trials, "seed": cfg.seed, "provenance": s2.provenance(),
             "nl_in_basis": all(any(str(getattr(b, "value", b)) == "NL_ASSERTION" for b in t.evaluation_criteria.reward_basis) for t in tasks),
             "info_diff_vs_block1": info_diff(cfg), "save_dir": str(save_dir.relative_to(ROOT))}
+    if part.startswith("cf32"):
+        plan["task_instructions"] = tasks[0].user_scenario.instructions.task_instructions
     print(json.dumps(plan, indent=1, default=str))
     if dry:
         return plan
@@ -136,13 +162,15 @@ def main() -> int:
     args = ap.parse_args()
     if not args.dry_run:
         s2.require_clean("run_v2")
-    sample_ids = json.loads((ROOT / "sample.json").read_text(encoding="utf-8"))["task_ids"]
+    sample = json.loads((ROOT / "sample.json").read_text(encoding="utf-8"))
+    sample_ids = sample["task_ids"]
+    rest_ids = [t for t in sample["population_ids"] if t not in sample_ids]
     s2.install()
     s2.SWITCHES.set(True, True, True)
     s2.set_judge_cache(ROOT / "results" / "v2" / "judge_cache_live.json")
     tasks_v2.register()
-    for part in (list(PARTS) if args.part == "all" else [args.part]):
-        run_part(part, sample_ids, args.seed, args.dry_run)
+    for part in (BLOCK2_PARTS if args.part == "all" else [args.part]):
+        run_part(part, sample_ids, rest_ids, args.seed, args.dry_run)
     return 0
 
 
