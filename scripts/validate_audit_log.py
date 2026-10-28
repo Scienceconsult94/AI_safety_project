@@ -19,7 +19,7 @@ def main() -> int:
     ids = set(sample["population_ids"]) | {"ALL"}
     commit = sample["bench_commit"]
     created = date.fromisoformat(sample["created"])
-    path = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "audit_log.csv"
+    path = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else ROOT / "audit_log.csv"  # resolve: a relative argument works too
     with open(path, encoding="utf-8", newline="") as fp:
         reader = csv.DictReader(fp)
         header = reader.fieldnames or []
