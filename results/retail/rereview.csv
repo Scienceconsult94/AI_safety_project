@@ -1,0 +1,103 @@
+task_id,check,original_defect,corrected_defect,final_defect,blind_defect,agree_original,agree_corrected,agree_final,not_blind,blind_note,original_note,final_note
+3,1b,1,1,1,1,1,1,1,1,"not an intended negative step: nothing in the scenario sets up a wrong product id. The raising action is a READ, so the evaluator skips it and the scored target still contains the intended write 3_12 ","same artifact as task 2: not an intended negative step; READ, the evaluator continues past it, scored target unaffected; defect under the literal 1b rule, reward impact nil (candidate for downgrade)","same artifact as task 2: not an intended negative step; READ, the evaluator continues past it, scored target unaffected; defect under the literal 1b rule, reward impact nil (candidate for downgrade)"
+3,1d,0,0,0,0,1,1,1,0,all reference values stated or reachable,all values derivable,all values derivable
+3,2k,0,0,0,0,1,1,1,0,,covered; not a DB mirror,covered; not a DB mirror
+3,2m,0,0,0,0,1,1,1,0,general gap left to the benchmark-level row,general gap only (benchmark-level row),general gap only (benchmark-level row)
+3,4a,0,0,0,0,1,1,1,0,"matches 'all pending small tshirt to purple, same size, same v-neck, prefer polyester'",matches,matches
+3,4b,0,0,0,0,1,1,1,0,,compliant,compliant
+3,4c,0,0,0,0,1,1,1,0,no open choice,no open choice,no open choice
+3,4d,0,0,0,0,1,1,1,0,,no mismatch,no mismatch
+3,4e,0,0,0,0,1,1,1,0,consistent,assertion agrees with the DB,assertion agrees with the DB
+3,1g,,,,0,0,0,0,0,single pair: the reuse of the last variant in modify_pending_order_items cannot misassign price or options,,
+7,1d,0,0,0,0,1,1,1,0,"uncertain: first and last name appear only inside the user id token, and policy l.10 forbids authenticating by user id, so the simulator must derive 'Mei Kovacs' from the id; settled by the 1e/1f traj",derivable; name only implied by the user id,derivable; name only implied by the user id
+7,2k,0,0,0,0,1,1,1,0,,nothing unscored,nothing unscored
+7,2m,0,0,0,0,1,1,1,0,"the task turns on the confirmation step, but the hash sees it: without the confirmation the agent exchanges both items in one call and the hash differs",confirmation encoded in the hash; general gap only (benchmark-level row),confirmation encoded in the hash; general gap only (benchmark-level row)
+7,4a,0,0,0,0,1,1,1,0,consistent with the confirmation instruction (policy l.16 makes the confirmation mandatory),matches,matches
+7,4b,0,0,0,0,1,1,1,0,,compliant,compliant
+7,4c,0,0,0,0,1,1,1,0,no open choice; colour changes white -> silver because no low/white variant exists,no open choice,no open choice
+7,4d,0,0,0,0,1,1,1,0,,no mismatch,no mismatch
+7,4e,0,0,0,0,1,1,1,0,,nothing to compare,nothing to compare
+12,1d,0,0,0,0,1,1,1,0,,,
+12,2k,0,0,0,0,1,1,1,0,"the expected transfer is GENERIC, leaves no DB trace and is not asserted; target == initial, so any write-free answer passes (static_scan noop_pass=1; 2a/2b/2c territory, transfer tasks exempt from 2c","Same situation as task 10: the refusal and transfer leave no DB trace and no assertion; target hash = initial hash (noop_reward=1.0), recorded under 2a/2b (P1).","Same situation as task 10: the refusal and transfer leave no DB trace and no assertion; target hash = initial hash (noop_reward=1.0), recorded under 2a/2b (P1)."
+12,2m,0,0,0,0,1,1,1,0,,No process-only requirement is the subject of the task; the transfer gap is the 2a/2b row.,No process-only requirement is the subject of the task; the transfer gap is the 2a/2b row.
+12,4a,0,0,0,0,1,1,1,0,consistent,"Both orders are delivered, so 'cancel' does not apply.","Both orders are delivered, so 'cancel' does not apply."
+12,4b,0,0,0,0,1,1,1,0,compliant,,
+12,4c,0,0,0,0,1,1,1,0,,,
+12,4d,0,0,0,0,1,1,1,0,,,
+12,4e,0,0,0,0,1,1,1,0,,,
+15,1d,0,0,0,0,1,1,1,0,,,
+15,2k,0,0,0,0,1,1,1,0,,,
+15,2m,0,0,0,0,1,1,1,0,,,
+15,4a,0,0,0,0,1,1,1,0,"matches 'size 8, keep the material, waterproof does not matter, PayPal'","'want the material' read as keeping the current material (synthetic); 3613716226 is the only available size-8 variant in any case (2648909398, size 8 leather, is unavailable).","'want the material' read as keeping the current material (synthetic); 3613716226 is the only available size-8 variant in any case (2648909398, size 8 leather, is unavailable)."
+15,4b,0,0,0,0,1,1,1,0,,,
+15,4c,0,0,0,0,1,1,1,0,"one available size-8 variant, so the garbled 'want the material' leaves no choice",,
+15,4d,0,0,0,0,1,1,1,0,,,
+15,4e,0,0,0,0,1,1,1,0,,,
+15,1g,,,,0,0,0,0,0,,,
+21,1d,0,0,0,0,1,1,1,0,the stated '1656367028' is a product id; the scenario sets up this confusion and the item id is reachable,all reference values derivable,all reference values derivable
+21,2k,0,0,0,0,1,1,1,0,,"covered; the assertion checks what the agent says, so it is not a mirror of the DB change (the balance 44.08 is also in the target DB)","covered; the assertion checks what the agent says, so it is not a mirror of the DB change (the balance 44.08 is also in the target DB)"
+21,2m,0,0,0,0,1,1,1,0,DB-visible,the one-modification rule is enforced by the tool and leaves a DB trace,the one-modification rule is enforced by the tool and leaves a DB trace
+21,4a,0,0,0,0,1,1,1,0,"the user says 'exchange' but the order is pending, so modify is the correct tool",reference matches the request,reference matches the request
+21,4b,0,0,0,0,1,1,1,0,,compliant,compliant
+21,4c,1,1,1,0,0,0,0,0,pair order: see 2h,Either order is a correct single call for the same request; only the reference order passes. Not covered by probe_2h. Same tool bug as task 20.,Either order is a correct single call for the same request; only the reference order passes. Not covered by probe_2h. Same tool bug as task 20.
+21,4d,0,0,0,0,1,1,1,0,deliberate: the scenario sets it up as the user's confusion,deliberate user confusion set up by the scenario; not a defect,deliberate user confusion set up by the scenario; not a defect
+21,4e,0,0,0,0,1,1,1,0,consistent (the balance is computed in the validation loop and is unaffected by 1g),assertion agrees with the reference and DB,assertion agrees with the reference and DB
+21,1g,,,1,1,0,0,1,0,"the scored target holds a running-shoe line with a keyboard's price and options, not the state the tool documentation describes",,"tool bug found during the review (PLAN.md deviation); the agent is scored against the corrupted state, so the reward is unaffected when the agent makes the same single call"
+21,2h,,,1,1,0,0,1,0,the scenario does not fix the list order (policy l.84 only requires one call with all items); listing the keyboard first (it precedes the shoes in #W9911714.items) is an equally correct call that scor,,mechanical (probe); a policy-compliant agent that lists the same swaps in another order is scored 0
+24,1d,0,0,0,0,1,1,1,0,,no reference values needed; asserted facts derivable,no reference values needed; asserted facts derivable
+24,2k,0,0,0,0,1,1,1,0,,covered,covered
+24,2m,0,0,0,0,1,1,1,0,DB-visible,the confirmation requirement leaves a DB trace in this task,the confirmation requirement leaves a DB trace in this task
+24,4a,0,0,0,0,1,1,1,0,consistent,reference matches the request,reference matches the request
+24,4b,0,0,0,0,1,1,1,0,,nothing to check,nothing to check
+24,4c,0,0,0,0,1,1,1,0,,no open choice,no open choice
+24,4d,0,0,0,0,1,1,1,0,"a second Sofia Hernandez (sofia_hernandez_8513, zip 78219) exists; name+zip disambiguates",facts match the DB,facts match the DB
+24,4e,0,0,0,0,1,1,1,0,consistent,assertion agrees with the DB,assertion agrees with the DB
+31,1d,0,0,0,0,1,1,1,0,,charger cancel reason 'no longer needed' follows from the stated motive (the charger goes with the lost tablet),charger cancel reason 'no longer needed' follows from the stated motive (the charger goes with the lost tablet)
+31,2k,1,1,1,1,1,1,1,0,the user's tracking-number question is never scored,the requested tracking number is never scored,the requested tracking number is never scored
+31,2m,0,0,0,0,1,1,1,0,,not about a process requirement,not about a process requirement
+31,4a,0,0,0,0,1,1,1,0,consistent: no tool places orders and a lost item cannot be sent back; the scenario calls it a long shot,matches the request; the DB hash checks that #W5481803 stays unchanged,matches the request; the DB hash checks that #W5481803 stays unchanged
+31,4b,0,0,0,0,1,1,1,0,,,
+31,4c,0,0,0,0,1,1,1,0,,,
+31,4d,0,0,0,0,1,1,1,0,"deliberate (forces name+zip), does not block the path",,
+31,4e,0,0,0,0,1,1,1,0,,nothing to contradict,nothing to contradict
+43,1d,0,0,0,0,1,1,1,0,"uncertain: the last name appears only inside the user id token (policy l.10 requires name+zip or email, and the email is unknown); settled by the 1e/1f trajectories",,
+43,2k,0,0,0,0,1,1,1,0,the user's 'still in transit' question (#W7895761 is delivered) is neither in communicate_info nor asserted; outside 2k's definition,"The requested 'still in transit?' answer (#W7895761 status delivered) is in neither communicate_info nor an assertion; outside 2k by definition, logged for completeness","The requested 'still in transit?' answer (#W7895761 status delivered) is in neither communicate_info nor an assertion; outside 2k by definition, logged for completeness"
+43,2m,0,0,0,0,1,1,1,0,,,
+43,4a,0,0,0,0,1,1,1,0,matches 'change your default address to your daughter's address',,
+43,4b,0,0,0,0,1,1,1,0,,,
+43,4c,0,0,0,0,1,1,1,0,,,
+43,4d,0,0,0,0,1,1,1,0,"user belief that the agent is expected to correct, not a DB fact the reference depends on",,
+43,4e,0,0,0,0,1,1,1,0,,,
+43,2e,0,0,0,0,1,1,1,1,"the end-state comparison hides an earlier wrong modify_user_address; it is not a forbidden write order (no write_order row for this task), so it stays with the benchmark-level row",End-state comparison hides an earlier wrong modify_user_address; policy has no once-rule for the user address; generic case covered by the benchmark-level row,End-state comparison hides an earlier wrong modify_user_address; policy has no once-rule for the user address; generic case covered by the benchmark-level row
+77,1d,0,0,0,0,1,1,1,0,,All derivable.,All derivable.
+77,2k,0,0,0,0,1,1,1,0,,Nothing is stated only in communicate_info.,Nothing is stated only in communicate_info.
+77,2m,0,0,0,0,1,1,1,0,,Not about a no-trace process requirement.,Not about a no-trace process requirement.
+77,4a,0,0,0,0,1,1,1,0,matches the fallback in task_instructions (no tool places new orders),Matches.,Matches.
+77,4b,0,0,0,0,1,1,1,0,,Compliant.,Compliant.
+77,4c,0,0,0,0,1,1,1,0,no open choice,No open choice under the plain reading; another scent would not be 'it'.,No open choice under the plain reading; another scent would not be 'it'.
+77,4d,0,0,0,0,1,1,1,0,,No mismatch.,No mismatch.
+77,4e,0,0,0,0,1,1,1,0,,Nothing to contradict.,Nothing to contradict.
+83,1d,0,0,0,0,1,1,1,0,,all reference arguments derivable,all reference arguments derivable
+83,2k,0,0,0,0,1,1,1,0,,nothing stated outside the scored channels,nothing stated outside the scored channels
+83,2m,0,0,0,0,1,1,1,0,,not a process-requirement task,not a process-requirement task
+83,4a,0,0,0,0,1,1,1,0,consistent,reference = the scenario's fallback branch,reference = the scenario's fallback branch
+83,4b,0,0,0,0,1,1,1,0,,compliant,compliant
+83,4c,0,0,0,0,1,1,1,0,,no open choice,no open choice
+83,4d,0,0,0,0,1,1,1,0,,consistent,consistent
+83,4e,0,0,0,0,1,1,1,0,,nothing to contradict,nothing to contradict
+84,1d,0,0,0,0,1,1,1,0,,all reference arguments derivable,all reference arguments derivable
+84,2k,0,0,0,0,1,1,1,0,,nothing stated outside the scored channels,nothing stated outside the scored channels
+84,2m,0,0,0,0,1,1,1,0,DB-visible,confirmation step is visible to the hash in this task,confirmation step is visible to the hash in this task
+84,4a,0,0,0,0,1,1,1,0,consistent; same gold hash as task 83,reference = the final request,reference = the final request
+84,4b,0,0,0,0,1,1,1,0,,compliant,compliant
+84,4c,0,0,0,0,1,1,1,0,,no open choice,no open choice
+84,4d,0,0,0,0,1,1,1,0,,consistent,consistent
+84,4e,0,0,0,0,1,1,1,0,,nothing to contradict,nothing to contradict
+98,1d,0,0,0,0,1,1,1,0,,,
+98,2k,0,0,0,0,1,1,1,0,,,
+98,2m,0,0,0,0,1,1,1,0,"an agent that skips the confirmation and keeps the original card reaches the gold hash; general gap, benchmark-level row",,
+98,4a,0,0,0,0,1,1,1,0,items and cancellation match the request; payment method: see 4c,uncertain: the payment method of 99_0/99_1 may contradict the request ('the other card'); recorded under 4c; it is a 4a mismatch if the agent's confirmation is taken to propose the original card,uncertain: the payment method of 99_0/99_1 may contradict the request ('the other card'); recorded under 4c; it is a 4a mismatch if the agent's confirmation is taken to propose the original card
+98,4b,0,0,0,0,1,1,1,0,,,
+98,4c,1,1,1,1,1,1,1,0,"which card is 'the other' depends on the card the agent proposes; under the default proposal (the original card 8105988) the user's choice is 3951670, a compliant end state that scores 0","an agent that proposes the original card (mastercard 8105988) gets 'the other card' = visa 3951670, a compliant end state that scores 0; the reference fits only an agent that proposes visa first; task","an agent that proposes the original card (mastercard 8105988) gets 'the other card' = visa 3951670, a compliant end state that scores 0; the reference fits only an agent that proposes visa first; task"
+98,4d,0,0,0,0,1,1,1,0,,,
+98,4e,0,0,0,0,1,1,1,0,the reference action ids are labelled 99_* in task 98 (cosmetic),,
