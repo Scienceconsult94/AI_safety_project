@@ -1,4 +1,4 @@
-"""Validate audit_log.csv against schema.md. Pure stdlib; exit 0 when every rule holds."""
+"""Validate audit_log.csv (or the log given as the first argument) against schema.md. Pure stdlib; exit 0 when every rule holds."""
 
 from __future__ import annotations
 
@@ -19,7 +19,8 @@ def main() -> int:
     ids = set(sample["population_ids"]) | {"ALL"}
     commit = sample["bench_commit"]
     created = date.fromisoformat(sample["created"])
-    with open(ROOT / "audit_log.csv", encoding="utf-8", newline="") as fp:
+    path = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "audit_log.csv"
+    with open(path, encoding="utf-8", newline="") as fp:
         reader = csv.DictReader(fp)
         header = reader.fieldnames or []
         rows = list(reader)
@@ -68,7 +69,7 @@ def main() -> int:
             errs.append(f"line {i}: bad date {r['date']!r}")
     for e in errs:
         print("ERR", e)
-    print(f"audit_log.csv: {len(rows)} rows, {len(errs)} errors")
+    print(f"{path.name if path.parent == ROOT else path.relative_to(ROOT).as_posix()}: {len(rows)} rows, {len(errs)} errors")
     return 1 if errs else 0
 
 

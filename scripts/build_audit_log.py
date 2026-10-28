@@ -4,18 +4,26 @@ Inputs (all under results/ unless noted):
   static_scan.csv        mechanical static checks and the empty-trajectory probe (all 50 tasks)
   probe_2h.csv           WRITE-order permutation probe (hash differences only; verdicts in review_2h.csv)
   review_2h.csv          per-task verdicts for check 2h           (task_id,check,defect,severity,evidence,note)
+  review_2j.csv          per-task rows for check 2j (substring vs semantic communicate scorer; probe_2j.py)
   review_batch_*.csv     per-task reviewer verdicts for 1d,2g,2k,4a-4e (same columns)
   review_ALL.csv         benchmark-level static rows, task_id = ALL   (same columns)
   review_overrides.csv   rows that replace reviewer rows after skeptic review (same columns)
   haiku_pass.csv         optional: task_id,check,haiku_pass,defect,severity,evidence,note from agent runs (agent_rows.py)
   review_agent.csv       optional: reviewer verdicts on failed/flipped trajectories (4f, 5c, 5d, 1e triage); read last
   skeptic_verdicts.csv   optional: task_id,check,skeptic_ok,note  (results-skeptic review of medium/high rows)
+Rest tasks (airline_full/PLAN.md): review_overrides_rest_*.csv (adversarial review of the rest static rows),
+  haiku_pass_rest30.csv, review_agent_rest30.csv, review_agent_overrides_rest30.csv; skeptic_verdicts_*rest*.csv.
+  Inputs are filtered by task id, so the same file list serves both logs.
 Output: audit_log.csv (schema.md), then validate_audit_log.py is run.
-Usage (from ==Project):  python -I scripts/build_audit_log.py
+  --ids population: all 50 tasks -> airline_full/audit_log.csv (or --out PATH).
+  A row identical (all columns but date) to the row already in the output file keeps its date; in population mode the
+  root audit_log.csv is a second date source, so the sampled rows keep their block-1 dates.
+Usage (from ==Project):  python -I scripts/build_audit_log.py [--ids sample|population] [--out PATH]
 """
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import subprocess
@@ -98,12 +106,22 @@ def reviewer_rows(paths: list[Path], sample: set[str], commit: str) -> list[dict
 
 
 def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--ids", choices=("sample", "population"), default="sample")
+    ap.add_argument("--out", default=None)
+    a = ap.parse_args()
+    pop = a.ids == "population"
+    out = Path(a.out) if a.out else ROOT / ("airline_full/audit_log.csv" if pop else "audit_log.csv")
+    out = out if out.is_absolute() else ROOT / out
     sample_json = json.loads((ROOT / "sample.json").read_text(encoding="utf-8"))
-    sample, commit = set(sample_json["task_ids"]), sample_json["bench_commit"]
+    sample, commit = set(sample_json["population_ids" if pop else "task_ids"]), sample_json["bench_commit"]
     rows = static_rows(read(RES / "static_scan.csv"), sample, commit)
     rows += reviewer_rows([RES / "review_2h.csv"] + sorted(RES.glob("review_batch_*.csv"))
-                          + [RES / "review_ALL.csv", RES / "review_overrides.csv", RES / "haiku_pass.csv",
-                             RES / "review_agent.csv", RES / "review_agent_overrides.csv"], sample, commit)
+                          + [RES / "review_2j.csv", RES / "review_ALL.csv", RES / "review_overrides.csv"]
+                          + sorted(RES.glob("review_overrides_rest_*.csv"))
+                          + [RES / "haiku_pass.csv", RES / "haiku_pass_rest30.csv",
+                             RES / "review_agent.csv", RES / "review_agent_overrides.csv",
+                             RES / "review_agent_rest30.csv", RES / "review_agent_overrides_rest30.csv"], sample, commit)
     # skeptic verdicts
     verdicts = {}
     for p in sorted(RES.glob("skeptic_verdicts*.csv")):  # skeptic_verdicts.csv (static phase), skeptic_verdicts_agent.csv (agent runs)
@@ -128,15 +146,24 @@ def main() -> int:
         if r["method"] == "agent_run" and not r["haiku_pass"]:
             r["haiku_pass"] = hp.get(t, "")
     rows = sorted(dedup.values(), key=lambda r: (r["task_id"] == "ALL", int(r["task_id"]) if r["task_id"].isdigit() else 0, r["check"]))
-    with open(ROOT / "audit_log.csv", "w", newline="", encoding="utf-8") as fp:
+    # an unchanged row keeps the date it was first logged with
+    prev = {}
+    for p in ([ROOT / "audit_log.csv"] if pop else []) + [out]:
+        prev.update({(r["task_id"], r["check"]): r for r in read(p)})
+    for r in rows:
+        o = prev.get((r["task_id"], r["check"]))
+        if o and all(o.get(c, "") == r[c] for c in COLS if c != "date"):
+            r["date"] = o["date"]
+    with open(out, "w", newline="", encoding="utf-8") as fp:
         w = csv.DictWriter(fp, fieldnames=COLS)
         w.writeheader()
         w.writerows(rows)
     n_def = sum(r["defect"] == "1" for r in rows)
     by_sev = {s: sum(1 for r in rows if r["defect"] == "1" and r["severity"] == s) for s in ("high", "medium", "low")}
     tasks_def = sorted({r["task_id"] for r in rows if r["defect"] == "1" and r["severity"] in ("high", "medium") and r["task_id"] != "ALL"}, key=int)
-    print(f"audit_log.csv: {len(rows)} rows; defect=1 rows: {n_def} {by_sev}; defective sampled tasks: {len(tasks_def)}/20 -> {tasks_def}")
-    return subprocess.call([sys.executable, "-I", str(Path(__file__).resolve().parent / "validate_audit_log.py")])
+    print(f"{out.relative_to(ROOT).as_posix()}: {len(rows)} rows; defect=1 rows: {n_def} {by_sev}; "
+          f"defective tasks: {len(tasks_def)}/{len(sample)} -> {tasks_def}")
+    return subprocess.call([sys.executable, "-I", str(Path(__file__).resolve().parent / "validate_audit_log.py"), str(out)])
 
 
 if __name__ == "__main__":
