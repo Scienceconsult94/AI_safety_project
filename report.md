@@ -141,8 +141,8 @@ Table 4. Retail headline shares (all 114 tasks).
 | quantity | share |
 |---|---|
 | tasks with ≥1 medium/high defect, static reading and probes (every row adversarially reviewed) | 44/114 = 0.39 [0.30, 0.48] |
-| tasks with ≥1 medium/high defect, all checks (the run rows not adversarially reviewed) | 67/114 = 0.59 [0.50, 0.67] |
-| the same, without the rows that attribute the failure to the user simulator (5c, 5d) | 48/114 = 0.42 [0.33, 0.51] |
+| tasks with ≥1 medium/high defect, all checks (the run rows also adversarially reviewed) | 67/114 = 0.59 [0.50, 0.67] |
+| the same, without the rows that attribute the failure to the user simulator (5c, 5d) | 46/114 = 0.40 [0.32, 0.50] |
 | tasks an empty trajectory passes (no write and no assertion) | 6/114 = 0.05 [0.02, 0.11] |
 | blind second pass against the corrected labels | 98/98, kappa 1.00 (97/98, kappa 0.85, against the first reviewers) |
 
@@ -167,13 +167,13 @@ Table 5. Retail runs (`claude-haiku-5-5` as agent and as user simulator; stock s
 | ground-truth agent reaches reward 1.0 | 89/112 = 0.79 [0.71, 0.86] |
 | failures caused by the judge alone (database matched) | 9 of 342 trials; 3 of 112 ground-truth runs |
 
-The reviewers read every failed trajectory and named its cause.
+The reviewers read every failed trajectory and named its cause. A second, adversarial review then checked every run row in four parts, with rules fixed in advance (`results/retail/skeptic_report_agent.md`). It kept 66 of the 74 defect rows as filed, set 7 to 0, moved one from high to medium and raised two from 0.
 
-- **Ground-truth failures.** Of the 23 ground-truth failures, 8 trace to the task or its scoring (1e). In tasks 52 and 105 (high) no compliant conversation reaches the reference; tasks 1, 16, 38, 64, 98 and 100 are medium. Another 12 trace to the user simulator and 3 to agent errors.
-- **Unstable tasks.** The flip traces to the simulator in 23 of the 32 unstable tasks (5c). Deviations from the scenario appear on 36 of the 45 reviewed tasks (5d). The text-mode simulator instructions lack the "do not end the conversation prematurely" rule that the voice-mode instructions carry (I15).
-- **New task-level findings.** The runs added six findings the static reading missed (4f: tasks 0, 1, 15, 31, 34 and 100; I16). Tasks 0 and 1, for example, require "Google Home" compatibility, which appears nowhere in the catalogue.
+- **Ground-truth failures.** Of the 23 ground-truth failures, 8 trace to the task or its scoring (1e). In task 105 (high) no compliant conversation reaches the reference; tasks 1, 16, 38, 52, 64, 98 and 100 are medium. Another 12 trace to the user simulator and 3 to agent errors.
+- **Unstable tasks.** In 24 of the 32 unstable tasks the flip runs through the simulator (5c): in 21 it departs from its scenario, and in 3 it makes a choice the scenario leaves open. Seven flips run through the agent and one through the judge. Departures from the scenario appear on 32 of the 45 reviewed tasks (5d). The text-mode simulator instructions lack the "do not end the conversation prematurely" rule that the voice-mode instructions carry (I15).
+- **New task-level findings.** The runs added four findings the static reading missed (4f: tasks 0, 1, 31 and 100; I16). Tasks 0 and 1, for example, require "Google Home" compatibility, which appears nowhere in the catalogue.
 
-These run rows were not adversarially reviewed. The threshold for 5d differs between reviewer batches, and the rule for "the simulator makes a choice the scenario leaves open" was applied differently (tasks 0, 1 and 98 against 15 and 100). The static-and-probe figure (44/114) carries no such caveat.
+A few rows rest on a reading that could go the other way. In tasks 15, 39, 59 and 91 a loose scenario sentence was read as plain, so the simulator's reading counts as a departure. Task 80's only defect is a refusal the scenario never gives, which a stricter reading of the persona the simulator is given would excuse. Together these readings move the all-checks count to between 66 and 68 of 114, and the count without the simulator rows to at most 50. The static-and-probe figure (44/114) does not depend on them.
 
 ### 5.4 The judge inside the score
 
@@ -312,7 +312,7 @@ Drafted in `issues_draft.md`, none filed:
 | I13 | retail reference defects: a product id that exists nowhere (2, 3, 4), an unreachable exchange (105), a transfer summary from another task (26), a no-op address write (110) |
 | I14 | retail scoring path: an assertion the judge omits counts as met; the strict parser rejects most replies of the substituted judge |
 | I15 | the text-mode user simulator lacks the "do not end prematurely" rule of the voice mode; the simulator is the largest cause of retail failures and flips |
-| I16 | retail task texts a faithful simulator cannot follow to the reference (0, 1, 15, 34, 52, 100) |
+| I16 | retail task texts a faithful simulator cannot follow to the reference (0, 1, 52, 100) |
 
 ## 9. What the numbers mean
 
@@ -320,13 +320,13 @@ Two facts stand side by side. The examination has reproducible faults: a pass fo
 
 The repair itself is instructive. The deterministic faults exist (they fire on perturbed trajectories) but did not flip a single recorded conversation, because the recorded agents happened not to hit them. The one fix that failed, task 32, failed because a sentence added to make the scenario consistent with the reference exposed a second agent error that the pre-test could not see. Both say the same thing: an examination has to be validated as an instrument, with pre-registered expectations and adversarial review, before its numbers are read.
 
-Retail tests the claim on a whole domain (interpretation). Its scorer closes airline's largest hole, yet 44 of 114 tasks still carry an adversarially reviewed defect. The new holes sit in places a leaderboard never shows: a tool that stores the wrong item, an order rule only the policy text enforces, and a judge that would crash the stock parser on most replies. The conversations add a second lesson. In retail, the user simulator decides more outcomes than the reference does: it explains 12 of 23 ground-truth failures and 23 of 32 flips. A pass rate on this benchmark therefore measures the agent and the simulator together. The null-agent table puts the same point in one line: the score of an agent that does nothing ranges from 0% to 46% across domains of one benchmark, depending only on how each domain's exam is built. Four external benchmarks show a similar spread, from 0 to 38% of tasks, and on OSWorld-Verified the refusal floor changed between two versions of the same task files. The strong-vs-weak check adds the consequence for model comparison. On the stock exam a stronger model is ahead on 6 of the 7 tasks where the two differ, yet the difference is not significant, because 9 of the 20 tasks tie both models by construction.
+Retail tests the claim on a whole domain (interpretation). Its scorer closes airline's largest hole, yet 44 of 114 tasks still carry a defect found by reading and probes alone, and 67 counting the runs, all adversarially reviewed. The new holes sit in places a leaderboard never shows: a tool that stores the wrong item, an order rule only the policy text enforces, and a judge that would crash the stock parser on most replies. The conversations add a second lesson. In retail, the user simulator decides more outcomes than the reference does: it explains 12 of 23 ground-truth failures, and 24 of 32 flips run through it. A pass rate on this benchmark therefore measures the agent and the simulator together. The null-agent table puts the same point in one line: the score of an agent that does nothing ranges from 0% to 46% across domains of one benchmark, depending only on how each domain's exam is built. Four external benchmarks show a similar spread, from 0 to 38% of tasks, and on OSWorld-Verified the refusal floor changed between two versions of the same task files. The strong-vs-weak check adds the consequence for model comparison. On the stock exam a stronger model is ahead on 6 of the 7 tasks where the two differ, yet the difference is not significant, because 9 of the 20 tasks tie both models by construction.
 
 ## 10. Limits
 
 - **Scope.** Two domains of one benchmark: airline with all 50 tasks (20 sampled in block 1, the other 30 in Section 13) and retail with all 114 tasks.
 - **Models.** One agent model and one simulator model, and a judge from the same family. In retail that judge replaces the stock OpenAI judge, so the parser figures describe the substitution.
-- **Unreviewed rows.** The retail rows from the runs (1e, 4f, 5c, 5d) were not adversarially reviewed, and their 5d threshold differs between reviewer batches.
+- **Run-row readings.** The retail rows from the runs passed their own adversarial review, in four parts with rules fixed in advance. A few rows rest on readings that could go the other way; together they move the all-checks count to between 66 and 68 of 114.
 - **Reading of the bag allowance.** Rows 17/2h and 22/2h hold only if the free-bag allowance follows the cabin the reservation has when the bags are added. If the final cabin governed, both would be 0, and the counts from reading and probes would be 13/20 (sample), 22/30 (rest) and 35/50 (all); the headline counts would not change.
 - **Reviewers.** Every reviewer, adversarial reviewer and reader in this audit was a language model, not a person, so agreement figures measure agreement between model reviewers. Deviations during the airline review are listed in Section 13.6.
 - **One reading for the whole audit.** An upgrade the user never asked for, which would make a refused cancellation or change possible, is read as an unrequested write in both blocks. The opposite reading would add seven rest rows and raise the whole-domain count to at least 45/50.
@@ -348,7 +348,6 @@ Not done, candidates for a next iteration:
 - **Strong vs weak, more power.** Repeat the comparison on all 50 airline tasks or with a second run per model, so that a gap of the observed size can reach significance.
 - **External null agent, remaining runs.** Run the do-nothing agent on OSWorld-Verified (needs its virtual machine) and on the original WebArena (needs the live sites).
 - **External defects.** The defects found in tau-bench (six retail tasks whose single reference write is rejected) and in WebArena-Verified (tasks 319, 699, 700, 811 and the 10 map tasks) are recorded in `results/null_agent/external.md`; no issue text is drafted for them.
-- **Retail run rows.** Give the retail run rows an adversarial pass.
 - **Upstream issues.** Texts for I1 and I3–I16 are ready in `upstream/` (nine issues, five patches, fourteen reproductions, each patch checked against the pinned clone). None has been filed; which to file is still to be decided.
 
 ## 13. The whole airline domain: the other 30 tasks

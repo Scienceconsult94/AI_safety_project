@@ -1,12 +1,12 @@
-# retail task data: reference defects (tasks 2-4, 18, 26, 64, 105, 110; action ids from 95 on) and task texts a faithful user cannot follow to the reference (tasks 0, 1, 15, 34, 52, 100)
+# retail task data: reference defects (tasks 2-4, 18, 26, 64, 105, 110; action ids from 95 on) and task texts a faithful user cannot follow to the reference (tasks 0, 1, 52, 100)
 
 | field | value |
 |---|---|
 | audit ids | I13, I16 |
 | type | task data |
 | domain | retail |
-| severity | 105 high; 52 high (run evidence) and medium (static); 0, 1, 15, 18, 34, 100, 110 medium; 2-4, 26, 64 low; action ids cosmetic |
-| status | draft, not filed |
+| severity | 105 high; 0, 1, 18, 52, 100, 110 medium; 2-4, 26, 64 low; action ids cosmetic |
+| status | draft, not filed; corrected on 2026-10-28 after the adversarial review of the run rows: the failures of tasks 15 and 34 are attributed to the simulator, not to the task text, and task 52 is medium |
 
 ## Summary
 
@@ -229,8 +229,8 @@ I16, task texts (the run observations come from the audit's runs with `claude-ha
 ## Impact on scores
 
 - Task 105 is unpassable as written (target = unchanged database, assertion = exchange done). In the runs, all 4 conversations (3 trials and the ground-truth run) matched the unchanged target and failed the assertion.
-- Tasks 52 and 105 are the two tasks where no compliant conversation reaches the reference (high). Together with tasks 1, 16, 38, 64, 98 and 100, they are the 8 of 23 ground-truth-agent failures that the audit traces to the task or its scoring (run rows, not adversarially reviewed).
-- Tasks 0, 1, 15, 34 and 100 fail or flip depending on how the simulator resolves the gap, so they add run-to-run variance that is not about the agent.
+- Task 105 is the one task where no compliant conversation reaches the reference (high). Task 52 is reachable only if the user lets "maximum zoom" win over "all other specifications the same", which the scenario does not settle (medium). Together with tasks 1, 16, 38, 64, 98 and 100, they are the 8 of 23 ground-truth-agent failures that the audit traces to the task or its scoring.
+- Tasks 0, 1 and 100 fail or flip depending on how the simulator resolves the gap, so they add run-to-run variance that is not about the agent. The adversarial review of the run rows attributes the failures of tasks 15 and 34 to the simulator; for task 15 this rests on reading "want the material" as "keep the material".
 
 ## Suggested fix
 

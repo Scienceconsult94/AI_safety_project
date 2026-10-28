@@ -12,7 +12,7 @@ Target: `sierra-research/tau2-bench`, tag `v2.0.0`, commit `989d3285ae669e495033
 | 4 | I1 | docs say the runner defaults to `ALL_WITH_NL_ASSERTIONS`; the code defaults to `ALL` | docs | all (visible in airline) | low | `issue_I1_docs_default_evaluation_type.md` | draft, not filed |
 | 5 | I5 | default `temperature: 0.0` rejected by current Anthropic models; failed run reported as success; agent cost always `None` | bug (reporting) | all | medium | `issue_I5_default_temperature_and_run_reporting.md` | draft, not filed |
 | 6 | I4, I6, I8 | airline task data: accidental substring matches (3, 23), wrong required total (7), budget clause that forbids the reference (32) | task data | airline | I4 medium, I6 medium, I8 high | `issue_I4_I6_I8_airline_task_data.md` | draft, not filed |
-| 7 | I13, I16 | retail task data: reference defects (2-4, 18, 26, 64, 105, 110, action ids) and task texts a faithful user cannot follow (0, 1, 15, 34, 52, 100) | task data | retail | 105 and 52 high; others medium to cosmetic | `issue_I13_I16_retail_task_data.md` | draft, not filed |
+| 7 | I13, I16 | retail task data: reference defects (2-4, 18, 26, 64, 105, 110, action ids) and task texts a faithful user cannot follow (0, 1, 52, 100) | task data | retail | 105 high; others medium to cosmetic | `issue_I13_I16_retail_task_data.md` | draft, not filed |
 | 8 | I3 | DB hash depends on list order and on generated reservation ids | scoring validity | airline (hash shared by all domains) | medium | `issue_I3_db_hash_order_and_generated_ids.md` | draft, not filed |
 | 9 | I7, I15 | text-mode simulator guidelines lack three rules of the voice guidelines; simulator deviations decide many failures and flips | simulator | all text-mode runs | medium | `issue_I7_I15_user_simulator_text_mode.md` | draft, not filed |
 
@@ -49,4 +49,4 @@ Their output, as pasted into the issues, was produced on the unpatched clone at 
 
 - English, impersonal; model ids appear only where a run used them.
 - Evidence paths in the issues are paths in the audit repository; code references are file and line at the pinned commit.
-- Numbers come from the audit's result files named in each issue. Run-based retail findings that were not adversarially reviewed are marked as such where they are cited.
+- Numbers come from the audit's result files named in each issue. Run-based retail findings are cited as they stand after the adversarial review of the run rows (`results/retail/skeptic_report_agent.md`, 2026-10-28).

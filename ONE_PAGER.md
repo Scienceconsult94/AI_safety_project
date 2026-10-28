@@ -11,7 +11,7 @@
 | airline tasks with a confirmed medium- or high-severity defect | 18 of 20 sampled (17 without the one finding that depends on the non-default scorer setting the runs selected) |
 | airline, whole domain: tasks with a confirmed medium- or high-severity defect | 44 of 50 (18 of 20 sampled, 26 of 30 others) |
 | airline tasks passed by an empty conversation | 23 of 50 |
-| retail tasks with an adversarially reviewed defect | 44 of 114 (67 counting the unreviewed rows from the agent runs) |
+| retail tasks with an adversarially reviewed defect | 44 of 114 from reading and probes; 67 counting the rows from the agent runs |
 | retail tasks accepting a policy-forbidden order of changes | 14 |
 | retail tasks hit by a tool that stores the wrong item | 5 |
 | retail failures of an agent given the answer key, explained by the model playing the customer | 12 of 23 |
@@ -33,4 +33,4 @@
 
 **What is in the repository.** Full report (`report.md`), audit logs, an offline demo (about 12 seconds, no model call; `scripts/demo/demo.py`, script in `DEMO.md`), and 16 issue drafts for the maintainers with reproduction scripts and patches (`issues_draft.md`, `upstream/`; nothing filed).
 
-**Limits.** One benchmark audited in depth; retail rows from agent runs not adversarially reviewed; reviewers and adversarial reviewers are language models, not people; one run per model in the strong-vs-weak comparison; three of nine external rows counted from task files rather than measured.
+**Limits.** One benchmark audited in depth; reviewers and adversarial reviewers are language models, not people; one run per model in the strong-vs-weak comparison; three of nine external rows counted from task files rather than measured.

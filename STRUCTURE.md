@@ -93,7 +93,7 @@ Each sampled task is checked against a fixed checklist (static reading, mechanic
 │   ├── PLAN.md                 pre-registration (question, protocol, predictions P1-P7, budget) and dated Deviations
 │   ├── checklist.md            how each check of checklist.md is read in retail (judge-gated reward, no clock, 2m added)
 │   ├── sample.json             the 114 task ids (the whole split `base`) and the pinned bench commit
-│   ├── review_brief.md, skeptic_brief.md, review_agent_brief.md   instructions given to the reviewers, the adversarial reviewer and the trajectory reviewers
+│   ├── review_brief.md, skeptic_brief.md, review_agent_brief.md, skeptic_brief_agent.md, skeptic_brief_agent_parts.md   instructions given to the reviewers, the adversarial reviewer, the trajectory reviewers and the adversarial review of the run rows (the single pass stopped before any output; the four-part pass ran)
 │   ├── audit_log.csv           one row per (task_id, check) for retail (same schema as the root audit_log.csv)
 │   ├── summary_numbers.md, fig_defects_retail.png   headline numbers, Tables 1-8 (generated)
 │   └── comparison.md, fig_comparison.png            airline beside retail (generated)

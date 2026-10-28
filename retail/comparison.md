@@ -5,15 +5,15 @@ Same pinned benchmark (`989d3285ae669e49503324bdb9981bf14fccedeb`), same checkli
 | quantity | airline (20 of 50, sampled) | retail (all 114) |
 |---|---|---|
 | tasks with ≥1 medium/high defect (all checks) | 18/20 = 0.900 [0.699, 0.972] | 67/114 = 0.588 [0.496, 0.674] |
-| … all checks without the simulator-attributed rows (5c, 5d) | 14/20 = 0.700 [0.481, 0.855] | 48/114 = 0.421 [0.334, 0.513] |
-| … static and probe checks only | 13/20 = 0.650 [0.433, 0.819] | 44/114 = 0.386 [0.302, 0.478] |
+| … all checks without the simulator-attributed rows (5c, 5d) | 15/20 = 0.750 [0.531, 0.888] | 46/114 = 0.404 [0.318, 0.495] |
+| … static and probe checks only | 14/20 = 0.700 [0.481, 0.855] | 44/114 = 0.386 [0.302, 0.478] |
 | … agent_run checks only | 9/20 = 0.450 [0.258, 0.658] | 41/114 = 0.360 [0.277, 0.451] |
 | … excluding the no-op class (2a, 2b[, 2c]) | 16/20 = 0.800 [0.584, 0.919] | 61/114 = 0.535 [0.444, 0.624] |
 | category 1 Solvability | 1/20 = 0.050 [0.009, 0.236] | 14/114 = 0.123 [0.075, 0.196] |
-| category 2 Scoring validity | 12/20 = 0.600 [0.387, 0.781] | 31/114 = 0.272 [0.199, 0.360] |
+| category 2 Scoring validity | 13/20 = 0.650 [0.433, 0.819] | 31/114 = 0.272 [0.199, 0.360] |
 | category 3 Isolation and leaks | 0/20 = 0.000 [0.000, 0.161] | 0/114 = 0.000 [0.000, 0.033] |
-| category 4 Specification clarity | 4/20 = 0.200 [0.081, 0.416] | 23/114 = 0.202 [0.138, 0.285] |
-| category 5 Determinism | 8/20 = 0.400 [0.219, 0.613] | 36/114 = 0.316 [0.238, 0.406] |
+| category 4 Specification clarity | 4/20 = 0.200 [0.081, 0.416] | 21/114 = 0.184 [0.124, 0.265] |
+| category 5 Determinism | 8/20 = 0.400 [0.219, 0.613] | 34/114 = 0.298 [0.222, 0.388] |
 | category 6 Reporting | 0/20 = 0.000 [0.000, 0.161] | 0/114 = 0.000 [0.000, 0.033] |
 | empty answer gets full reward (whole domain) | 23/50 = 0.460 [0.330, 0.596] | 6/114 = 0.053 [0.024, 0.110] |
 | agent pass^1 (claude-haiku-5-5; first 1 trial(s) all reward 1.0) | 16/20 = 0.800 [0.584, 0.919] | 93/114 = 0.816 [0.735, 0.876] |

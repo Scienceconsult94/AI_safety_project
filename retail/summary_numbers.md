@@ -10,31 +10,31 @@ Table 1. Headline shares
 |---|---|
 | defective tasks (≥1 medium/high defect row, all checks) | 67/114 = 0.588 [0.496, 0.674] |
 | defective tasks, static and probe checks only (method ≠ agent_run; every row passed the adversarial review) | 44/114 = 0.386 [0.302, 0.478] |
-| defective tasks, all checks without the simulator-attributed rows (5c, 5d) | 48/114 = 0.421 [0.334, 0.513] |
+| defective tasks, all checks without the simulator-attributed rows (5c, 5d) | 46/114 = 0.404 [0.318, 0.495] |
 | defective tasks, agent_run checks only (1e, 4f, 5c, 5d, 5e, 5f) | 41/114 = 0.360 [0.277, 0.451] |
-| defective tasks, agent_run checks excluding 5d (user-simulator deviations) | 33/114 = 0.289 [0.214, 0.379] |
-| defective tasks, agent_run checks excluding 5c and 5d (simulator-attributed rows) | 12/114 = 0.105 [0.061, 0.175] |
+| defective tasks, agent_run checks excluding 5d (user-simulator deviations) | 32/114 = 0.281 [0.206, 0.369] |
+| defective tasks, agent_run checks excluding 5c and 5d (simulator-attributed rows) | 10/114 = 0.088 [0.048, 0.154] |
 | tasks whose only defects come from agent_run checks | 23/114 = 0.202 [0.138, 0.285] |
 | defective tasks, excluding the no-op class (checks 2a, 2b, 2c) | 61/114 = 0.535 [0.444, 0.624] |
 | defective tasks, excluding every defect that derives from the no-op design (2a, 2b, 2c, and 2k on no-op tasks) | 61/114 = 0.535 [0.444, 0.624] |
 | no-op pass by construction (empty answer = full reward), all tasks | 6/114 = 0.053 [0.024, 0.110] |
 | no-op verdict left to the judge (DB unchanged, assertions exist) | 5/114; the judge failed all of them in the probe |
-| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | 75 |
+| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | 1 |
 
-Verification status: the static and probe rows passed the adversarial review (results/retail/skeptic_report.md). The agent-run rows (1e, 4f, 5c, 5d per task) are as filed by five trajectory reviewers and were not adversarially reviewed (retail/PLAN.md, deviation of 2026-10-28); every share that includes them carries that caveat.
+Verification status: the static and probe rows passed the adversarial review (results/retail/skeptic_report.md). The agent-run rows (1e, 4f, 5c, 5d and 2j per task) passed a second adversarial review in four parts (results/retail/skeptic_report_agent_p1.md to _p4.md; retail/PLAN.md, deviations of 2026-10-28).
 
-Table 2. Tasks with ≥1 defect (high/medium, all checks; agent-run rows not adversarially reviewed), by category
+Table 2. Tasks with ≥1 defect (high/medium, all checks), by category
 
 | category | share of all tasks |
 |---|---|
 | 1 Solvability | 14/114 = 0.123 [0.075, 0.196] |
 | 2 Scoring validity | 31/114 = 0.272 [0.199, 0.360] |
 | 3 Isolation and leaks | 0/114 = 0.000 [0.000, 0.033] |
-| 4 Specification clarity | 23/114 = 0.202 [0.138, 0.285] |
-| 5 Determinism | 36/114 = 0.316 [0.238, 0.406] |
+| 4 Specification clarity | 21/114 = 0.184 [0.124, 0.265] |
+| 5 Determinism | 34/114 = 0.298 [0.222, 0.388] |
 | 6 Reporting | 0/114 = 0.000 [0.000, 0.033] |
 
-Table 2b. Defect rows by check (high/medium, all methods; 1e, 4f, 5c, 5d come from the runs and were not adversarially reviewed)
+Table 2b. Defect rows by check (high/medium, all methods; 1e, 4f, 5c, 5d come from the runs)
 
 | check | defect rows (high/medium) | tasks |
 |---|---|---|
@@ -55,9 +55,9 @@ Table 2b. Defect rows by check (high/medium, all methods; 1e, 4f, 5c, 5d come fr
 | 4c | 11 | 11/114 |
 | 4d | 3 | 3/114 |
 | 4e | 2 | 2/114 |
-| 4f | 6 | 6/114 |
-| 5c | 23 | 23/114 |
-| 5d | 36 | 36/114 |
+| 4f | 4 | 4/114 |
+| 5c | 24 | 24/114 |
+| 5d | 32 | 32/114 |
 
 Benchmark-level defect rows (task_id = ALL): 1g (medium), 2e (medium), 2j (medium), 2m (medium), 5b (low), 6d (low), 6f (low), 6g (low)
 

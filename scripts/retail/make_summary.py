@@ -204,15 +204,15 @@ def build_markdown(audit, scan, sample, runs) -> str:
     L.append(f"| no-op verdict left to the judge (DB unchanged, assertions exist) | {needs}/{n}; the judge failed all of them in the probe |")
     L.append(f"| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | {unverified_rows(audit)} |")
     L += ["", "Verification status: the static and probe rows passed the adversarial review (results/retail/skeptic_report.md). "
-          "The agent-run rows (1e, 4f, 5c, 5d per task) are as filed by five trajectory reviewers and were not adversarially reviewed "
-          "(retail/PLAN.md, deviation of 2026-10-28); every share that includes them carries that caveat."]
+          "The agent-run rows (1e, 4f, 5c, 5d and 2j per task) passed a second adversarial review in four parts "
+          "(results/retail/skeptic_report_agent_p1.md to _p4.md; retail/PLAN.md, deviations of 2026-10-28)."]
     notes = rule_of_three(noop, n, "no-op pass") + rule_of_three(k_def, n, "defective tasks") + rule_of_three(k_ex, n, "defective tasks excluding the no-op class")
     conf = per_category(audit, ids)
-    L += ["", "Table 2. Tasks with ≥1 defect (high/medium, all checks; agent-run rows not adversarially reviewed), by category", "", "| category | share of all tasks |", "|---|---|"]
+    L += ["", "Table 2. Tasks with ≥1 defect (high/medium, all checks), by category", "", "| category | share of all tasks |", "|---|---|"]
     for c, name in CATEGORIES.items():
         L.append(f"| {c} {name} | {fmt_share(conf[c], n)} |")
         notes += rule_of_three(conf[c], n, f"category {c} {name}")
-    L += ["", "Table 2b. Defect rows by check (high/medium, all methods; 1e, 4f, 5c, 5d come from the runs and were not adversarially reviewed)", "", "| check | defect rows (high/medium) | tasks |", "|---|---|---|"]
+    L += ["", "Table 2b. Defect rows by check (high/medium, all methods; 1e, 4f, 5c, 5d come from the runs)", "", "| check | defect rows (high/medium) | tasks |", "|---|---|---|"]
     L += [f"| {c} | {r} | {t}/{n} |" for c, r, t in rows_per_check(audit, ids)]
     a = normalize(audit)
     all_rows = a[(a["task_id"] == "ALL") & (a["defect"] == 1)]
@@ -233,9 +233,9 @@ def build_markdown(audit, scan, sample, runs) -> str:
 def make_figure(audit, scan, sample, runs, out: Path):
     ids, n = sample["task_ids"], len(sample["task_ids"])
     bars = [("Empty answer gets full score\n(no-op pass, by construction)", int(scan["noop_pass"].sum()), n),
-            ("≥1 defect (all checks;\nrun rows not adversarially reviewed)", defective_tasks(audit, ids), n),
+            ("≥1 defect (all checks)", defective_tasks(audit, ids), n),
             ("≥1 defect without the\nsimulator rows (5c, 5d)", defective_tasks(audit, ids, ("5c", "5d")), n),
-            ("≥1 confirmed defect\n(static and probe checks, reviewed)", defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,)), n)]
+            ("≥1 defect, static and\nprobe checks only", defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,)), n)]
     conf = per_category(audit, ids)
     bars += [(f"category {c}: {name}", conf[c], n) for c, name in CATEGORIES.items()]
     if runs is not None:

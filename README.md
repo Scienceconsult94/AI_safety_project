@@ -50,8 +50,8 @@ Retail, the whole domain (all 114 tasks, pre-registered in `retail/PLAN.md`):
 | quantity | value |
 |---|---|
 | tasks with at least one medium/high defect, static reading and probes (every row adversarially reviewed) | 44/114 = 0.39 [0.30, 0.48] |
-| the same, all checks including the agent runs (run rows not adversarially reviewed) | 67/114 = 0.59 [0.50, 0.67] |
-| all checks without the rows that blame the user simulator | 48/114 = 0.42 [0.33, 0.51] |
+| the same, all checks including the agent runs (run rows also adversarially reviewed) | 67/114 = 0.59 [0.50, 0.67] |
+| all checks without the rows that blame the user simulator | 46/114 = 0.40 [0.32, 0.50] |
 | tasks an agent passes by doing nothing | 6/114 = 0.05 |
 | agent solve rate (claude-haiku-5-5), tasks passed 3/3; ground-truth agent | 75/114 = 0.66; 89/112 |
 | judge replies the stock strict parser would reject (judge substituted by claude-haiku-5-5) | 103/169 = 0.61 |
@@ -60,7 +60,7 @@ Retail's judged assertions close most of airline's pass for doing nothing. The w
 
 - **Order rule.** 14 tasks reach the target through an order of changes that the policy forbids and the tools accept.
 - **Tool bug.** One tool stores the wrong item in 5 tasks, so the score depends on the order of items inside a call.
-- **User simulator.** It explains 12 of the 23 ground-truth failures and the flips of 23 of the 32 unstable tasks.
+- **User simulator.** It explains 12 of the 23 ground-truth failures, and the flips of 24 of the 32 unstable tasks run through it (21 departures from its scenario, 3 choices the scenario leaves open).
 
 Strong vs weak (pre-registered in `strong_vs_weak/PLAN.md`): the same 20 airline tasks with `claude-sonnet-5-5` as the agent.
 
@@ -122,4 +122,4 @@ Models used: `claude-haiku-5-5` as the agent, as the user simulator and as the j
 
 ## Limits
 
-Airline: all 50 tasks; 20 were sampled before any run (block 1), and the other 30 were audited afterwards with the same pipeline (report Section 13). Retail: all 114 tasks, but the rows from its agent runs were not adversarially reviewed. Required information is checked by the substring scorer in every run, not by the v2.0.0 default semantic judge; on the recorded airline runs the two agree on all 58 verdicts (check 2j). Every reviewer, adversarial reviewer and reader was a language model, not a person. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. The OSWorld-Verified and original WebArena floors are counted from task files, not measured by running the evaluator. Dollar figures are own estimates from token counts at the published per-token prices; they were not reconciled with billing row by row (billing showed about $11 when the own estimate was $10.79).
+Airline: all 50 tasks; 20 were sampled before any run (block 1), and the other 30 were audited afterwards with the same pipeline (report Section 13). Retail: all 114 tasks; the rows from its agent runs passed their own adversarial review, and a few rest on readings that could go the other way (report Section 5). Required information is checked by the substring scorer in every run, not by the v2.0.0 default semantic judge; on the recorded airline runs the two agree on all 58 verdicts (check 2j). Every reviewer, adversarial reviewer and reader was a language model, not a person. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. The OSWorld-Verified and original WebArena floors are counted from task files, not measured by running the evaluator. Dollar figures are own estimates from token counts at the published per-token prices; they were not reconciled with billing row by row (billing showed about $11 when the own estimate was $10.79).
