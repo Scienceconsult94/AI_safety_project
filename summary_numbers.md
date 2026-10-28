@@ -18,7 +18,7 @@ Table 1. Headline shares
 | defective tasks, sampled tasks, excluding every defect that derives from the no-op design (checks 2a, 2b, and 2k rows on tasks with noop_pass = 1 in results/static_scan.csv) | 11/20 = 0.550 [0.342, 0.742] |
 | no-op pass, all airline tasks | 23/50 = 0.460 [0.330, 0.596] |
 | no-op pass, sampled tasks | 7/20 = 0.350 [0.181, 0.567] |
-| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | 1 |
+| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | 0 |
 
 Table 2. Sampled tasks with ≥1 confirmed defect (high/medium), by category
 

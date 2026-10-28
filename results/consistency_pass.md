@@ -14,7 +14,7 @@ Done after the four parts of the adversarial review of the 30 rest tasks (2k, or
 - **Task 22** has the same reservation (FQ8APE), the same three reference writes and the same mechanism as task 17.
   - The block-1 probe could not see the path. Batch 3 had flagged it as "uncertain" in its 22/4c note.
   - In 22 the user lists the upgrade before the bags; in 17 the bags come first and "in this order". So in 22 the failing path needs the agent to take the bags first. Severity is medium, as on every 2h row.
-  - The row has no adversarial verdict of its own (`skeptic_ok` empty). The order part stated that 22 "would be 1" under its reading of 17 (`results/skeptic_report_rest_order.md`, open question 2).
+  - A separate adversarial review, run after this pass, confirmed the row (`results/skeptic_verdicts_consistency.csv`, `results/skeptic_report_consistency.md`). It holds under the write-time reading of the allowance, as 17/2h does. Under the final-cabin reading both rows would be 0, and the counts from reading and probes would be 13/20, 22/30 and 35/50.
   - Effect on block 1: the sample headline stays 18/20, because 22 was already defective through 5d. The static-only count goes from 13/20 to 14/20, and sample 2h rows from 3 to 4.
 - **Tasks 15 and 16** (the same reservation and reference) state one change. Splitting it would put in an intermediate state that the user never asked for: first a downgrade on the old flights, then the flight change. Both stay 0. Block 1 has no 2h row for 16, a single-write task, and the order part reached the same reading for 15.
 

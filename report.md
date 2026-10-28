@@ -12,7 +12,7 @@ An agent benchmark is an examination: a task text, a hidden reference, a scorer.
 
 **Sample.** 20 of 50 tasks, drawn with a fixed seed before any run (`sample.json`). Static scans that cost nothing were run on all 50. Section 13 audits the other 30 tasks with the same pipeline.
 
-**Verdicts.** One row per task and check in `audit_log.csv`, validated against `schema.md`. Every medium or high defect row went through an adversarial review that tried to overturn it; 11 of 15 contested rows survived, 4 were withdrawn. One sampled row was added later, when the audit was extended to all 50 tasks: task 22, check 2h, set by the consistency pass for the same reason as task 17 (Section 13); it has no adversarial verdict of its own. Three tasks were re-labelled blind by a second reader: 27/29 agreement with the original labels, 29/29 with the corrected ones.
+**Verdicts.** One row per task and check in `audit_log.csv`, validated against `schema.md`. Every medium or high defect row went through an adversarial review that tried to overturn it; 11 of 15 contested rows survived, 4 were withdrawn. One sampled row was added later, when the audit was extended to all 50 tasks: task 22, check 2h, set by the consistency pass for the same reason as task 17 (Section 13). A separate adversarial review then confirmed it, under the same reading of the free-bag allowance as task 17. Three tasks were re-labelled blind by a second reader: 27/29 agreement with the original labels, 29/29 with the corrected ones.
 
 **Agent runs.** The audited model, `claude-haiku-5-5`, as agent and as user simulator, 3 trials per task on the 20 sampled tasks; the ground-truth agent (`llm_agent_gt`, which sees the reference actions) on the 16 tasks that have reference actions. The runner settings are recorded in the results files and were reused unchanged in block 2. Two of them depart from the v2.0.0 defaults: required information is checked by the substring scorer (`--communicate-scorer substring`) instead of the default semantic judge, which keeps the check deterministic, and no sampling parameters are sent (`llm_args {}`), because the default `temperature: 0.0` is rejected by the model (I5). Among the findings from reading and probes, only check 2g depends on the first choice (Section 3); the rewards behind the run-based rows were computed with it. The null-agent floor does not: the 23 tasks have no required information, which both scorers pass without a check.
 
@@ -324,7 +324,8 @@ Retail tests the claim on a whole domain (interpretation). Its scorer closes air
 
 - **Scope.** Two domains of one benchmark: airline with all 50 tasks (20 sampled in block 1, the other 30 in Section 13) and retail with all 114 tasks.
 - **Models.** One agent model and one simulator model, and a judge from the same family. In retail that judge replaces the stock OpenAI judge, so the parser figures describe the substitution.
-- **Unreviewed rows.** The retail rows from the runs (1e, 4f, 5c, 5d) were not adversarially reviewed, and their 5d threshold differs between reviewer batches. In airline one medium row has no adversarial verdict of its own: 22/2h, set by the consistency pass (Section 13.3).
+- **Unreviewed rows.** The retail rows from the runs (1e, 4f, 5c, 5d) were not adversarially reviewed, and their 5d threshold differs between reviewer batches.
+- **Reading of the bag allowance.** Rows 17/2h and 22/2h hold only if the free-bag allowance follows the cabin the reservation has when the bags are added. If the final cabin governed, both would be 0, and the counts from reading and probes would be 13/20 (sample), 22/30 (rest) and 35/50 (all); the headline counts would not change.
 - **Reviewers.** Every reviewer, adversarial reviewer and reader in this audit was a language model, not a person, so agreement figures measure agreement between model reviewers. Deviations during the airline review are listed in Section 13.6.
 - **One reading for the whole audit.** An upgrade the user never asked for, which would make a refused cancellation or change possible, is read as an unrequested write in both blocks. The opposite reading would add seven rest rows and raise the whole-domain count to at least 45/50.
 - **What v2 is.** The refusal pass is documented as intended, so v2 is a stricter alternative protocol rather than a bug fix.
@@ -444,7 +445,8 @@ The ground-truth agent failed on 5 of the other 30 tasks (14, 24, 29, 39, 42).
 - **Consistency across the blocks.** A second order probe (`scripts/probe_2h_paths.py`) covers two paths the first one could not: an earlier write that changes the arguments of a later one, and one change split into two calls. It found one block-1 row to change.
   - Task 22 has the same reservation and the same reference writes as task 17 from the other 30.
   - The reference upgrades the reservation from basic economy first and adds the bags afterwards. An agent that adds the bags first, while the reservation is still basic economy, must charge for one of them. That extra $50 changes the end state, so this equally valid order fails.
-  - 22/2h went from 0 to 1. This moves the block-1 count from reading and probes from 13/20 to 14/20; the block-1 headline stays 18/20.
+  - 22/2h went from 0 to 1, and a separate adversarial review then confirmed it (`results/skeptic_report_consistency.md`). This moves the block-1 count from reading and probes from 13/20 to 14/20; the block-1 headline stays 18/20.
+  - Rows 17/2h and 22/2h hold only if the free-bag allowance follows the cabin the reservation has when the bags are added. If the final cabin governed, both would be 0, and the counts from reading and probes would be 13/20 (sample), 22/30 (rest) and 35/50 (all); the headline counts would not change.
 - **One reading of "upgrade routes".** These are upgrades the user never asked for that would make a refused cancellation or change possible. Both blocks read them as unrequested writes (4c = 0). The opposite reading would raise the whole-domain count to at least 45/50.
 
 ### 13.4 Block 2 on the 30 tasks
@@ -488,4 +490,4 @@ Table 13.4. Pre-registered predictions (`airline_full/PLAN.md`, section 3).
 
 - All reviewers, adversarial reviewers and readers were language models, not people. Agreement figures measure agreement between model reviewers.
 - One adversarial reviewer opened the pre-registration file once, before it read the list of files it must not open. Three ran read-only git commands inside the pinned copy of the benchmark; no file changed. Neither event changed a verdict.
-- One medium row has no adversarial verdict of its own: 22/2h, set by the consistency pass. The adversarial review of task 17 named it as the same case.
+- Row 22/2h, set by the consistency pass, got its own adversarial review afterwards and held. That reviewer read four more benchmark source files than its brief named, and listed file names in the clone's folder of recorded simulations without opening any of them.
