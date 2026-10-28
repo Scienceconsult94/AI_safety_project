@@ -1,0 +1,24 @@
+{
+ "scorer_version": "v2",
+ "overlay_commit": "4974a19",
+ "overlay_dirty": false,
+ "judge_model": "anthropic/claude-haiku-5-5",
+ "judge_args": {},
+ "judge_votes": 3,
+ "judge_view": "with_tool_calls",
+ "judge_prompt_sha256": "c560776f121c1500",
+ "switches": {
+  "hash_canon": false,
+  "comm_boundary": false,
+  "nl_enforce": false
+ },
+ "set": "rest30",
+ "judge_cost": {
+  "calls": 364,
+  "cost": 0.0,
+  "in_tokens": 1953934,
+  "out_tokens": 209052,
+  "retries": 1
+ },
+ "votes": 3
+}
