@@ -46,6 +46,16 @@ Retail's judged assertions close most of airline's pass for doing nothing. The w
 - **Tool bug.** One tool stores the wrong item in 5 tasks, so the score depends on the order of items inside a call.
 - **User simulator.** It explains 12 of the 23 ground-truth failures and the flips of 23 of the 32 unstable tasks.
 
+Strong vs weak (pre-registered in `strong_vs_weak/PLAN.md`): the same 20 airline tasks with `claude-sonnet-5-5` as the agent.
+
+| | claude-haiku-5-5 | claude-sonnet-5-5 |
+|---|---|---|
+| tau2 pass^1, stock scorer | 0.733 | 0.850 |
+| tasks passed 3/3, stock scorer | 12/20 | 16/20 |
+| tau2 pass^1, full v2 | 0.733 | 0.883 |
+
+On the stock exam the stronger model is ahead on 6 tasks and behind on 1, but the difference is not significant (sign test p = 0.125). Nine of the 20 tasks tie both models by construction: 7 pass for doing nothing and 2 cannot be passed. Under v2 the gap widens to +0.150 (p = 0.039, uncorrected for the three configurations compared).
+
 What an agent that does nothing scores, by task set (stock scorer, no model call; `results/null_agent/tau2_null_agent.md`):
 
 | airline | retail | telecom (base / full) | intake |
@@ -63,6 +73,8 @@ Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file a
 - `block2/`: pre-registration (`PLAN.md`, with dated deviations), task fixes with their audit rows, the two adversarial reviews (`skeptic_design.md`, `skeptic_results.md`), the hand-check of judge verdicts, and the generated `summary_v2.md`.
 - `retail/`, `scripts/retail/`, `results/retail/`: the retail audit. It holds the pre-registration with dated deviations, the per-check readings, the audit log, the generated `summary_numbers.md` and `comparison.md`, every script, the reviewer files, the runs and the re-judge.
 - `scripts/null_agent/`, `results/null_agent/`, `null_agent/`: the null-agent table over every tau2 task set, and a desk survey of external benchmarks where the same floor can be measured.
+- `strong_vs_weak/`, `scripts/strong_vs_weak/`: the Sonnet-vs-Haiku check (pre-registration, summary, per-task table and figure).
+- `scripts/demo/demo.py`: four reproductions for a live demo, offline and without a model call (about 12 seconds).
 - `scripts/`, `scripts/v2/`: every script that produced a number; `scripts/runs/`, `scripts/v2/run_v2.py` and `scripts/retail/run_retail.py` are the paid runs.
 - `results/`, `results/v2/`: recorded runs (`results.json` of every simulation), re-scores, gates, judge votes and raw replies, provenance stamps, probe transcripts.
 - `issues_draft.md`, `cost.md`, `COMMIT_MAP.md`.
@@ -77,4 +89,4 @@ Models used: `claude-haiku-5-5` as the agent, as the user simulator and as the j
 
 ## Limits
 
-Airline: 20 of 50 tasks sampled before any run, and the free-text assertions of the 30 unsampled tasks were not audited. Retail: all 114 tasks, but the rows from its agent runs were not adversarially reviewed. One agent model and one user-simulator model throughout. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. Dollar figures are own estimates from token counts at an assumed price and were not reconciled with billing.
+Airline: 20 of 50 tasks sampled before any run, and the free-text assertions of the 30 unsampled tasks were not audited. Retail: all 114 tasks, but the rows from its agent runs were not adversarially reviewed. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. Dollar figures are own estimates from token counts at an assumed price and were not reconciled with billing.

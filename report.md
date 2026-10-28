@@ -251,7 +251,28 @@ A desk survey of nine external agent benchmarks (`null_agent/external_candidates
 
 The measurement itself is an open item.
 
-## 7. Issue candidates
+## 7. Strong vs weak: does the exam separate a stronger agent?
+
+The check was pre-registered in `strong_vs_weak/PLAN.md` and committed before any result of the run was read. It uses the same 20 sampled airline tasks with three trials each. The agent is `claude-sonnet-5-5`; everything else is unchanged: the user simulator `claude-haiku-5-5`, the seed, the scorer and the settings. Results are in `strong_vs_weak/summary.md`.
+
+Table 10. Sonnet and Haiku on the same exam (20 sampled airline tasks × 3 trials).
+
+| quantity | claude-haiku-5-5 | claude-sonnet-5-5 |
+|---|---|---|
+| tau2 pass^1, stock scorer | 0.733 | 0.850 |
+| tasks passed 3/3, stock scorer | 12/20 = 0.60 [0.39, 0.78] | 16/20 = 0.80 [0.58, 0.92] |
+| tau2 pass^1, full v2 | 0.733 | 0.883 |
+| tasks passed 3/3, full v2 | 11/20 | 16/20 |
+
+- **Stock scorer.** Paired per task, Sonnet is ahead on 6 tasks, behind on 1 and equal on 13; the exact sign test gives p = 0.125. By the pre-registered rule, the exam does not separate the two models on this sample.
+- **Tasks that carry no information.** Nine of the 20 tasks say nothing about the difference. The 7 tasks that an empty conversation passes give both models 3/3. Tasks 7 and 44, whose references are defective, give both models 0/3.
+- **Full v2.** The gap widens to +0.150: 8 tasks ahead, 1 behind, 11 equal, p = 0.039. Most of the change comes from task 7, whose corrected reference total Sonnet reaches in 3 of 3 trials and Haiku in 1. This p value comes from one of three configurations compared on the same conversations, so it does not survive a Bonferroni correction (threshold 0.017).
+
+All five predictions held. The check cost about $17.21: the run $16.85, the smoke simulation $0.14 and the re-score $0.22.
+
+Reading (interpretation): the defects found in block 1 compress the measured difference between models. Free passes and impossible tasks tie both models, so a real gap has fewer tasks in which to show. Repairing one wrong reference answer moved the comparison across the conventional threshold. With 20 tasks and one run per model, the check cannot say how large the true gap is. It shows that the measurable gap depends on the exam's defects.
+
+## 8. Issue candidates
 
 Drafted in `issues_draft.md`, none filed:
 
@@ -274,32 +295,33 @@ Drafted in `issues_draft.md`, none filed:
 | I15 | the text-mode user simulator lacks the "do not end prematurely" rule of the voice mode; the simulator is the largest cause of retail failures and flips |
 | I16 | retail task texts a faithful simulator cannot follow to the reference (0, 1, 15, 34, 52, 100) |
 
-## 8. What the numbers mean
+## 9. What the numbers mean
 
 Two facts stand side by side. The examination has reproducible faults: a pass for doing nothing on 23 of 50 tasks, an end-state check that fails valid solutions, a string check that passes by accident, a wrong reference answer, a scenario that forbids its own reference, requirements nobody scores, a simulator that improvises. And the agent's headline number barely moves when the examination is repaired: pass^3 0.60 in both runs, pass^1 within the noise floor. The leaderboard cannot show what is wrong with the exam. Finding it took a checklist applied to the procedure, probes with known answers, and reviews whose job was to overturn the findings.
 
 The repair itself is instructive. The deterministic faults exist (they fire on perturbed trajectories) but did not flip a single recorded conversation, because the recorded agents happened not to hit them. The one fix that failed, task 32, failed because a sentence added to make the scenario consistent with the reference exposed a second agent error that the pre-test could not see. Both say the same thing: an examination has to be validated as an instrument, with pre-registered expectations and adversarial review, before its numbers are read.
 
-Retail tests the claim on a whole domain (interpretation). Its scorer closes airline's largest hole, yet 44 of 114 tasks still carry an adversarially reviewed defect. The new holes sit in places a leaderboard never shows: a tool that stores the wrong item, an order rule only the policy text enforces, and a judge that would crash the stock parser on most replies. The conversations add a second lesson. In retail, the user simulator decides more outcomes than the reference does: it explains 12 of 23 ground-truth failures and 23 of 32 flips. A pass rate on this benchmark therefore measures the agent and the simulator together. The null-agent table puts the same point in one line: the score of an agent that does nothing ranges from 0% to 46% across domains of one benchmark, depending only on how each domain's exam is built.
+Retail tests the claim on a whole domain (interpretation). Its scorer closes airline's largest hole, yet 44 of 114 tasks still carry an adversarially reviewed defect. The new holes sit in places a leaderboard never shows: a tool that stores the wrong item, an order rule only the policy text enforces, and a judge that would crash the stock parser on most replies. The conversations add a second lesson. In retail, the user simulator decides more outcomes than the reference does: it explains 12 of 23 ground-truth failures and 23 of 32 flips. A pass rate on this benchmark therefore measures the agent and the simulator together. The null-agent table puts the same point in one line: the score of an agent that does nothing ranges from 0% to 46% across domains of one benchmark, depending only on how each domain's exam is built. The strong-vs-weak check adds the consequence for model comparison. On the stock exam a stronger model is ahead on 6 of the 7 tasks where the two differ, yet the difference is not significant, because 9 of the 20 tasks tie both models by construction.
 
-## 9. Limits
+## 10. Limits
 
 - **Scope.** Two domains of one benchmark: airline with 20 of 50 tasks sampled (its 30 unsampled tasks' assertions unaudited), retail with all 114 tasks.
 - **Models.** One agent model and one simulator model, and a judge from the same family. In retail that judge replaces the stock OpenAI judge, so the parser figures describe the substitution.
 - **Unreviewed rows.** The retail rows from the runs (1e, 4f, 5c, 5d) were not adversarially reviewed, and their 5d threshold differs between reviewer batches.
 - **What v2 is.** The refusal pass is documented as intended, so v2 is a stricter alternative protocol rather than a bug fix.
 - **Run-to-run noise.** Single-trial ground-truth runs flipped on 4 of 13 unchanged airline tasks between two runs, so ground-truth totals are read against that floor.
-- **Cost figures.** Dollar figures are own estimates at an assumed price.
+- **Strong vs weak.** One run per model and 20 tasks. The two runs are a day apart and the user simulator samples, so each run is one draw.
+- **Cost figures.** Dollar figures are own estimates from token counts at the published per-token prices. They were not reconciled with billing row by row; the account's billing was about $11 when the own estimate was $10.79.
 
-## 10. Reproducibility and cost
+## 11. Reproducibility and cost
 
-Every number is rebuilt by the command sequences in `STRUCTURE.md`; the judge stages replay from cached votes without a model call. Provenance stamps on every v2 output record the overlay commit and a dirty-tree flag; the live runs record the runner configuration and its empty diff against block 1. Spend, own estimate from token counts: block 1 about $1.36, block 2 about $2.27, retail about $7.16 (runs $6.86, re-judge $0.30, probe below one cent); about $10.79 in total against a hard stop of $30 (`cost.md`). The null-agent table makes no model call.
+Every number is rebuilt by the command sequences in `STRUCTURE.md`; the judge stages replay from cached votes without a model call. Provenance stamps on every v2 output record the overlay commit and a dirty-tree flag; the live runs record the runner configuration and its empty diff against block 1. Spend, own estimate from token counts: block 1 about $1.36, block 2 about $2.27, retail about $7.16 (runs $6.86, re-judge $0.30, probe below one cent); the strong-vs-weak check about $17.21; about $27.99 in total (`cost.md`). The null-agent table and the demo make no model call.
 
-## 11. Open items
+## 12. Open items
 
 Not done, candidates for a next iteration:
 
-- **Stronger agent.** Run a stronger agent model on the 20 airline tasks to test whether the exam separates it from the audited one; the script is ready and was checked without an API call (`scripts/runs/run_sonnet20.ps1`).
+- **Strong vs weak, more power.** Repeat the comparison on all 50 airline tasks or with a second run per model, so that a gap of the observed size can reach significance.
 - **External null agent.** Measure the null-agent floor on three or four external benchmarks chosen from `null_agent/external_candidates.md`.
 - **Retail run rows.** Give the retail run rows an adversarial pass.
 - **Task 32.** Run a counterfactual ground-truth conversation on airline task 32 without the payment-method sentence, to isolate its effect.
