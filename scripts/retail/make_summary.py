@@ -139,11 +139,15 @@ def judge_table() -> list:
 def issues_table(audit, ids) -> list:
     tasks = json.loads((ROOT / "tau2-bench" / "data" / "tau2" / "domains" / "retail" / "tasks.json").read_text(encoding="utf-8"))
     rows = defect_rows(audit, ids, CONFIRMED)
-    out = ["", "Table 7. Upstream-recorded open issues (tasks.json → issues) against the audit rows", "", "| task | upstream issue (title) | audit: confirmed defect rows on the task |", "|---|---|---|"]
+    match = {r["task_id"]: r for r in pd.read_csv(RES / "upstream_issue_match.csv", dtype=str).to_dict("records")} if (RES / "upstream_issue_match.csv").exists() else {}
+    out = ["", "Table 7. Upstream-recorded open issues (tasks.json → issues) against the audit rows", "",
+           "| task | upstream issue (title) | audit: defect rows on the task (any mechanism) | same mechanism found by the audit (results/retail/upstream_issue_match.csv) |",
+           "|---|---|---|---|"]
     for t in tasks:
         for iss in t.get("issues") or []:
             found = sorted(set(rows.loc[rows["task_id"] == str(t["id"]), "check"]))
-            out.append(f"| {t['id']} | {iss.get('title', '')[:110]} | {', '.join(found) or 'none'} |")
+            m = match.get(str(t["id"]), {}).get("match", "not read")
+            out.append(f"| {t['id']} | {iss.get('title', '')[:110]} | {', '.join(found) or 'none'} | {m} |")
     return out
 
 
@@ -166,7 +170,7 @@ def predictions_table(audit, scan, ids, runs) -> list:
            f"| P2 | 2k only where no enforced assertion covers the communicate_info fact; certain for 30, 31, 32 | 2k confirmed on {k2k} tasks: {', '.join(sorted(rows.loc[rows['check'] == '2k', 'task_id'].unique(), key=int))} |",
            f"| P3 | 0 tasks flip on WRITE order (except shared payment_history) | 2h confirmed on {k2h} tasks |",
            f"| P4 | process requirements unscored (benchmark-level 2m) | 2m benchmark-level defect rows: {k2m_all}; per-task 2m: {rows.loc[rows['check'] == '2m', 'task_id'].nunique()} |",
-           f"| P5 | upstream issues on 4, 5, 7 re-found | {' / '.join(ln.strip('| ').split(' | ')[0] + ': ' + ln.strip('| ').split(' | ')[2] for ln in issues)} |",
+           f"| P5 | upstream issues on 4, 5, 7 re-found | {' / '.join(ln.strip('| ').split(' | ')[0] + ': ' + ln.strip('| ').split(' | ')[3] for ln in issues)} (Table 7; the rows on tasks 4 and 5 describe other mechanisms) |",
            f"| P6 | some judge replies fail the strict parser; re-judge flips some verdicts | {j[5].strip('| ').split(' | ')[1] if len(j) > 5 else 'n/a'} rejected; reward flips {j[-1].strip('| ').split(' | ')[1] if len(j) > 5 else 'n/a'} |",
            f"| P7 | defective share, no numeric prediction | {fmt_share(defective_tasks(audit, ids), n)} (airline sample: 18/20) |"]
     return out
@@ -180,29 +184,35 @@ def build_markdown(audit, scan, sample, runs) -> str:
     L = ["# Summary numbers — retail", "", f"bench_commit: `{sample['bench_commit']}`; all {n} tasks of the base split (no sampling).", "", "Intervals: 95% Wilson.", "",
          "Table 1. Headline shares", "", "| quantity | share |", "|---|---|"]
     k_def = defective_tasks(audit, ids)
-    L.append(f"| defective tasks (≥1 confirmed medium/high row) | {fmt_share(k_def, n)} |")
-    for label, k in (("static and probe checks only (method ≠ agent_run)", defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,))),
+    L.append(f"| defective tasks (≥1 medium/high defect row, all checks) | {fmt_share(k_def, n)} |")
+    for label, k in (("static and probe checks only (method ≠ agent_run; every row passed the adversarial review)", defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,))),
+                     ("all checks without the simulator-attributed rows (5c, 5d)", defective_tasks(audit, ids, ("5c", "5d"))),
                      ("agent_run checks only (1e, 4f, 5c, 5d, 5e, 5f)", defective_tasks(audit, ids, methods=(AGENT_RUN,))),
-                     ("agent_run checks excluding 5d (user-simulator deviations)", defective_tasks(audit, ids, USER_SIM_CHECKS, methods=(AGENT_RUN,)))):
+                     ("agent_run checks excluding 5d (user-simulator deviations)", defective_tasks(audit, ids, USER_SIM_CHECKS, methods=(AGENT_RUN,))),
+                     ("agent_run checks excluding 5c and 5d (simulator-attributed rows)", defective_tasks(audit, ids, ("5c", "5d"), methods=(AGENT_RUN,)))):
         L.append(f"| defective tasks, {label} | {fmt_share(k, n)} |")
-    L.append(f"| tasks whose only confirmed defects come from agent_run checks | {fmt_share(agent_run_only_tasks(audit, ids), n)} |")
-    k_ex = defective_tasks(audit, ids, NOOP_CHECKS)
+    L.append(f"| tasks whose only defects come from agent_run checks | {fmt_share(agent_run_only_tasks(audit, ids), n)} |")
+    noop_checks = NOOP_CHECKS + ("2c",)  # retail adds the transfer-only probe to the no-op class
+    k_ex = defective_tasks(audit, ids, noop_checks)
     L.append(f"| defective tasks, excluding the no-op class (checks 2a, 2b, 2c) | {fmt_share(k_ex, n)} |")
     rows = defect_rows(audit, ids, CONFIRMED)
     noop_ids = set(scan.loc[scan["noop_pass"] == 1, "task_id"].astype(str))
-    derived = rows["check"].isin(NOOP_CHECKS) | ((rows["check"] == "2k") & rows["task_id"].isin(noop_ids))
+    derived = rows["check"].isin(noop_checks) | ((rows["check"] == "2k") & rows["task_id"].isin(noop_ids))
     k_nf = rows.loc[~derived, "task_id"].nunique()
     L.append(f"| defective tasks, excluding every defect that derives from the no-op design (2a, 2b, 2c, and 2k on no-op tasks) | {fmt_share(k_nf, n)} |")
     L.append(f"| no-op pass by construction (empty answer = full reward), all tasks | {fmt_share(noop, n)} |")
     L.append(f"| no-op verdict left to the judge (DB unchanged, assertions exist) | {needs}/{n}; the judge failed all of them in the probe |")
     L.append(f"| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | {unverified_rows(audit)} |")
+    L += ["", "Verification status: the static and probe rows passed the adversarial review (results/retail/skeptic_report.md). "
+          "The agent-run rows (1e, 4f, 5c, 5d per task) are as filed by five trajectory reviewers and were not adversarially reviewed "
+          "(retail/PLAN.md, deviation of 2026-10-28); every share that includes them carries that caveat."]
     notes = rule_of_three(noop, n, "no-op pass") + rule_of_three(k_def, n, "defective tasks") + rule_of_three(k_ex, n, "defective tasks excluding the no-op class")
     conf = per_category(audit, ids)
-    L += ["", "Table 2. Tasks with ≥1 confirmed defect (high/medium), by category", "", "| category | share of all tasks |", "|---|---|"]
+    L += ["", "Table 2. Tasks with ≥1 defect (high/medium, all checks; agent-run rows not adversarially reviewed), by category", "", "| category | share of all tasks |", "|---|---|"]
     for c, name in CATEGORIES.items():
         L.append(f"| {c} {name} | {fmt_share(conf[c], n)} |")
         notes += rule_of_three(conf[c], n, f"category {c} {name}")
-    L += ["", "Table 2b. Confirmed defect rows by check (all methods)", "", "| check | defect rows (high/medium) | tasks |", "|---|---|---|"]
+    L += ["", "Table 2b. Defect rows by check (high/medium, all methods; 1e, 4f, 5c, 5d come from the runs and were not adversarially reviewed)", "", "| check | defect rows (high/medium) | tasks |", "|---|---|---|"]
     L += [f"| {c} | {r} | {t}/{n} |" for c, r, t in rows_per_check(audit, ids)]
     a = normalize(audit)
     all_rows = a[(a["task_id"] == "ALL") & (a["defect"] == 1)]
@@ -223,8 +233,9 @@ def build_markdown(audit, scan, sample, runs) -> str:
 def make_figure(audit, scan, sample, runs, out: Path):
     ids, n = sample["task_ids"], len(sample["task_ids"])
     bars = [("Empty answer gets full score\n(no-op pass, by construction)", int(scan["noop_pass"].sum()), n),
-            ("≥1 confirmed defect\n(all checks)", defective_tasks(audit, ids), n),
-            ("≥1 confirmed defect\n(static and probe checks only)", defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,)), n)]
+            ("≥1 defect (all checks;\nrun rows not adversarially reviewed)", defective_tasks(audit, ids), n),
+            ("≥1 defect without the\nsimulator rows (5c, 5d)", defective_tasks(audit, ids, ("5c", "5d")), n),
+            ("≥1 confirmed defect\n(static and probe checks, reviewed)", defective_tasks(audit, ids, exclude_methods=(AGENT_RUN,)), n)]
     conf = per_category(audit, ids)
     bars += [(f"category {c}: {name}", conf[c], n) for c, name in CATEGORIES.items()]
     if runs is not None:
@@ -240,7 +251,7 @@ def make_figure(audit, scan, sample, runs, out: Path):
     ax.set_xlim(0, 1)
     ax.set_xlabel("share of the 114 retail tasks (95% Wilson interval)")
     for i, (v, b) in enumerate(zip(vals, bars[::-1])):
-        ax.text(min(v + 0.02, 0.9), i, f"{b[1]}/{b[2]}", va="center", fontsize=8)
+        ax.text(min(wilson(b[1], b[2])[1] + 0.01, 0.9), i, f"{b[1]}/{b[2]}", va="center", fontsize=8)  # right of the interval
     ax.set_title("tau2-bench retail (v2.0.0): what the checklist found on all 114 tasks", fontsize=10)
     fig.tight_layout()
     fig.savefig(out, dpi=150, facecolor="white")

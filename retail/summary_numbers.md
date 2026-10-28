@@ -8,41 +8,46 @@ Table 1. Headline shares
 
 | quantity | share |
 |---|---|
-| defective tasks (≥1 confirmed medium/high row) | 57/114 = 0.500 [0.410, 0.590] |
-| defective tasks, static and probe checks only (method ≠ agent_run) | 44/114 = 0.386 [0.302, 0.478] |
-| defective tasks, agent_run checks only (1e, 4f, 5c, 5d, 5e, 5f) | 23/114 = 0.202 [0.138, 0.285] |
-| defective tasks, agent_run checks excluding 5d (user-simulator deviations) | 23/114 = 0.202 [0.138, 0.285] |
-| tasks whose only confirmed defects come from agent_run checks | 13/114 = 0.114 [0.068, 0.185] |
-| defective tasks, excluding the no-op class (checks 2a, 2b, 2c) | 51/114 = 0.447 [0.359, 0.539] |
-| defective tasks, excluding every defect that derives from the no-op design (2a, 2b, 2c, and 2k on no-op tasks) | 51/114 = 0.447 [0.359, 0.539] |
+| defective tasks (≥1 medium/high defect row, all checks) | 67/114 = 0.588 [0.496, 0.674] |
+| defective tasks, static and probe checks only (method ≠ agent_run; every row passed the adversarial review) | 44/114 = 0.386 [0.302, 0.478] |
+| defective tasks, all checks without the simulator-attributed rows (5c, 5d) | 48/114 = 0.421 [0.334, 0.513] |
+| defective tasks, agent_run checks only (1e, 4f, 5c, 5d, 5e, 5f) | 41/114 = 0.360 [0.277, 0.451] |
+| defective tasks, agent_run checks excluding 5d (user-simulator deviations) | 33/114 = 0.289 [0.214, 0.379] |
+| defective tasks, agent_run checks excluding 5c and 5d (simulator-attributed rows) | 12/114 = 0.105 [0.061, 0.175] |
+| tasks whose only defects come from agent_run checks | 23/114 = 0.202 [0.138, 0.285] |
+| defective tasks, excluding the no-op class (checks 2a, 2b, 2c) | 61/114 = 0.535 [0.444, 0.624] |
+| defective tasks, excluding every defect that derives from the no-op design (2a, 2b, 2c, and 2k on no-op tasks) | 61/114 = 0.535 [0.444, 0.624] |
 | no-op pass by construction (empty answer = full reward), all tasks | 6/114 = 0.053 [0.024, 0.110] |
 | no-op verdict left to the judge (DB unchanged, assertions exist) | 5/114; the judge failed all of them in the probe |
-| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | 23 |
+| medium/high defect rows with skeptic_ok empty (whole file, incl. task_id ALL) | 75 |
 
-Table 2. Tasks with ≥1 confirmed defect (high/medium), by category
+Verification status: the static and probe rows passed the adversarial review (results/retail/skeptic_report.md). The agent-run rows (1e, 4f, 5c, 5d per task) are as filed by five trajectory reviewers and were not adversarially reviewed (retail/PLAN.md, deviation of 2026-10-28); every share that includes them carries that caveat.
+
+Table 2. Tasks with ≥1 defect (high/medium, all checks; agent-run rows not adversarially reviewed), by category
 
 | category | share of all tasks |
 |---|---|
-| 1 Solvability | 29/114 = 0.254 [0.183, 0.341] |
-| 2 Scoring validity | 30/114 = 0.263 [0.191, 0.351] |
+| 1 Solvability | 14/114 = 0.123 [0.075, 0.196] |
+| 2 Scoring validity | 31/114 = 0.272 [0.199, 0.360] |
 | 3 Isolation and leaks | 0/114 = 0.000 [0.000, 0.033] |
-| 4 Specification clarity | 17/114 = 0.149 [0.095, 0.226] |
-| 5 Determinism | 0/114 = 0.000 [0.000, 0.033] |
+| 4 Specification clarity | 23/114 = 0.202 [0.138, 0.285] |
+| 5 Determinism | 36/114 = 0.316 [0.238, 0.406] |
 | 6 Reporting | 0/114 = 0.000 [0.000, 0.033] |
 
-Table 2b. Confirmed defect rows by check (all methods)
+Table 2b. Defect rows by check (high/medium, all methods; 1e, 4f, 5c, 5d come from the runs and were not adversarially reviewed)
 
 | check | defect rows (high/medium) | tasks |
 |---|---|---|
 | 1b | 1 | 1/114 |
 | 1d | 2 | 2/114 |
-| 1e | 23 | 23/114 |
+| 1e | 8 | 8/114 |
 | 1g | 5 | 5/114 |
 | 2a | 6 | 6/114 |
 | 2b | 6 | 6/114 |
 | 2c | 2 | 2/114 |
 | 2e | 14 | 14/114 |
 | 2h | 5 | 5/114 |
+| 2j | 1 | 1/114 |
 | 2k | 3 | 3/114 |
 | 2m | 5 | 5/114 |
 | 4a | 1 | 1/114 |
@@ -50,8 +55,11 @@ Table 2b. Confirmed defect rows by check (all methods)
 | 4c | 11 | 11/114 |
 | 4d | 3 | 3/114 |
 | 4e | 2 | 2/114 |
+| 4f | 6 | 6/114 |
+| 5c | 23 | 23/114 |
+| 5d | 36 | 36/114 |
 
-Benchmark-level defect rows (task_id = ALL): 1g (medium), 2e (medium), 2m (medium), 5b (low), 6d (low), 6f (low), 6g (low)
+Benchmark-level defect rows (task_id = ALL): 1g (medium), 2e (medium), 2j (medium), 2m (medium), 5b (low), 6d (low), 6f (low), 6g (low)
 
 Table 3. Low-severity defects, by category (informational)
 
@@ -103,17 +111,17 @@ Table 6. The judge inside the score (check 2j)
 |---|---|
 | live judge replies the stock strict parser would reject | 103/169 = 0.609 [0.534, 0.680] |
 | live replies with fewer results than assertions (silently uncounted by the stock code) | 0/169 |
-| simulations re-judged with 3 votes | 0 |
-| assertion verdicts where the live vote differs from the majority | 0/0 |
-| rewards that flip under the majority (pass→fail / fail→pass) | 0 (0 / 0) of 0 |
+| simulations re-judged with 3 votes | 159 |
+| assertion verdicts where the live vote differs from the majority | 1/243 = 0.004 [0.001, 0.023] |
+| rewards that flip under the majority (pass→fail / fail→pass) | 1 (0 / 1) of 159 |
 
 Table 7. Upstream-recorded open issues (tasks.json → issues) against the audit rows
 
-| task | upstream issue (title) | audit: confirmed defect rows on the task |
-|---|---|---|
-| 4 | Task looks for number 10, but user does not ask for a number. It is happy with "various" or a description. | 4d |
-| 5 | Domain level issue. Agent is allowed to do user level actions e.g. look-up their order info, without authentic | none |
-| 7 | For tasks where user does not know order ID, mention explicitly that user does not know th | none |
+| task | upstream issue (title) | audit: defect rows on the task (any mechanism) | same mechanism found by the audit (results/retail/upstream_issue_match.csv) |
+|---|---|---|---|
+| 4 | Task looks for number 10, but user does not ask for a number. It is happy with "various" or a description. | 4d | not reproduced |
+| 5 | Domain level issue. Agent is allowed to do user level actions e.g. look-up their order info, without authentic | 5c, 5d | benchmark level only |
+| 7 | For tasks where user does not know order ID, mention explicitly that user does not know th | none | not found |
 
 Table 8. Pre-registered predictions (retail/PLAN.md §3) against the measurements
 
@@ -123,12 +131,11 @@ Table 8. Pre-registered predictions (retail/PLAN.md §3) against the measurement
 | P2 | 2k only where no enforced assertion covers the communicate_info fact; certain for 30, 31, 32 | 2k confirmed on 3 tasks: 30, 31, 32 |
 | P3 | 0 tasks flip on WRITE order (except shared payment_history) | 2h confirmed on 5 tasks |
 | P4 | process requirements unscored (benchmark-level 2m) | 2m benchmark-level defect rows: 1; per-task 2m: 5 |
-| P5 | upstream issues on 4, 5, 7 re-found | 4: 4d / 5: none / 7: none |
-| P6 | some judge replies fail the strict parser; re-judge flips some verdicts | 103/169 = 0.609 [0.534, 0.680] rejected; reward flips 0 (0 / 0) of 0 |
-| P7 | defective share, no numeric prediction | 57/114 = 0.500 [0.410, 0.590] (airline sample: 18/20) |
+| P5 | upstream issues on 4, 5, 7 re-found | 4: not reproduced / 5: benchmark level only / 7: not found (Table 7; the rows on tasks 4 and 5 describe other mechanisms) |
+| P6 | some judge replies fail the strict parser; re-judge flips some verdicts | 103/169 = 0.609 [0.534, 0.680] rejected; reward flips 1 (0 / 1) of 159 |
+| P7 | defective share, no numeric prediction | 67/114 = 0.588 [0.496, 0.674] (airline sample: 18/20) |
 
 Rule of three (k = 0)
 
 - category 3 Isolation and leaks: 0/114 → upper bound by the rule of three ≈ 3/114 = 0.026
-- category 5 Determinism: 0/114 → upper bound by the rule of three ≈ 3/114 = 0.026
 - category 6 Reporting: 0/114 → upper bound by the rule of three ≈ 3/114 = 0.026
