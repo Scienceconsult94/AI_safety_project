@@ -70,6 +70,32 @@ Each sampled task is checked against a fixed checklist (static reading, mechanic
 │                               judge_raw*.json, judge_cache*.json, provenance*.json, noop_*.csv/.md, probe_2h_v2.csv,
 │                               probe_32_v2/ (samples, two classifications per arm, result.md), runs/<name>/ (results.json, summary.json,
 │                               judge_votes.csv, judge_raw.json), *_fresh.* (the live runs re-scored under every protocol), *.log (console logs of the paid runs)
+├── retail/                     the same audit over ALL 114 retail tasks (pre-registered before any run)
+│   ├── PLAN.md                 pre-registration (question, protocol, predictions P1-P7, budget) and dated Deviations
+│   ├── checklist.md            how each check of checklist.md is read in retail (judge-gated reward, no clock, 2m added)
+│   ├── sample.json             the 114 task ids (the whole split `base`) and the pinned bench commit
+│   ├── review_brief.md, skeptic_brief.md, review_agent_brief.md   instructions given to the reviewers, the adversarial reviewer and the trajectory reviewers
+│   ├── audit_log.csv           one row per (task_id, check) for retail (same schema as the root audit_log.csv)
+│   ├── summary_numbers.md, fig_defects_retail.png   headline numbers, Tables 1-8 (generated)
+│   └── comparison.md, fig_comparison.png            airline beside retail (generated)
+├── scripts/retail/             retail pipeline (tau2 venv scripts run from inside tau2-bench as ../scripts/retail/<name>.py)
+│   ├── static_scan.py          replay, no-op verdict of the stock scorer, text pre-screen over all 114 tasks
+│   ├── probe_2h.py, probe_2d.py, probe_1g.py   WRITE-order permutations; argument perturbations, hidden and forbidden writes; the modify_pending_order_items tool bug
+│   ├── extract_tasks.py        one Markdown card per task (upstream `issues` field withheld from reviewers)
+│   ├── judge_overlay.py        substitutes the NL judge model (claude-haiku-5-5), keeps the stock prompt and evaluator, logs every reply with a strict-parser flag
+│   ├── noop_judge_probe.py     empty-answer and transfer-only conversations through the stock evaluators (API: judge only)
+│   ├── run_retail.py           the paid runs: Pass^3 on 114 tasks and the ground-truth agent on 112 (API)
+│   ├── agent_rows.py           run results -> audit rows, run summary, triage list, transcripts
+│   ├── rejudge.py              check 2j: strict-parser share of the live judge replies; 3-vote re-judge of every assertion-gated simulation (API)
+│   ├── build_audit_log.py, validate_audit_log.py   merge of every CSV input (reviewers, probes, skeptic overrides) -> retail/audit_log.csv
+│   ├── rereview_agreement.py   blind second pass on 12 tasks vs original, skeptic-corrected and final labels
+│   └── make_summary.py, comparison.py   retail/summary_numbers.md and figures; airline beside retail
+├── results/retail/             retail outputs: static_scan.csv, probe_*.csv, noop_judge_probe.*, review_batch_1..12.*, review_ALL.*,
+│                               skeptic_verdicts*.csv, review_overrides.csv, skeptic_report*.md, rereview_blind.*, rereview.*, haiku_pass.csv,
+│                               agent_runs_summary.md, agent_triage.md, review_agent_*.csv/.md, rejudge.*, task_cards/, trajectories/,
+│                               runs/<name>/ (results.json, summary.json, judge_calls.json), run_retail_all.log
+├── scripts/null_agent/         tau2_null_agent.py: what the stock scorer awards to an agent that does nothing, every tau2 task set (offline)
+├── results/null_agent/         tau2_null_agent.csv (one row per task) and tau2_null_agent.md (per-domain table, Wilson intervals)
 ├── patches/                    recorded local patches to the tau2-bench checkout (not applied)
 ├── private/                    gitignored
 └── tau2-bench/                 gitignored upstream clone
@@ -134,7 +160,36 @@ Live parts (spend money; recorded in cost.md): `run_v2.py --part all` (pass3, gt
 
 The judge, probe and live-run scripts refuse to run while `scripts/v2` or `block2` has uncommitted changes (set `V2_ALLOW_DIRTY=1` to override); every v2 output carries the overlay commit and a dirty flag.
 
+## Retail domain audit (all 114 tasks)
+
+Same checklist and models as the airline block; differences are listed in `retail/checklist.md`, the protocol and its dated deviations in `retail/PLAN.md`. Offline rebuild:
+
+```powershell
+cd tau2-bench; $env:PYTHONUTF8 = 1
+& $uv run --no-sync python ..\scripts\retail\static_scan.py
+& $uv run --no-sync python ..\scripts\retail\probe_2h.py
+& $uv run --no-sync python ..\scripts\retail\probe_2d.py
+& $uv run --no-sync python ..\scripts\retail\probe_1g.py
+& $uv run --no-sync python ..\scripts\retail\extract_tasks.py
+& $uv run --no-sync python ..\scripts\retail\judge_overlay.py --selftest       # no model call
+& $uv run --no-sync python ..\scripts\retail\rejudge.py --dry                  # parser share only; the 3-vote re-judge replays from judge_cache_rejudge.json
+& $uv run --no-sync python ..\scripts\null_agent\tau2_null_agent.py           # every tau2 task set; banking_knowledge needs an optional package the pinned venv lacks
+cd ..
+python -I -X utf8 scripts\retail\agent_rows.py
+python -I scripts\retail\build_audit_log.py
+python -I -X utf8 scripts\retail\rereview_agreement.py
+python -I -X utf8 scripts\retail\make_summary.py
+python -I -X utf8 scripts\retail\comparison.py
+```
+
+Live parts (spend money; recorded in `cost.md`): `noop_judge_probe.py`, `run_retail.py --part all`, `rejudge.py` without `--dry`.
+
+Pipeline: `static_scan.py`, the probes and `extract_tasks.py` -> twelve reviewer batches and the benchmark-level rows (`results/retail/review_batch_*.csv`, `review_ALL.csv`) -> `build_audit_log.py` (pre-skeptic log) -> adversarial review (`skeptic_verdicts.csv`, `review_overrides.csv`) and blind re-review (`rereview_blind.csv`) -> the paid runs -> `agent_rows.py` -> trajectory review (`review_agent_*.csv`, concatenated into `review_agent.csv`) and its skeptic pass (`skeptic_verdicts_agent.csv`) -> `rejudge.py` -> `review_2j.csv` -> `build_audit_log.py` (final) -> `make_summary.py`, `comparison.py`.
+
 ## Where the headline numbers live
+
+- `retail/summary_numbers.md`: the retail audit — Tables 1-8 (headline shares, defects by category and check, agent runs with judge-only failures, blind re-review, the judge as scorer (2j), upstream issues vs audit, predictions P1-P7); `retail/comparison.md`: airline beside retail.
+- `results/null_agent/tau2_null_agent.md`: the null-agent floor of every tau2 task set.
 
 - `block2/summary_v2.md`: block 2 — no-op pass under v1/v2, permutation probe, the 76 recorded simulations re-scored, judge agreement, task-32 probe, fresh v2 runs vs block 1.
 - `summary_numbers.md`: Table 1 (headline shares), Table 2 and 2b (confirmed defects by category and by check), Table 3 (low-severity defects), Table 4 (agent runs), Table 5 (blind re-review agreement).

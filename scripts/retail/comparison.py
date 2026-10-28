@@ -17,11 +17,9 @@ import matplotlib.pyplot as plt  # noqa: E402
 import pandas as pd  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "scripts"))
-sys.path.insert(0, str(ROOT / "scripts" / "retail"))
+sys.path.insert(0, str(ROOT / "scripts"))  # the block-1 make_summary; the retail one is loaded by path in load_retail()
 from make_summary import AGENT_RUN, CATEGORIES, agent_run_stats, defective_tasks, fmt_share, per_category, wilson  # noqa: E402
 from make_summary import load_inputs as load_airline, load_runs as load_airline_runs  # noqa: E402
-import make_summary as retail_ms  # noqa: E402  (scripts/retail/make_summary.py, found first on sys.path? no: imported below by path)
 
 
 def load_retail():
@@ -55,7 +53,12 @@ def main() -> int:
     sa = agent_run_stats(a_runs, a_ids) if a_runs else None
     sr = agent_run_stats(r_runs, r_ids) if r_runs else None
     for k in (1, 3):
-        add(f"agent pass^{k} (claude-haiku-5-5)", *(sa[f"pass{k}"] if sa else (0, 0)), *(sr[f"pass{k}"] if sr else (0, 0)))
+        add(f"agent pass^{k} (claude-haiku-5-5; first {k} trial(s) all reward 1.0)", *(sa[f"pass{k}"] if sa else (0, 0)), *(sr[f"pass{k}"] if sr else (0, 0)))
+    for k in (1, 3):
+        pa = rmod.tau2_pass_k(a_runs["haiku"], a_ids, k) if a_runs else (float("nan"), 0)
+        pr = rmod.tau2_pass_k(r_runs["haiku"], r_ids, k) if r_runs else (float("nan"), 0)
+        rows.append((f"agent pass^{k} (claude-haiku-5-5; tau2 estimator, mean of C(c,k)/C(n,k) over tasks)",
+                     f"{pa[0]:.3f} (n = {pa[1]})" if pa[1] else "n/a", f"{pr[0]:.3f} (n = {pr[1]})" if pr[1] else "n/a", (0, 0, 0, 0)))
     add("ground-truth agent reaches reward 1.0", *(sa["gt"] if sa else (0, 0)), *(sr["gt"] if sr else (0, 0)))
     jo_r = rmod.judge_only(r_runs["haiku"]) if r_runs else (0, 0)
     L = ["# Airline beside retail", "",

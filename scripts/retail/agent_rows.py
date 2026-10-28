@@ -20,6 +20,7 @@ No LLM calls, nothing under tau2-bench/ is modified.
 from __future__ import annotations
 
 import csv
+from math import comb
 import json
 import re
 import sys
@@ -91,7 +92,7 @@ def main() -> int:
     if lp.exists():
         pat = re.compile(r"replay|mismatch|strict|set_state", re.I)
         for line in lp.read_text(encoding="utf-8", errors="replace").replace("\r", "\n").splitlines():
-            if (pat.search(line) and "ERROR" in line) or "mismatch" in line.lower():
+            if pat.search(line) and ("ERROR" in line or "WARNING" in line):  # log lines only, not conversation text
                 m = re.search(r"[Tt]ask (\d+)", line)
                 log_hits[m.group(1) if m else "ALL"].append(line.strip()[:200])
 
@@ -168,9 +169,11 @@ def main() -> int:
     evald = [v for v in (by_task.get(t, []) for t in ids) if v]
 
     def pk(k):
+        """tau2's pass^k estimator: per task C(c, k) / C(n, k) over the n evaluated trials with c successes, averaged over tasks
+        (k = 1 is the mean reward that `tau2 run` prints)."""
         el = [[f["reward"] for f in v if f["termination"] != "infrastructure_error"] for v in evald]
         el = [v for v in el if len(v) >= k]
-        return (sum(all(r == 1.0 for r in v[:k]) for v in el) / len(el), len(el)) if el else (float("nan"), 0)
+        return (sum(comb(sum(r == 1.0 for r in v), k) / comb(len(v), k) for v in el) / len(el), len(el)) if el else (float("nan"), 0)
 
     summary += [""]
     for k in (1, 2, 3):

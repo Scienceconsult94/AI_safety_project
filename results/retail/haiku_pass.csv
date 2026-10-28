@@ -1,0 +1,572 @@
+task_id,check,haiku_pass,defect,severity,evidence,note
+0,1f,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 22, 26] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+0,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=26 tool_calls=6,
+0,5c,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 22, 26] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+0,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+0,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+1,1f,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 20, 27] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+1,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=24 tool_calls=5,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+1,5c,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 20, 27] judge_only_fails=0","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+1,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+1,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+2,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[24, 24, 28] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+2,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=32 tool_calls=10,
+2,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[24, 24, 28] judge_only_fails=0",stable
+2,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+2,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+3,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 26, 25] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+3,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=25 tool_calls=10,
+3,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 26, 25] judge_only_fails=0",stable
+3,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+3,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+4,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 28, 29] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+4,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=34 tool_calls=12,
+4,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 28, 29] judge_only_fails=0",stable
+4,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+4,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+6,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 25, 27] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+6,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=25 tool_calls=6,
+6,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 25, 27] judge_only_fails=0",stable
+6,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+6,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+7,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 25, 27] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+7,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=30 tool_calls=6,
+7,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 25, 27] judge_only_fails=0",stable
+7,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+7,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+8,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 25, 31] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+8,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=23 tool_calls=6,
+8,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 25, 31] judge_only_fails=0",stable
+8,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+8,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+10,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 39, 23] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+10,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=20 tool_calls=5,
+10,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 39, 23] judge_only_fails=0",stable
+10,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+10,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+11,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 24, 20] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+11,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=25 tool_calls=6,
+11,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 24, 20] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+11,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+11,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+13,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 27, 23] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+13,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=25 tool_calls=5,
+13,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 27, 23] judge_only_fails=0",stable
+13,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+13,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+14,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[35, 21, 23] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+14,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=25 tool_calls=6,
+14,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[35, 21, 23] judge_only_fails=0",stable
+14,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+14,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+15,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 24, 20] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+15,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=28 tool_calls=7,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+15,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 24, 20] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+15,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+15,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+16,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 26, 21] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+16,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=28 tool_calls=9,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+16,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 26, 21] judge_only_fails=0",stable
+16,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+16,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+19,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[32, 32, 34] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+19,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=True nl_unmet=['Agent should tell the user that exchanging the pet bed and office chai'] termination=user_stop msgs=27 tool_calls=8,"PROVISIONAL (mechanical, judge failed an assertion while the DB matched): REVIEW whether the cause is the task, the judge, or an agent slip"
+19,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[32, 32, 34] judge_only_fails=0",stable
+19,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+19,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+20,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[41, 39, 47] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+20,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=40 tool_calls=12,
+20,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[41, 39, 47] judge_only_fails=0",stable
+20,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+20,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+21,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[37, 36, 36] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+21,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=36 tool_calls=12,
+21,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[37, 36, 36] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+21,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+21,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+22,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 29, 32] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+22,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=30 tool_calls=7,
+22,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 29, 32] judge_only_fails=0",stable
+22,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+22,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+23,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 28, 27] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+23,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=34 tool_calls=12,
+23,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 28, 27] judge_only_fails=0",stable
+23,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+23,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+24,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 19, 21] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+24,1e,,0,,static_scan gt_eligible=0 (no reference actions); llm_agent_gt skips the task (registry task_filter),n/a
+24,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 19, 21] judge_only_fails=0",stable
+24,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=-",
+24,5f,,0,,reward_info present for every normal-stop simulation (3); no replay/mismatch line in the run log names this task,
+25,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 23, 23] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+25,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=21 tool_calls=7,
+25,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 23, 23] judge_only_fails=0",stable
+25,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+25,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+28,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[31, 25, 33] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+28,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=28 tool_calls=10,
+28,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[31, 25, 33] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+28,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+28,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+29,1f,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 33, 31] judge_only_fails=2",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+29,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=42 tool_calls=11,
+29,5c,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 33, 31] judge_only_fails=2","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+29,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+29,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+30,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[40, 40, 39] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+30,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=39 tool_calls=11,
+30,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[40, 40, 39] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+30,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+30,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+31,1f,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[21, 40, 40] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+31,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=42 tool_calls=10,
+31,5c,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[21, 40, 40] judge_only_fails=0","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+31,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+31,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+34,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[30, 28, 26] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+34,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=30 tool_calls=5,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+34,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[30, 28, 26] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+34,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+34,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+35,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 29, 33] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+35,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=28 tool_calls=8,
+35,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 29, 33] judge_only_fails=0",stable
+35,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+35,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+37,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[60, 35, 38] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+37,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=50 tool_calls=12,
+37,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[60, 35, 38] judge_only_fails=0",stable
+37,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+37,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+41,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 31, 30] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+41,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=33 tool_calls=9,
+41,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 31, 30] judge_only_fails=0",stable
+41,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+41,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+43,1f,1/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[23, 23, 21] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+43,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=37 tool_calls=6,
+43,5c,1/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[23, 23, 21] judge_only_fails=0","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+43,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+43,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+44,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 26, 20] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+44,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=18 tool_calls=5,
+44,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 26, 20] judge_only_fails=0",stable
+44,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+44,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+46,1f,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[30, 30, 28] judge_only_fails=2",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+46,1e,,1,high,"retail_gt_haiku: reward=0.0 db_match=False nl_unmet=['Agent should tell the user the total paid for remaining items is $1,49'] termination=user_stop msgs=24 tool_calls=6","PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+46,5c,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[30, 30, 28] judge_only_fails=2","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+46,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+46,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+47,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[24, 28, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+47,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=28 tool_calls=7,
+47,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[24, 28, 24] judge_only_fails=0",stable
+47,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+47,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+48,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 26, 26] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+48,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=24 tool_calls=6,
+48,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 26, 26] judge_only_fails=0",stable
+48,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+48,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+50,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[18, 18, 18] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+50,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=16 tool_calls=4,
+50,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[18, 18, 18] judge_only_fails=0",stable
+50,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+50,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+52,1f,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 25, 25] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+52,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=24 tool_calls=5,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+52,5c,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 25, 25] judge_only_fails=0",stable
+52,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+52,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+54,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[38, 41, 37] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+54,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=44 tool_calls=13,
+54,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[38, 41, 37] judge_only_fails=0",stable
+54,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+54,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+57,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[16, 16, 14] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+57,1e,,0,,static_scan gt_eligible=0 (no reference actions); llm_agent_gt skips the task (registry task_filter),n/a
+57,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[16, 16, 14] judge_only_fails=0",stable
+57,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=-",
+57,5f,,0,,reward_info present for every normal-stop simulation (3); no replay/mismatch line in the run log names this task,
+58,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 27, 27] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+58,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=26 tool_calls=6,
+58,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 27, 27] judge_only_fails=0",stable
+58,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+58,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+59,1f,1/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 25, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+59,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=21 tool_calls=5,
+59,5c,1/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 25, 24] judge_only_fails=0","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+59,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+59,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+63,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[31, 28, 28] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+63,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=32 tool_calls=8,
+63,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[31, 28, 28] judge_only_fails=0",stable
+63,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+63,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+66,1f,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 26, 31] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+66,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=25 tool_calls=5,
+66,5c,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 26, 31] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+66,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+66,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+67,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 29, 35] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+67,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=34 tool_calls=8,
+67,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 29, 35] judge_only_fails=0",stable
+67,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+67,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+69,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 29, 30] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+69,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=38 tool_calls=7,
+69,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 29, 30] judge_only_fails=0",stable
+69,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+69,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+72,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 29, 33] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+72,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=29 tool_calls=10,
+72,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 29, 33] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+72,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+72,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+73,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 26, 20] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+73,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=20 tool_calls=4,
+73,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 26, 20] judge_only_fails=0",stable
+73,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+73,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+75,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[21, 21, 19] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+75,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=19 tool_calls=6,
+75,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[21, 21, 19] judge_only_fails=0",stable
+75,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+75,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+76,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[38, 31, 33] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+76,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=33 tool_calls=12,
+76,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[38, 31, 33] judge_only_fails=0",stable
+76,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+76,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+78,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 27, 28] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+78,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=35 tool_calls=9,
+78,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 27, 28] judge_only_fails=0",stable
+78,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+78,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+80,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 19, 31] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+80,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=25 tool_calls=6,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+80,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 19, 31] judge_only_fails=0",stable
+80,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+80,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+81,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 24, 31] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+81,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=22 tool_calls=6,
+81,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 24, 31] judge_only_fails=0",stable
+81,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+81,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+82,1f,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 27, 25] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+82,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=26 tool_calls=7,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+82,5c,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 27, 25] judge_only_fails=0","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+82,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+82,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+83,1f,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 25, 23] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+83,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=30 tool_calls=8,
+83,5c,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 25, 23] judge_only_fails=0","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+83,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+83,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+84,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 27, 35] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+84,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=34 tool_calls=8,
+84,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 27, 35] judge_only_fails=0",stable
+84,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+84,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+85,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[30, 30, 29] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+85,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=24 tool_calls=6,
+85,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[30, 30, 29] judge_only_fails=0",stable
+85,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+85,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+87,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 40, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+87,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=21 tool_calls=7,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+87,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 40, 24] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+87,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+87,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+88,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 23, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+88,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=24 tool_calls=6,
+88,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 23, 24] judge_only_fails=0",stable
+88,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+88,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+89,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[23, 27, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+89,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=23 tool_calls=7,
+89,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[23, 27, 24] judge_only_fails=0",stable
+89,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+89,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+91,1f,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[36, 32, 32] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+91,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=32 tool_calls=8,
+91,5c,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[36, 32, 32] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+91,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+91,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+92,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 27, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+92,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=27 tool_calls=7,
+92,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 27, 24] judge_only_fails=0",stable
+92,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+92,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+93,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[30, 26, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+93,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=22 tool_calls=5,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+93,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[30, 26, 24] judge_only_fails=0",stable
+93,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+93,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+95,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[34, 36, 30] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+95,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=24 tool_calls=7,
+95,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[34, 36, 30] judge_only_fails=0",stable
+95,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+95,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+96,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[23, 23, 27] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+96,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=30 tool_calls=7,
+96,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[23, 23, 27] judge_only_fails=0",stable
+96,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+96,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+98,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[35, 42, 35] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+98,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=36 tool_calls=12,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+98,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[35, 42, 35] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+98,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+98,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+99,1f,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 30, 32] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+99,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=42 tool_calls=11,
+99,5c,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 30, 32] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+99,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+99,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+103,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[44, 40, 46] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+103,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=True nl_unmet=['Agent should provide the tracking number 286422338955.'] termination=user_stop msgs=40 tool_calls=12,"PROVISIONAL (mechanical, judge failed an assertion while the DB matched): REVIEW whether the cause is the task, the judge, or an agent slip"
+103,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[44, 40, 46] judge_only_fails=0",stable
+103,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+103,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+104,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[45, 42, 54] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+104,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=49 tool_calls=14,
+104,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[45, 42, 54] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+104,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+104,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+105,1f,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 22, 19] judge_only_fails=3",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+105,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=True nl_unmet=['Agent should exchange both tea kettles (same style) to the items reque'] termination=user_stop msgs=22 tool_calls=4,"PROVISIONAL (mechanical, judge failed an assertion while the DB matched): REVIEW whether the cause is the task, the judge, or an agent slip"
+105,5c,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[19, 22, 19] judge_only_fails=3",stable
+105,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+105,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+106,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[32, 31, 29] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+106,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=27 tool_calls=7,
+106,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[32, 31, 29] judge_only_fails=0",stable
+106,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+106,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+107,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[39, 33, 37] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+107,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=32 tool_calls=8,
+107,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[39, 33, 37] judge_only_fails=0",stable
+107,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+107,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+109,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 27, 29] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+109,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=31 tool_calls=8,
+109,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 27, 29] judge_only_fails=0",stable
+109,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+109,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+110,1f,1/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 25, 25] judge_only_fails=2",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+110,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=29 tool_calls=8,
+110,5c,1/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 25, 25] judge_only_fails=2","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+110,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+110,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+112,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 33, 39] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+112,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=36 tool_calls=11,
+112,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 33, 39] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+112,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+112,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+113,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 24, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+113,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=21 tool_calls=8,
+113,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 24, 24] judge_only_fails=0",stable
+113,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+113,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+5,1f,1/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 35, 31] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+5,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=30 tool_calls=6,
+5,5c,1/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[33, 35, 31] judge_only_fails=0","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+5,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+5,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+9,1f,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 27, 27] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+9,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=25 tool_calls=6,
+9,5c,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 27, 27] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+9,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+9,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+12,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[23, 23, 21] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+12,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=20 tool_calls=5,
+12,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[23, 23, 21] judge_only_fails=0",stable
+12,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+12,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+17,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[16, 16, 16] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+17,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=18 tool_calls=4,
+17,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[16, 16, 16] judge_only_fails=0",stable
+17,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+17,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+18,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 31, 29] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+18,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=28 tool_calls=5,
+18,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 31, 29] judge_only_fails=0",stable
+18,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+18,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+26,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 27, 25] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+26,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=32 tool_calls=8,
+26,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[25, 27, 25] judge_only_fails=0",stable
+26,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+26,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+27,1f,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 29, 29] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+27,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=29 tool_calls=10,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+27,5c,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 29, 29] judge_only_fails=0",stable
+27,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+27,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+32,1f,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[34, 26, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+32,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=22 tool_calls=8,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+32,5c,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[34, 26, 24] judge_only_fails=0",stable
+32,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+32,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+33,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[24, 22, 20] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+33,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=30 tool_calls=7,
+33,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[24, 22, 20] judge_only_fails=0",stable
+33,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+33,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+36,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[41, 37, 47] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+36,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=46 tool_calls=14,
+36,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[41, 37, 47] judge_only_fails=0",stable
+36,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+36,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+38,1f,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[34, 39, 36] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+38,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=40 tool_calls=10,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+38,5c,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[34, 39, 36] judge_only_fails=0",stable
+38,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+38,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+39,1f,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 24, 28] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+39,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=22 tool_calls=4,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+39,5c,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[20, 24, 28] judge_only_fails=0","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+39,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+39,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+40,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 18, 22] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+40,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=18 tool_calls=4,
+40,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 18, 22] judge_only_fails=0",stable
+40,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+40,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+42,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[36, 33, 31] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+42,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=36 tool_calls=9,
+42,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[36, 33, 31] judge_only_fails=0",stable
+42,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+42,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+45,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 24, 22] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+45,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=22 tool_calls=5,
+45,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 24, 22] judge_only_fails=0",stable
+45,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+45,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+49,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 30, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+49,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=26 tool_calls=9,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+49,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 30, 24] judge_only_fails=0",stable
+49,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+49,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+51,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 27, 28] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+51,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=28 tool_calls=6,
+51,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 27, 28] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+51,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+51,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+53,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 28, 25] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+53,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=24 tool_calls=7,
+53,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 28, 25] judge_only_fails=0",stable
+53,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+53,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+55,1f,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[38, 32, 37] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+55,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=40 tool_calls=13,
+55,5c,2/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[38, 32, 37] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+55,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+55,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+56,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 24, 27] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+56,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=26 tool_calls=7,
+56,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 24, 27] judge_only_fails=0",stable
+56,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+56,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+60,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[16, 18, 18] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+60,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=16 tool_calls=4,
+60,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[16, 18, 18] judge_only_fails=0",stable
+60,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+60,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+61,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[18, 19, 21] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+61,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=16 tool_calls=5,
+61,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[18, 19, 21] judge_only_fails=0",stable
+61,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+61,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+62,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 25, 25] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+62,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=26 tool_calls=6,
+62,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 25, 25] judge_only_fails=0",stable
+62,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+62,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+64,1f,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 29, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+64,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=26 tool_calls=7,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+64,5c,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[27, 29, 24] judge_only_fails=0",stable
+64,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+64,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+65,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 24, 18] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+65,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=16 tool_calls=3,
+65,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 24, 18] judge_only_fails=0",stable
+65,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+65,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+68,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 25, 22] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+68,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=25 tool_calls=7,
+68,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 25, 22] judge_only_fails=0",stable
+68,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+68,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+70,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[37, 25, 23] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+70,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=18 tool_calls=5,
+70,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[37, 25, 23] judge_only_fails=0",stable
+70,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+70,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+71,1f,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[44, 30, 35] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+71,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=32 tool_calls=7,
+71,5c,1/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[44, 30, 35] judge_only_fails=0","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+71,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+71,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+74,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 27, 28] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+74,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=34 tool_calls=9,
+74,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 27, 28] judge_only_fails=0",stable
+74,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+74,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+77,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 22, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+77,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=22 tool_calls=5,
+77,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[22, 22, 24] judge_only_fails=0",stable
+77,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+77,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+79,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 28, 28] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+79,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=30 tool_calls=7,
+79,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[28, 28, 28] judge_only_fails=0",stable
+79,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+79,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+86,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[34, 34, 28] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+86,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=36 tool_calls=10,
+86,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[34, 34, 28] judge_only_fails=0",stable
+86,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+86,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+90,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 24, 26] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+90,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=28 tool_calls=7,
+90,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 24, 26] judge_only_fails=0",stable
+90,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+90,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+94,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 22, 28] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+94,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=26 tool_calls=7,
+94,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 22, 28] judge_only_fails=0",stable
+94,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+94,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+97,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 29, 25] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+97,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=26 tool_calls=7,
+97,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[29, 29, 25] judge_only_fails=0",stable
+97,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+97,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+100,1f,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[37, 36, 37] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+100,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=46 tool_calls=14,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+100,5c,0/3,0,,"retail_pass3_haiku: rewards=[0.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[37, 36, 37] judge_only_fails=0",stable
+100,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+100,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+101,1f,1/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[36, 49, 37] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+101,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=42 tool_calls=8,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+101,5c,1/3,0,,"retail_pass3_haiku: rewards=[1.0, 0.0, 0.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[36, 49, 37] judge_only_fails=0","REVIEW: flip 1/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+101,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+101,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+102,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[34, 40, 44] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+102,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=42 tool_calls=10,
+102,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[34, 40, 44] judge_only_fails=0",stable
+102,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+102,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+108,1f,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 24, 24] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+108,1e,,1,high,retail_gt_haiku: reward=0.0 db_match=False nl_unmet=['Agent should tell the user the refund amount is $346.93.'] termination=user_stop msgs=22 tool_calls=6,"PROVISIONAL (mechanical, DB did not match): REVIEW whether the cause is the task, the judge, or an agent slip"
+108,5c,2/3,0,,"retail_pass3_haiku: rewards=[0.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[26, 24, 24] judge_only_fails=0","REVIEW: flip 2/3; decide whether it traces to the user simulator (defect=1 medium), to the judge (note under 2j) or to the agent"
+108,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+108,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+111,1f,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[32, 31, 31] judge_only_fails=0",haiku_pass = successes/evaluated trials; NL judge claude-haiku-5-5 in the loop
+111,1e,,0,,retail_gt_haiku: reward=1.0 db_match=True nl_unmet=- termination=user_stop msgs=42 tool_calls=11,
+111,5c,3/3,0,,"retail_pass3_haiku: rewards=[1.0, 1.0, 1.0] terminations=['user_stop', 'user_stop', 'user_stop'] msgs=[32, 31, 31] judge_only_fails=0",stable
+111,5e,,0,,"terminations=['user_stop', 'user_stop', 'user_stop'] gt=user_stop",
+111,5f,,0,,reward_info present for every normal-stop simulation (4); no replay/mismatch line in the run log names this task,
+ALL,6e,,0,,infrastructure_error simulations in these runs: 0; tau2 discloses 'Infra Errors N (excluded from metrics below)' above Average Reward (display.py),no exclusion in these runs

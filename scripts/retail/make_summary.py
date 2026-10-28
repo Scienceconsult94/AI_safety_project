@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import sys
+from math import comb
 from pathlib import Path
 
 import matplotlib
@@ -57,6 +58,21 @@ def _share(k, n):
     return fmt_share(k, n) if n else f"{k}/0"
 
 
+def tau2_pass_k(sims, ids, k: int) -> tuple[float, int]:
+    """tau2's pass^k: per task C(c, k) / C(n, k) over the n evaluated trials with c successes, averaged over tasks
+    (k = 1 is the average reward that `tau2 run` prints); infrastructure_error simulations excluded."""
+    ids = set(map(str, ids))
+    per: dict[str, list[bool]] = {}
+    for s in sims:
+        t = str(s["task_id"])
+        if t not in ids or s.get("termination_reason") == "infrastructure_error":
+            continue
+        r = (s.get("reward_info") or {}).get("reward")
+        per.setdefault(t, []).append(r is not None and float(r) == 1.0)
+    el = [v for v in per.values() if len(v) >= k]
+    return (sum(comb(sum(v), k) / comb(len(v), k) for v in el) / len(el), len(el)) if el else (float("nan"), 0)
+
+
 def agent_table(runs, ids) -> list:
     title = "Table 4. Agent runs (claude-haiku-5-5 agent and user; stock scorer; NL judge claude-haiku-5-5, one vote, in the loop)"
     if runs is None:
@@ -65,6 +81,7 @@ def agent_table(runs, ids) -> list:
     n3 = st["n3"]
     L = ["", title, "", "| quantity | value |", "|---|---|"]
     L += [f"| pass^{k}, all tasks (first {k} trial(s) all reward 1.0) | {_share(*st[f'pass{k}'])} |" for k in (1, 2, 3)]
+    L += [f"| pass^{k}, tau2 estimator (mean over tasks of C(c,k)/C(n,k); k = 1 is the average reward tau2 prints) | {tau2_pass_k(runs['haiku'], ids, k)[0]:.3f} (n = {tau2_pass_k(runs['haiku'], ids, k)[1]} tasks) |" for k in (1, 2, 3)]
     L.append(f"| tasks solved in 0/3 trials | {_share(st['s0'], n3)} |")
     L.append(f"| tasks solved in 1/3 or 2/3 trials (unstable) | {_share(st['s12'], n3)} |")
     L.append(f"| tasks solved in 3/3 trials | {_share(st['s3'], n3)} |")

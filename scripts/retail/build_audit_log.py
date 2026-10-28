@@ -177,8 +177,8 @@ def main() -> int:
         v = verdicts.get((t, c))
         if v and r["defect"] == "1":
             ok = v["skeptic_ok"].strip()
-            if ok == "0" and v.get("note", "").strip().lower().startswith("should be defect=1"):
-                ok = "1"
+            if ok in ("0", "") and v.get("note", "").strip().lower().startswith("should be defect=1"):
+                ok = "1"  # an escalation: the skeptic filed the row itself, so it counts as skeptic-confirmed
             r["skeptic_ok"] = ok
             if v.get("note"):
                 r["note"] = (r["note"] + "; skeptic: " + v["note"].strip()).strip("; ")

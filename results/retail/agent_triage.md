@@ -1,0 +1,93 @@
+# Trajectories for manual review (checks 4f, 5c, 5d; 1e triage)
+
+Each line: one failed Haiku trial or failed GT run; flipped tasks (1 or 2 of 3) have all their trials rendered.
+
+- task 0, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=26 -> `results/retail/trajectories/0_haiku_t0.md`
+- task 1, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=24 tool_calls=5 -> `results/retail/trajectories/1_gt_t0.md`
+- task 1, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=20 -> `results/retail/trajectories/1_haiku_t0.md`
+- task 1, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=20 -> `results/retail/trajectories/1_haiku_t1.md`
+- task 11, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=20 -> `results/retail/trajectories/11_haiku_t2.md`
+- task 15, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=28 tool_calls=7 -> `results/retail/trajectories/15_gt_t0.md`
+- task 15, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=20 -> `results/retail/trajectories/15_haiku_t2.md`
+- task 16, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=28 tool_calls=9 -> `results/retail/trajectories/16_gt_t0.md`
+- task 19, GT run: retail_gt_haiku: reward=0.0 db_match=True nl_unmet=['Agent should tell the user that exchanging the pet bed and office chai'] termination=user_stop msgs=27 tool_calls=8 -> `results/retail/trajectories/19_gt_t0.md`
+- task 21, Haiku trial 2: reward=0.0 db_match=False nl_unmet=['Agent should tell the user their gift card balance is $44.08.'] termination=user_stop msgs=36 -> `results/retail/trajectories/21_haiku_t2.md`
+- task 28, Haiku trial 2: reward=0.0 db_match=False nl_unmet=['Agent should tell the user the total refund amount is $918.43.'] termination=user_stop msgs=33 -> `results/retail/trajectories/28_haiku_t2.md`
+- task 29, Haiku trial 0: reward=0.0 db_match=True nl_unmet=['Agent should tell the user the prices of the available bamboo skateboa'] termination=user_stop msgs=29 -> `results/retail/trajectories/29_haiku_t0.md`
+- task 29, Haiku trial 1: reward=0.0 db_match=True nl_unmet=['Agent should tell the user the prices of the available bamboo skateboa'] termination=user_stop msgs=33 -> `results/retail/trajectories/29_haiku_t1.md`
+- task 30, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=40 -> `results/retail/trajectories/30_haiku_t1.md`
+- task 31, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=21 -> `results/retail/trajectories/31_haiku_t0.md`
+- task 31, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=40 -> `results/retail/trajectories/31_haiku_t1.md`
+- task 34, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=30 tool_calls=5 -> `results/retail/trajectories/34_gt_t0.md`
+- task 34, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=28 -> `results/retail/trajectories/34_haiku_t1.md`
+- task 43, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=23 -> `results/retail/trajectories/43_haiku_t1.md`
+- task 43, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=21 -> `results/retail/trajectories/43_haiku_t2.md`
+- task 46, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=['Agent should tell the user the total paid for remaining items is $1,49'] termination=user_stop msgs=24 tool_calls=6 -> `results/retail/trajectories/46_gt_t0.md`
+- task 46, Haiku trial 0: reward=0.0 db_match=True nl_unmet=['Agent should tell the user the total paid for remaining items is $1,49'] termination=user_stop msgs=30 -> `results/retail/trajectories/46_haiku_t0.md`
+- task 46, Haiku trial 2: reward=0.0 db_match=True nl_unmet=['Agent should tell the user the total paid for remaining items is $1,49'] termination=user_stop msgs=28 -> `results/retail/trajectories/46_haiku_t2.md`
+- task 52, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=24 tool_calls=5 -> `results/retail/trajectories/52_gt_t0.md`
+- task 52, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=25 -> `results/retail/trajectories/52_haiku_t0.md`
+- task 52, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=25 -> `results/retail/trajectories/52_haiku_t1.md`
+- task 52, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=25 -> `results/retail/trajectories/52_haiku_t2.md`
+- task 59, Haiku trial 1: reward=0.0 db_match=False nl_unmet=['Agent should tell the user the refund for the cancelled desk lamp orde'] termination=user_stop msgs=25 -> `results/retail/trajectories/59_haiku_t1.md`
+- task 59, Haiku trial 2: reward=0.0 db_match=False nl_unmet=['Agent should tell the user the refund for the cancelled desk lamp orde'] termination=user_stop msgs=24 -> `results/retail/trajectories/59_haiku_t2.md`
+- task 66, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=25 -> `results/retail/trajectories/66_haiku_t0.md`
+- task 72, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=33 -> `results/retail/trajectories/72_haiku_t2.md`
+- task 80, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=25 tool_calls=6 -> `results/retail/trajectories/80_gt_t0.md`
+- task 82, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=26 tool_calls=7 -> `results/retail/trajectories/82_gt_t0.md`
+- task 82, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=27 -> `results/retail/trajectories/82_haiku_t0.md`
+- task 82, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=25 -> `results/retail/trajectories/82_haiku_t2.md`
+- task 83, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=27 -> `results/retail/trajectories/83_haiku_t0.md`
+- task 83, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=25 -> `results/retail/trajectories/83_haiku_t1.md`
+- task 87, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=21 tool_calls=7 -> `results/retail/trajectories/87_gt_t0.md`
+- task 87, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=24 -> `results/retail/trajectories/87_haiku_t2.md`
+- task 91, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=36 -> `results/retail/trajectories/91_haiku_t0.md`
+- task 93, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=22 tool_calls=5 -> `results/retail/trajectories/93_gt_t0.md`
+- task 98, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=36 tool_calls=12 -> `results/retail/trajectories/98_gt_t0.md`
+- task 98, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=42 -> `results/retail/trajectories/98_haiku_t1.md`
+- task 99, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=33 -> `results/retail/trajectories/99_haiku_t0.md`
+- task 103, GT run: retail_gt_haiku: reward=0.0 db_match=True nl_unmet=['Agent should provide the tracking number 286422338955.'] termination=user_stop msgs=40 tool_calls=12 -> `results/retail/trajectories/103_gt_t0.md`
+- task 104, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=54 -> `results/retail/trajectories/104_haiku_t2.md`
+- task 105, GT run: retail_gt_haiku: reward=0.0 db_match=True nl_unmet=['Agent should exchange both tea kettles (same style) to the items reque'] termination=user_stop msgs=22 tool_calls=4 -> `results/retail/trajectories/105_gt_t0.md`
+- task 105, Haiku trial 0: reward=0.0 db_match=True nl_unmet=['Agent should exchange both tea kettles (same style) to the items reque'] termination=user_stop msgs=19 -> `results/retail/trajectories/105_haiku_t0.md`
+- task 105, Haiku trial 1: reward=0.0 db_match=True nl_unmet=['Agent should exchange both tea kettles (same style) to the items reque'] termination=user_stop msgs=22 -> `results/retail/trajectories/105_haiku_t1.md`
+- task 105, Haiku trial 2: reward=0.0 db_match=True nl_unmet=['Agent should exchange both tea kettles (same style) to the items reque'] termination=user_stop msgs=19 -> `results/retail/trajectories/105_haiku_t2.md`
+- task 110, Haiku trial 1: reward=0.0 db_match=True nl_unmet=['Agent should modify user address'] termination=user_stop msgs=25 -> `results/retail/trajectories/110_haiku_t1.md`
+- task 110, Haiku trial 2: reward=0.0 db_match=True nl_unmet=['Agent should modify user address'] termination=user_stop msgs=25 -> `results/retail/trajectories/110_haiku_t2.md`
+- task 112, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=39 -> `results/retail/trajectories/112_haiku_t2.md`
+- task 5, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=35 -> `results/retail/trajectories/5_haiku_t1.md`
+- task 5, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=31 -> `results/retail/trajectories/5_haiku_t2.md`
+- task 9, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=29 -> `results/retail/trajectories/9_haiku_t0.md`
+- task 27, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=29 tool_calls=10 -> `results/retail/trajectories/27_gt_t0.md`
+- task 27, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=27 -> `results/retail/trajectories/27_haiku_t0.md`
+- task 27, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=29 -> `results/retail/trajectories/27_haiku_t1.md`
+- task 27, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=29 -> `results/retail/trajectories/27_haiku_t2.md`
+- task 32, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=22 tool_calls=8 -> `results/retail/trajectories/32_gt_t0.md`
+- task 32, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=34 -> `results/retail/trajectories/32_haiku_t0.md`
+- task 32, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=26 -> `results/retail/trajectories/32_haiku_t1.md`
+- task 32, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=24 -> `results/retail/trajectories/32_haiku_t2.md`
+- task 38, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=40 tool_calls=10 -> `results/retail/trajectories/38_gt_t0.md`
+- task 38, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=34 -> `results/retail/trajectories/38_haiku_t0.md`
+- task 38, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=39 -> `results/retail/trajectories/38_haiku_t1.md`
+- task 38, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=36 -> `results/retail/trajectories/38_haiku_t2.md`
+- task 39, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=22 tool_calls=4 -> `results/retail/trajectories/39_gt_t0.md`
+- task 39, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=20 -> `results/retail/trajectories/39_haiku_t0.md`
+- task 39, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=24 -> `results/retail/trajectories/39_haiku_t1.md`
+- task 49, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=26 tool_calls=9 -> `results/retail/trajectories/49_gt_t0.md`
+- task 51, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=27 -> `results/retail/trajectories/51_haiku_t1.md`
+- task 55, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=37 -> `results/retail/trajectories/55_haiku_t2.md`
+- task 64, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=26 tool_calls=7 -> `results/retail/trajectories/64_gt_t0.md`
+- task 64, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=27 -> `results/retail/trajectories/64_haiku_t0.md`
+- task 64, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=29 -> `results/retail/trajectories/64_haiku_t1.md`
+- task 64, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=24 -> `results/retail/trajectories/64_haiku_t2.md`
+- task 71, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=44 -> `results/retail/trajectories/71_haiku_t0.md`
+- task 71, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=30 -> `results/retail/trajectories/71_haiku_t1.md`
+- task 100, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=46 tool_calls=14 -> `results/retail/trajectories/100_gt_t0.md`
+- task 100, Haiku trial 0: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=37 -> `results/retail/trajectories/100_haiku_t0.md`
+- task 100, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=36 -> `results/retail/trajectories/100_haiku_t1.md`
+- task 100, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=37 -> `results/retail/trajectories/100_haiku_t2.md`
+- task 101, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=42 tool_calls=8 -> `results/retail/trajectories/101_gt_t0.md`
+- task 101, Haiku trial 1: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=49 -> `results/retail/trajectories/101_haiku_t1.md`
+- task 101, Haiku trial 2: reward=0.0 db_match=False nl_unmet=- termination=user_stop msgs=37 -> `results/retail/trajectories/101_haiku_t2.md`
+- task 108, GT run: retail_gt_haiku: reward=0.0 db_match=False nl_unmet=['Agent should tell the user the refund amount is $346.93.'] termination=user_stop msgs=22 tool_calls=6 -> `results/retail/trajectories/108_gt_t0.md`
+- task 108, Haiku trial 0: reward=0.0 db_match=False nl_unmet=['Agent should tell the user the refund amount is $346.93.'] termination=user_stop msgs=26 -> `results/retail/trajectories/108_haiku_t0.md`
