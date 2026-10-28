@@ -24,7 +24,7 @@ Reading rule (design review E3): a flip is attributed to its component (criteria
 the task-7 trial that flips 0 -> 1 under tasks v2 does so by construction of the fix.
 
 Run from inside tau2-bench (tau2 venv; .env is read by tau2 for the judge):
-    uv run --no-sync python ../scripts/v2/rescore.py [--set recorded|fresh] [--no-judge] [--force] [--workers 3]
+    uv run --no-sync python ../scripts/v2/rescore.py [--set recorded|fresh|sonnet] [--no-judge] [--force] [--workers 3]
 """
 
 from __future__ import annotations
@@ -67,7 +67,11 @@ SETS = {
     "fresh": {"dir": OUT / "runs", "files": {"haiku": "v2_sample20_pass3_haiku/results.json", "gt": "v2_sample20_gt_haiku/results.json",
                                              "gt3": "v2_gt3_haiku/results.json"},
               "gate_cfg": "V2", "suffix": "_fresh", "cache": OUT / "judge_cache_live.json"},
+    # strong-vs-weak check (strong_vs_weak/PLAN.md): the Sonnet agent on the 20 sampled tasks x 3, recorded under the stock scorer
+    "sonnet": {"dir": RUNS, "files": {"sonnet": "sample20_sonnet_t3.results.json"},
+               "gate_cfg": "v1", "suffix": "_sonnet", "cache": OUT / "judge_cache_sonnet.json", "label": "sonnet"},
 }
+PASS3_AGENTS = ("haiku", "sonnet")  # run keys of Pass^3 runs; every other key is a ground-truth run
 CONFIGS = [  # name, tasks, hash, comm, nl
     ("v1", "t1", 0, 0, 0),
     ("S_hash", "t1", 1, 0, 0),
@@ -223,7 +227,7 @@ def main() -> int:
             print(f"missing {p} - skipped")
             continue
         res = Results.load(p)
-        if args.set == "recorded":
+        if args.set in ("recorded", "sonnet"):  # runs on the pinned tasks: the embedded tasks must equal the loader's
             t1 = {t.id: t for t in res.tasks}
             assert all(t1[k].model_dump() == t1_stock[k].model_dump() for k in t1), "embedded tasks differ from the pinned loader"
         else:
@@ -349,15 +353,16 @@ def main() -> int:
 
     # ---- summary
     cost = s2.JUDGE_COST["in_tokens"] / 1e6 * PRICE_IN + s2.JUDGE_COST["out_tokens"] / 1e6 * PRICE_OUT
-    hk = [r for r in rows if r["agent"] == "haiku"]
-    gt = [r for r in rows if r["agent"] != "haiku"]
+    hk = [r for r in rows if r["agent"] in PASS3_AGENTS]
+    gt = [r for r in rows if r["agent"] not in PASS3_AGENTS]
+    lab = S.get("label", "haiku")
     n_tasks = len({r["task_id"] for r in hk})
     lines = [f"# Re-score of the {args.set} simulations under scorer v2", "",
              f"Inputs: {', '.join(fn for _, fn, _, _ in loaded)} ({len(rows)} simulations). Replay gate ({S['gate_cfg']} reproduces the recorded reward): {len(gate_rows) - mism}/{len(gate_rows)}.",
              f"Provenance: scorer {prov['scorer_version']}, overlay commit {prov['overlay_commit']}{' (DIRTY)' if prov['overlay_dirty'] else ''}, judge {prov['judge_model']} args {prov['judge_args']} view {prov['judge_view']} prompt {prov['judge_prompt_sha256']}, {args.votes} votes.",
              f"Judge calls this run: {s2.JUDGE_COST['calls']} ({s2.JUDGE_COST['retries']} re-asks), {s2.JUDGE_COST['in_tokens']:,} in / {s2.JUDGE_COST['out_tokens']:,} out tokens, own cost estimate ${cost:.3f} (${PRICE_IN}/{PRICE_OUT} per MTok).", "",
              "## Pass counts per configuration", "",
-             f"| config | tasks | switches | haiku sims ({len(hk)}) | haiku tasks 3/3 ({n_tasks}) | gt sims ({len(gt)}) | all ({len(rows)}) | upper bound (undetermined→met) | without process-class assertions |",
+             f"| config | tasks | switches | {lab} sims ({len(hk)}) | {lab} tasks 3/3 ({n_tasks}) | gt sims ({len(gt)}) | all ({len(rows)}) | upper bound (undetermined→met) | without process-class assertions |",
              "|---|---|---|---|---|---|---|---|---|"]
     for name, tv, h, c, n in cfgs:
         ph = sum(1 for r in hk if r.get(f"{name}_reward") == 1.0)
