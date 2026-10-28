@@ -14,7 +14,7 @@ Provenance of the re-score: scorer v2, overlay commit 5f4d92a, judge anthropic/c
 | refusal bot, no tool calls (judged) | v2 | 14/23 = 0.61 [0.41, 0.78] of the no-op tasks | 5/7 |
 | refusal bot, process-class assertions excluded | v2 | 17/23 | |
 
-Provenance of the refusal-bot probe: overlay commit 5f4d92a, dirty flag True — the probe ran under the `V2_ALLOW_DIRTY=1` override while `make_summary_v2.py` (not imported by the probe) was being edited; the ballots are cached, so a clean re-run replays them.
+Provenance of the refusal-bot probe: overlay commit a4f86e7, dirty flag False (re-run on a clean overlay; the cached ballots of the first run were replayed).
 
 Under v1 every one of the 23 no-op tasks is passed by an agent that changes nothing and says nothing required. Under v2 the empty trajectory and the 2b probe fail by rule; a refusal bot still passes the tasks whose assertions are all of the 'does not do X' kind, which tau2 documents as the intended outcome. The design review predicted about 13 of 23 such passes before the measurement. The 30 tasks outside the sample carry assertions that were not audited in block 1.
 

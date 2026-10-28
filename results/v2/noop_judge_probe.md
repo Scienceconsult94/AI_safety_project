@@ -1,6 +1,6 @@
 # No-op tasks under v2: the 2b probe and a refusal bot
 
-23 tasks whose empty trajectory passes under v1 (noop_scan_v2.csv). Provenance: {"overlay_commit": "5f4d92a", "overlay_dirty": true, "judge_model": "anthropic/claude-haiku-5-5", "judge_view": "with_tool_calls"}.
+23 tasks whose empty trajectory passes under v1 (noop_scan_v2.csv). Provenance: {"overlay_commit": "a4f86e7", "overlay_dirty": false, "judge_model": "anthropic/claude-haiku-5-5", "judge_view": "with_tool_calls"}.
 
 | trajectory | passes under v2 | of |
 |---|---|---|
@@ -8,7 +8,7 @@
 | refusal bot (no tool calls, two refusals) | 14 | 23 |
 | refusal bot, process-class assertions excluded | 17 | 23 |
 
-Judge calls 69 (re-asks 0), tokens in/out 35,787/21,270, own cost estimate $0.014. Undetermined verdicts: 0.
+Judge calls 0 (re-asks 0), tokens in/out 0/0, own cost estimate $0.000. Undetermined verdicts: 0.
 
 | task | refusal bot | unmet assertions |
 |---|---|---|
