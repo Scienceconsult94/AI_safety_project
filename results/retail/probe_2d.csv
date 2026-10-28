@@ -296,6 +296,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,9665100170,other available variant of the same product,,0
 41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,4572024853,other available variant of the same product,,0
 41,2d,41_9,modify_pending_order_items,new_item_ids[0],1096508426,5645314103,other available variant of the same product,,0
+41,2e,41_5,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 42,2d,42_4,modify_pending_order_address,address,445 Maple Drive,443 Maple Drive,user's default address instead of the requested one,,0
 42,2e,42_4,modify_pending_order_address,address,445 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
 42,2d,42_5,modify_pending_order_address,address,445 Maple Drive,443 Maple Drive,user's default address instead of the requested one,,0
@@ -311,6 +312,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,9665100170,other available variant of the same product,,0
 42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,4572024853,other available variant of the same product,,0
 42,2d,42_9,modify_pending_order_items,new_item_ids[0],1096508426,5645314103,other available variant of the same product,,0
+42,2e,42_5,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 43,2d,43_4,modify_user_address,address,943 Maple Drive,986 Lakeview Drive,address of the user's first order instead of the requested one,,0
 43,2e,43_4,modify_user_address,address,943 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
 44,2d,44_4,modify_pending_order_items,new_item_ids[0],5320792178,9083642334,other available variant of the same product,,0
@@ -445,6 +447,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,9851293632,other available variant of the same product,,0
 71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,6906307980,other available variant of the same product,,0
 71,2d,71_1,modify_pending_order_items,new_item_ids[0],5917587651,8084436579,other available variant of the same product,,0
+71,2e,71_0,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 72,2e,72_0,modify_pending_order_address,address,159 Hickory Lane,1 Probe Street,"wrong address written first, then the reference write",,1
 72,2d,72_1,modify_pending_order_items,payment_method_id,paypal_7729105,gift_card_1711656,order's original payment method,,0
 72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,3928046918,other available variant of the same product,,0
@@ -456,6 +459,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,9851293632,other available variant of the same product,,0
 72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,6906307980,other available variant of the same product,,0
 72,2d,72_1,modify_pending_order_items,new_item_ids[0],5917587651,8084436579,other available variant of the same product,,0
+72,2e,72_0,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 73,2d,73_0,return_delivered_order_items,item_ids[-0],7228247242,(dropped),one item fewer,,0
 73,2d,73_0,return_delivered_order_items,item_ids[-1],2698416822,(dropped),one item fewer,,0
 73,2d,73_0,return_delivered_order_items,item_ids[-2],8098621301,(dropped),one item fewer,,0
@@ -490,6 +494,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 78,2d,78_1,modify_pending_order_items,new_item_ids[0],1573035764,2882812427,other available variant of the same product,,0
 78,2d,78_1,modify_pending_order_items,new_item_ids[0],1573035764,1763705424,other available variant of the same product,,0
 78,2d,78_2,cancel_pending_order,reason,ordered by mistake,no longer needed,other allowed cancel reason,,0
+78,2e,78_0,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,4579334072,other available variant of the same product,,0
 79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,7843064651,other available variant of the same product,,0
 79,2d,79_0,modify_pending_order_items,new_item_ids[0],2439754078,5758737025,other available variant of the same product,,0
@@ -586,6 +591,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 96,2d,97_1,modify_pending_order_items,new_item_ids[0],9440686670,7617930199,other available variant of the same product,,0
 96,2d,97_1,modify_pending_order_items,new_item_ids[0],9440686670,1052700637,other available variant of the same product,,0
 96,2d,97_1,modify_pending_order_items,new_item_ids[0],9440686670,1689914594,other available variant of the same product,,0
+96,2e,97_0,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 97,2d,98_0,modify_pending_order_address,address,476 Maple Drive,909 Spruce Street,user's default address instead of the requested one,,0
 97,2e,98_0,modify_pending_order_address,address,476 Maple Drive,1 Probe Street,"wrong address written first, then the reference write",,1
 97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,4716977452,other available variant of the same product,,0
@@ -595,6 +601,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,7617930199,other available variant of the same product,,0
 97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,1052700637,other available variant of the same product,,0
 97,2d,98_1,modify_pending_order_items,new_item_ids[0],9440686670,1689914594,other available variant of the same product,,0
+97,2e,98_0,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 98,2d,99_0,exchange_delivered_order_items,payment_method_id,credit_card_8105988,paypal_8194385,other payment method of the same user,,0
 98,2d,99_0,exchange_delivered_order_items,payment_method_id,credit_card_8105988,credit_card_3951670,other payment method of the same user,,0
 98,2d,99_0,exchange_delivered_order_items,new_item_ids[0],8363011723,6384525445,other available variant of the same product,,0
@@ -675,6 +682,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 101,2d,102_2,modify_pending_order_items,new_item_ids[0],8302289002,1327854740,other available variant of the same product,,0
 101,2d,102_2,modify_pending_order_items,new_item_ids[0],8302289002,9534205511,other available variant of the same product,,0
 101,2d,102_2,modify_pending_order_items,new_item_ids[0],8302289002,9375701158,other available variant of the same product,,0
+101,2e,102_0,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 102,2d,103_0,modify_pending_order_address,address,144 Lakeview Drive,619 Broadway,user's default address instead of the requested one,,0
 102,2e,103_0,modify_pending_order_address,address,144 Lakeview Drive,1 Probe Street,"wrong address written first, then the reference write",,1
 102,2d,103_1,modify_pending_order_items,new_item_ids[0],2407258246,4510078629,other available variant of the same product,,0
@@ -689,6 +697,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 102,2d,103_2,exchange_delivered_order_items,new_item_ids[0],8302289002,1327854740,other available variant of the same product,,0
 102,2d,103_2,exchange_delivered_order_items,new_item_ids[0],8302289002,9534205511,other available variant of the same product,,0
 102,2d,103_2,exchange_delivered_order_items,new_item_ids[0],8302289002,9375701158,other available variant of the same product,,0
+102,2e,103_0,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 103,2d,104_0,return_delivered_order_items,item_ids[-0],4900661478,(dropped),one item fewer,,0
 103,2d,104_0,return_delivered_order_items,item_ids[-1],3614853563,(dropped),one item fewer,,0
 103,2e,104_2,modify_pending_order_address,address,921 Park Avenue,1 Probe Street,"wrong address written first, then the reference write",,1
@@ -697,6 +706,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 103,2d,104_3,modify_pending_order_items,new_item_ids[0],8964750292,9956648681,other available variant of the same product,,0
 103,2d,104_3,modify_pending_order_items,new_item_ids[0],8964750292,8926329222,other available variant of the same product,,0
 103,2d,104_3,modify_pending_order_items,new_item_ids[0],8964750292,7160999700,other available variant of the same product,,0
+103,2e,104_2,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 104,2e,105_2,modify_pending_order_address,address,921 Park Avenue,1 Probe Street,"wrong address written first, then the reference write",,1
 104,2d,105_3,modify_pending_order_items,new_item_ids[0],8964750292,8759627937,other available variant of the same product,,0
 104,2d,105_3,modify_pending_order_items,new_item_ids[0],8964750292,6301799585,other available variant of the same product,,0
@@ -705,6 +715,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 104,2d,105_3,modify_pending_order_items,new_item_ids[0],8964750292,7160999700,other available variant of the same product,,0
 104,2d,action_1746656550382,return_delivered_order_items,item_ids[-0],4900661478,(dropped),one item fewer,,0
 104,2d,action_1746656550382,return_delivered_order_items,item_ids[-1],3614853563,(dropped),one item fewer,,0
+104,2e,105_2,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,9647374798,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
 105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,4238115171,other available variant of the same product,,0
 105,2d,106_0,exchange_delivered_order_items,new_item_ids[0],3761330360,3909406921,other available variant of the same product,exchange_delivered_order_items: ValueError: Insufficient gift card balance to pay for the price difference,
@@ -760,6 +771,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 109,2d,110_2,modify_pending_order_items,new_item_ids[0],2106335193,4913411651,other available variant of the same product,,0
 109,2d,110_2,modify_pending_order_items,new_item_ids[0],2106335193,4615543240,other available variant of the same product,,0
 109,2d,110_2,modify_pending_order_items,new_item_ids[0],2106335193,6948061616,other available variant of the same product,,0
+109,2e,110_0,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 110,2e,111_0,modify_pending_order_address,address,760 Elm Avenue,1 Probe Street,"wrong address written first, then the reference write",,1
 110,2e,111_1,modify_user_address,address,760 Elm Avenue,1 Probe Street,"wrong address written first, then the reference write",,1
 110,2d,111_2,modify_pending_order_items,new_item_ids[0],2106335193,2235648106,other available variant of the same product,,0
@@ -781,6 +793,7 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 111,2d,112_2,modify_pending_order_items,new_item_ids[0],2216662955,5052031638,other available variant of the same product,,0
 111,2d,112_2,modify_pending_order_items,new_item_ids[0],2216662955,3265035808,other available variant of the same product,,0
 111,2d,112_2,modify_pending_order_items,new_item_ids[0],2216662955,9844888101,other available variant of the same product,,0
+111,2e,112_1,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 112,2d,113_0,modify_pending_order_items,new_item_ids[0],9949163720,4510078629,other available variant of the same product,modify_pending_order_items: ValueError: Insufficient gift card balance to pay for the new item,
 112,2d,113_0,modify_pending_order_items,new_item_ids[0],9949163720,2226219750,other available variant of the same product,,0
 112,2d,113_0,modify_pending_order_items,new_item_ids[0],9949163720,8886009523,other available variant of the same product,,0
@@ -795,5 +808,6 @@ task_id,check,action_id,tool,field,original,alternative,kind,replay_error,hash_e
 112,2d,113_2,modify_pending_order_items,new_item_ids[0],9844888101,1657832319,other available variant of the same product,,0
 112,2d,113_2,modify_pending_order_items,new_item_ids[0],9844888101,5052031638,other available variant of the same product,,0
 112,2d,113_2,modify_pending_order_items,new_item_ids[0],9844888101,3265035808,other available variant of the same product,,0
+112,2e,113_1,modify_pending_order_address,write_order,address then items,items then address,items modified before the address change (forbidden by policy.md l.110; the tool accepts it),,1
 113,2d,114_0,cancel_pending_order,reason,ordered by mistake,no longer needed,other allowed cancel reason,,0
 113,2d,114_1,cancel_pending_order,reason,ordered by mistake,no longer needed,other allowed cancel reason,,0

@@ -1,0 +1,6 @@
+task_id,action_id,n_pairs,n_pair_orders_tried,n_hash_differs
+20,20_8,4,23,18
+21,21_11,2,1,1
+36,36_9,3,5,4
+37,37_9,3,5,4
+100,101_0,2,1,1

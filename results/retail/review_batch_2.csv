@@ -1,0 +1,82 @@
+task_id,check,defect,severity,evidence,note
+10,1d,0,,"Reference has no WRITE. User id from known_info e-mail via find_user_id_by_email; order ids #W5490111, #W7387996 from get_user_details; transfer summary has compare_args [] (not compared).",
+10,2k,0,,"communicate_info = []; nl_assertions = null.","Nothing is stated only in communicate_info. The refusal and the transfer leave no DB trace and no assertion covers them; target hash = initial hash (static_scan db_changed=0, noop_reward=1.0). That empty-answer pass belongs to 2a/2b (prediction P1), not to 2k."
+10,2m,0,,"reason_for_call: refund each order to the other order's payment method, else ask for a human. tools.py return_delivered_order_items raises 'Payment method should be the original payment method'.","The policy rule at stake (refund destination, policy.md line 124) is enforced by the tool and the hash, not a process-only requirement. The transfer (policy.md line 24) leaves no trace and no assertion names it; the resulting empty-answer pass is the 2a/2b row, not counted again here."
+10,4a,0,,"reason_for_call: cross refunds or a human representative. Reference: four READs + transfer_to_human_agents, no WRITE.","Matches: the cross refund is not permitted (policy.md line 124; the user has no gift card), so the scenario's fallback (human) is the reference."
+10,4b,0,,"No WRITE. policy.md line 24 (transfer when the request cannot be handled); line 124 (refund to the original method or an existing gift card); user payment_methods = paypal_9497703, credit_card_3124723 (no gift card).",
+10,4c,0,,"No WRITE; every ending without a WRITE gives the same hash.","No open choice affects the scored state."
+10,4d,0,,"known_info mia_garcia_4516 / mia.garcia2723@example.com = DB user record; two orders and two payment methods as stated (#W5490111 paid by credit_card_3124723, #W7387996 by paypal_9497703); both delivered.",
+10,4e,0,,"nl_assertions = null; description purpose/notes = null.","Nothing to contradict."
+11,1d,0,,"User via e-mail (known_info); orders via get_user_details; item ids via get_order_details (#W5490111: 4579334072, 1421289881, 6117189161, 4947717507; #W7387996: 5796612084); payment ids = each order's payment_history[0].",
+11,2k,0,,"communicate_info = []; nl_assertions = null.",
+11,2m,0,,"No authentication, confirmation, other-user or one-per-order twist in the scenario. The forbidden cross refund raises in tools.py (probe_2d rows 11_4 and 11_5, payment substitution: replay_error).","A policy-violating refund destination cannot reach the DB."
+11,4a,0,,"reason_for_call: return everything in both orders; after the cross refund is refused, original payment methods. Reference 11_4 returns all 4 items of #W5490111 to credit_card_3124723; 11_5 returns the 1 item of #W7387996 to paypal_9497703.",
+11,4b,0,,"Both orders delivered (policy.md line 118); each refund goes to the order's original method (payment_history[0]), policy.md line 124.",
+11,4c,0,,"Refund destination: the scenario says original payment method; the user has no gift card, so the original method is the only compliant destination.",
+11,4d,0,,"known_info matches the DB user record; two orders, two payment methods, both orders delivered.",
+11,4e,0,,"nl_assertions = null; description = null.",
+12,1d,0,,"Reference has no WRITE. User via e-mail; orders via get_user_details; transfer summary not compared (compare_args []).",
+12,2k,0,,"communicate_info = []; nl_assertions = null.","Same situation as task 10: the refusal and transfer leave no DB trace and no assertion; target hash = initial hash (noop_reward=1.0), recorded under 2a/2b (P1)."
+12,2m,0,,"reason_for_call: PayPal refund for the non-gaming items, else a human. The only refund-relevant rule (policy.md line 124) is enforced by return_delivered_order_items.","No process-only requirement is the subject of the task; the transfer gap is the 2a/2b row."
+12,4a,0,,"Non-gaming items = #W5490111 items 4579334072, 6117189161, 4947717507 (keyboard 1421289881 and mouse 5796612084 kept). #W5490111 was paid by credit_card_3124723 and the user has no gift card, so a PayPal refund is not allowed (policy.md line 124); scenario fallback = human; reference = transfer, no WRITE.","Both orders are delivered, so 'cancel' does not apply."
+12,4b,0,,"No WRITE; policy.md lines 24 and 124.",
+12,4c,0,,"No WRITE; every ending without a WRITE gives the same hash.",
+12,4d,0,,"known_info matches the DB user record; a keyboard (1421289881) and a mouse (5796612084) exist in the orders, as the scenario implies.",
+12,4e,0,,"nl_assertions = null; description = null.",
+13,1d,0,,"User via e-mail; item ids from get_order_details #W5490111; payment id = payment_history[0] of #W5490111 (credit_card_3124723).",
+13,2k,0,,"communicate_info = []; nl_assertions = null.",
+13,2m,0,,"No process twist; the PayPal refund the user prefers raises in tools.py (probe_2d row 13_4 payment substitution: replay_error).",
+13,4a,0,,"Return everything except a keyboard and a mouse: Water Bottle 4579334072, Action Camera 6117189161, Backpack 4947717507 (#W5490111). Reference 13_4 returns exactly these three; #W7387996 (Gaming Mouse only) untouched.",
+13,4b,0,,"#W5490111 delivered; refund to its original method credit_card_3124723 (policy.md line 124).",
+13,4c,0,,"Scenario: PayPal preferred, otherwise credit card. PayPal is neither the original method nor a gift card and the user has no gift card, so the credit card is the only compliant destination.",
+13,4d,0,,"known_info matches the DB user record; items as implied.",
+13,4e,0,,"nl_assertions = null; description = null.",
+14,1d,0,,"User via e-mail; keyboard 1421289881 (#W5490111) and mouse 5796612084 (#W7387996) via get_order_details; payment ids = each order's payment_history[0].",
+14,2k,0,,"communicate_info = []; nl_assertions = null.",
+14,2m,0,,"No process twist in the scenario.",
+14,4a,0,,"Return the gaming items only (keyboard and mouse). Reference 14_4 returns 1421289881 from #W5490111, 14_5 returns 5796612084 from #W7387996.",
+14,4b,0,,"Both orders delivered; refunds to the original methods credit_card_3124723 and paypal_9497703 (policy.md line 124).",
+14,4c,0,,"Scenario: original payment preferred; the user has no gift card, so the original method is the only compliant destination for each order.",
+14,4d,0,,"known_info matches the DB user record.",
+14,4e,0,,"nl_assertions = null; description = null.",
+15,1d,0,,"User via find_user_id_by_name_zip (Fatima Johnson, 78712 in known_info); pending boots 1615379700 in #W5199551 via get_user_details -> get_order_details; 3613716226 via get_product_details 7363354090; paypal_5364164 in payment_methods.",
+15,2k,0,,"communicate_info = []; nl_assertions = null.",
+15,2m,0,,"No process twist in the scenario.",
+15,4a,0,,"reason_for_call: pending boots to size 8, keep the material, waterproof free, PayPal. Reference 15_6: 1615379700 (size 10, synthetic, waterproof yes) -> 3613716226 (size 8, synthetic, waterproof no, available), paypal_5364164.","'want the material' read as keeping the current material (synthetic); 3613716226 is the only available size-8 variant in any case (2648909398, size 8 leather, is unavailable)."
+15,4b,0,,"#W5199551 pending; same product 7363354090; 3613716226 available (policy.md line 112); difference 253.54 - 253.89 = -0.35 refunded to PayPal, not a gift card (line 114); a single modify_pending_order_items call.",
+15,4c,0,,"Variant: one available size-8 variant (3613716226). Payment pinned by 'You prefer PayPal for any payment or refund', although gift_card_1675628 exists.",
+15,4d,0,,"Fatima Johnson / 78712 = DB user fatima_johnson_7581; the only pending order with Hiking Boots is #W5199551 (the other boots are in delivered #W9389413).",
+15,4e,0,,"nl_assertions = null; description = null.",
+16,1d,0,,"User via name+zip; pending orders #W5199551, #W8665881 via get_user_details/get_order_details; Smart Watch 2554056026 in delivered #W9389413; cancel reason 'no longer needed' stated in reason_for_call; paypal_5364164 = original payment of #W9389413.",
+16,2k,0,,"communicate_info ['8276.23'] is covered by the nl_assertion 'Agent should tell the user the total refund amount is $8,276.23.'","Covered by a reward-gating assertion."
+16,2m,0,,"No process twist in the scenario.",
+16,4a,0,,"Cancel all pending orders (#W5199551, #W8665881, both pending) as 'no longer needed'; return only the received watch (Smart Watch 2554056026 in delivered #W9389413). Reference 16_6, 16_7, 16_8 match.",
+16,4b,0,,"Cancels of pending orders with an allowed reason (policy.md lines 88, 90); return of a delivered order to the original method paypal_5364164 (line 124).",
+16,4c,1,medium,"reason_for_call names no refund destination for the watch return. policy.md line 122 (the user provides the refund method) and line 124 (original method or an existing gift card); user holds gift_card_1675628 (balance 99.0); reference 16_8 fixes paypal_5364164; tools.py stores return_payment_method_id; probe_2d row 16_8 paypal_5364164 -> gift_card_1675628: hash_equals_gold=0.","Two compliant end states fit the scenario (refund to PayPal or to the existing gift card); only the PayPal one matches the target hash, and the user simulator has no instruction for this choice."
+16,4d,0,,"Name/zip match fatima_johnson_7581; #W5199551 and #W8665881 pending, #W9389413 delivered with one Smart Watch.","#W5199551 also holds a Wristwatch (1994478369), but it is cancelled anyway; 'received' singles out the delivered Smart Watch."
+16,4e,0,,"nl_assertion $8,276.23 = 3131.1 (#W5199551 total) + 4777.75 (#W8665881 total) + 367.38 (Smart Watch 2554056026) = 8276.23; equals the calculate expression in 16_5.",
+17,1d,0,,"address1, city, state, country, zip of #W8665881 come from get_order_details (123 Elm Street, Suite 640, Austin, TX, USA, 78712); only address2 changes, to 'Suite 641' as stated in reason_for_call.","The scan's unstated address fields are reachable by READ."
+17,2k,0,,"communicate_info = []; nl_assertions = null.",
+17,2m,0,,"No process twist in the scenario.",
+17,2e,0,,"probe_2d row 17_5 check=2e: '1 Probe Street' written first, then the reference write: hash_equals_gold=1.","uncertain: the end-state comparison hides an earlier wrong address write on #W8665881. A wrong-then-corrected address is not by itself a policy-violating write, so defect=0 per the brief; but policy.md line 84 ('Exchange or modify order tools can only be called once per order'), read literally, makes a second modify_pending_order_address call on the same order a violation, which the tool does not enforce (_is_pending_order accepts it). A ruling on whether line 84 covers address modifications would settle it; the benchmark-level 2e row covers the general gap."
+17,4a,0,,"reason_for_call: deliver #W8665881 to Suite 641. Reference 17_5 changes only address2 (Suite 640 -> Suite 641) of #W8665881.",
+17,4b,0,,"#W8665881 status pending (policy.md lines 96, 98).",
+17,4c,0,,"The other address fields equal the current order address; the user's default address is not part of the request.","No open choice."
+17,4d,0,,"#W8665881 belongs to fatima_johnson_7581, status pending, current address2 'Suite 640'.",
+17,4e,0,,"nl_assertions = null; description = null.",
+18,1d,0,,"User via name+zip (Mei Davis, 80217); office chair 8069050545 in #W2890441 via get_order_details; 1071497737 via get_product_details 4794339885; credit_card_1061405 is the only payment method.",
+18,2k,0,,"communicate_info = []; nl_assertions = null.",
+18,2m,0,,"reason_for_call: the user withholds confirmation of the return, then switches to an exchange.","The confirmation twist has a DB footprint: a return executed without the 'yes' sets #W2890441 to 'return requested' (tools.py) and the exchange then raises 'Non-delivered order cannot be exchanged', so the hash differs from the target."
+18,4a,0,,"Fallback request 'gray office chair with fixed armrest made of leather' = 1071497737 (leather, gray, fixed, high-back, available, 483.95). Reference 18_4 exchanges 8069050545 -> 1071497737 on #W2890441.","The initial return is withdrawn in the scenario, so no return in the reference is correct."
+18,4b,0,,"#W2890441 delivered; same product 4794339885, different option, available (policy.md line 132); difference 483.95 - 499.28 = -15.33 refunded to credit_card_1061405 (line 134).","An exchange to the identical item 8069050545 is excluded by policy line 132 (different product option), although the tool would accept it."
+18,4c,0,,"One available variant matches leather/gray/fixed (1071497737; 2386562819 is mesh); one payment method.",
+18,4d,0,,"Mei Davis / 80217 = DB user mei_davis_8935; office chair 8069050545 in delivered #W2890441. Scenario trigger 'If the agent mentions that the same product is not available' vs DB 8069050545 available=true.","uncertain: the trigger presumes the identical chair is unavailable, while the DB lists it as available; the compliant refusal comes from policy line 132 (different option), not from availability. It is a conditional, not a stated fact, and the fallback is the only alternative the user has; trajectories (4f/5d) would show whether the simulator reaches the fallback when the agent cites the policy instead of availability."
+18,4e,0,,"nl_assertions = null; description = null.",
+19,1d,0,,"User via name+zip; 2366567022 (water bottle), 2751999929 (pet bed), 8069050545 (office chair) in #W2890441 via get_order_details; cheapest variants via get_product_details 2747247837 and 4794339885; credit_card_1061405 is the only method.",
+19,2k,0,,"communicate_info ['54.04', '41.64'] is covered by the two nl_assertions.","Covered by reward-gating assertions."
+19,2m,0,,"The task turns on 'only one of the two things' (one return or exchange per delivered order).","Enforced by the tools, not process-only: a return sets 'return requested' and an exchange sets 'exchange requested', after which the other WRITE raises (requires 'delivered'); the hash also tells which one was done."
+19,4a,0,,"The user wants both, but only one WRITE is possible on #W2890441; the scenario's rule picks the larger saving: return 54.04 vs exchange 41.64 -> return. Reference 19_6 returns 2366567022 only.",
+19,4b,0,,"#W2890441 delivered; refund to the original method credit_card_1061405 (policy.md line 124).",
+19,4c,0,,"One payment method; the choice between return and exchange is fixed by the scenario ('whatever saves you most money').",
+19,4d,0,,"Mei Davis / 80217 = DB user mei_davis_8935; water bottle, pet bed and office chair are all in delivered #W2890441.",
+19,4e,0,,"Assertion 1: water bottle 2366567022 price 54.04 -> refund 54.04. Assertion 2: cheapest available pet bed 6942241102 at 180.93 (195.11 - 180.93 = 14.18) + cheapest available office chair 4168944673 at 471.82 (499.28 - 471.82 = 27.46) = 41.64.","Both amounts match."

@@ -1,0 +1,86 @@
+task_id,check,defect,severity,evidence,note
+40,1d,0,,"known_info e-mail isabella.lopez3271@example.com -> find_user_id_by_email; get_user_details lists #W4923227 and credit_card_8897086 (visa 8902); every reference argument reachable",
+40,2k,0,,"communicate_info ['60','mastercard'] both covered by nl_assertions 1 and 2",
+40,2m,0,,"reason_for_call: balance and payment questions plus one payment change; no refusal to authenticate, no other-user request, no push to act without confirmation",
+40,4a,0,,"reason_for_call: switch to visa if the gift card cannot be applied; reference 40_3 modify_pending_order_payment(#W4923227, credit_card_8897086 = visa)",
+40,4b,0,,"#W4923227 pending; new method visa differs from the original credit_card_8554680 (policy line 102); gift card balance 60.0 < order total 321.18, so a gift-card switch is barred (policy line 104)",
+40,4c,0,,"visa pinned by reason_for_call; the user holds one visa (credit_card_8897086)",
+40,4d,0,,"name and e-mail match user isabella_lopez_6490; reason_for_call mentions an 'amex' card and 'the other two cards', while the user record holds only visa 8902 and mastercard 4336 (plus gift_card_8245350, paypal_1621947)","uncertain: the amex card has no DB counterpart; no reference value depends on it. Settled by whether the author meant it as the user's own confusion (a distractor the agent should correct); if counted it would not block the reference path"
+40,4e,0,,"nl_assertion 1 '$60' = gift_card_8245350 balance 60.0; nl_assertion 2 'Mastercard' = payment_history credit_card_8554680 (brand mastercard); description null",
+41,1d,0,,"known_info name Mei Patel + zip 76165 -> find_user_id_by_name_zip; orders via get_user_details; 1096508426 via get_product_details(1808611083); paypal_4768213 via get_user_details; new address stated in known_info",
+41,2k,0,,"communicate_info empty; nl_assertions null",
+41,2m,1,medium,"reason_for_call: 'mention these two problems at the same time in the same order' (jigsaw first, address second) sets up policy line 110 (after modify items 'the agent will not be able to modify or cancel the order anymore'); modify_pending_order_address accepts status 'pending (item modified)' through _is_pending_order ('pending' in status, tools.py lines 164-170 and 485); probe_2h: 23 WRITE orderings, including items before address on #W4082615, n_hash_differs=0, n_with_replay_error=0; nl_assertions null","A trajectory that modifies the jigsaw first and then changes the address of #W4082615 breaks policy line 110 and still reaches the target hash; no assertion names the requirement. The tool enforces the one-modification rule only inside modify_pending_order_items (status == 'pending'), not for later address or payment modifications. Secondary: reason_for_call hands over the user id (policy line 10 still requires authentication); left to the benchmark-level row"
+41,2e,0,,"probe_2d rows 41_4, 41_5, 41_6 (check=2e): hash_equals_gold=1","End-state comparison hides an earlier wrong address write (a second modify_pending_order_address on the same order, or a second modify_user_address). The probe's wrong write is not a violation the scenario sets up; policy line 84 'modify order tools can only be called once per order' is read as the items rule (its second sentence names items). The forbidden-order case is logged under 2m"
+41,4a,0,,"reason_for_call: jigsaw to the easiest with fewest pieces + correct all order addresses and the user address; reference 41_4/41_5 (both orders), 41_6 (user), 41_9 9779102705 -> 1096508426 (500 pieces, beginner): the only available variant that has both the fewest pieces (500) and the easiest level (beginner)",
+41,4b,0,,"both orders pending; address writes 41_4/41_5 precede 41_9 (policy line 110); 1096508426 same product 1808611083, available; paypal_4768213 is a user method; one items modification","policy line 84 read literally (any modify tool once per order) would bar address + items on #W4082615; the items section (line 110) implies earlier modifications are allowed, and the reference follows that reading"
+41,4c,1,medium,"reason_for_call and known_info name no payment method for the price difference (46.13 - 54.11 = -7.98, a refund); the user holds credit_card_9503061 (visa) and paypal_4768213; the reference fixes paypal_4768213; probe_2d 41_9 payment_method_id -> credit_card_9503061: hash_equals_gold=0","Refunding the difference to the visa is policy-compliant (policy line 114 asks only for a user-provided method) and scores 0. Task 42 (same records) adds 'By default you use PayPal', which pins the choice there"
+41,4d,0,,"known_info address 445 Maple Drive vs DB 443 Maple Drive (user and both orders): set up as the user's typo ('you might have typed your address wrong'), deliberate; name, zip 76165, user id mei_patel_7272, jigsaw 9779102705 (1000 pieces, intermediate) match",
+41,4e,0,,"nl_assertions null; description null",
+42,1d,0,,"known_info name Mei Patel + zip 76165 -> find_user_id_by_name_zip; orders via get_user_details; 1096508426 via get_product_details(1808611083); paypal_4768213 via get_user_details; new address stated in known_info",
+42,2k,0,,"communicate_info empty; nl_assertions null",
+42,2m,0,,"reason_for_call asks for the address correction first, then the jigsaw ('After this...'); nl_assertions null","The same tool gap as task 41 exists (modify_pending_order_address accepts 'pending (item modified)', tools.py line 485; probe_2h 23 orderings, n_hash_differs=0), but the scenario does not build the task around the ordering requirement; the user id handed over in reason_for_call (policy line 10) is left to the benchmark-level row"
+42,2e,0,,"probe_2d rows 42_4, 42_5, 42_6 (check=2e): hash_equals_gold=1","End-state comparison hides an earlier wrong address write; no specific policy-violating intermediate write is set up by the scenario (see 41/2e for the line-84 reading)"
+42,4a,0,,"reason_for_call: correct all order addresses and the user address, then change the jigsaw (if not shipped: #W4082615 pending) to easiest level, least pieces; reference 42_4/42_5/42_6 and 42_9 9779102705 -> 1096508426 (500 pieces, beginner, the unique available match)",
+42,4b,0,,"both orders pending; address writes precede the items modification (policy line 110); same product, available; paypal_4768213 is a user method; one items modification",
+42,4c,0,,"'By default you use PayPal' pins paypal_4768213 for the -7.98 difference (46.13 - 54.11); variant unique",
+42,4d,0,,"445 vs 443 Maple Drive set up as the user's typo, deliberate; name, zip 76165, user id, jigsaw 9779102705 match",
+42,4e,0,,"nl_assertions null; description null",
+43,1d,0,,"known_info Lucas + zip 80239 (last name Santos inside the stated user id lucas_santos_6600) -> find_user_id_by_name_zip; the new default address (943 Maple Drive, Suite 356, Chicago, IL 60621) is reachable via get_user_details -> get_order_details(#W7895761), the order shipped to Chicago",
+43,2k,0,,"all 7 communicate_info strings (840887978435, 943 Maple Drive, Suite 356, Chicago, IL, 60621, 64GB) appear in nl_assertions 1-3","The requested 'still in transit?' answer (#W7895761 status delivered) is in neither communicate_info nor an assertion; outside 2k by definition, logged for completeness"
+43,2m,0,,"reason_for_call: order information questions and one default-address change; no process requirement set up",
+43,2e,0,,"probe_2d row 43_4 (check=2e): hash_equals_gold=1","End-state comparison hides an earlier wrong modify_user_address; policy has no once-rule for the user address; generic case covered by the benchmark-level row"
+43,4a,0,,"reason_for_call: change the default address to the daughter's address; reference 43_4 writes the #W7895761 shipping address (Chicago) to lucas_santos_6600",
+43,4b,0,,"modify_user_address carries no status rule; policy line 7 allows modifying the default address",
+43,4c,0,,"only #W7895761 went to Chicago (#W1588712 is cancelled and went to Denver); address fields come from that order, unique",
+43,4d,0,,"Lucas, Denver CO 80239 match the user; daughter in Chicago matches #W7895761; 'she has not received them' vs status delivered is the user's report, not a contradicting DB fact",
+43,4e,0,,"nl_assertion 1 tracking 840887978435 = #W7895761 fulfillments; nl_assertion 2 address = #W7895761 address; nl_assertion 3 64GB = item 4803681337 storage; description null",
+44,1d,0,,"known_info name + zip 19031; #W9300146 in reason_for_call; product 6817146515 from the order; 5320792178 via get_product_details; gift_card_7245904 in the order payment_history and the user record",
+44,2k,0,,"communicate_info ['17.99'] covered by nl_assertion 1",
+44,2m,0,,"reason_for_call: one item change; 'reluctant to share information' is not a refusal to authenticate",
+44,4a,0,,"cheapest available Desk Lamp = 5320792178 at 135.24 (other available variants: 143.02, 150.01, 153.23 current, 154.17, 158.41, 164.28, 164.97); difference to a gift card -> gift_card_7245904; reference 44_4 matches",
+44,4b,0,,"#W9300146 pending; same product 6817146515; 5320792178 available; difference is a refund (-17.99), so the gift card needs no balance (tools.py line 562); one items modification",
+44,4c,0,,"variant (unique cheapest available) and payment method (the user's only gift card) both pinned",
+44,4d,0,,"Aarav Anderson, Philadelphia 19031 match aarav_anderson_8794; #W9300146 belongs to the user, pending, contains Desk Lamp 9190635437",
+44,4e,0,,"153.23 - 135.24 = 17.99 = nl_assertion 'get back $17.99'; description null",
+45,1d,0,,"known_info: user id daiki_johnson_9523 and zip 80273, no e-mail; first and last name only inside the stated user id; order via the scenario's 9502127 + 'W' or get_user_details; 7958300294 via get_product_details(1762337868); paypal_2433177 via the order/user","name inferred from the stated user id"
+45,2k,0,,"communicate_info ['9.89'] covered by nl_assertion 1",
+45,2m,0,,"reason_for_call: one exchange; the gift-card wish is refused by the DB facts (no gift card), and the hash records the payment method",
+45,4a,0,,"robotic 6259501109 -> canister bagless 7958300294 (the only available bagless canister); gift card asked 'if possible' but the user holds none, so paypal_2433177 (only method); reference 45_4 matches",
+45,4b,0,,"#W9502127 delivered; same product 1762337868; 7958300294 available; refund 9.89 to paypal_2433177 (policy line 134)",
+45,4c,1,medium,"reason_for_call: bagless 'if and only if the agent gives you several options... (don't mention this if the agent just provides you one option)'; available canister variants of 1762337868: 1345513440 (bagged, cordless, 655.59), 2872451762 (bagged, pet hair removal, 622.12), 7958300294 (bagless, pet hair removal, 642.72); probe_2d 45_4 new_item_ids -> 1345513440 and -> 2872451762: hash_equals_gold=0","If the agent offers a single canister variant (e.g. 2872451762, which changes only the type option of 6259501109), the scenario has the user accept it; that exchange is policy-compliant (same product, available, confirmed) and scores 0; only 7958300294 passes. Counter-reading: the author may intend the agent to list all options (policy line 18, no subjective recommendations), but the policy does not require listing all variants"
+45,4d,0,,"order id 9502127 without 'W' is the user's deliberate mistake (scenario scripts the retry); user id, Denver, 80273 match",
+45,4e,0,,"652.61 - 642.72 = 9.89 = nl_assertion 'price difference is $9.89'; description null",
+46,1b,0,,"static_scan replay_errors=2: get_order_details('#9502126') and get_order_details('#9502127') raise 'Order not found'","intended negative step: reason_for_call has the user give 9502126 first, then 9502127, then add the 'W'"
+46,1d,0,,"user id daiki_johnson_9523 + zip 80273 (name inside the user id; 'You don't have an email'); items 6259501109 and 9534205511 via get_order_details(#W9502127); robotic vacuum named when the agent asks; paypal_2433177 only method","name inferred from the stated user id"
+46,2k,0,,"communicate_info ['1126.04','1497.65'] covered by nl_assertions 1 and 2","The 'refund within 3 days' request (the agent must not promise it) is unscored; it is not in communicate_info"
+46,2m,0,,"reason_for_call: one return with scripted order-id mistakes; no process requirement without DB trace set up",
+46,4a,0,,"return air purifier 9534205511 + robotic vacuum 6259501109 from #W9502127, refund to paypal_2433177; reference 46_5 matches",
+46,4b,0,,"#W9502127 delivered; refund to the original method paypal_2433177 (policy line 124); the user holds no gift card",
+46,4c,0,,"paypal_2433177 the only method; vacuum pinned (robotic) when asked; one air purifier in the order",
+46,4d,0,,"order ids 9502126 / 9502127 are deliberate user mistakes (scenario); user id, Denver, 80273 match",
+46,4e,0,,"refund 652.61 + 473.43 = 1126.04 (nl_assertion 1 $1,126.04); remaining 2623.69 - 1126.04 = 1497.65 = 622.12 + 329.85 + 545.68 (nl_assertion 2 $1,497.65); description null",
+47,1b,0,,"static_scan replay_errors=2: get_order_details('#9502126') and get_order_details('#9502127') raise 'Order not found'","intended negative step: reason_for_call has the user give 9502126 first, then 9502127, then add the 'W'"
+47,1d,0,,"user id daiki_johnson_9523 + zip 80273 (name inside the user id; e-mail not remembered); items 2872451762 and 9534205511 via get_order_details(#W9502127); canister vacuum named when the agent asks; paypal_2433177 only method","name inferred from the stated user id"
+47,2k,0,,"communicate_info ['1095.55','1528.14'] covered by nl_assertions 1 and 2","The 'refund within 3 days' request is unscored; it is not in communicate_info"
+47,2m,0,,"reason_for_call: one return with scripted order-id mistakes; no process requirement without DB trace set up",
+47,4a,0,,"return air purifier 9534205511 + canister vacuum 2872451762 from #W9502127, refund to paypal_2433177; reference 47_5 matches",
+47,4b,0,,"#W9502127 delivered; refund to the original method paypal_2433177 (policy line 124); the user holds no gift card",
+47,4c,0,,"paypal_2433177 the only method; one canister vacuum in the order; one air purifier",
+47,4d,0,,"order ids 9502126 / 9502127 are deliberate user mistakes (scenario); user id, Denver, 80273 match",
+47,4e,0,,"refund 622.12 + 473.43 = 1095.55 (nl_assertion 1 $1,095.55); remaining 2623.69 - 1095.55 = 1528.14 = 329.85 + 545.68 + 652.61 (nl_assertion 2 $1,528.14); description null",
+48,1d,0,,"user id daiki_johnson_9523 + zip 80273 (name inside the user id); air purifier 9534205511 via get_user_details -> get_order_details(#W9502127); paypal_2433177 the original method","name inferred from the stated user id"
+48,2k,0,,"communicate_info empty; nl_assertions null","The requested answer on the vacuum (after the purifier return #W9502127 is 'return requested', so a second return_delivered_order_items would raise, tools.py line 735) is in neither communicate_info nor an assertion; outside 2k by definition, logged for completeness"
+48,2m,0,,"'don't process anything' for the vacuum: a vacuum return would change return_items, so the DB hash sees a violation",
+48,4a,0,,"return the air purifier only, refund to the original method; reference 48_5 return_delivered_order_items(#W9502127, [9534205511], paypal_2433177) matches; no vacuum write",
+48,4b,0,,"#W9502127 delivered; refund to the original method (policy line 124)",
+48,4c,0,,"one air purifier across the user's orders; paypal_2433177 the only method and the one requested",
+48,4d,0,,"user id, Denver, 80273 match; the air purifier is in delivered #W9502127",
+48,4e,0,,"nl_assertions null; description null",
+49,1d,0,,"known_info name + zip 19031 -> find_user_id_by_name_zip; orders via get_user_details; 2757705742 and 1646531091 via get_order_details(#W3470184); gift_card_7245904 the only method",
+49,2k,0,,"communicate_info empty; nl_assertions null",
+49,2m,0,,"reason_for_call: one exchange; no process requirement without DB trace set up",
+49,4a,0,,"IPX7 earbud 2757705742 (258.97) -> cheapest earbud from the rest of #W3470184: 1646531091 (IPX4, 232.49) vs 6452271382 (IPX4, 258.84); reference 49_9 matches","the catalogue has a cheaper available IPX4 variant 8555936349 (226.49), but the scenario restricts the choice to items of that order"
+49,4b,0,,"#W3470184 delivered; same product 9924732112; 1646531091 available; refund 26.48 (232.49 - 258.97 = -26.48) to gift_card_7245904, the only method",
+49,4c,0,,"variant pinned by 'cheapest earbud item from the rest of that order'; one payment method",
+49,4d,0,,"Aarav Anderson, Philadelphia 19031 match; IPX7 earbud 2757705742 is in delivered #W3470184; the other earbuds in that order are IPX4",
+49,4e,0,,"nl_assertions null; description null",

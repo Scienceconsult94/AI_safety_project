@@ -14,6 +14,10 @@ A perturbation that replays AND yields the gold hash is a blind spot: the scorer
 2e — hidden intermediate write. For tasks whose reference writes an address, a wrong address write on the same
 target is inserted before the reference write; the final hash is compared with the gold hash. Equal = the
 end-state comparison hides the earlier wrong write (2e per-task evidence).
+2e — forbidden write order (added 2026-10-27 after the reviewers found it): for tasks whose reference changes the
+address of an order and then its items, the two writes are swapped. policy.md l.110 forbids any modification after
+the items change; the address tool accepts the status "pending (item modified)". Equal hash without error = the
+policy-violating order scores 1.0.
 
 No LLM calls. Output: results/retail/probe_2d.csv (one row per perturbation) and a summary on stdout.
 Run from inside tau2-bench:  uv run --no-sync python ../scripts/retail/probe_2d.py
@@ -149,6 +153,25 @@ def main() -> int:
                 h, err = replay(env_ctor, v)
                 add(task.id, "2e", a, "address", args["address1"], WRONG_ADDRESS["address1"], "wrong address written first, then the reference write", gold, h, err)
 
+        # 2e, forbidden write order: policy.md l.110 forbids any further modification of an order once its items were
+        # modified, but modify_pending_order_address accepts status "pending (item modified)" (_is_pending_order). For every
+        # task whose reference modifies the address of an order BEFORE modifying its items, swap the two writes and replay.
+        by_order = {}
+        for idx, a in enumerate(ref):
+            if a["name"] in ("modify_pending_order_address", "modify_pending_order_items"):
+                by_order.setdefault(a["arguments"].get("order_id"), []).append((idx, a["name"]))
+        for oid, writes in by_order.items():
+            names = [n for _, n in writes]
+            if "modify_pending_order_address" in names and "modify_pending_order_items" in names:
+                i_addr = next(i for i, n in writes if n == "modify_pending_order_address")
+                i_items = next(i for i, n in writes if n == "modify_pending_order_items")
+                if i_addr < i_items:
+                    v = copy.deepcopy(ref)
+                    v[i_addr], v[i_items] = v[i_items], v[i_addr]
+                    h, err = replay(env_ctor, v)
+                    add(task.id, "2e", ref[i_addr], "write_order", "address then items", "items then address",
+                        "items modified before the address change (forbidden by policy.md l.110; the tool accepts it)", gold, h, err)
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with open(OUT, "w", newline="", encoding="utf-8") as fp:
         w = csv.DictWriter(fp, fieldnames=list(rows[0].keys()))
@@ -162,8 +185,12 @@ def main() -> int:
           f"replayed and hash differs: {sum(1 for r in d if r['hash_equals_gold'] == 0)}; replayed and hash EQUALS gold (blind spot): {len(blind)}")
     for r in blind:
         print(f"  BLIND task {r['task_id']} {r['tool']} {r['field']}: {r['original']} -> {r['alternative']} ({r['kind']})")
-    print(f"2e hidden-write probes: {len(e)} over {len({r['task_id'] for r in e})} tasks; final hash equals gold: {sum(1 for r in e if r['hash_equals_gold'] == 1)}; "
-          f"rejected: {sum(1 for r in e if r['replay_error'])}")
+    ea = [r for r in e if r["field"] == "address"]
+    eo = [r for r in e if r["field"] == "write_order"]
+    print(f"2e hidden-write probes: {len(ea)} over {len({r['task_id'] for r in ea})} tasks; final hash equals gold: {sum(1 for r in ea if r['hash_equals_gold'] == 1)}; "
+          f"rejected: {sum(1 for r in ea if r['replay_error'])}")
+    print(f"2e forbidden write order (items before address, same order): {len(eo)} tasks probed; replays to the gold hash without error: "
+          f"{sum(1 for r in eo if r['hash_equals_gold'] == 1)} -> {[r['task_id'] for r in eo if r['hash_equals_gold'] == 1]}; rejected: {sum(1 for r in eo if r['replay_error'])}")
     print(f"written {OUT.relative_to(ROOT)}")
     return 0
 
