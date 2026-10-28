@@ -1,0 +1,38 @@
+# Retail audit — the block-1 checklist applied to a second domain, all 114 tasks
+
+Pre-registered on 2026-10-27, before any retail scan, probe or run. Same pinned benchmark: `sierra-research/tau2-bench` tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`; domain `retail`, split `base` = all 114 tasks (`retail/sample.json`; no sampling). The clone is never edited.
+
+## 1. Question
+
+Block 1 found 18/20 sampled airline tasks defective, half of the domain passable by an empty answer. Is that the airline domain, or the way the benchmark is built? Retail is scored differently (reward = DB hash × LLM-judged `nl_assertions`; `communicate_info` is present in 36 tasks but **not** in the reward basis), so the same checklist on retail tests whether the defect classes travel across domains and scorers.
+
+## 2. What is fixed before measurement
+
+- **Checklist.** `checklist.md` (ids 1a–6h) unchanged; retail-specific readings per check in `retail/checklist.md`. One added check, `2m`: a policy process requirement with no DB footprint (authenticate first, explicit confirmation before each write, one exchange per order) is unscored unless an `nl_assertion` names it.
+- **Scorer under test.** The stock `tau2 run` path: `EvaluationType.ALL`, reward = product over `reward_basis` (`DB`+`NL_ASSERTION` in 112 tasks, `DB` in tasks 33 and 34). The only substitution: the NL judge model, `gpt-5.4-mini-2026-03-17` with `reasoning_effort: low` (`src/tau2/config.py`), is replaced by `anthropic/claude-haiku-5-5` with provider defaults (`{}`), because the audit runs Anthropic models only and has no OpenAI key. Stock prompt, stock single vote, stock transcript view (`role: content`, tool calls invisible), stock mapping of results to assertions. Stock parsing is strict `json.loads`; a reply it rejects would abort the simulation (3 retries, then `infrastructure_error`), so the overlay parses tolerantly (code fence, bare array) and **records for every reply whether the stock parser would have accepted it** (reported under 2j). Raw replies, token usage and `n_results` vs `n_assertions` are logged per call.
+- **Agent runs.** Settings identical to block 1: `anthropic/claude-haiku-5-5` as agent and user simulator, `llm_args {}`, seed 300, `max_steps` 200, `max_errors` 10, `max_concurrency` 3, `timeout` 900, `workers` 0 (threads; the overlay lives in-process). (a) `llm_agent`, 114 tasks × 3 trials (pass^3 generic mode); (b) `llm_agent_gt`, 1 trial on the 112 tasks with reference actions (tasks 24 and 57 have none and are skipped by the registry filter). Outputs land outside the clone in `results/retail/runs/`.
+- **Probes (free).** 2b/2c: empty and transfer-only trajectories through the real evaluators; the judge is called only where `nl_assertions` exist (≤ 80 calls). 2d/2e: argument-perturbation probe (`scripts/retail/probe_2d.py`): for every WRITE reference action, each scalar argument is replaced by an alternative valid value from the DB (another payment method of the same user, the other cancellation reason, another available variant of the same product, the user's other address) and the reference replayed; a substitution that leaves the target hash unchanged is a scorer blind spot. 2h: WRITE-order permutations (`scripts/retail/probe_2h.py`, ≤ 120 per task).
+- **2j after the runs.** Every fresh simulation with `nl_assertions` is re-judged offline with 3 votes (same prompt, same model); flips between the live single vote and the majority, and the resulting reward flips, are the measured judge noise inside the official score.
+- **Review.** Static reading of all 114 task cards for 1d, 2k, 2m, 4a–4e in batches of ~10 by independent reviewers with the block-1 instructions; every medium/high defect row goes through the adversarial review (results skeptic) before it counts; blind re-review of 12 tasks drawn by `random.Random(20261027).sample(task_ids, 12)` by a reviewer without access to the originals, agreement and Cohen's kappa reported. Failed and flipped trajectories are read for 1e, 4f, 5c, 5d as in block 1.
+- **Numbers.** Rebuilt by script (`scripts/retail/build_audit_log.py`, `make_summary.py`) into `retail/audit_log.csv`, `retail/summary_numbers.md`; Wilson 95% intervals; a task is defective iff ≥ 1 confirmed medium/high row (schema.md). Block-1 files are not touched.
+
+## 3. Predictions (written before any measurement)
+
+| id | prediction | how it is decided |
+|---|---|---|
+| P1 | No-op pass under the stock scorer: 6/114 (tasks whose reference has no WRITE and no `nl_assertions`: 10, 12, 25, 50, 57, 65), against 23/50 in airline. A refusal- or transfer-only answer passes more tasks only where the judge accepts it. | static scan + 2b/2c probe |
+| P2 | Unscored requirements: in 36 tasks `communicate_info` is written but never checked; a defect (2k) only where no enforced `nl_assertion` covers the same fact. Certain for the 3 tasks with `communicate_info` and no `nl_assertions` (30, 31, 32); the other 33 by reading. | review + scan |
+| P3 | Order sensitivity (2h): retail sorts item lists and creates no ids, so 0 tasks flip on WRITE order, except possibly multi-write tasks whose writes append to the same `payment_history`. | probe_2h |
+| P4 | Process requirements (2m): authentication and per-write confirmation are required by `policy.md` but leave no DB trace; most tasks have no assertion about them, so the scorer cannot see a violation. The upstream `issues` field already records this for task 5 (open). | review; benchmark-level row |
+| P5 | The upstream-acknowledged open issues on tasks 4 and 7 (`tasks.json` → `issues`) are re-found by the checklist (4a/4e for 4, 1d/4d for 7). | review; compared after |
+| P6 | Judge: some Haiku replies fail the stock strict parser (block 2 saw 9 % bare arrays); the 3-vote re-judge flips a non-zero number of live verdicts. No numeric prediction. | 2j |
+| P7 | Defective share: no numeric prediction. Reported with its interval next to airline's 18/20 with the caveat that airline was a 20-task sample and retail is the population. | audit_log |
+
+## 4. Budget and rules
+
+- Estimate ≈ $10 (pass^3 ≈ $6, GT ≈ $2, judge ≈ $1); ceiling for the retail block **$15** (overall hard stop $30 unchanged). If the pass^3 part alone passes $10, stop and report.
+- Nothing leaves the machine: no push, no issues, no PRs.
+- Deviations from this plan are appended below with a date; the plan text above is not edited.
+
+## Deviations
+(none yet)
