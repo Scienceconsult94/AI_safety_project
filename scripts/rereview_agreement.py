@@ -11,11 +11,15 @@ Inputs (results/):
 Output: results/rereview.csv (one row per (task_id, check) in the blind file: original, corrected, blind, agree flags)
         and the agreement numbers printed and written to results/rereview_summary.md.
 Sampling of the three tasks: random.Random(20261027).sample(sample.json["task_ids"], 3) -> 23, 10, 37.
-Usage (from ==Project):  python -I scripts/rereview_agreement.py
+--set rest: the blind re-review of three of the 30 rest tasks (airline_full/PLAN.md: random.Random(20261028) -> 33, 35, 39):
+  rereview_blind_rest.csv against the rest reviewer batches; the skeptic-corrected labels add review_overrides_rest_*.csv.
+  Output: results/rereview_rest.csv and results/rereview_summary_rest.md.
+Usage (from ==Project):  python -I scripts/rereview_agreement.py [--set rest]
 """
 
 from __future__ import annotations
 
+import argparse
 import csv
 import math
 from pathlib import Path
@@ -51,10 +55,15 @@ def kappa(pairs: list[tuple[str, str]]) -> float:
 
 
 def main() -> int:
-    blind = labels([RES / "rereview_blind.csv"])
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--set", choices=("sample", "rest"), default="sample")
+    rest = ap.parse_args().set == "rest"
+    sfx = "_rest" if rest else ""
+    blind = labels([RES / f"rereview_blind{sfx}.csv"])
     original = labels(sorted(RES.glob("review_batch_*.csv")) + [RES / "review_2h.csv", RES / "review_agent.csv"])
-    corrected = labels(sorted(RES.glob("review_batch_*.csv")) + [RES / "review_2h.csv", RES / "review_overrides.csv",
-                                                                  RES / "review_agent.csv", RES / "review_agent_overrides.csv"])
+    corrected = labels(sorted(RES.glob("review_batch_*.csv")) + [RES / "review_2h.csv", RES / "review_overrides.csv"]
+                       + sorted(RES.glob("review_overrides_rest_*.csv"))
+                       + [RES / "review_agent.csv", RES / "review_agent_overrides.csv"])
     rows, pairs_orig, pairs_corr, missing = [], [], [], []
     for key in sorted(blind, key=lambda k: (int(k[0]), k[1])):
         b = blind[key]
@@ -80,7 +89,7 @@ def main() -> int:
             pairs_orig.append((od, bd))
         if c is not None:
             pairs_corr.append((cd, bd))
-    with open(RES / "rereview.csv", "w", encoding="utf-8", newline="") as fp:
+    with open(RES / f"rereview{sfx}.csv", "w", encoding="utf-8", newline="") as fp:
         w = csv.DictWriter(fp, fieldnames=list(rows[0].keys()))
         w.writeheader()
         w.writerows(rows)
@@ -92,16 +101,23 @@ def main() -> int:
     ko, no, so = share(pairs_orig)
     kc, nc, sc = share(pairs_corr)
     dis = [r for r in rows if r["agree_corrected"] == "0"]
-    lines = ["# Blind re-review of 3 sampled tasks (23, 10, 37; random.Random(20261027))", "",
+    head = (["# Blind re-review of 3 rest tasks (33, 35, 39; random.Random(20261028))", "",
+             "Labels compared on `defect` (0/1) per (task, check). The blind pass saw task cards, the static scan and probe outputs,",
+             "the policy and tool code, checklist.md and the review brief (with the block-1 defect rows of batches 2-4 as style",
+             "examples); none of batches 8 and 9, the audit log, skeptic or summary files. Corrected labels = after the adversarial",
+             "review of the rest rows (review_overrides_rest_*.csv; equal to the original labels where none exists).", ""]
+            if rest else
+            ["# Blind re-review of 3 sampled tasks (23, 10, 37; random.Random(20261027))", "",
              "Labels compared on `defect` (0/1) per (task, check). The blind pass saw task cards, mechanical scan/probe outputs,",
-             "the task-23 GT trajectory, the policy and tool code, and checklist.md; none of the review, skeptic or summary files.", "",
+             "the task-23 GT trajectory, the policy and tool code, and checklist.md; none of the review, skeptic or summary files.", ""])
+    lines = head + [
              "| comparison | agreement | Cohen's kappa |", "|---|---|---|",
              f"| blind vs original reviewer labels | {ko}/{no} = {so:.3f} | {kappa(pairs_orig):.3f} |",
              f"| blind vs skeptic-corrected labels | {kc}/{nc} = {sc:.3f} | {kappa(pairs_corr):.3f} |", "",
              f"Disagreements vs corrected labels ({len(dis)}):"] + \
             [f"- task {r['task_id']} check {r['check']}: corrected={r['corrected_defect']} blind={r['blind_defect']} — blind note: {r['blind_note'][:220]}" for r in dis] + \
             ([""] + [f"- no original label for task {t} check {c} (blind row kept, not counted)" for t, c in missing] if missing else [])
-    (RES / "rereview_summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (RES / f"rereview_summary{sfx}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
     return 0
 
