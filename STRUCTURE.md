@@ -7,7 +7,6 @@ Each sampled task is checked against a fixed checklist (static reading, mechanic
 
 ```
 .
-├── 14_claude_code_kickoff.md   task statement and rules of the audit
 ├── STRUCTURE.md                this map
 ├── checklist.md                the validation checklist (check ids 1a..6e, method per check)
 ├── schema.md                   columns and validation rules of audit_log.csv

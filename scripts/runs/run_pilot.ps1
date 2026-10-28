@@ -1,4 +1,4 @@
-# Pilot: 5 airline tasks end-to-end on Claude Haiku 5.5 (agent and user), substring scorer.
+# Pilot: 5 airline tasks end-to-end on claude-haiku-5-5 (agent and user), substring scorer.
 # Preconditions: tau2-bench\.env with ANTHROPIC_API_KEY exists (created by hand; never read or printed here);
 #                spending limit set in the Anthropic Console; cost.md cumulative < $30.
 # Usage:  powershell -ExecutionPolicy Bypass -File .\scripts\runs\run_pilot.ps1
