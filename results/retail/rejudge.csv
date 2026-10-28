@@ -1,0 +1,244 @@
+run,task_id,trial,sim_id,assertion_idx,assertion,live_met,votes_met,votes_unmet,votes_missing,majority_met,flip,live_omitted
+retail_pass3_haiku,2,0,cda8b4b6-5099-424c-98a1-1222f5261b56,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_pass3_haiku,3,0,f03fafdc-8df8-47d2-8609-a96187e28444,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_pass3_haiku,4,0,5ab9ec79-4b5b-4e09-9d7e-bd9702e2c4b5,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_pass3_haiku,16,0,d2ebbe51-d9ec-4d8f-ac41-23987b4b2f92,0,"Agent should tell the user the total refund amount is $8,276.23.",True,3,0,0,True,0,0
+retail_pass3_haiku,19,0,c412bc10-0f7c-4344-bf68-b10c27617ea8,0,Agent should tell the user that returning the water bottle gives a refund of $54,True,3,0,0,True,0,0
+retail_pass3_haiku,19,0,c412bc10-0f7c-4344-bf68-b10c27617ea8,1,Agent should tell the user that exchanging the pet bed and office chair saves $4,True,3,0,0,True,0,0
+retail_pass3_haiku,21,0,cc76373f-9792-451e-a7b9-1315c2d4e1a1,0,Agent should tell the user their gift card balance is $44.08.,True,3,0,0,True,0,0
+retail_pass3_haiku,24,0,f3d9d45f-b144-48f4-b0b5-ca0e689ad516,0,Agent should tell the user the materials of the two t-shirts are polyester and c,True,3,0,0,True,0,0
+retail_pass3_haiku,28,0,45c12043-7e3e-4028-9f28-fcb6228616b6,0,Agent should tell the user the total refund amount is $918.43.,True,3,0,0,True,0,0
+retail_pass3_haiku,29,0,f0fd45ff-11d2-46b6-a217-55463e93ea4f,0,Agent should tell the user the prices of the available bamboo skateboard options,False,0,3,0,False,0,0
+retail_pass3_haiku,36,0,5d86678a-7082-41a3-b1a4-235b77175cd9,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_pass3_haiku,36,0,5d86678a-7082-41a3-b1a4-235b77175cd9,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_pass3_haiku,38,0,44ec224c-507d-4a3a-a6e2-ad07ef1cba9b,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_pass3_haiku,38,0,44ec224c-507d-4a3a-a6e2-ad07ef1cba9b,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_pass3_haiku,39,0,23b9afc9-be3e-4f52-8ace-d35e51365f4c,0,Agent should tell the user the cheapest t-shirt costs $46.66.,True,3,0,0,True,0,0
+retail_pass3_haiku,40,0,8b64bfeb-d04e-4df4-84b1-b01a91370650,0,Agent should tell the user their gift card balance is $60.,True,3,0,0,True,0,0
+retail_pass3_haiku,40,0,8b64bfeb-d04e-4df4-84b1-b01a91370650,1,Agent should tell the user their recent order was paid with a Mastercard.,True,3,0,0,True,0,0
+retail_pass3_haiku,37,0,e1e50d34-2cf6-4e79-b847-b58e6533bc36,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_pass3_haiku,37,0,e1e50d34-2cf6-4e79-b847-b58e6533bc36,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_pass3_haiku,44,0,623d1636-415a-42f1-8960-3c5b3e60a183,0,Agent should tell the user they will get back $17.99.,True,3,0,0,True,0,0
+retail_pass3_haiku,43,0,0c4d46dd-93a8-4f85-b5c2-313247ca2827,0,Agent should tell the user the tracking number is 840887978435.,True,3,0,0,True,0,0
+retail_pass3_haiku,43,0,0c4d46dd-93a8-4f85-b5c2-313247ca2827,1,"Agent should tell the user the order was shipped to 943 Maple Drive, Suite 356, ",True,3,0,0,True,0,0
+retail_pass3_haiku,43,0,0c4d46dd-93a8-4f85-b5c2-313247ca2827,2,Agent should tell the user the tablet storage is 64GB.,True,3,0,0,True,0,0
+retail_pass3_haiku,45,0,2cf2f684-0d0a-4fab-8f40-92ce227b5132,0,Agent should tell the user the price difference is $9.89.,True,3,0,0,True,0,0
+retail_pass3_haiku,47,0,cd4288c4-91c0-4f7a-a26a-1c65ada4c604,0,"Agent should tell the user the total refund amount is $1,095.55.",True,3,0,0,True,0,0
+retail_pass3_haiku,47,0,cd4288c4-91c0-4f7a-a26a-1c65ada4c604,1,"Agent should tell the user the total paid for remaining items is $1,528.14.",True,3,0,0,True,0,0
+retail_pass3_haiku,46,0,1561b36d-6bb9-4c25-a044-c3a20f80a131,0,"Agent should tell the user the total refund amount is $1,126.04.",True,3,0,0,True,0,0
+retail_pass3_haiku,46,0,1561b36d-6bb9-4c25-a044-c3a20f80a131,1,"Agent should tell the user the total paid for remaining items is $1,497.65.",False,0,3,0,False,0,0
+retail_pass3_haiku,54,0,2a31a50b-3e7e-4952-8a0d-cd6006e529af,0,"Agent should tell the user the total refund amount is $3,646.68.",True,3,0,0,True,0,0
+retail_pass3_haiku,60,0,b1e88550-ebc7-4ca4-9b1f-ac264ba23647,0,Agent should tell the user the price of the new earbuds is $242.92.,True,3,0,0,True,0,0
+retail_pass3_haiku,59,0,b67e83d0-c625-42d0-94e2-494dd06afb5a,0,Agent should tell the user the refund for the cancelled desk lamp order is $164.,True,3,0,0,True,0,0
+retail_pass3_haiku,59,0,b67e83d0-c625-42d0-94e2-494dd06afb5a,1,Agent should tell the user the total price of order #W2702727 is $625.60.,True,3,0,0,True,0,0
+retail_pass3_haiku,62,0,33900cb8-dd21-47db-95c1-7170f50c5128,0,Agent should tell the user the Bluetooth speaker costs $302.67.,True,3,0,0,True,0,0
+retail_pass3_haiku,62,0,33900cb8-dd21-47db-95c1-7170f50c5128,1,Agent should tell the user the battery life is 20 hours.,True,3,0,0,True,0,0
+retail_pass3_haiku,63,0,2712506d-3794-49f5-84e0-d3c6caa0c65b,0,Agent should tell the user the Bluetooth speaker costs $302.67.,True,3,0,0,True,0,0
+retail_pass3_haiku,63,0,2712506d-3794-49f5-84e0-d3c6caa0c65b,1,Agent should tell the user the battery life is 20 hours.,True,3,0,0,True,0,0
+retail_pass3_haiku,63,0,2712506d-3794-49f5-84e0-d3c6caa0c65b,2,"Agent should tell the user the new order total is $1,288.65.",True,3,0,0,True,0,0
+retail_pass3_haiku,67,0,9e11c197-0a23-4bee-a3c7-276b819d8f59,0,Agent should tell the user the order total is $829.43.,True,3,0,0,True,0,0
+retail_pass3_haiku,68,0,261588a9-44ac-43aa-9227-ce9b9e6fdbc6,0,Agent should tell the user the order total is $829.43.,True,3,0,0,True,0,0
+retail_pass3_haiku,70,0,c71128f5-0cf0-45b4-a267-455287aefe71,0,Agent should tell the user they need to pay $22.55 for the price difference.,True,3,0,0,True,0,0
+retail_pass3_haiku,76,0,b4ac7c17-bea6-4613-8d99-e0129a59087e,0,"Agent should tell the user the total price of all grills is $1,939.05.",True,3,0,0,True,0,0
+retail_pass3_haiku,89,0,b70f81c0-a6e7-4ff6-97af-babfc8c35ddb,0,Agent should tell the user the cheapest mechanical keyboard costs $226.11.,True,3,0,0,True,0,0
+retail_pass3_haiku,89,0,b70f81c0-a6e7-4ff6-97af-babfc8c35ddb,1,Agent should tell the user the keyboard switch type is tactile.,True,3,0,0,True,0,0
+retail_pass3_haiku,89,0,b70f81c0-a6e7-4ff6-97af-babfc8c35ddb,2,Agent should tell the user the keyboard backlight is white.,True,3,0,0,True,0,0
+retail_pass3_haiku,89,0,b70f81c0-a6e7-4ff6-97af-babfc8c35ddb,3,Agent should tell the user the keyboard size is full.,True,3,0,0,True,0,0
+retail_pass3_haiku,95,0,fde8300a-9bb1-4b4d-8166-b0cb8582b4de,0,Agent should tell the user the price difference for one laptop exchange is $167.,True,3,0,0,True,0,0
+retail_pass3_haiku,95,0,fde8300a-9bb1-4b4d-8166-b0cb8582b4de,1,Agent should tell the user the price difference for the other laptop exchange is,True,3,0,0,True,0,0
+retail_pass3_haiku,95,0,fde8300a-9bb1-4b4d-8166-b0cb8582b4de,2,Agent should tell the user the total amount to pay today is $107.09.,True,3,0,0,True,0,0
+retail_pass3_haiku,105,0,23b1d804-846d-4ca1-83e7-4c37edcac0dc,0,Agent should exchange both tea kettles (same style) to the items requested,False,0,3,0,False,0,0
+retail_pass3_haiku,103,0,08494e06-5f12-4caa-ac4c-3dcce28e9e9f,0,Agent should provide the tracking number 286422338955.,True,3,0,0,True,0,0
+retail_pass3_haiku,104,0,294eab4e-b46e-472b-8b1f-c1536c069e92,0,Agent should provide the tracking number 286422338955.,True,3,0,0,True,0,0
+retail_pass3_haiku,106,0,8fb2fd41-2e98-4748-a5a9-2f3474ef1729,0,Agent should process the exchange.,True,3,0,0,True,0,0
+retail_pass3_haiku,108,0,bf6761c3-b900-4709-b5c1-73b76929dfa4,0,Agent should tell the user the refund amount is $346.93.,False,0,3,0,False,0,0
+retail_pass3_haiku,107,0,3889518d-984c-4cfe-b52d-9b7be9701c97,0,Agent should exchange items in both orders.,True,3,0,0,True,0,0
+retail_pass3_haiku,109,0,0d8aa665-7a56-4c80-9108-9f0fe106e94d,0,Agent should make changes to address on order and user profile,True,3,0,0,True,0,0
+retail_pass3_haiku,109,0,0d8aa665-7a56-4c80-9108-9f0fe106e94d,1,Agent should modify the pending order.,True,3,0,0,True,0,0
+retail_pass3_haiku,110,0,21f7b56e-8096-442c-81b6-c58805e00b13,0,Agent should modify address for the order,True,3,0,0,True,0,0
+retail_pass3_haiku,110,0,21f7b56e-8096-442c-81b6-c58805e00b13,1,Agent should modify user address,True,3,0,0,True,0,0
+retail_pass3_haiku,110,0,21f7b56e-8096-442c-81b6-c58805e00b13,2,Agent should modify the items in the pending order.,True,3,0,0,True,0,0
+retail_pass3_haiku,111,0,17016e13-8d94-4b2c-8f23-74f6807707a5,0,Agent should modify the items and address as requested.,True,3,0,0,True,0,0
+retail_pass3_haiku,113,0,420d9a7d-c8b3-46d1-a888-4cd7c6565a27,0,Agent should cancel all pending orders,True,3,0,0,True,0,0
+retail_pass3_haiku,2,1,c707bff6-b2b6-4782-9947-4169eb27d451,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_pass3_haiku,3,1,8da6f84b-87ea-4d60-8aef-5af76e12f13a,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_pass3_haiku,4,1,8d396d2d-3c49-475b-8bf4-b792f4b007ff,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_pass3_haiku,16,1,50fc49ee-98a2-41f4-95c3-0e13f251e783,0,"Agent should tell the user the total refund amount is $8,276.23.",True,3,0,0,True,0,0
+retail_pass3_haiku,19,1,bff2286e-92ff-4334-b5de-5ab979eb5752,0,Agent should tell the user that returning the water bottle gives a refund of $54,True,3,0,0,True,0,0
+retail_pass3_haiku,19,1,bff2286e-92ff-4334-b5de-5ab979eb5752,1,Agent should tell the user that exchanging the pet bed and office chair saves $4,True,3,0,0,True,0,0
+retail_pass3_haiku,21,1,f128f989-e1eb-47a7-81cb-6bd9affa10b9,0,Agent should tell the user their gift card balance is $44.08.,True,3,0,0,True,0,0
+retail_pass3_haiku,24,1,b8bbe469-1c03-4037-8365-f3ab8eac880a,0,Agent should tell the user the materials of the two t-shirts are polyester and c,True,3,0,0,True,0,0
+retail_pass3_haiku,28,1,5f26388c-8d55-43da-965e-2875ba0ceb36,0,Agent should tell the user the total refund amount is $918.43.,True,3,0,0,True,0,0
+retail_pass3_haiku,29,1,4d4ff2d7-7b43-4d5b-b547-991a443ef41c,0,Agent should tell the user the prices of the available bamboo skateboard options,False,0,3,0,False,0,0
+retail_pass3_haiku,36,1,0dde8190-2139-422a-bea2-2cd91b67eb7a,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_pass3_haiku,36,1,0dde8190-2139-422a-bea2-2cd91b67eb7a,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_pass3_haiku,37,1,61b9de2a-11bb-40bc-879b-b30b7a71028e,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_pass3_haiku,37,1,61b9de2a-11bb-40bc-879b-b30b7a71028e,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_pass3_haiku,38,1,f09ea0eb-9ced-4af0-8979-c0a6fb928977,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_pass3_haiku,38,1,f09ea0eb-9ced-4af0-8979-c0a6fb928977,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_pass3_haiku,39,1,01ff3b0d-a182-476d-a5c7-d4d5b5b17169,0,Agent should tell the user the cheapest t-shirt costs $46.66.,True,3,0,0,True,0,0
+retail_pass3_haiku,40,1,1d721abd-8d0a-4aac-bbd4-fdb0966978d3,0,Agent should tell the user their gift card balance is $60.,True,3,0,0,True,0,0
+retail_pass3_haiku,40,1,1d721abd-8d0a-4aac-bbd4-fdb0966978d3,1,Agent should tell the user their recent order was paid with a Mastercard.,True,3,0,0,True,0,0
+retail_pass3_haiku,43,1,be09599e-3fc5-4d52-a3c9-f2c04d76283e,0,Agent should tell the user the tracking number is 840887978435.,True,3,0,0,True,0,0
+retail_pass3_haiku,43,1,be09599e-3fc5-4d52-a3c9-f2c04d76283e,1,"Agent should tell the user the order was shipped to 943 Maple Drive, Suite 356, ",True,3,0,0,True,0,0
+retail_pass3_haiku,43,1,be09599e-3fc5-4d52-a3c9-f2c04d76283e,2,Agent should tell the user the tablet storage is 64GB.,True,3,0,0,True,0,0
+retail_pass3_haiku,44,1,04edba5c-6ba8-4d3b-87c4-29841c8a0f0d,0,Agent should tell the user they will get back $17.99.,True,3,0,0,True,0,0
+retail_pass3_haiku,45,1,8d5917ec-4bbe-4d97-a865-a202030721b7,0,Agent should tell the user the price difference is $9.89.,True,3,0,0,True,0,0
+retail_pass3_haiku,46,1,6bae75ec-4754-4d28-8166-cccff842bd80,0,"Agent should tell the user the total refund amount is $1,126.04.",True,3,0,0,True,0,0
+retail_pass3_haiku,46,1,6bae75ec-4754-4d28-8166-cccff842bd80,1,"Agent should tell the user the total paid for remaining items is $1,497.65.",True,3,0,0,True,0,0
+retail_pass3_haiku,47,1,8bd8ca0c-8102-49a5-960f-28f98f704ebb,0,"Agent should tell the user the total refund amount is $1,095.55.",True,3,0,0,True,0,0
+retail_pass3_haiku,47,1,8bd8ca0c-8102-49a5-960f-28f98f704ebb,1,"Agent should tell the user the total paid for remaining items is $1,528.14.",True,3,0,0,True,0,0
+retail_pass3_haiku,54,1,3a57c1bc-0ce6-4484-8e15-512759deafe3,0,"Agent should tell the user the total refund amount is $3,646.68.",True,3,0,0,True,0,0
+retail_pass3_haiku,60,1,25281598-9279-4dbd-a82f-61eac3c12b3d,0,Agent should tell the user the price of the new earbuds is $242.92.,True,3,0,0,True,0,0
+retail_pass3_haiku,59,1,e38075d3-8b8a-4203-8755-8b5aab9fc92a,0,Agent should tell the user the refund for the cancelled desk lamp order is $164.,False,0,3,0,False,0,0
+retail_pass3_haiku,59,1,e38075d3-8b8a-4203-8755-8b5aab9fc92a,1,Agent should tell the user the total price of order #W2702727 is $625.60.,True,3,0,0,True,0,0
+retail_pass3_haiku,62,1,814d89ae-2e82-441b-ae24-dbbb598568c2,0,Agent should tell the user the Bluetooth speaker costs $302.67.,True,3,0,0,True,0,0
+retail_pass3_haiku,62,1,814d89ae-2e82-441b-ae24-dbbb598568c2,1,Agent should tell the user the battery life is 20 hours.,True,3,0,0,True,0,0
+retail_pass3_haiku,63,1,4c1213c9-5ef6-4f19-af3a-2c1938db58ee,0,Agent should tell the user the Bluetooth speaker costs $302.67.,True,3,0,0,True,0,0
+retail_pass3_haiku,63,1,4c1213c9-5ef6-4f19-af3a-2c1938db58ee,1,Agent should tell the user the battery life is 20 hours.,True,3,0,0,True,0,0
+retail_pass3_haiku,63,1,4c1213c9-5ef6-4f19-af3a-2c1938db58ee,2,"Agent should tell the user the new order total is $1,288.65.",True,3,0,0,True,0,0
+retail_pass3_haiku,67,1,537777da-fd2d-4b8d-a7a1-d9d194478042,0,Agent should tell the user the order total is $829.43.,True,3,0,0,True,0,0
+retail_pass3_haiku,68,1,f1210e01-3a36-4540-a68b-49a8fb44468f,0,Agent should tell the user the order total is $829.43.,True,3,0,0,True,0,0
+retail_pass3_haiku,70,1,c20704d0-6473-4f3f-8da4-760cbd138256,0,Agent should tell the user they need to pay $22.55 for the price difference.,True,3,0,0,True,0,0
+retail_pass3_haiku,76,1,cdbaa9cc-24a1-495b-a822-b808f3cb4b91,0,"Agent should tell the user the total price of all grills is $1,939.05.",True,3,0,0,True,0,0
+retail_pass3_haiku,89,1,b748ed37-6c9c-45f6-b461-409914d0fa74,0,Agent should tell the user the cheapest mechanical keyboard costs $226.11.,True,3,0,0,True,0,0
+retail_pass3_haiku,89,1,b748ed37-6c9c-45f6-b461-409914d0fa74,1,Agent should tell the user the keyboard switch type is tactile.,True,3,0,0,True,0,0
+retail_pass3_haiku,89,1,b748ed37-6c9c-45f6-b461-409914d0fa74,2,Agent should tell the user the keyboard backlight is white.,True,3,0,0,True,0,0
+retail_pass3_haiku,89,1,b748ed37-6c9c-45f6-b461-409914d0fa74,3,Agent should tell the user the keyboard size is full.,True,3,0,0,True,0,0
+retail_pass3_haiku,95,1,7afa3b93-957a-451d-ac1e-736979fe8f73,0,Agent should tell the user the price difference for one laptop exchange is $167.,True,3,0,0,True,0,0
+retail_pass3_haiku,95,1,7afa3b93-957a-451d-ac1e-736979fe8f73,1,Agent should tell the user the price difference for the other laptop exchange is,True,3,0,0,True,0,0
+retail_pass3_haiku,95,1,7afa3b93-957a-451d-ac1e-736979fe8f73,2,Agent should tell the user the total amount to pay today is $107.09.,True,3,0,0,True,0,0
+retail_pass3_haiku,103,1,f0d52e8d-865b-4955-890c-d9f346d7df8c,0,Agent should provide the tracking number 286422338955.,True,3,0,0,True,0,0
+retail_pass3_haiku,105,1,13fe1886-48a7-4898-b058-fb7238753390,0,Agent should exchange both tea kettles (same style) to the items requested,False,0,3,0,False,0,0
+retail_pass3_haiku,104,1,95ade8cc-3bfb-49e1-a240-3f0c2fb9a346,0,Agent should provide the tracking number 286422338955.,True,3,0,0,True,0,0
+retail_pass3_haiku,106,1,7beaad34-d8bb-4a52-a055-aad051821110,0,Agent should process the exchange.,True,3,0,0,True,0,0
+retail_pass3_haiku,108,1,9e4d6a60-e20e-470d-91a1-99fe6f1a2c72,0,Agent should tell the user the refund amount is $346.93.,True,3,0,0,True,0,0
+retail_pass3_haiku,107,1,259cc919-c42a-47a0-ac98-025d70a98668,0,Agent should exchange items in both orders.,True,3,0,0,True,0,0
+retail_pass3_haiku,109,1,99c946bf-a125-4bad-af69-1a7438673f47,0,Agent should make changes to address on order and user profile,True,3,0,0,True,0,0
+retail_pass3_haiku,109,1,99c946bf-a125-4bad-af69-1a7438673f47,1,Agent should modify the pending order.,True,3,0,0,True,0,0
+retail_pass3_haiku,110,1,b91ff400-bc3f-4445-929c-341fe233959b,0,Agent should modify address for the order,True,3,0,0,True,0,0
+retail_pass3_haiku,110,1,b91ff400-bc3f-4445-929c-341fe233959b,1,Agent should modify user address,False,2,1,0,True,1,0
+retail_pass3_haiku,110,1,b91ff400-bc3f-4445-929c-341fe233959b,2,Agent should modify the items in the pending order.,True,3,0,0,True,0,0
+retail_pass3_haiku,111,1,ebe50d69-33fc-430b-984d-c0104704dcea,0,Agent should modify the items and address as requested.,True,3,0,0,True,0,0
+retail_pass3_haiku,113,1,ecd9a9af-ff2f-4517-b5d8-3683def2a046,0,Agent should cancel all pending orders,True,3,0,0,True,0,0
+retail_pass3_haiku,2,2,fcb22fb8-4db8-458d-bcfb-5f3bc7890248,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_pass3_haiku,4,2,ac32f4fc-5423-413a-967a-1a39a37d70bb,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_pass3_haiku,3,2,816e5f70-3fb2-4fa2-bee6-c102e10e5322,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_pass3_haiku,16,2,2b1d1417-ee1c-4308-a784-7282ea5312d2,0,"Agent should tell the user the total refund amount is $8,276.23.",True,3,0,0,True,0,0
+retail_pass3_haiku,19,2,20772f1e-f5fa-4788-b7d9-748c5d78bc1c,0,Agent should tell the user that returning the water bottle gives a refund of $54,True,3,0,0,True,0,0
+retail_pass3_haiku,19,2,20772f1e-f5fa-4788-b7d9-748c5d78bc1c,1,Agent should tell the user that exchanging the pet bed and office chair saves $4,True,3,0,0,True,0,0
+retail_pass3_haiku,21,2,d6f5a90e-7551-4e4a-8665-8ddba53288b8,0,Agent should tell the user their gift card balance is $44.08.,False,0,3,0,False,0,0
+retail_pass3_haiku,24,2,8dc41686-d3a2-4fc5-83c3-ffc775fe74c4,0,Agent should tell the user the materials of the two t-shirts are polyester and c,True,3,0,0,True,0,0
+retail_pass3_haiku,28,2,cbbd7668-8eb2-469e-a14d-b271e90a6c85,0,Agent should tell the user the total refund amount is $918.43.,False,0,3,0,False,0,0
+retail_pass3_haiku,29,2,a22a3fbe-8243-425f-baff-9c284c80a9fd,0,Agent should tell the user the prices of the available bamboo skateboard options,True,3,0,0,True,0,0
+retail_pass3_haiku,36,2,1a292259-06d9-4461-854b-71a0767ad8e9,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_pass3_haiku,36,2,1a292259-06d9-4461-854b-71a0767ad8e9,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_pass3_haiku,38,2,489e1282-a2cc-463c-b7b0-f199d3841542,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_pass3_haiku,38,2,489e1282-a2cc-463c-b7b0-f199d3841542,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_pass3_haiku,37,2,6e1e1d43-272d-4747-b229-24fff9291f9f,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_pass3_haiku,37,2,6e1e1d43-272d-4747-b229-24fff9291f9f,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_pass3_haiku,39,2,6f1bd0b7-987b-44b6-877a-89522f34d7ef,0,Agent should tell the user the cheapest t-shirt costs $46.66.,True,3,0,0,True,0,0
+retail_pass3_haiku,40,2,9c250ba5-d876-464f-8efb-a2a35c5f670c,0,Agent should tell the user their gift card balance is $60.,True,3,0,0,True,0,0
+retail_pass3_haiku,40,2,9c250ba5-d876-464f-8efb-a2a35c5f670c,1,Agent should tell the user their recent order was paid with a Mastercard.,True,3,0,0,True,0,0
+retail_pass3_haiku,43,2,615d2372-e3d5-4f01-8aeb-242d832f4e21,0,Agent should tell the user the tracking number is 840887978435.,True,3,0,0,True,0,0
+retail_pass3_haiku,43,2,615d2372-e3d5-4f01-8aeb-242d832f4e21,1,"Agent should tell the user the order was shipped to 943 Maple Drive, Suite 356, ",True,3,0,0,True,0,0
+retail_pass3_haiku,43,2,615d2372-e3d5-4f01-8aeb-242d832f4e21,2,Agent should tell the user the tablet storage is 64GB.,True,3,0,0,True,0,0
+retail_pass3_haiku,44,2,59816579-1d39-4b6d-8e37-9f6a7b3800fe,0,Agent should tell the user they will get back $17.99.,True,3,0,0,True,0,0
+retail_pass3_haiku,45,2,9acf1124-7e74-4f97-b1df-74312f8474e7,0,Agent should tell the user the price difference is $9.89.,True,3,0,0,True,0,0
+retail_pass3_haiku,47,2,0e37d8dd-d088-4d50-a2d5-dc2f40e11773,0,"Agent should tell the user the total refund amount is $1,095.55.",True,3,0,0,True,0,0
+retail_pass3_haiku,47,2,0e37d8dd-d088-4d50-a2d5-dc2f40e11773,1,"Agent should tell the user the total paid for remaining items is $1,528.14.",True,3,0,0,True,0,0
+retail_pass3_haiku,46,2,798b8645-b4c6-4e8b-8166-3e44f1569fba,0,"Agent should tell the user the total refund amount is $1,126.04.",True,3,0,0,True,0,0
+retail_pass3_haiku,46,2,798b8645-b4c6-4e8b-8166-3e44f1569fba,1,"Agent should tell the user the total paid for remaining items is $1,497.65.",False,0,3,0,False,0,0
+retail_pass3_haiku,54,2,610da0fa-2486-4c23-8929-4f841b4d3cf1,0,"Agent should tell the user the total refund amount is $3,646.68.",True,3,0,0,True,0,0
+retail_pass3_haiku,60,2,c220cc8a-48ea-4611-b54f-6dde23e2412d,0,Agent should tell the user the price of the new earbuds is $242.92.,True,3,0,0,True,0,0
+retail_pass3_haiku,59,2,75dd614c-d222-4d9e-bca1-3bc5f6499180,0,Agent should tell the user the refund for the cancelled desk lamp order is $164.,False,0,3,0,False,0,0
+retail_pass3_haiku,59,2,75dd614c-d222-4d9e-bca1-3bc5f6499180,1,Agent should tell the user the total price of order #W2702727 is $625.60.,True,3,0,0,True,0,0
+retail_pass3_haiku,62,2,0ed40783-3b77-4b8e-bd6f-b5ff2abe7a1a,0,Agent should tell the user the Bluetooth speaker costs $302.67.,True,3,0,0,True,0,0
+retail_pass3_haiku,62,2,0ed40783-3b77-4b8e-bd6f-b5ff2abe7a1a,1,Agent should tell the user the battery life is 20 hours.,True,3,0,0,True,0,0
+retail_pass3_haiku,63,2,7f8cbe91-0f81-462b-9627-973764d0d760,0,Agent should tell the user the Bluetooth speaker costs $302.67.,True,3,0,0,True,0,0
+retail_pass3_haiku,63,2,7f8cbe91-0f81-462b-9627-973764d0d760,1,Agent should tell the user the battery life is 20 hours.,True,3,0,0,True,0,0
+retail_pass3_haiku,63,2,7f8cbe91-0f81-462b-9627-973764d0d760,2,"Agent should tell the user the new order total is $1,288.65.",True,3,0,0,True,0,0
+retail_pass3_haiku,68,2,30302341-87ec-4ee8-b032-6b47a8e5e338,0,Agent should tell the user the order total is $829.43.,True,3,0,0,True,0,0
+retail_pass3_haiku,67,2,0bd388d9-66c0-4c23-a0a1-7b4cd35eb2a5,0,Agent should tell the user the order total is $829.43.,True,3,0,0,True,0,0
+retail_pass3_haiku,70,2,fbd6ac9b-2a39-4ebb-8c1f-d7af21042c08,0,Agent should tell the user they need to pay $22.55 for the price difference.,True,3,0,0,True,0,0
+retail_pass3_haiku,76,2,c403893b-6a32-4987-9f90-9035e209440e,0,"Agent should tell the user the total price of all grills is $1,939.05.",True,3,0,0,True,0,0
+retail_pass3_haiku,89,2,db9322a3-9be2-44d7-acda-4e12915a93f7,0,Agent should tell the user the cheapest mechanical keyboard costs $226.11.,True,3,0,0,True,0,0
+retail_pass3_haiku,89,2,db9322a3-9be2-44d7-acda-4e12915a93f7,1,Agent should tell the user the keyboard switch type is tactile.,True,3,0,0,True,0,0
+retail_pass3_haiku,89,2,db9322a3-9be2-44d7-acda-4e12915a93f7,2,Agent should tell the user the keyboard backlight is white.,True,3,0,0,True,0,0
+retail_pass3_haiku,89,2,db9322a3-9be2-44d7-acda-4e12915a93f7,3,Agent should tell the user the keyboard size is full.,True,3,0,0,True,0,0
+retail_pass3_haiku,95,2,7a2612f1-a874-47cb-9339-d54866e64d21,0,Agent should tell the user the price difference for one laptop exchange is $167.,True,3,0,0,True,0,0
+retail_pass3_haiku,95,2,7a2612f1-a874-47cb-9339-d54866e64d21,1,Agent should tell the user the price difference for the other laptop exchange is,True,3,0,0,True,0,0
+retail_pass3_haiku,95,2,7a2612f1-a874-47cb-9339-d54866e64d21,2,Agent should tell the user the total amount to pay today is $107.09.,True,3,0,0,True,0,0
+retail_pass3_haiku,103,2,5eb8e39e-a053-4cd6-afdf-27c8de448512,0,Agent should provide the tracking number 286422338955.,True,3,0,0,True,0,0
+retail_pass3_haiku,105,2,67dba6d5-48bf-4dda-b5cb-0e251c2bac66,0,Agent should exchange both tea kettles (same style) to the items requested,False,0,3,0,False,0,0
+retail_pass3_haiku,104,2,dd295e44-8257-4345-950d-9919b8fe55e3,0,Agent should provide the tracking number 286422338955.,True,3,0,0,True,0,0
+retail_pass3_haiku,106,2,d2e7e118-f20a-41cd-bb69-0956518959b0,0,Agent should process the exchange.,True,3,0,0,True,0,0
+retail_pass3_haiku,107,2,57293b2f-9f1d-4891-a72a-87a066f017c5,0,Agent should exchange items in both orders.,True,3,0,0,True,0,0
+retail_pass3_haiku,108,2,acc4c94c-6f62-4bbb-a92e-63a90742ac13,0,Agent should tell the user the refund amount is $346.93.,True,3,0,0,True,0,0
+retail_pass3_haiku,109,2,6d043840-63b6-48ef-b782-03b6acba306f,0,Agent should make changes to address on order and user profile,True,3,0,0,True,0,0
+retail_pass3_haiku,109,2,6d043840-63b6-48ef-b782-03b6acba306f,1,Agent should modify the pending order.,True,3,0,0,True,0,0
+retail_pass3_haiku,110,2,e4aa5adf-370c-4f8f-a935-f0de62849dab,0,Agent should modify address for the order,True,3,0,0,True,0,0
+retail_pass3_haiku,110,2,e4aa5adf-370c-4f8f-a935-f0de62849dab,1,Agent should modify user address,False,0,3,0,False,0,0
+retail_pass3_haiku,110,2,e4aa5adf-370c-4f8f-a935-f0de62849dab,2,Agent should modify the items in the pending order.,True,3,0,0,True,0,0
+retail_pass3_haiku,111,2,f7d301ed-db8a-4333-b3cc-66d7a3f175c2,0,Agent should modify the items and address as requested.,True,3,0,0,True,0,0
+retail_pass3_haiku,113,2,eeb9e634-b158-43ad-862d-4384ea82dd66,0,Agent should cancel all pending orders,True,3,0,0,True,0,0
+retail_gt_haiku,2,0,ce9012bb-1bd9-4548-993c-ef0018310d0b,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_gt_haiku,3,0,33394899-d940-492b-ac16-59a6b38f8509,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_gt_haiku,4,0,07cfe30b-fd8f-4434-a5d3-5f6d6c6d62b8,0,Agent should tell the user that there are 10 t-shirt options available.,True,3,0,0,True,0,0
+retail_gt_haiku,16,0,8701d659-286d-463e-bdc1-e1f6a8a8cd1b,0,"Agent should tell the user the total refund amount is $8,276.23.",True,3,0,0,True,0,0
+retail_gt_haiku,19,0,68a09025-5b3c-459e-a796-9ce71c033521,0,Agent should tell the user that returning the water bottle gives a refund of $54,True,3,0,0,True,0,0
+retail_gt_haiku,19,0,68a09025-5b3c-459e-a796-9ce71c033521,1,Agent should tell the user that exchanging the pet bed and office chair saves $4,False,0,3,0,False,0,0
+retail_gt_haiku,21,0,57596317-3cc5-491c-9eac-1c018fc58a32,0,Agent should tell the user their gift card balance is $44.08.,True,3,0,0,True,0,0
+retail_gt_haiku,28,0,2ea9615c-e2e9-431b-b861-86d05a9c761c,0,Agent should tell the user the total refund amount is $918.43.,True,3,0,0,True,0,0
+retail_gt_haiku,29,0,c649cfdc-774e-4403-af21-d518ff66e972,0,Agent should tell the user the prices of the available bamboo skateboard options,True,3,0,0,True,0,0
+retail_gt_haiku,36,0,64f30d97-c5b9-44a9-935f-bc7a1be6eba2,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_gt_haiku,36,0,64f30d97-c5b9-44a9-935f-bc7a1be6eba2,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_gt_haiku,38,0,63839b10-ec65-41d5-a105-a2bfaed7e069,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_gt_haiku,38,0,63839b10-ec65-41d5-a105-a2bfaed7e069,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_gt_haiku,37,0,74b1fc1c-7859-453f-a5c5-6219d6d0fbb5,0,Agent should tell the user the most expensive item in the order is the camera.,True,3,0,0,True,0,0
+retail_gt_haiku,37,0,74b1fc1c-7859-453f-a5c5-6219d6d0fbb5,1,Agent should tell the user the camera costs $481.50.,True,3,0,0,True,0,0
+retail_gt_haiku,40,0,e2ccba94-023c-4f1f-b5e9-76245bf9055f,0,Agent should tell the user their gift card balance is $60.,True,3,0,0,True,0,0
+retail_gt_haiku,40,0,e2ccba94-023c-4f1f-b5e9-76245bf9055f,1,Agent should tell the user their recent order was paid with a Mastercard.,True,3,0,0,True,0,0
+retail_gt_haiku,39,0,c3b7992e-5533-4ac4-8b4d-8ddcdc17e286,0,Agent should tell the user the cheapest t-shirt costs $46.66.,True,3,0,0,True,0,0
+retail_gt_haiku,44,0,3e492919-fe7d-48b0-a96b-93ea19d2a841,0,Agent should tell the user they will get back $17.99.,True,3,0,0,True,0,0
+retail_gt_haiku,43,0,ab26d58b-afcc-4ebc-8512-241bd9b1ae7b,0,Agent should tell the user the tracking number is 840887978435.,True,3,0,0,True,0,0
+retail_gt_haiku,43,0,ab26d58b-afcc-4ebc-8512-241bd9b1ae7b,1,"Agent should tell the user the order was shipped to 943 Maple Drive, Suite 356, ",True,3,0,0,True,0,0
+retail_gt_haiku,43,0,ab26d58b-afcc-4ebc-8512-241bd9b1ae7b,2,Agent should tell the user the tablet storage is 64GB.,True,3,0,0,True,0,0
+retail_gt_haiku,45,0,8b3f8ecc-0c00-4a29-b07a-067c5d78c1c5,0,Agent should tell the user the price difference is $9.89.,True,3,0,0,True,0,0
+retail_gt_haiku,46,0,65561635-7302-427c-9f95-6a2d31a618aa,0,"Agent should tell the user the total refund amount is $1,126.04.",True,3,0,0,True,0,0
+retail_gt_haiku,46,0,65561635-7302-427c-9f95-6a2d31a618aa,1,"Agent should tell the user the total paid for remaining items is $1,497.65.",False,0,3,0,False,0,0
+retail_gt_haiku,47,0,f1d97a8b-2227-4cd0-b93f-f41f053d8618,0,"Agent should tell the user the total refund amount is $1,095.55.",True,3,0,0,True,0,0
+retail_gt_haiku,47,0,f1d97a8b-2227-4cd0-b93f-f41f053d8618,1,"Agent should tell the user the total paid for remaining items is $1,528.14.",True,3,0,0,True,0,0
+retail_gt_haiku,54,0,67227baf-f9b3-4f9d-b634-d5d7884d27bf,0,"Agent should tell the user the total refund amount is $3,646.68.",True,3,0,0,True,0,0
+retail_gt_haiku,60,0,081c80cd-54ca-4181-91d2-d3282f22ec11,0,Agent should tell the user the price of the new earbuds is $242.92.,True,3,0,0,True,0,0
+retail_gt_haiku,59,0,03fb26b5-e11a-48e0-9036-09c98ed69db1,0,Agent should tell the user the refund for the cancelled desk lamp order is $164.,True,3,0,0,True,0,0
+retail_gt_haiku,59,0,03fb26b5-e11a-48e0-9036-09c98ed69db1,1,Agent should tell the user the total price of order #W2702727 is $625.60.,True,3,0,0,True,0,0
+retail_gt_haiku,62,0,5a9c7e8a-ea16-4f80-afe0-c886f8b0aaab,0,Agent should tell the user the Bluetooth speaker costs $302.67.,True,3,0,0,True,0,0
+retail_gt_haiku,62,0,5a9c7e8a-ea16-4f80-afe0-c886f8b0aaab,1,Agent should tell the user the battery life is 20 hours.,True,3,0,0,True,0,0
+retail_gt_haiku,63,0,e47f3d92-ea88-4f81-b010-3e8001e4ba70,0,Agent should tell the user the Bluetooth speaker costs $302.67.,True,3,0,0,True,0,0
+retail_gt_haiku,63,0,e47f3d92-ea88-4f81-b010-3e8001e4ba70,1,Agent should tell the user the battery life is 20 hours.,True,3,0,0,True,0,0
+retail_gt_haiku,63,0,e47f3d92-ea88-4f81-b010-3e8001e4ba70,2,"Agent should tell the user the new order total is $1,288.65.",True,3,0,0,True,0,0
+retail_gt_haiku,68,0,b4f20e26-0a65-41e0-b6cd-7fc229701ae1,0,Agent should tell the user the order total is $829.43.,True,3,0,0,True,0,0
+retail_gt_haiku,67,0,208714d5-2079-488b-bcda-9e43a0dfed6b,0,Agent should tell the user the order total is $829.43.,True,3,0,0,True,0,0
+retail_gt_haiku,70,0,f5434bbc-259b-47ad-a04d-e75c6e0f6b5d,0,Agent should tell the user they need to pay $22.55 for the price difference.,True,3,0,0,True,0,0
+retail_gt_haiku,76,0,294f0b71-5e11-496d-b87a-b4f9286fe4a0,0,"Agent should tell the user the total price of all grills is $1,939.05.",True,3,0,0,True,0,0
+retail_gt_haiku,89,0,05b2dd6d-1d87-4cc5-9920-c89fe46f4d2c,0,Agent should tell the user the cheapest mechanical keyboard costs $226.11.,True,3,0,0,True,0,0
+retail_gt_haiku,89,0,05b2dd6d-1d87-4cc5-9920-c89fe46f4d2c,1,Agent should tell the user the keyboard switch type is tactile.,True,3,0,0,True,0,0
+retail_gt_haiku,89,0,05b2dd6d-1d87-4cc5-9920-c89fe46f4d2c,2,Agent should tell the user the keyboard backlight is white.,True,3,0,0,True,0,0
+retail_gt_haiku,89,0,05b2dd6d-1d87-4cc5-9920-c89fe46f4d2c,3,Agent should tell the user the keyboard size is full.,True,3,0,0,True,0,0
+retail_gt_haiku,95,0,8c714225-e498-4dda-989c-37c40fd03849,0,Agent should tell the user the price difference for one laptop exchange is $167.,True,3,0,0,True,0,0
+retail_gt_haiku,95,0,8c714225-e498-4dda-989c-37c40fd03849,1,Agent should tell the user the price difference for the other laptop exchange is,True,3,0,0,True,0,0
+retail_gt_haiku,95,0,8c714225-e498-4dda-989c-37c40fd03849,2,Agent should tell the user the total amount to pay today is $107.09.,True,3,0,0,True,0,0
+retail_gt_haiku,103,0,6e11ca21-9dd7-437e-919b-9d4d0ca0fe80,0,Agent should provide the tracking number 286422338955.,False,0,3,0,False,0,0
+retail_gt_haiku,106,0,c81c316d-dcd7-4099-a630-5d3a65717818,0,Agent should process the exchange.,True,3,0,0,True,0,0
+retail_gt_haiku,105,0,70674ef6-c9ed-4071-a4c8-eb6148064889,0,Agent should exchange both tea kettles (same style) to the items requested,False,0,3,0,False,0,0
+retail_gt_haiku,104,0,eea3e856-6c26-4f0f-8b0a-d52358c40078,0,Agent should provide the tracking number 286422338955.,True,3,0,0,True,0,0
+retail_gt_haiku,107,0,a8492cee-2a8c-4f8e-aa98-04b69791f4b4,0,Agent should exchange items in both orders.,True,3,0,0,True,0,0
+retail_gt_haiku,108,0,f089b2a5-9295-47ad-99d7-60d714da1e60,0,Agent should tell the user the refund amount is $346.93.,False,0,3,0,False,0,0
+retail_gt_haiku,109,0,22549ab6-091c-4562-93f2-1f731c5414b5,0,Agent should make changes to address on order and user profile,True,3,0,0,True,0,0
+retail_gt_haiku,109,0,22549ab6-091c-4562-93f2-1f731c5414b5,1,Agent should modify the pending order.,True,3,0,0,True,0,0
+retail_gt_haiku,110,0,2028f02c-085a-4aa3-9980-d2afa4d98eb9,0,Agent should modify address for the order,True,3,0,0,True,0,0
+retail_gt_haiku,110,0,2028f02c-085a-4aa3-9980-d2afa4d98eb9,1,Agent should modify user address,True,3,0,0,True,0,0
+retail_gt_haiku,110,0,2028f02c-085a-4aa3-9980-d2afa4d98eb9,2,Agent should modify the items in the pending order.,True,3,0,0,True,0,0
+retail_gt_haiku,113,0,08f075b7-35ba-4b76-9088-6ddbe4b32092,0,Agent should cancel all pending orders,True,3,0,0,True,0,0
+retail_gt_haiku,111,0,2499a47e-0824-404d-b0b4-6d3354680cc8,0,Agent should modify the items and address as requested.,True,3,0,0,True,0,0

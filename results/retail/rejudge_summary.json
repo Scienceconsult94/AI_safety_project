@@ -1,0 +1,45 @@
+{
+ "strict_parser": {
+  "calls": 169,
+  "strict_rejected": 103,
+  "results_short": 0,
+  "files": [
+   "results/retail/runs/retail_pass3_haiku/judge_calls.json",
+   "results/retail/runs/retail_gt_haiku/judge_calls.json",
+   "results/retail/judge_calls_noop.json"
+  ]
+ },
+ "rejudge": {
+  "simulations": 159,
+  "assertion_verdicts": 243,
+  "assertion_flips": 1,
+  "unparsed_replies": 1,
+  "unparsed_detail": [
+   {
+    "run": "retail_pass3_haiku",
+    "task_id": "103",
+    "trial": 2,
+    "attempt": 0,
+    "error": "judge reply: no JSON object or array found"
+   }
+  ],
+  "live_omitted_assertions": 0,
+  "reward_flips": 1,
+  "pass_to_fail": 0,
+  "fail_to_pass": 1,
+  "flipped": [
+   {
+    "run": "retail_pass3_haiku",
+    "task_id": "110",
+    "trial": 1,
+    "live_reward": 0.0,
+    "majority_reward": 1.0
+   }
+  ],
+  "votes": 3,
+  "judge_calls": 385,
+  "in_tokens": 2220267,
+  "out_tokens": 163355,
+  "own_estimate_usd": 0.3037
+ }
+}
