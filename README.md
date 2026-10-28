@@ -91,6 +91,8 @@ The same floor on four external agent benchmarks, each scored offline with its o
 
 Original tau-bench retail task 106 is tau2 retail task 105: its only reference action is rejected for an insufficient gift-card balance. The original gives it to an agent that does nothing; tau2 added an assertion that demands the exchange and made it impossible.
 
+On HAL's public TAU-bench Airline leaderboard, four single runs of the tool-calling agent score below this 38% floor, on the same 50 tasks and with the same scoring code: one at 28% and three at 36% (`results/null_agent/hal_check.md`). With one run each, this does not show that these models do worse than doing nothing. It shows that the page, which prints no floor, gives a reader no way to tell.
+
 Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file and line references and reproduction paths). Texts ready to file for I1 and I3–I16, grouped into nine issues with fourteen reproduction scripts and five patches, are in `upstream/`. Nothing has been filed.
 
 ## What is in the repository

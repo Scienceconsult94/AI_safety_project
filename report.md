@@ -268,6 +268,8 @@ Table 9b. Null-agent and refusal-agent floors on four external benchmarks (Wilso
 
 Outside tau2 the floor runs from 0 (WebArena-Verified, null agent) to 38% of tasks (original tau-bench airline), plus 10 of 100 points on BFCL V4.
 
+**Published scores below the floor.** HAL's TAU-bench Airline leaderboard (accessed 2026-10-28) lists four single runs of the "TAU-bench Tool Calling" scaffold below 38%: Gemini 2.0 Flash High at 28% (14 of 50 tasks), and o4-mini Low, GPT-4.1 and DeepSeek R1 at 36% (18 of 50). HAL scores the same 50 airline test tasks with tau-bench's own reward code. It installs the code from a fork whose airline tasks differ from the original in tasks 2, 8, 9, 10 and 23 only. None of these five is among the 19 that doing nothing passes, so the floor on HAL's version is also 19 of 50 (`results/null_agent/hal_check.md`). The 28% run therefore failed at least 5 of the 19 tasks that an immediate hand-over passes. This does not show that these models do worse than doing nothing: each row is one run, the 36% rows are one task below the floor, both Wilson intervals contain 38%, and HAL counts errors and timeouts as failures. It shows that a reader of the page cannot tell, because the page prints no floor. HAL's Generalist rows (10% to 32%) cannot be compared: HAL marks them as a lower bound, because that scaffold rarely ends the episode and an episode that does not end scores 0.
+
 ## 7. Strong vs weak: does the exam separate a stronger agent?
 
 The check was pre-registered in `strong_vs_weak/PLAN.md` and committed before any result of the run was read. It uses the same 20 sampled airline tasks with three trials each. The agent is `claude-sonnet-5-5`; everything else is unchanged: the user simulator `claude-haiku-5-5`, the seed, the scorer and the settings. Results are in `strong_vs_weak/summary.md`.
@@ -344,7 +346,7 @@ Every number is rebuilt by the command sequences in `STRUCTURE.md`; the judge st
 Not done, candidates for a next iteration:
 
 - **Strong vs weak, more power.** Repeat the comparison on all 50 airline tasks or with a second run per model, so that a gap of the observed size can reach significance.
-- **External null agent, remaining runs.** Run the do-nothing agent on OSWorld-Verified (needs its virtual machine) and on the original WebArena (needs the live sites). Check whether published tau-bench airline scores use the 50 original test tasks and this reward code: the HAL leaderboard lists 28.00% for a cheap model, which would then sit 10 points below the do-nothing floor of 38.0%.
+- **External null agent, remaining runs.** Run the do-nothing agent on OSWorld-Verified (needs its virtual machine) and on the original WebArena (needs the live sites).
 - **External defects.** The defects found in tau-bench (six retail tasks whose single reference write is rejected) and in WebArena-Verified (tasks 319, 699, 700, 811 and the 10 map tasks) are recorded in `results/null_agent/external.md`; no issue text is drafted for them.
 - **Retail run rows.** Give the retail run rows an adversarial pass.
 - **Upstream issues.** Texts for I1 and I3–I16 are ready in `upstream/` (nine issues, five patches, fourteen reproductions, each patch checked against the pinned clone). None has been filed; which to file is still to be decided.

@@ -117,7 +117,7 @@ Each sampled task is checked against a fixed checklist (static reading, mechanic
 │   └── external/               bfcl.py, tau_bench.py, osworld.py, webarena_verified.py: the same floor on four external benchmarks
 │                               (each run with its benchmark's own venv, installed outside the repository in ../external_benchmarks/)
 ├── results/null_agent/         tau2_null_agent.csv (one row per task) and tau2_null_agent.md (per-domain table, Wilson intervals);
-│                               external.md/.csv (four external benchmarks: method, commands, results), external_raw/ (per-task and per-category outputs)
+│                               external.md/.csv (four external benchmarks: method, commands, results), external_raw/ (per-task and per-category outputs), hal_check.md (HAL's TAU-bench Airline scores against the 38% floor)
 ├── null_agent/                external_candidates.md: desk survey of nine external agent benchmarks (scoring, null and refusal floors by construction, offline cost)
 ├── strong_vs_weak/             PLAN.md (pre-registration, committed before the run's results were read), summary.md, per_task.csv, fig_per_task.png
 ├── scripts/strong_vs_weak/     compare.py: the pre-registered Sonnet-vs-Haiku comparison (Python 3.11)
