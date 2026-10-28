@@ -8,6 +8,7 @@ Each sampled task is checked against a fixed checklist (static reading, mechanic
 ```
 .
 ├── STRUCTURE.md                this map
+├── COMMIT_MAP.md               old -> new commit hashes after the one-time rewrite of commit messages (provenance stamps cite the old ones)
 ├── checklist.md                the validation checklist (check ids 1a..6e, method per check)
 ├── schema.md                   columns and validation rules of audit_log.csv
 ├── sample.json                 the 20 sampled task ids and the pinned bench commit
