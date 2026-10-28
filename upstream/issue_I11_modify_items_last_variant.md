@@ -6,7 +6,7 @@
 | type | bug (environment correctness; scoring validity) |
 | domain | retail |
 | severity | medium |
-| status | draft, not filed |
+| status | draft, not filed; already reported as sierra-research/tau2-bench#318 (also #317, #325), fix in pull request #322, not merged (checked 2026-10-28); the unrounded price difference is not reported there |
 
 ## Summary
 

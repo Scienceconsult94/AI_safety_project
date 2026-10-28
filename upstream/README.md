@@ -1,19 +1,19 @@
 # Upstream issue and pull-request drafts for tau2-bench
 
-Target: `sierra-research/tau2-bench`, tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`. Source drafts: `issues_draft.md` rows I1 and I3 to I16. Nothing here has been filed or opened.
+Target: `sierra-research/tau2-bench`, tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`. Source drafts: `issues_draft.md` rows I1 and I3 to I16. Nothing here has been filed or opened, and nothing is to be filed for now. A check of the tracker on 2026-10-28 found three of the drafts already reported by others; see the status column.
 
 ## Issues
 
 | order | audit ids | title | type | domain | severity | file | status |
 |---|---|---|---|---|---|---|---|
-| 1 | I11 | `modify_pending_order_items` stores the last new variant in every modified item; price difference not rounded | bug | retail | medium | `issue_I11_modify_items_last_variant.md` | draft, not filed |
+| 1 | I11 | `modify_pending_order_items` stores the last new variant in every modified item; price difference not rounded | bug | retail | medium | `issue_I11_modify_items_last_variant.md` | draft, not filed; already reported as sierra-research/tau2-bench#318 (also #317, #325; fix in pull request #322, not merged); the unrounded price difference is not reported there |
 | 2 | I12 | address change accepted after an item change, against the policy; the forbidden order reaches the target | bug | retail | medium | `issue_I12_modify_after_item_change.md` | draft, not filed |
 | 3 | I9, I10, I14 | NL-assertion judge: tool calls invisible, fenced or array replies rejected, omitted assertion counts as met | scoring validity, bug | retail; any task judged on `nl_assertions` | medium | `issue_I9_I10_I14_nl_assertion_judge.md` | draft, not filed |
 | 4 | I1 | docs say the runner defaults to `ALL_WITH_NL_ASSERTIONS`; the code defaults to `ALL` | docs | all (visible in airline) | low | `issue_I1_docs_default_evaluation_type.md` | draft, not filed |
 | 5 | I5 | default `temperature: 0.0` rejected by current Anthropic models; failed run reported as success; agent cost always `None` | bug (reporting) | all | medium | `issue_I5_default_temperature_and_run_reporting.md` | draft, not filed |
-| 6 | I4, I6, I8 | airline task data: accidental substring matches (3, 23), wrong required total (7), budget clause that forbids the reference (32) | task data | airline | I4 medium, I6 medium, I8 high | `issue_I4_I6_I8_airline_task_data.md` | draft, not filed |
+| 6 | I4, I6, I8 | airline task data: accidental substring matches (3, 23), wrong required total (7), budget clause that forbids the reference (32) | task data | airline | I4 medium, I6 medium, I8 high | `issue_I4_I6_I8_airline_task_data.md` | draft, not filed; I6 already reported as sierra-research/tau2-bench#495; I4 and I8 not found there |
 | 7 | I13, I16 | retail task data: reference defects (2-4, 18, 26, 64, 105, 110, action ids) and task texts a faithful user cannot follow (0, 1, 52, 100) | task data | retail | 105 high; others medium to cosmetic | `issue_I13_I16_retail_task_data.md` | draft, not filed |
-| 8 | I3 | DB hash depends on list order and on generated reservation ids | scoring validity | airline (hash shared by all domains) | medium | `issue_I3_db_hash_order_and_generated_ids.md` | draft, not filed |
+| 8 | I3 | DB hash depends on list order and on generated reservation ids | scoring validity | airline (hash shared by all domains) | medium | `issue_I3_db_hash_order_and_generated_ids.md` | draft, not filed; the payment-order part already reported as sierra-research/tau2-bench#514; passenger order and generated ids not reported there |
 | 9 | I7, I15 | text-mode simulator guidelines lack three rules of the voice guidelines; simulator deviations decide many failures and flips | simulator | all text-mode runs | medium | `issue_I7_I15_user_simulator_text_mode.md` | draft, not filed |
 
 Suggested filing order: first the two small retail tool bugs, whose patches change one function each and are fully verified (1, 2); then the judge-path fix, which also comes with a patch (3); then the two reporting items, one docs-only (4) and one partial fix that leaves a policy decision to the maintainers (5); then the task-data items, which need the maintainers' judgement per task (6, 7); then the two design-level items, where the fix changes what the benchmark measures and needs discussion (8, 9).

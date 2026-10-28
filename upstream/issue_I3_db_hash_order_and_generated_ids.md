@@ -6,7 +6,7 @@
 | type | scoring validity |
 | domain | airline (the hash is shared by every domain) |
 | severity | medium |
-| status | draft, not filed |
+| status | draft, not filed; the payment-order part is already reported as sierra-research/tau2-bench#514 (checked 2026-10-28) |
 
 ## Summary
 

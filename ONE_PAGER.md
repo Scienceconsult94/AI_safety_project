@@ -31,6 +31,6 @@
 
 **What would help** (proposal). Publish next to every agent leaderboard: do-nothing and refuse-only floors; a replay of each task's reference solution (official correct actions) as a control; the task-file version behind each score; and, with a simulated customer, the share of failures it causes. Scripts here produce the do-nothing floor and the reference replay for five of the six tau2 task sets without paid model calls.
 
-**What is in the repository.** Full report (`report.md`), audit logs, an offline demo (about 12 seconds, no model call; `scripts/demo/demo.py`, script in `DEMO.md`), and 16 issue drafts for the maintainers with reproduction scripts and patches (`issues_draft.md`, `upstream/`; nothing filed).
+**What is in the repository.** Full report (`report.md`), audit logs, an offline demo (about 12 seconds, no model call; `scripts/demo/demo.py`, script in `DEMO.md`), and 16 issue drafts for the maintainers with reproduction scripts and patches (`issues_draft.md`, `upstream/`; nothing filed; three of them were already reported by others).
 
 **Limits.** One benchmark audited in depth; reviewers and adversarial reviewers are language models, not people; one run per model in the strong-vs-weak comparison; three of nine external rows counted from task files rather than measured.

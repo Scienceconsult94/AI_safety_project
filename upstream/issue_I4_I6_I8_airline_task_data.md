@@ -6,7 +6,7 @@
 | type | task data (I4 also concerns the substring scorer) |
 | domain | airline |
 | severity | I4 medium, I6 medium, I8 high |
-| status | draft, not filed |
+| status | draft, not filed; I6 is already reported as sierra-research/tau2-bench#495 (checked 2026-10-28); I4 and I8 were not found in the tracker |
 
 ## Summary
 

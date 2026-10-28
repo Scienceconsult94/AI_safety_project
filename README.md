@@ -93,7 +93,7 @@ Original tau-bench retail task 106 is tau2 retail task 105: its only reference a
 
 On HAL's public TAU-bench Airline leaderboard, four single runs of the tool-calling agent score below this 38% floor, on the same 50 tasks and with the same scoring code: one at 28% and three at 36% (`results/null_agent/hal_check.md`). With one run each, this does not show that these models do worse than doing nothing. It shows that the page, which prints no floor, gives a reader no way to tell.
 
-Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file and line references and reproduction paths). Texts ready to file for I1 and I3–I16, grouped into nine issues with fourteen reproduction scripts and five patches, are in `upstream/`. Nothing has been filed.
+Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file and line references and reproduction paths). Texts ready to file for I1 and I3–I16, grouped into nine issues with fourteen reproduction scripts and five patches, are in `upstream/`. Nothing has been filed. Three of the drafts (I6, I11 and part of I3) were already reported by others in the benchmark's issue tracker (report Section 8).
 
 ## What is in the repository
 
