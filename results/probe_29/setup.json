@@ -1,0 +1,28 @@
+{
+ "created_utc": "2026-10-28T17:37:58+00:00",
+ "bench_commit": "989d3285ae669e49503324bdb9981bf14fccedeb",
+ "user_llm": "anthropic/claude-haiku-5-5",
+ "llm_args_user": {},
+ "persona": "mamadou_diallo",
+ "prefix_source": "29_gt_t0 (rest30_gt_haiku), user-visible messages with turn_idx <= 6",
+ "prefix_turns": [
+  [
+   0,
+   "assistant"
+  ],
+  [
+   1,
+   "user"
+  ],
+  [
+   2,
+   "assistant"
+  ],
+  [
+   3,
+   "user"
+  ]
+ ],
+ "counterfactual": "I can't change VA5SGQ to JFK, because a change cannot alter the destination. Because you have travel insurance and a health reason, I can cancel VA5SGQ for a full refund of $686 to your Visa ending 6521, and book new nonstop flights HAT169 on May 17 (arrives 6:00 AM) and HAT033 on May 19, economy, $282, with your one checked bag free. There is no change fee. I can book the new flights first, so the fares are locked. Shall I go ahead?",
+ "n": 10
+}

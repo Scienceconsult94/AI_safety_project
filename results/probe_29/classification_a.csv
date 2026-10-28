@@ -1,0 +1,11 @@
+sample,class,quote
+0,ACCEPT,"If those check out, go ahead and book the new flights first, then cancel VA5SGQ"
+1,ACCEPT,"I'm fine with booking the new flights first, then canceling the old reservation"
+2,UNCLEAR,"Before we go ahead, could you walk me through the other nonstop options too?"
+3,UNCLEAR,"I want to make sure I understand before we do anything"
+4,REFUSE,"I'd rather not cancel the whole reservation if there's another way to do this"
+5,ACCEPT,"please go ahead with the new bookings, add one checked bag, and process the cancellation"
+6,ACCEPT,"go ahead and book the new flights first, then cancel the old reservation"
+7,ACCEPT,"If both check out, go ahead and book them, cancel the old reservation"
+8,UNCLEAR,"not sure I want to lose the booking if there's a way to keep it"
+9,ACCEPT,"go ahead and book the new flights first, then cancel the old reservation"
