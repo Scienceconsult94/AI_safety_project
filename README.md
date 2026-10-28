@@ -9,13 +9,29 @@ Block 1, the audit of the pinned benchmark (20 sampled tasks of 50, fixed checkl
 | quantity | value |
 |---|---|
 | sampled tasks with at least one confirmed medium/high defect | 18/20 = 0.90 [0.70, 0.97] |
-| by static reading and mechanical probes alone | 13/20 |
+| by static reading and mechanical probes alone | 14/20 |
 | tasks of the whole domain that an agent passes by doing nothing | 23/50 = 0.46 |
 | agent solve rate (claude-haiku-5-5 as agent and user simulator), tasks passed 3/3 | 12/20 = 0.60 |
 | ground-truth agent (sees the reference actions) reaches the target state | 11/16 |
 | blind re-review agreement with the corrected labels | 29/29, Cohen's kappa 1.00 |
 
-The defects concentrate in two categories: scoring validity (12/20 tasks: an end-state hash that depends on list order, a substring check that matches by accident, requirements stated only in free-text assertions that the default scorer never reads, an arithmetic error in a reference answer) and determinism (8/20: the user simulator departs from its scenario). The substring check concerns the substring scorer, which every run here selected; the v2.0.0 default is a semantic judge, and without that check the headline is 17/20.
+The defects concentrate in two categories: scoring validity (13/20 tasks: an end-state hash that depends on list order, a substring check that matches by accident, requirements stated only in free-text assertions that the default scorer never reads, an arithmetic error in a reference answer) and determinism (8/20: the user simulator departs from its scenario). The substring check concerns the substring scorer, which every run here selected; the v2.0.0 default is a semantic judge, and without that check the headline is 17/20.
+
+The whole airline domain (report Section 13; pre-registration `airline_full/PLAN.md`): the same pipeline on the other 30 tasks, an adversarial review of every new defect row, and a consistency pass across the two blocks.
+
+| quantity | sample (20) | rest (30) | all 50 |
+|---|---|---|---|
+| tasks with at least one confirmed medium/high defect | 18/20 | 26/30 | 44/50 = 0.88 [0.76, 0.94] |
+| by static reading and mechanical probes alone | 14/20 | 23/30 | 37/50 |
+| tasks an agent passes by doing nothing | 7/20 | 16/30 | 23/50 |
+| agent tasks passed 3/3, stock protocol | 12/20 | 21/30 | 33/50 = 0.66 |
+| ground-truth agent reaches the target state | 11/16 | 22/27 | 33/43 |
+
+Eight of ten pre-registered predictions hold. Two do not:
+- removing the payment sentence from task 32 does not help the ground-truth agent (2/10 with it and 2/10 without it);
+- under the full v2 protocol the rest drops from 21/30 to 15/30 tasks passed 3/3, more than the predicted 0.10.
+
+The consistency pass changed one block-1 row (task 22, check 2h). That moves the sample count from reading and probes from 13/20 to 14/20; the headline is unchanged.
 
 Block 2, the stricter protocol and the re-run (pre-registered hypotheses H1–H5, one variable at a time):
 
@@ -84,6 +100,7 @@ Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file a
 - `checklist.md`, `schema.md`, `sample.json`, `audit_log.csv`: the checklist, the row schema, the sample, and the audit itself (one row per task and check).
 - `summary_numbers.md`, `fig_defects.png`, `analysis.ipynb`: block-1 numbers and figure, generated.
 - `block2/`: pre-registration (`PLAN.md`, with dated deviations), task fixes with their audit rows, the two adversarial reviews (`skeptic_design.md`, `skeptic_results.md`), the hand-check of judge verdicts, and the generated `summary_v2.md`.
+- `airline_full/`: the whole airline domain (all 50 tasks). It holds the pre-registration with dated deviations, the briefs of the reviewers and adversarial reviewers, the 50-task audit log, the generated `summary_numbers.md`, the task-32 counterfactual, and the second blind hand-check of the judge.
 - `retail/`, `scripts/retail/`, `results/retail/`: the retail audit. It holds the pre-registration with dated deviations, the per-check readings, the audit log, the generated `summary_numbers.md` and `comparison.md`, every script, the reviewer files, the runs and the re-judge.
 - `scripts/null_agent/`, `results/null_agent/`, `null_agent/`: the null-agent table over every tau2 task set, a desk survey of nine external benchmarks, and the floors measured on four of them (the benchmarks themselves are installed outside the repository).
 - `strong_vs_weak/`, `scripts/strong_vs_weak/`: the Sonnet-vs-Haiku check (pre-registration, summary, per-task table and figure).
@@ -103,4 +120,4 @@ Models used: `claude-haiku-5-5` as the agent, as the user simulator and as the j
 
 ## Limits
 
-Airline: 20 of 50 tasks sampled before any run, and the free-text assertions of the 30 unsampled tasks were not audited. Retail: all 114 tasks, but the rows from its agent runs were not adversarially reviewed. Required information is checked by the substring scorer in every run, not by the v2.0.0 default semantic judge, which was not audited. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. The OSWorld-Verified and original WebArena floors are counted from task files, not measured by running the evaluator. Dollar figures are own estimates from token counts at the published per-token prices; they were not reconciled with billing row by row (billing showed about $11 when the own estimate was $10.79).
+Airline: all 50 tasks; 20 were sampled before any run (block 1), and the other 30 were audited afterwards with the same pipeline (report Section 13). Retail: all 114 tasks, but the rows from its agent runs were not adversarially reviewed. Required information is checked by the substring scorer in every run, not by the v2.0.0 default semantic judge; on the recorded airline runs the two agree on all 58 verdicts (check 2j). Every reviewer, adversarial reviewer and reader was a language model, not a person. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. The OSWorld-Verified and original WebArena floors are counted from task files, not measured by running the evaluator. Dollar figures are own estimates from token counts at the published per-token prices; they were not reconciled with billing row by row (billing showed about $11 when the own estimate was $10.79).

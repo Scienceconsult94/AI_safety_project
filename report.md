@@ -10,9 +10,9 @@ An agent benchmark is an examination: a task text, a hidden reference, a scorer.
 
 **Checklist.** 52 checks in six categories (`checklist.md`): 1 solvability, 2 scoring validity, 3 isolation and leaks, 4 specification clarity, 5 determinism, 6 reporting. Each check names its method: static reading of code and data, a mechanical probe, or an agent run.
 
-**Sample.** 20 of 50 tasks, drawn with a fixed seed before any run (`sample.json`). Static scans that cost nothing were run on all 50.
+**Sample.** 20 of 50 tasks, drawn with a fixed seed before any run (`sample.json`). Static scans that cost nothing were run on all 50. Section 13 audits the other 30 tasks with the same pipeline.
 
-**Verdicts.** One row per task and check in `audit_log.csv`, validated against `schema.md`. Every medium or high defect row went through an adversarial review that tried to overturn it; 11 of 15 contested rows survived, 4 were withdrawn. Three tasks were re-labelled blind by a second reader: 27/29 agreement with the original labels, 29/29 with the corrected ones.
+**Verdicts.** One row per task and check in `audit_log.csv`, validated against `schema.md`. Every medium or high defect row went through an adversarial review that tried to overturn it; 11 of 15 contested rows survived, 4 were withdrawn. One sampled row was added later, when the audit was extended to all 50 tasks: task 22, check 2h, set by the consistency pass for the same reason as task 17 (Section 13); it has no adversarial verdict of its own. Three tasks were re-labelled blind by a second reader: 27/29 agreement with the original labels, 29/29 with the corrected ones.
 
 **Agent runs.** The audited model, `claude-haiku-5-5`, as agent and as user simulator, 3 trials per task on the 20 sampled tasks; the ground-truth agent (`llm_agent_gt`, which sees the reference actions) on the 16 tasks that have reference actions. The runner settings are recorded in the results files and were reused unchanged in block 2. Two of them depart from the v2.0.0 defaults: required information is checked by the substring scorer (`--communicate-scorer substring`) instead of the default semantic judge, which keeps the check deterministic, and no sampling parameters are sent (`llm_args {}`), because the default `temperature: 0.0` is rejected by the model (I5). Among the findings from reading and probes, only check 2g depends on the first choice (Section 3); the rewards behind the run-based rows were computed with it. The null-agent floor does not: the 23 tasks have no required information, which both scorers pass without a check.
 
@@ -25,7 +25,7 @@ Table 1. Headline shares (sampled tasks).
 | quantity | share |
 |---|---|
 | defective tasks (≥1 confirmed medium/high defect) | 18/20 = 0.90 [0.70, 0.97] |
-| defective by static reading and probes only | 13/20 = 0.65 [0.43, 0.82] |
+| defective by static reading and probes only | 14/20 = 0.70 [0.48, 0.86] |
 | defective by agent-run checks only | 9/20 = 0.45 |
 | defective by agent-run checks, excluding user-simulator deviations | 6/20 = 0.30 |
 | defective excluding the documented pass-by-doing-nothing class | 16/20 = 0.80 |
@@ -38,7 +38,7 @@ Table 2. Sampled tasks with a confirmed defect, by category.
 | category | share |
 |---|---|
 | 1 solvability | 1/20 |
-| 2 scoring validity | 12/20 |
+| 2 scoring validity | 13/20 |
 | 3 isolation and leaks | 0/20 (rule of three: ≤ 0.15) |
 | 4 specification clarity | 4/20 |
 | 5 determinism | 8/20 |
@@ -47,7 +47,7 @@ Table 2. Sampled tasks with a confirmed defect, by category.
 The main mechanisms, each with a reproduction in the repository:
 
 - **A pass for doing nothing (checks 2a, 2b).** 23 of 50 tasks have a reference that leaves the database unchanged and no required output string. The default scorer compares the end-state hash and the required strings, so an empty conversation scores 1.0. The benchmark's documentation describes the refusal case as the intended outcome of these tasks; the audit records the consequence, not a hidden bug: the exam cannot distinguish an agent that correctly refuses from one that does nothing.
-- **An end-state hash that depends on list order (2h, I3).** The DB hash serialises lists in their stored order. Reordering the reference actions, with the same final state, changes the hash in 24 of 78 tested permutations; adding passengers or payment methods in a different but equally valid order fails a correct solution.
+- **An end-state hash that depends on list order (2h, I3).** The DB hash serialises lists in their stored order. Reordering the reference actions, with the same final state, changes the hash in 24 of 78 tested permutations; adding passengers or payment methods in a different but equally valid order fails a correct solution. A second probe, added when the audit was extended to the whole domain, lets an earlier write change the arguments of a later one: in task 22, adding the three bags before the upgrade from basic economy makes one bag non-free, and the extra $50 charge fails an equally valid order (Section 13).
 - **A substring check that matches by accident (2g, I4).** Required strings such as "1000" or "327" are matched as substrings after commas are stripped, so they are found inside unrelated numbers and identifiers. This concerns the substring scorer, which every run here selected; the v2.0.0 default is a semantic judge. Task 3 has no other confirmed defect, so without this check the headline is 17/20.
 - **Requirements that no scorer reads (2k, 6 tasks).** The free-text `nl_assertions` state obligations that the default evaluation never checks; the documentation says the CLI evaluates them by default, the code at this tag does not (I1).
 - **A wrong reference answer (I6).** Task 7's required total, 1628, sums all four upcoming reservations, including the two the user cancels in the same conversation; the task asks for the total of the other upcoming flights (708). In block 1 one of the four trials answered 708 and scored 0, and the other three answered 1004; all three Sonnet trials (Section 7) answered 708 and scored 0.
@@ -217,7 +217,7 @@ Table 8. The same checklist on two domains (`retail/comparison.md`; airline is a
 
 | quantity | airline | retail |
 |---|---|---|
-| tasks with ≥1 medium/high defect, static and probe checks | 13/20 = 0.65 | 44/114 = 0.39 |
+| tasks with ≥1 medium/high defect, static and probe checks | 14/20 = 0.70 | 44/114 = 0.39 |
 | tasks with ≥1 medium/high defect, all checks | 18/20 = 0.90 | 67/114 = 0.59 |
 | empty answer gets full reward (whole domain) | 23/50 = 0.46 | 6/114 = 0.05 |
 | agent pass^3 | 12/20 = 0.60 | 75/114 = 0.66 |
@@ -314,7 +314,7 @@ Drafted in `issues_draft.md`, none filed:
 
 ## 9. What the numbers mean
 
-Two facts stand side by side. The examination has reproducible faults: a pass for doing nothing on 23 of 50 tasks, an end-state check that fails valid solutions, a string check that passes by accident, a wrong reference answer, a scenario that forbids its own reference, requirements nobody scores, a simulator that improvises. And the agent's headline number barely moves when the examination is repaired: pass^3 0.60 in both runs, pass^1 within the noise floor. The leaderboard cannot show what is wrong with the exam. Finding it took a checklist applied to the procedure, probes with known answers, and reviews whose job was to overturn the findings.
+Two facts stand side by side. The examination has reproducible faults: a pass for doing nothing on 23 of 50 tasks, an end-state check that fails valid solutions, a string check that passes by accident, a wrong reference answer, a scenario that forbids its own reference, requirements nobody scores, a simulator that improvises. And on the 20 sampled tasks the agent's headline number barely moves when the examination is repaired: pass^3 0.60 in both runs, pass^1 within the noise floor. On the other 30 tasks (Section 13) the same repair moves it from 0.70 to 0.50, mostly because v2 reads the requirements written only in free text. Whether the number moves depends on the tasks, and the stock number gives no sign of it. The leaderboard cannot show what is wrong with the exam. Finding it took a checklist applied to the procedure, probes with known answers, and reviews whose job was to overturn the findings.
 
 The repair itself is instructive. The deterministic faults exist (they fire on perturbed trajectories) but did not flip a single recorded conversation, because the recorded agents happened not to hit them. The one fix that failed, task 32, failed because a sentence added to make the scenario consistent with the reference exposed a second agent error that the pre-test could not see. Both say the same thing: an examination has to be validated as an instrument, with pre-registered expectations and adversarial review, before its numbers are read.
 
@@ -322,19 +322,21 @@ Retail tests the claim on a whole domain (interpretation). Its scorer closes air
 
 ## 10. Limits
 
-- **Scope.** Two domains of one benchmark: airline with 20 of 50 tasks sampled (its 30 unsampled tasks' assertions unaudited), retail with all 114 tasks.
+- **Scope.** Two domains of one benchmark: airline with all 50 tasks (20 sampled in block 1, the other 30 in Section 13) and retail with all 114 tasks.
 - **Models.** One agent model and one simulator model, and a judge from the same family. In retail that judge replaces the stock OpenAI judge, so the parser figures describe the substitution.
-- **Unreviewed rows.** The retail rows from the runs (1e, 4f, 5c, 5d) were not adversarially reviewed, and their 5d threshold differs between reviewer batches.
+- **Unreviewed rows.** The retail rows from the runs (1e, 4f, 5c, 5d) were not adversarially reviewed, and their 5d threshold differs between reviewer batches. In airline one medium row has no adversarial verdict of its own: 22/2h, set by the consistency pass (Section 13.3).
+- **Reviewers.** Every reviewer, adversarial reviewer and reader in this audit was a language model, not a person, so agreement figures measure agreement between model reviewers. Deviations during the airline review are listed in Section 13.6.
+- **One reading for the whole audit.** An upgrade the user never asked for, which would make a refused cancellation or change possible, is read as an unrequested write in both blocks. The opposite reading would add seven rest rows and raise the whole-domain count to at least 45/50.
 - **What v2 is.** The refusal pass is documented as intended, so v2 is a stricter alternative protocol rather than a bug fix.
 - **Run-to-run noise.** Single-trial ground-truth runs flipped on 4 of 13 unchanged airline tasks between two runs, so ground-truth totals are read against that floor.
 - **Strong vs weak.** One run per model and 20 tasks. The two runs are a day apart and the user simulator samples, so each run is one draw.
 - **External floors.** Three of the nine external rows are counted from task files and quoted scoring code rather than measured by running the evaluator (OSWorld-Verified twice, original WebArena). The WebArena-Verified agents were scored with a synthetic start-page network trace, because its evaluator rejects an empty one.
-- **Scorer setting.** The airline runs check required information with the substring scorer, not the v2.0.0 default semantic judge. Task 3 is defective only through check 2g, which depends on that choice; the run rewards were computed under it, and the semantic judge was not audited.
+- **Scorer setting.** The airline runs check required information with the substring scorer, not the v2.0.0 default semantic judge. Check 2j compared the two on every recorded airline run: 0 of 58 verdicts differ. Task 3 is defective only through check 2g, which depends on the substring choice; the run rewards were computed under it.
 - **Cost figures.** Dollar figures are own estimates from token counts at the published per-token prices. They were not reconciled with billing row by row; the account's billing was about $11 when the own estimate was $10.79.
 
 ## 11. Reproducibility and cost
 
-Every number is rebuilt by the command sequences in `STRUCTURE.md`; the judge stages replay from cached votes without a model call. Provenance stamps on every v2 output record the overlay commit and a dirty-tree flag; the live runs record the runner configuration and its empty diff against block 1. Spend, own estimate from token counts: block 1 about $1.36, block 2 about $2.27, retail about $7.16 (runs $6.86, re-judge $0.30, probe below one cent); the strong-vs-weak check about $17.21; about $27.99 in total (`cost.md`). The null-agent tables and the demo make no model call; the external benchmarks are installed in their own folders outside the repository, with the commands in `results/null_agent/external.md`.
+Every number is rebuilt by the command sequences in `STRUCTURE.md`; the judge stages replay from cached votes without a model call. Provenance stamps on every v2 output record the overlay commit and a dirty-tree flag; the live runs record the runner configuration and its empty diff against block 1. Spend, own estimate from token counts: block 1 about $1.36, block 2 about $2.27, retail about $7.16 (runs $6.86, re-judge $0.30, probe below one cent); the strong-vs-weak check about $17.21; the whole-domain airline work (Section 13: runs, probes and re-scores) about $5.05; about $33.04 in total (`cost.md`). The null-agent tables and the demo make no model call; the external benchmarks are installed in their own folders outside the repository, with the commands in `results/null_agent/external.md`.
 
 ## 12. Open items
 
@@ -344,7 +346,146 @@ Not done, candidates for a next iteration:
 - **External null agent, remaining runs.** Run the do-nothing agent on OSWorld-Verified (needs its virtual machine) and on the original WebArena (needs the live sites). Check whether published tau-bench airline scores use the 50 original test tasks and this reward code: the HAL leaderboard lists 28.00% for a cheap model, which would then sit 10 points below the do-nothing floor of 38.0%.
 - **External defects.** The defects found in tau-bench (six retail tasks whose single reference write is rejected) and in WebArena-Verified (tasks 319, 699, 700, 811 and the 10 map tasks) are recorded in `results/null_agent/external.md`; no issue text is drafted for them.
 - **Retail run rows.** Give the retail run rows an adversarial pass.
-- **Task 32.** Run a counterfactual ground-truth conversation on airline task 32 without the payment-method sentence, to isolate its effect.
-- **Judge hand-check.** Hand-check about 20 fresh judge-only verdicts blind.
-- **Airline coverage.** Audit the assertions of the 30 unsampled airline tasks.
 - **Upstream issues.** Texts for I1 and I3–I16 are ready in `upstream/` (nine issues, five patches, fourteen reproductions, each patch checked against the pinned clone). None has been filed; which to file is still to be decided.
+
+## 13. The whole airline domain: the other 30 tasks
+
+Block 1 audited 20 of the 50 airline tasks. This section runs the same pipeline on the other 30 tasks and closes the block-1 items that were still open. The questions, the predictions and the decision rules were written down before any run or review (`airline_full/PLAN.md`). Departures from that plan are recorded, with dates, at its end.
+
+Every number below comes from `airline_full/summary_numbers.md`. The script `scripts/airline_full_summary.py` builds that file from `airline_full/audit_log.csv`, which has one row per task and check (1,219 rows). The format validator finds 0 errors in it.
+
+### 13.1 What was done
+
+On the 30 tasks outside the sample:
+- **Reading and probes.** Reviewers read the tasks in batches of five (`results/review_batch_5.md` to `review_batch_10.md`). They used the same mechanical probes and static scan as in block 1.
+- **Agent runs.** The settings were those of block 1: Haiku 5.5 as the agent and as the user simulator, the substring scorer, 3 trials per task. The ground-truth agent ran on the 27 tasks that have reference actions (`scripts/runs/run_rest30.ps1`). A reviewer read every conversation that failed, and every task whose trials gave different results (`results/review_agent_rest30.md`).
+- **Adversarial review.** Every medium or high row went through a review that tried to overturn it (`results/skeptic_report_rest_*.md`, `results/skeptic_report_agent_rest.md`). The review had four parts:
+  - check 2k;
+  - the order checks 2h and 4c;
+  - all other static checks (checks that need no agent runs);
+  - the checks based on runs.
+- **Blind re-review.** A second reader labelled three tasks (33, 35, 39) without seeing the first labels.
+- **Consistency pass.** One mechanism gets one reading and one check, across the four parts and across both blocks (`results/consistency_pass.md`).
+
+On all 50 tasks:
+- **Scorer choice (check 2j).** On every recorded run, the substring scorer was compared with a semantic judge that votes three times (`results/probe_2j.md`). There are 58 recorded verdicts on required information, in 36 trials; 0 differ.
+- **Task 32 (open item from block 1).** The ground-truth agent ran 10 times with the payment sentence and 10 times without it (`airline_full/cf32.md`).
+- **The v2 judge, second blind check.** Two readers labelled 20 judge verdicts and 10 decoys, each working on a copy without the answer key (`airline_full/judge_handcheck_fresh_r2.md`).
+  - Decoys are verdicts the judge had marked unmet, mixed in so that a reader who marks everything as met is caught.
+  - A first round was only partially blind, which is recorded in the plan, so this second round was run.
+- **Block 2 on the 30 tasks.** The recorded conversations on the other 30 tasks were scored again under every block-2 configuration. A fresh run used the full v2 protocol.
+
+### 13.2 What the audit found
+
+Table 13.1. Defective tasks (at least one confirmed medium or high defect), with 95% Wilson intervals.
+
+| quantity | sample (20) | rest (30) | all 50 |
+|---|---|---|---|
+| defective tasks, all checks | 18/20 = 0.90 [0.70, 0.97] | 26/30 = 0.87 [0.70, 0.95] | 44/50 = 0.88 [0.76, 0.94] |
+| from reading and probes only (no agent runs) | 14/20 = 0.70 [0.48, 0.86] | 23/30 = 0.77 [0.59, 0.88] | 37/50 = 0.74 [0.60, 0.84] |
+| without the pass-for-doing-nothing class (2a, 2b) | 16/20 = 0.80 | 18/30 = 0.60 | 34/50 = 0.68 [0.54, 0.79] |
+| without check 2g (substring scorer only) | 17/20 = 0.85 | 26/30 = 0.87 | 43/50 = 0.86 |
+| without every defect that follows from the do-nothing design | 11/20 = 0.55 | 13/30 = 0.43 | 24/50 = 0.48 |
+| tasks an empty conversation passes | 7/20 | 16/30 | 23/50 = 0.46 |
+
+Table 13.2. Defective tasks per category.
+
+| category | sample | rest | all 50 |
+|---|---|---|---|
+| 1 solvability | 1/20 | 1/30 | 2/50 |
+| 2 scoring validity | 13/20 | 22/30 | 35/50 |
+| 3 isolation and leaks | 0/20 | 0/30 | 0/50 |
+| 4 specification clarity | 4/20 | 7/30 | 11/50 |
+| 5 determinism | 8/20 | 7/30 | 15/50 |
+| 6 reporting | 0/20 | 0/30 | 0/50 |
+
+The other 30 tasks show the same mechanisms as block 1, in different proportions:
+- **A pass for doing nothing.** This is more common in the other 30 tasks: 16 of 30, against 7 of 20 in the sample.
+- **Requirements no scorer reads (2k).** These are in 11 of the other 30 tasks. In task 6, no tool can break the requirement.
+- **Order that changes the hash (2h).** This is in 4 of the other 30 tasks. In task 33 the user asks for two flight changes separately, and they can be done in two calls. That gives the same flights and the same balance, but a different payment record.
+- **Open choices the hash punishes (4c).** These are in 3 of the other 30 tasks.
+- **A reference that breaks the policy (4b, task 39).** The reference cancels a reservation that the policy does not allow to be cancelled. No conversation that follows the policy reaches the target, and the ground-truth agent failed on this task.
+- **Text left over from an earlier version (4e, task 27).** The purpose and one requirement of task 27 still describe a certificate that the current task text no longer contains. Result files in the benchmark's own repository show that earlier text.
+- **"Your most recent reservation" (4d, tasks 2 and 38).** The phrase can point to more than one reservation. The review read it the same way in both tasks: the reservation with the latest booking time.
+- **A required number found inside another number (2g, task 14).** In a recorded run, the answer "$1,327" (certificates 1,000 plus gift cards 327) contains the required "327".
+
+Table 13.3. Agent runs (Haiku 5.5 as agent and user, substring scorer, three trials per task).
+
+| quantity | sample | rest | all 50 |
+|---|---|---|---|
+| tasks passed 3/3 (tau2 pass^3) | 12/20 = 0.60 | 21/30 = 0.70 | 33/50 = 0.66 [0.52, 0.78] |
+| passing trials (tau2 pass^1, mean over all trials) | 44/60 = 0.73 | 76/90 = 0.84 | 120/150 = 0.80 |
+| tasks solved in 1 or 2 of 3 trials | 5/20 | 8/30 | 13/50 |
+| ground-truth agent reaches the target | 11/16 | 22/27 | 33/43 = 0.77 |
+
+The block-1 summaries also report a pass^1 that counts only the first trial of each task: 0.80 on the sample and 0.87 on the rest. Pass^3 is the same under both ways of counting.
+
+The ground-truth agent failed on 5 of the other 30 tasks (14, 24, 29, 39, 42).
+- After the adversarial review and one probe (Section 13.3), one of the five traces to the task itself: task 39, whose reference breaks the policy.
+- Across all 50 tasks, the ground-truth agent failed on 10 tasks, and 2 of them trace to the task (32 and 39). The other failures trace to the agent or to the user simulator.
+- The user simulator stepped outside its script in 7 of the other 30 tasks (check 5d). In block 1 the count was also 7.
+
+### 13.3 What the adversarial review and the consistency pass changed
+
+- **Check 2k.** All 9 defect rows held. One row was raised: task 6, a requirement that no tool can break. For task 33, the label from the blind re-review was kept. As in block 1, a clause such as "because …" inside a requirement was read as a justification, not as a demand to state a reason.
+- **Order checks (2h, 4c).** Four of seven rows held.
+  - Three were withdrawn, because each counted a cause that another row already counted.
+  - Task 25 got two rows for two causes: the split of the amount, which the task leaves open, and the order of the payment list.
+  - Two rows on task 33 were raised, keeping the labels of the blind re-review. The first is the two-call path described above. The second is "move back your return by one day", which gives a size but no direction.
+  - Every claim that two end states give different hashes was replayed in the pinned version of the benchmark.
+- **All other static checks.** All 34 rows held. Three were raised: 38/4d, 27/4e and 14/2g.
+- **Run-based checks.** Ten of 11 rows held. 29/1e was rejected, because every recorded refusal came after an agent error. Block 1 had settled the same kind of dispute on task 32 with a probe of the user simulator, and the same procedure was used here (`results/probe_29/`):
+  - the protocol was committed before the call;
+  - 10 replies were sampled;
+  - two readers classified them blind.
+
+  In the probe, the agent message states the reference route plainly: cancel for the full refund under the insurance, then book the two nonstop flights. The user simulator refused it in 1 reply of 10. By the pre-set rule (at most 5 refusals of 10 means 0), 1e stays 0.
+- **Blind re-review (tasks 33, 35, 39).** It agreed with the original labels on 23 of 26 rows, and with the corrected labels on 26 of 26. All three disagreements were settled in favour of the blind reader, so the second figure does not confirm the corrections independently.
+- **Consistency across the blocks.** A second order probe (`scripts/probe_2h_paths.py`) covers two paths the first one could not: an earlier write that changes the arguments of a later one, and one change split into two calls. It found one block-1 row to change.
+  - Task 22 has the same reservation and the same reference writes as task 17 from the other 30.
+  - The reference upgrades the reservation from basic economy first and adds the bags afterwards. An agent that adds the bags first, while the reservation is still basic economy, must charge for one of them. That extra $50 changes the end state, so this equally valid order fails.
+  - 22/2h went from 0 to 1. This moves the block-1 count from reading and probes from 13/20 to 14/20; the block-1 headline stays 18/20.
+- **One reading of "upgrade routes".** These are upgrades the user never asked for that would make a refused cancellation or change possible. Both blocks read them as unrequested writes (4c = 0). The opposite reading would raise the whole-domain count to at least 45/50.
+
+### 13.4 Block 2 on the 30 tasks
+
+| configuration | Haiku trials passing (90) | Haiku tasks 3/3 (30) | ground-truth runs passing (27) |
+|---|---|---|---|
+| stock scorer (v1) | 76 | 21 | 22 |
+| canonical hash only, or word-boundary check only | 76 | 21 | 22 |
+| requirements enforced by the judge (S_nl), or full V2 | 68 | 16 | 16 |
+
+- **The new scoring of recorded runs matches the original.** The stock (unchanged) scorer reproduces all 117 recorded rewards. The two mechanical switches (canonical hash, word-boundary check) change none of them (prediction P9).
+- **The whole difference comes from the judge reading the requirements.** On the same conversations, tasks passed 3/3 drop from 21 to 16, and ground-truth passes drop from 22 to 16.
+- **The fresh run under the full v2 protocol** passes 15 of 30 tasks 3/3 (0.50), against 21 (0.70) under the stock protocol. On the same fresh conversations, the stock scorer passes 19. So 4 of the 6 lost tasks are due to the stricter scoring, and the other 2 to different conversations (new task texts and random sampling). Prediction P10 (a difference of at most 0.10) does not hold.
+- **Task 32 (Q3).** The ground-truth agent passes 2 of 10 trials with the payment sentence and 2 of 10 without it. The pre-set rule asked for at least 3 more passes without the sentence, so the sentence does not cause the failures; prediction P7 does not hold. With and without the sentence, the failed trials miss the same two requirements: the cabin change is missed in 4 trials with the sentence and in 5 without it, the flight change in 7 and 6.
+- **The v2 judge.** Both blind readers agreed with it on 20 of 20 verdicts and on 10 of 10 decoys (P8).
+
+Table 13.4. Pre-registered predictions (`airline_full/PLAN.md`, section 3).
+
+| id | prediction | measured | verdict |
+|---|---|---|---|
+| P1 | whole-domain defective share in [0.70, 0.97] | 44/50 = 0.88 | holds |
+| P2 | the same without 2a/2b in [0.58, 0.92] | 34/50 = 0.68 | holds |
+| P3 | the same from reading and probes in [0.43, 0.82] | 37/50 = 0.74 | holds |
+| P4 | rest pass^3 above the sample's 0.60 | 21/30 = 0.70 | holds |
+| P5 | semantic scorer: the empty conversation passes the same 23 tasks | none of the 6 tasks with required information | holds |
+| P6 | recorded runs: semantic and substring verdicts differ on at most 2 trials | 0 of 36 | holds |
+| P7 | task 32: at least 3 more passes of 10 without the payment sentence | 2 vs 2 | does not hold |
+| P8 | each blind reader agrees with the judge on at least 18 of 20 | 20/20 and 20/20 | holds |
+| P9 | the mechanical v2 switches change no rest reward | 0 changed | holds |
+| P10 | rest pass^3 under v2 within 0.10 of the stock protocol | 0.70 vs 0.50 | does not hold |
+
+### 13.5 What else the conversations show
+
+- **A plan that cannot be flown still scores 1.0.** In task 10, two fresh v2 conversations (trials 0 and 1) quote the same cheapest business option: HAT131, arriving in Las Vegas at 21:00, connecting to HAT047, which leaves Las Vegas at 13:00 the same day.
+  - Nothing was booked, because the user declined on price. Both conversations scored 1.0.
+  - Task 10 is one of the tasks an empty conversation passes: its reference changes nothing and requires no output. So the score cannot tell this conversation from a correct one.
+- **A transfer does not end an airline conversation.** In airline runs the transfer call does not stop the conversation. Task 24 from the other 30 succeeded after a transfer.
+- **The two blocks agree.** The other 30 tasks are defective at about the sample's rate (0.87 against 0.90), and their agent pass^3 is a little higher (0.70 against 0.60). The block-1 estimate holds for the whole domain (P1).
+
+### 13.6 How the review was carried out
+
+- All reviewers, adversarial reviewers and readers were language models, not people. Agreement figures measure agreement between model reviewers.
+- One adversarial reviewer opened the pre-registration file once, before it read the list of files it must not open. Three ran read-only git commands inside the pinned copy of the benchmark; no file changed. Neither event changed a verdict.
+- One medium row has no adversarial verdict of its own: 22/2h, set by the consistency pass. The adversarial review of task 17 named it as the same case.
