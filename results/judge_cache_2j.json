@@ -622,5 +622,197 @@
 "null|null_23|1286|2": {
 "met": false,
 "justification": "[llm_judge] The expected information is '1286', but the conversation transcript is empty. With no agent or customer messages, there is no evidence that the agent communicated this information to the customer."
+},
+"haiku_rest30|8b20d782-a8ac-4984-948d-f8a4e817f021|327|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 327. The agent stated 'Gift cards total **$327.00**' (gift_card_8020792: $198.00 and gift_card_6136092: $129.00), which matches the gift card total. The agent repeated the $327 figure later in the payment plan. The meaning was clearly conveyed."
+},
+"haiku_rest30|8b20d782-a8ac-4984-948d-f8a4e817f021|1000|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 1000. The agent stated in its reply that the certificates total \"$1,000.00\" (certificate_3765853: $500, certificate_9984806: $250, certificate_2765295: $250). The user also acknowledged this figure (\"certificates are $1,000, got it\"). The information was clearly communicated."
+},
+"haiku_rest30|8b20d782-a8ac-4984-948d-f8a4e817f021|327|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 327. The agent explicitly stated 'Gift cards total **$327.00**' (gift_card_8020792: $198.00 and gift_card_6136092: $129.00), and later reiterated gift cards total $327 in the payment plan. The user also confirmed 'gift cards are $327'. The meaning is clearly conveyed."
+},
+"haiku_rest30|8b20d782-a8ac-4984-948d-f8a4e817f021|327|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 327. The agent stated 'Gift cards total **$327.00**' in response to the user's request for the gift card subtotal, and later repeated 'Gift cards: gift_card_8020792 ($198) and gift_card_6136092 ($129), for $327 total.' The figure was clearly communicated and was not contradicted."
+},
+"haiku_rest30|8b20d782-a8ac-4984-948d-f8a4e817f021|1000|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 1000. The agent stated in its reply that the certificates total \"$1,000.00\" (certificate_3765853: $500, certificate_9984806: $250, and certificate_2765295: $250). The user also acknowledged this figure (\"certificates are $1,000, got it\"). The information was clearly conveyed."
+},
+"haiku_rest30|8b20d782-a8ac-4984-948d-f8a4e817f021|1000|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 1000. The agent stated 'Certificates total **$1,000.00** (certificate_3765853: $500.00, certificate_9984806: $250.00, and certificate_2765295: $250.00)', which matches the expected figure. The user also repeated it back ('certificates are $1,000'), confirming it was conveyed."
+},
+"haiku_rest30|8b20d782-a8ac-4984-948d-f8a4e817f021|1786|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the amount 1786. The agent stated in the payment plan that the Mastercard ending 9363 would cover 'the remaining $1,786', and repeated this amount in the payment breakdown before the booking and in the final confirmation summary. The meaning was clearly conveyed, so the expected information was communicated."
+},
+"haiku_rest30|8b20d782-a8ac-4984-948d-f8a4e817f021|1786|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the amount $1786. The agent stated in the payment plan that the Mastercard ending 9363 would cover 'the remaining $1,786', and repeated 'credit_card_2198526 (Mastercard ending 9363): $1,786' in the payment summaries and the final booking confirmation. The amount was clearly communicated and was not contradicted."
+},
+"haiku_rest30|8b20d782-a8ac-4984-948d-f8a4e817f021|1786|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the amount $1786. The agent stated in the payment plan that the Mastercard ending 9363 (credit_card_2198526) would cover \"the remaining $1,786\" and repeated this amount in the confirmed booking summary. The figure was clearly conveyed to the customer and was not contradicted."
+},
+"haiku_rest30|9913a053-830a-4a02-8685-ceb4a25e22cf|23553|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 23553. The agent stated in the conversation that the total refund is $23,553 (\"The total refund is $23,553\"), and repeated it multiple times, including in the final summary. The number was clearly conveyed to the customer."
+},
+"haiku_rest30|9913a053-830a-4a02-8685-ceb4a25e22cf|23553|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 23553. The agent stated the total refund amount of $23,553 in its summary table message ('The total refund is $23,553'), and repeated it in later turns and in the final closing message. The number is conveyed in the same numeric form, so the expected information was communicated."
+},
+"haiku_rest30|9913a053-830a-4a02-8685-ceb4a25e22cf|23553|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 23553. The agent stated the total refund as $23,553 in its summary table message ('The total refund is $23,553'), repeated it in later turns, and confirmed it again in the closing message. The number formatting differs only by the comma, which is acceptable."
+},
+"haiku_rest30|91acfab4-a283-4fc0-aeab-995d02be071c|327|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 327. The agent stated in the first reply that the gift cards total \"$327.00\" (198 + 129). This is the same value, so the figure was communicated to the customer."
+},
+"haiku_rest30|91acfab4-a283-4fc0-aeab-995d02be071c|327|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 327. The agent stated in its first reply, \"That's $327.00 in gift cards,\" which matches the sum of the two gift card balances ($198 + $129). The figure was explicitly communicated to the customer, and the customer confirmed the sums checked out."
+},
+"haiku_rest30|91acfab4-a283-4fc0-aeab-995d02be071c|327|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 327. The agent stated in its first reply: \"That's $327.00 in gift cards and $1,000.00 in certificates,\" which correctly sums the two gift card balances ($198 + $129). The figure was clearly conveyed to the customer, and the user confirmed the sums checked out."
+},
+"haiku_rest30|91acfab4-a283-4fc0-aeab-995d02be071c|1000|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 1000. In the first assistant turn, the agent stated that the travel certificates total \"$1,000.00 in certificates\" (certificates of $500, $250, and $250). The value 1000 was clearly conveyed to the customer, and number formatting does not need to match."
+},
+"haiku_rest30|91acfab4-a283-4fc0-aeab-995d02be071c|1000|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 1000. In the first assistant turn, the agent stated the travel certificates total: \"$1,000.00 in certificates.\" That conveys the same amount, and the formatting difference ($1,000.00 vs. 1000) does not matter."
+},
+"haiku_rest30|91acfab4-a283-4fc0-aeab-995d02be071c|1000|2": {
+"met": null,
+"justification": "error: ValidationError: 1 validation error for SemanticCommunicateReply\n  Invalid JSON: expected `,` or `}` at line 2 column 81 [type=json_invalid, input_value='{\\n    \"reasoning\": \"The....\",\\n    \"met\": true\\n}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid"
+},
+"haiku_rest30|91acfab4-a283-4fc0-aeab-995d02be071c|1786|0": {
+"met": false,
+"justification": "[llm_judge] The expected information is '1786'. I searched the transcript for this figure and it never appears. The agent's stated amounts include $327 in gift cards, $1,000 in certificates, $1,327 total, $2,613 for the business fare, $567 current cost, $2,046 difference, and $871 per passenger. None of these equals 1786, and the agent never gives 1786 as a balance, charge, or other figure."
+},
+"haiku_rest30|249188d0-32c6-4e38-9184-a8d0ff9a8f4a|23553|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 23553. The agent explicitly stated 'The total refund across all five reservations would be $23,553' and later confirmed 'the total refund is $23,553' and the sum of the five refunds. This clearly conveys the expected figure to the customer."
+},
+"haiku_rest30|91acfab4-a283-4fc0-aeab-995d02be071c|1786|1": {
+"met": false,
+"justification": "[llm_judge] The expected information is '1786'. The agent's messages include gift card and certificate balances ($198, $129, $500, $250, $250), totals ($327, $1,000, $1,327), flight fares ($364, $248, $259, $507, $871), reservation totals ($567, $2,613), and the difference ($2,046). None of these is 1786, and no figure in the conversation equals 1786 or was described as 1786."
+},
+"haiku_rest30|249188d0-32c6-4e38-9184-a8d0ff9a8f4a|23553|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 23553. The agent explicitly stated the total refund across all five reservations is $23,553, both in the initial proposal table summary and again in the confirmation after changes, and again when the user asked to verify it. The meaning was clearly conveyed."
+},
+"haiku_rest30|91acfab4-a283-4fc0-aeab-995d02be071c|1786|2": {
+"met": false,
+"justification": "[llm_judge] The expected information is the number 1786. The agent's messages state gift card balances ($198, $129), certificate balances ($500, $250, $250), totals ($327, $1,000, $1,327), flight prices ($364, $507, $871 per passenger, $2,613 total), the $567 current cost, the $2,046 difference, and the $2,000 Mastercard limit. None of these is 1786, and no statement in the conversation yields that figure. The information was not communicated."
+},
+"haiku_rest30|249188d0-32c6-4e38-9184-a8d0ff9a8f4a|23553|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 23553. The agent explicitly stated the total refund across all five reservations is $23,553, both in the initial breakdown and again in the post-change confirmation and the follow-up clarification. The user confirmed understanding that the total is $23,553. The information was clearly communicated."
+},
+"haiku_rest30|fd307f6d-df07-44af-8540-f68637b07f70|327|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 327. The agent stated 'Gift cards: $327.00 (across 2 cards)' when totaling the user's gift card balances, and later repeated that the gift cards total $327. The figure was clearly conveyed to the user."
+},
+"haiku_rest30|fd307f6d-df07-44af-8540-f68637b07f70|327|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 327. The agent stated 'Gift cards: $327.00 (across 2 cards)' when giving the totals the customer requested. The figure was clearly conveyed. It also appears again later in the payment plan discussion."
+},
+"haiku_rest30|fd307f6d-df07-44af-8540-f68637b07f70|327|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 327. The agent stated the gift card total as '$327.00 (across 2 cards)' in response to the user's request to add up the balances, and later repeated that 'Your gift cards total $327.' The meaning was clearly conveyed."
+},
+"haiku_rest30|fd307f6d-df07-44af-8540-f68637b07f70|1000|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 1000. In the agent's second reply, it stated the travel certificates total: \"Travel certificates: $1,000.00 (across 3 certificates).\" The value $1,000.00 matches 1000 apart from formatting, and it was clearly conveyed to the customer as the certificate total. Nothing later contradicts it."
+},
+"haiku_rest30|fd307f6d-df07-44af-8540-f68637b07f70|1000|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 1000. The agent stated that the total across the travel certificates was \"$1,000.00 (across 3 certificates)\" in response to the user's request to add up the balances. That conveys the expected amount, so the information was communicated."
+},
+"haiku_rest30|fd307f6d-df07-44af-8540-f68637b07f70|1786|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the amount 1786. The agent explicitly stated that the Mastercard ending in 9363 would be charged $1,786, and repeated that figure in the full booking plan and the payment breakdown. The value was clearly communicated to the customer."
+},
+"haiku_rest30|fd307f6d-df07-44af-8540-f68637b07f70|1000|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 1000. The agent stated in the second turn that the travel certificates total \"$1,000.00 (across 3 certificates).\" That is the same amount, written with a currency symbol and decimal places, which the rubric allows. The figure was clearly conveyed to the customer."
+},
+"haiku_rest30|fd307f6d-df07-44af-8540-f68637b07f70|1786|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 1786. The agent stated that the Mastercard ending in 9363 would be charged $1,786, confirming it was under the user's $2,000 limit. The figure also appears in the final payment breakdown for the new booking."
+},
+"haiku_rest30|fd307f6d-df07-44af-8540-f68637b07f70|1786|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 1786. The agent stated that the Mastercard ending in 9363 would be charged $1,786, which is under the user's $2,000 limit. The agent repeated the $1,786 figure in the final plan and the booking confirmation, so the expected amount was clearly communicated."
+},
+"haiku_rest30|1bf9208d-b355-4f69-ad4e-7b2e635bd818|23553|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 23553. The agent stated in its summary that 'The total refund is $23,553,' and later repeated the $23,553 total in response to the customer's savings question. The figure is clearly conveyed and matches the expected value, so it counts as communicated."
+},
+"haiku_rest30|1bf9208d-b355-4f69-ad4e-7b2e635bd818|23553|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 23553. The agent stated 'The total refund is $23,553' when summarizing the five reservation changes, and repeated the figure when the customer asked about total savings. The user confirmed they understood the total as $23,553. The number was clearly conveyed."
+},
+"haiku_rest30|1bf9208d-b355-4f69-ad4e-7b2e635bd818|23553|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 23553. The agent stated in its summary of the cabin changes that 'The total refund is $23,553,' and repeated the figure when answering the customer's question about total savings. The number was clearly conveyed, so the expected information was communicated."
+},
+"gt_rest30|b4a06bb3-dad1-4295-a1a5-bed975bc219f|327|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 327. In the conversation, the agent explicitly stated the gift card total: \"Gift cards: $198.00 + $129.00 = **$327.00**\". This matches the expected value, and the user confirmed it matched their own calculation. The formatting difference ($327.00 vs. 327) does not affect the meaning."
+},
+"gt_rest30|8b122929-792c-450f-8173-75f8cf634bfd|23553|0": {
+"met": true,
+"justification": "[llm_judge] The expected figure is $23,553. The agent stated it directly in its correction message ('The total is **$23,553**'). In the later message, it again referred to the recorded refunds totaling $23,553, while questioning whether that figure is correct. The number was clearly conveyed to the customer. The agent's later doubts about its accuracy add context but do not replace or contradict the figure itself."
+},
+"gt_rest30|b4a06bb3-dad1-4295-a1a5-bed975bc219f|327|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 327. Early in the conversation, when the user asked for the gift card total, the agent stated that $198.00 + $129.00 = $327.00. That directly conveys the value, and the user confirmed it matched their own figure."
+},
+"gt_rest30|b4a06bb3-dad1-4295-a1a5-bed975bc219f|327|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is '327'. In the conversation, the agent explicitly stated the gift card total as '$198.00 + $129.00 = **$327.00**' in response to the user's request for the totals. The value 327 was clearly conveyed to the customer."
+},
+"gt_rest30|8b122929-792c-450f-8173-75f8cf634bfd|23553|1": {
+"met": true,
+"justification": "[llm_judge] The agent stated the total as \"$23,553\" in its table and summary, which matches the expected figure. The agent later reiterated that the recorded refunds total $23,553, while questioning whether those amounts are correct. The number was clearly conveyed to the customer. The later doubt about its accuracy qualifies the figure but does not contradict the number itself, so the information was communicated."
+},
+"gt_rest30|8b122929-792c-450f-8173-75f8cf634bfd|23553|2": {
+"met": true,
+"justification": "[llm_judge] The agent stated the total as \"$23,553\" in its earlier recap, which is the expected figure. In its later message, the agent again referred to the recorded refunds totaling $23,553 while questioning whether they were correct. The figure was clearly conveyed. The later doubts are a caveat about its accuracy, not a different figure, so this is not contradictory information."
+},
+"gt_rest30|b4a06bb3-dad1-4295-a1a5-bed975bc219f|1000|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the value 1000. In the agent's reply to the user's request for totals, it stated the travel certificates total: \"$500.00 + $250.00 + $250.00 = **$1,000.00**\". That is the same amount, so the information was clearly conveyed. Formatting differences ($1,000.00 vs 1000) do not matter."
+},
+"gt_rest30|b4a06bb3-dad1-4295-a1a5-bed975bc219f|1000|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is 1000. In the second assistant turn, the agent answered the user's request for totals by stating that the travel certificates add up to \"$1,000.00\" ($500 + $250 + $250). That is the same value, in a different number format, so the expected information was communicated."
+},
+"gt_rest30|b4a06bb3-dad1-4295-a1a5-bed975bc219f|1000|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is 1000. In the earlier turn, the agent stated the travel certificate total as \"$500.00 + $250.00 + $250.00 = **$1,000.00**\", which directly conveys the value 1000 (with the currency and comma formatting being acceptable variations). The user also confirmed this matched their own calculation."
+},
+"gt_rest30|b4a06bb3-dad1-4295-a1a5-bed975bc219f|1786|1": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 1786. The agent's first proposal to the user stated the payment split as 'credit_card_2198526 ($1,786)', so the figure was explicitly communicated. That split was later superseded, but the value was still conveyed to the user and does not contradict itself."
+},
+"gt_rest30|b4a06bb3-dad1-4295-a1a5-bed975bc219f|1786|0": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 1786. In the agent's earlier proposal, it stated the payment split as 'credit_card_2198526 ($1,786)', which is the exact figure. This was a proposed amount that was later superseded by a different payment plan, but the agent did state the number explicitly and it is consistent with the arithmetic ($2,613 minus $500, $198, and $129)."
+},
+"gt_rest30|b4a06bb3-dad1-4295-a1a5-bed975bc219f|1786|2": {
+"met": true,
+"justification": "[llm_judge] The expected information is the number 1786. In the agent's earlier proposal, it stated a payment split that included \"credit_card_2198526 ($1,786)\", so the figure was explicitly communicated to the customer. The agent later revised the payment plan, but the $1,786 amount was still stated to the customer at that point in the conversation."
 }
 }

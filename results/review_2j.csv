@@ -13,11 +13,11 @@ task_id,check,defect,severity,evidence,note
 11,2j,0,,"results/probe_2j.csv: 7 recorded fact verdicts, 0 differ ; 0 undetermined; null agent substring 0, semantic 0","semantic judge anthropic/claude-haiku-5-5 (substitute for the stock gpt-5.5), 3 passes, majority"
 12,2j,0,,communicate_info = []: both scorers return COMMUNICATE 1.0 without a check (evaluator_communicate.py),by construction
 13,2j,0,,communicate_info = []: both scorers return COMMUNICATE 1.0 without a check (evaluator_communicate.py),by construction
-14,2j,0,,"results/probe_2j.csv: 0 recorded fact verdicts, 0 differ ; 0 undetermined; null agent substring 0, semantic 0","semantic judge anthropic/claude-haiku-5-5 (substitute for the stock gpt-5.5), 3 passes, majority"
+14,2j,0,,"results/probe_2j.csv: 12 recorded fact verdicts, 0 differ ; 0 undetermined; null agent substring 0, semantic 0","semantic judge anthropic/claude-haiku-5-5 (substitute for the stock gpt-5.5), 3 passes, majority"
 15,2j,0,,communicate_info = []: both scorers return COMMUNICATE 1.0 without a check (evaluator_communicate.py),by construction
 16,2j,0,,communicate_info = []: both scorers return COMMUNICATE 1.0 without a check (evaluator_communicate.py),by construction
 17,2j,0,,communicate_info = []: both scorers return COMMUNICATE 1.0 without a check (evaluator_communicate.py),by construction
-18,2j,0,,"results/probe_2j.csv: 0 recorded fact verdicts, 0 differ ; 0 undetermined; null agent substring 0, semantic 0","semantic judge anthropic/claude-haiku-5-5 (substitute for the stock gpt-5.5), 3 passes, majority"
+18,2j,0,,"results/probe_2j.csv: 4 recorded fact verdicts, 0 differ ; 0 undetermined; null agent substring 0, semantic 0","semantic judge anthropic/claude-haiku-5-5 (substitute for the stock gpt-5.5), 3 passes, majority"
 19,2j,0,,communicate_info = []: both scorers return COMMUNICATE 1.0 without a check (evaluator_communicate.py),by construction
 20,2j,0,,communicate_info = []: both scorers return COMMUNICATE 1.0 without a check (evaluator_communicate.py),by construction
 21,2j,0,,communicate_info = []: both scorers return COMMUNICATE 1.0 without a check (evaluator_communicate.py),by construction
