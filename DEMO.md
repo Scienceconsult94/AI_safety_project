@@ -37,7 +37,7 @@ Say: to pass the hash the database must stay unchanged; to pass the assertion th
 
 **3:45–4:30 — What this does to model comparisons.**
 Show `strong_vs_weak/fig_per_task.png`.
-Say: the same 20 airline tasks were run with a stronger agent model. It is ahead on 6 tasks and behind on 1, but the difference is not significant (p = 0.125). Nine of the 20 tasks tie both models by construction: 7 pass for doing nothing and 2 have defective reference answers that both models fail. Correcting one wrong reference answer lowers p to 0.070; the full repaired protocol brings it to 0.039, before correcting for the three comparisons. In retail, the user simulator, not the agent, explains 12 of the 23 failures of an agent that sees the answer key.
+Say: the same 20 airline tasks were run with a stronger agent model. It is ahead on 6 tasks and behind on 1, but the difference is not significant (p = 0.125). Nine of the 20 tasks tie both models by construction: 7 pass for doing nothing and 2 have defective reference answers that both models fail. Correcting one wrong reference answer lowers p to 0.070; the full v2 protocol brings it to 0.039, before correcting for the three comparisons. In retail, the user simulator, not the agent, explains 12 of the 23 failures of an agent that sees the answer key.
 
 **4:30–5:00 — The point.**
 A pass rate measures the agent, the user simulator and the exam together. The exam has to be validated as an instrument before its numbers are read. Every number here from the recorded runs is rebuilt by script, apart from a few counts taken from review reports and the leaderboard scores read from a web page, and 16 issue candidates are drafted for the maintainers, with 14 reproduction scripts.

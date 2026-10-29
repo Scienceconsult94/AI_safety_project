@@ -11,7 +11,7 @@ One row per `(task_id, check)`. Columns, in this order:
 | check | check id from `checklist.md` (e.g. `2a`); free text never |
 | method | `static` = code/data inspection, no model call; `probe` = scripted evaluator call (e.g. empty trajectory); `agent_run` = real model run |
 | defect | `1` only when confirmed; otherwise `0` |
-| severity | required when defect=1 (`high` / `medium` / `low`, definitions in the kickoff prompt); empty when defect=0 |
+| severity | required when defect=1 (`high` = the result is uninformative (the task passes for doing nothing or for a dump of everything, or the reference does not pass it); `medium` = the outcome depends on interpretation or chance (the scenario contradicts the reference, a change of scorer changes the outcome); `low` = no effect on the reward); empty when defect=0 |
 | evidence | file path, line reference, rule or short quote that reproduces the finding; required when defect=1 |
 | haiku_pass | `k/n` only when method=agent_run; otherwise empty |
 | skeptic_ok | `1` confirmed by results-skeptic, `0` rejected, empty = not yet reviewed; only defect=1 rows carry a value |

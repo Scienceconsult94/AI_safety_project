@@ -64,7 +64,7 @@ Each sampled task is checked against a fixed checklist (static reading, mechanic
 │   ├── cf32.md                 task 32 with and without the payment sentence, 10 ground-truth runs per arm under v2 (generated)
 │   ├── handcheck_fresh/        first check round of the v2 judge by model readers on fresh runs (only partially blind; see PLAN.md, Deviations)
 │   └── judge_handcheck_fresh_r2.md, handcheck_fresh_r2/   second round: two blind readers, items with decoys, key kept apart
-├── block2/                     block 2: the repaired protocol ("v2") laid over the pinned benchmark
+├── block2/                     block 2: the revised protocol ("v2": corrected task texts and a stricter scoring protocol) laid over the pinned benchmark
 │   ├── PLAN.md                 pre-registration (switches, hypotheses, rules) and dated Deviations
 │   ├── task_fixes.md           every task-text edit with the audit rows it answers; tasks_airline_v2.json (generated), .meta.json
 │   ├── skeptic_design.md       adversarial review of the v2 design before the paid runs

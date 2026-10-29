@@ -42,9 +42,9 @@ Block 2, the stricter protocol and the re-run (pre-registered hypotheses H1–H5
 | H2 — the DB hash is order-sensitive | reference-action permutations with a differing hash 24/78 → 4/78 under a canonical hash (the 4 change the outcome) |
 | H3 — re-scoring the 76 recorded conversations | the deterministic switches change no recorded reward (the mechanisms are shown by construction, not by a flip); enforcing the free-text assertions through a 3-vote judge flips one pass to a fail; a corrected reference answer flips one fail to a pass |
 | H4 — the ground-truth agent passes the three text-fixed tasks | task 7: 4/4; task 44: 3/4; task 32: **failed**, 1/4 (a later test did not tie the failures to the new scenario sentence: the ground-truth agent passed 2 of 10 trials with it and without it) |
-| H5 — the agent's pass^3 changes under v2 | no difference: 0.60 → 0.60; pass^1 0.73 → 0.78, inside the run-to-run noise measured on the untouched tasks |
+| H5 — the agent's pass^3 changes under v2 | no difference: 0.60 → 0.60; pass^1 0.73 → 0.78 (a fresh run under v2), inside the run-to-run noise measured on the untouched tasks |
 
-Read together: the benchmark's defects are real and reproducible, and they are nearly invisible in the headline numbers. An agent's score moved by less than the noise floor while the examination underneath it changed substantially. That is the point of the audit: the procedure has to be checked directly, because the leaderboard will not show its faults.
+Read together: the benchmark's defects are real and reproducible, and on the 20 sampled tasks they are nearly invisible in the headline number: the agent's score moved by less than the noise floor while the examination underneath it changed substantially. On the other 30 tasks the score fell from 0.70 to 0.50, mostly because v2 also scores the requirements written only in free text (report Section 13). Either way the procedure has to be checked directly, because the leaderboard will not show its faults.
 
 Retail, the whole domain (all 114 tasks, pre-registered in `retail/PLAN.md`):
 
@@ -69,7 +69,7 @@ Strong vs weak (predictions in `strong_vs_weak/PLAN.md`, written after the run a
 |---|---|---|
 | tau2 pass^1, stock scorer | 0.733 | 0.850 |
 | tasks passed 3/3, stock scorer | 12/20 | 16/20 |
-| tau2 pass^1, full v2 | 0.733 | 0.883 |
+| tau2 pass^1, full v2 (the recorded conversations re-scored) | 0.733 | 0.883 |
 
 On the stock exam the stronger model is ahead on 6 tasks and behind on 1, but the difference is not significant (sign test p = 0.125). Nine of the 20 tasks tie both models by construction: 7 pass for doing nothing and 2 have defective reference answers that both models fail in every trial. Under v2 the gap widens to +0.150 (p = 0.039, uncorrected for the three configurations compared).
 
@@ -89,6 +89,8 @@ The same floor on four external agent benchmarks (`results/null_agent/external.m
 | OSWorld-Verified | not measured (needs the virtual machine) | 30/369 = 8.1% as released, 26/369 = 7.0% now (counted from task files) |
 | WebArena-Verified | 0/812 | 24/812 = 3.0% |
 | WebArena, original task file | not measured (needs the live sites) | at least 36/812 = 4.4% for the answer "N/A" (counted; the other tasks were not computed) |
+
+The tau-bench floors were reported before: Zhu et al. (2025), *Establishing Best Practices for Building Rigorous Agentic Benchmarks* (arXiv:2507.02825) give 38% of the airline subset and 6% of the retail subset as tasks that an agent that does nothing passes. Here they are re-measured with the benchmark's own reward code, and the airline floor is compared with published leaderboard scores (next section).
 
 Original tau-bench retail task 106 is tau2 retail task 105: its only reference action is rejected for an insufficient gift-card balance. The original gives it to an agent that does nothing; tau2 added an assertion that demands the exchange and made it impossible.
 
@@ -123,4 +125,4 @@ Models used: `claude-haiku-5-5` as the agent, as the user simulator and as the j
 
 ## Limits
 
-Airline: all 50 tasks; 20 were sampled before any run (block 1), and the other 30 were audited afterwards with the same pipeline (report Section 13). Retail: all 114 tasks; the findings from its agent runs went through their own adversarial review, and a few rest on readings that could go the other way (report Section 5). Required information is checked by the substring scorer in every run, not by the v2.0.0 default semantic judge; on the recorded airline runs the two agree on all 58 verdicts (check 2j). Every reviewer, adversarial reviewer and reader was a language model, not a person. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. The benchmark documents the pass-by-refusal behaviour as intended, so the v2 protocol is a stricter alternative, not a correction of a bug. The OSWorld-Verified and original WebArena floors are counted from task files, not measured by running the evaluator. Dollar figures are own estimates from token counts at the published per-token prices; they were not reconciled with billing row by row (billing showed about $11 when the own estimate was $10.79).
+Airline: all 50 tasks; 20 were sampled before any run (block 1), and the other 30 were audited afterwards with the same pipeline (report Section 13). Retail: all 114 tasks; the findings from its agent runs went through their own adversarial review, and a few rest on readings that could go the other way (report Section 5). Required information is checked by the substring scorer in every run, not by the v2.0.0 default semantic judge; on the recorded airline runs the two agree on all 58 verdicts (check 2j). Every reviewer, adversarial reviewer and reader was a language model, not a person. One user-simulator model throughout. Two agent models, compared on 20 tasks with one run each. v2 has two parts: corrected task texts (a wrong reference answer, a scenario that contradicted its reference), which fix defects, and a stricter scoring rule for the pass by doing nothing, which the benchmark documents as intended; that second part is a stricter alternative, not a correction of a bug. The OSWorld-Verified and original WebArena floors are counted from task files, not measured by running the evaluator. Dollar figures are own estimates from token counts at the published per-token prices, about $33 for the whole project (`cost.md`); they were not reconciled with billing row by row, and the one billing checkpoint available showed about $11 when the running estimate was $10.79.

@@ -1,4 +1,4 @@
-# Strong vs weak: does the exam separate a stronger agent? (pre-registration)
+# Strong vs weak: does the exam separate a stronger agent? (plan with predictions, written after the run and before its results were read)
 
 Written 2026-10-28, after the paid run finished (06:43) and before any reward, transcript or summary line of it was read. Only the completion markers of `results/runs/sonnet_chain.log` were read: start times, the smoke-gate counts and "CHAIN DONE". This file is committed before the analysis script is run.
 
