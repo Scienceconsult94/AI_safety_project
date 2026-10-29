@@ -8,7 +8,7 @@ An agent benchmark is an examination: a task text, a hidden reference, a scorer.
 
 ## 2. Method
 
-**Checklist.** 52 checks in six categories (`checklist.md`): 1 solvability, 2 scoring validity, 3 isolation and leaks, 4 specification clarity, 5 determinism, 6 reporting. Each check names its method: static reading of code and data, a mechanical probe, or an agent run.
+**Checklist.** 49 checks in six categories (`checklist.md`): 1 solvability, 2 scoring validity, 3 isolation and leaks, 4 specification clarity, 5 determinism, 6 reporting. Each check names its method: static reading of code and data, a mechanical probe, or an agent run. The retail audit added two checks (`retail/PLAN.md`): 2m, written into the plan before the audit began, and 1g, added after the first review pass, when four reviewers had independently found the same fault in a tool.
 
 **Sample.** 20 of 50 tasks, drawn with a fixed seed before any run (`sample.json`). Static scans that cost nothing were run on all 50. Section 13 audits the other 30 tasks with the same pipeline.
 

@@ -4,7 +4,7 @@ This repository asks one question of a widely used agent benchmark: when a task 
 
 ## Headline results
 
-Block 1, the audit of the pinned benchmark (20 sampled tasks of 50, fixed checklist of 52 checks, blind re-review, adversarial review of every defect row):
+Block 1, the audit of the pinned benchmark (20 sampled tasks of 50, fixed checklist of 49 checks, blind re-review, adversarial review of every defect row):
 
 | quantity | value |
 |---|---|
