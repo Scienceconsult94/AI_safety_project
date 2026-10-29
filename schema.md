@@ -14,7 +14,7 @@ One row per `(task_id, check)`. Columns, in this order:
 | severity | required when defect=1 (`high` = the result is uninformative (the task passes for doing nothing or for a dump of everything, or the reference does not pass it); `medium` = the outcome depends on interpretation or chance (the scenario contradicts the reference, a change of scorer changes the outcome); `low` = no effect on the reward); empty when defect=0 |
 | evidence | file path, line reference, rule or short quote that reproduces the finding; required when defect=1 |
 | haiku_pass | `k/n` only when method=agent_run; otherwise empty |
-| skeptic_ok | `1` confirmed by results-skeptic, `0` rejected, empty = not yet reviewed; only defect=1 rows carry a value |
+| skeptic_ok | `1` confirmed by the adversarial reviewer, `0` rejected, empty = not yet reviewed; only defect=1 rows carry a value |
 | date | ISO `yyyy-mm-dd`, the day the row was written |
 | note | optional free text; `patched=nl_judge_haiku` whenever the row's run used the recorded patch |
 

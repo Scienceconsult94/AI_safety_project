@@ -10,7 +10,7 @@ Inputs (all under results/ unless noted):
   review_overrides.csv   rows that replace reviewer rows after skeptic review (same columns)
   haiku_pass.csv         optional: task_id,check,haiku_pass,defect,severity,evidence,note from agent runs (agent_rows.py)
   review_agent.csv       optional: reviewer verdicts on failed/flipped trajectories (4f, 5c, 5d, 1e triage); read last
-  skeptic_verdicts.csv   optional: task_id,check,skeptic_ok,note  (results-skeptic review of medium/high rows)
+  skeptic_verdicts.csv   optional: task_id,check,skeptic_ok,note  (adversarial review of medium/high rows)
 Rest tasks (airline_full/PLAN.md): review_overrides_rest_*.csv (adversarial review of the rest static rows),
   haiku_pass_rest30.csv, review_agent_rest30.csv, review_agent_overrides_rest30.csv; skeptic_verdicts_*rest*.csv.
   Inputs are filtered by task id, so the same file list serves both logs.
