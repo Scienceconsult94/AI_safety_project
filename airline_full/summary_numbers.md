@@ -67,8 +67,8 @@ Ground-truth agent fails on: sample 7, 16, 23, 32, 44; rest 14, 24, 29, 39, 42.
 |---|---|
 | blind re-review of rest tasks 33, 35, 39 vs original reviewer labels | 23/26 rows agree |
 | blind re-review of rest tasks 33, 35, 39 vs labels after the adversarial review | 26/26 rows agree |
-| judge hand-check round 2, reader C vs judge | targets 20/20, decoys 10/10 |
-| judge hand-check round 2, reader D vs judge | targets 20/20, decoys 10/10 |
+| judge check round 2, model reader C vs judge | targets 20/20, decoys 10/10 |
+| judge check round 2, model reader D vs judge | targets 20/20, decoys 10/10 |
 
 ## Table 6. Block 2 on the rest tasks (Q5)
 

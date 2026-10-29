@@ -1,6 +1,6 @@
 # Strong vs weak: Sonnet and Haiku as the agent on the 20 sampled airline tasks
 
-Pre-registration: `strong_vs_weak/PLAN.md`, committed before any result of the Sonnet run was read. tau2-bench v2.0.0, same user simulator (claude-haiku-5-5), seed, scorer (stock, substring communicate check) and run settings; one run per model, a day apart. Intervals: 95% Wilson; tests: exact two-sided.
+Plan with predictions: `strong_vs_weak/PLAN.md`, written after the Sonnet run finished and committed before any of its results were read. tau2-bench v2.0.0, same user simulator (claude-haiku-5-5), seed, scorer (stock, substring communicate check) and run settings; one run per model, a day apart. Intervals: 95% Wilson; tests: exact two-sided.
 
 Table 1. Pass rates (stock scorer, as recorded)
 
@@ -71,7 +71,7 @@ Table 5. Tokens and cost (own estimate from the recorded usage; claude-api refer
 | user-simulator input / output tokens | 1,020,917 / 76,254 | 1,094,479 / 79,283 |
 | cost of the run, agent and user simulator | $1.00 | $16.85 |
 
-Table 6. Pre-registered predictions against the measurements
+Table 6. Predictions (written before the results were read) against the measurements
 
 | id | prediction | measured | verdict |
 |---|---|---|---|

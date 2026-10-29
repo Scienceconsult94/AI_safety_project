@@ -133,7 +133,7 @@ def main() -> int:
     H, S = run["haiku"]["per"], run["sonnet"]["per"]
 
     L = ["# Strong vs weak: Sonnet and Haiku as the agent on the 20 sampled airline tasks", "",
-         "Pre-registration: `strong_vs_weak/PLAN.md`, committed before any result of the Sonnet run was read. tau2-bench v2.0.0, "
+         "Plan with predictions: `strong_vs_weak/PLAN.md`, written after the Sonnet run finished and committed before any of its results were read. tau2-bench v2.0.0, "
          "same user simulator (claude-haiku-5-5), seed, scorer (stock, substring communicate check) and run settings; one run per model, "
          "a day apart. Intervals: 95% Wilson; tests: exact two-sided.", ""]
 
@@ -228,7 +228,7 @@ def main() -> int:
     noop_pr = paired(H, S, noop_l)
     oth_pr = paired(H, S, others)
     defect_zero = sum(1 for t in DEFECT_TASKS if sum(S.get(t, [])) == 0)
-    L += ["", "Table 6. Pre-registered predictions against the measurements", "", "| id | prediction | measured | verdict |", "|---|---|---|---|"]
+    L += ["", "Table 6. Predictions (written before the results were read) against the measurements", "", "| id | prediction | measured | verdict |", "|---|---|---|---|"]
     L.append(f"| P1 | Sonnet's tau2 pass^1 above Haiku's 0.733, likely by +0.05 to +0.15 | {p1h:.3f} → {p1s:.3f} ({d1:+.3f}) | {'held' if d1 > 0 else 'failed'}{'' if 0.05 <= d1 <= 0.15 else ' (outside the expected range)'} |")
     L.append(f"| P2 | the paired sign test does not reach p < 0.05 | p = {pair_all['p_sign']:.3f} ({pair_all['ahead']} ahead, {pair_all['behind']} behind, {pair_all['equal']} equal) | {'held' if pair_all['p_sign'] >= 0.05 else 'failed'} |")
     hn, sn = tau2_pass(H, noop_l, 1), tau2_pass(S, noop_l, 1)

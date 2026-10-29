@@ -22,9 +22,9 @@ Tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`.
 
 ## Reproduction
 
-No model call: the judge call (`generate`) is replaced by a stub that records the prompt or returns a fixed reply text. Run each from the repository root with `uv run --no-sync python <file>`.
+No model call: the judge call (`generate`) is replaced by a stub that records the prompt or returns a fixed reply text. Run each from the tau2-bench root with `PYTHONUTF8=1 uv run --no-sync python <path to repro>/<id>.py` (the scripts are in `upstream/repro/` of the audit repository).
 
-### I9: the transcript the judge sees (`repro_I9.py`)
+### I9: the transcript the judge sees (`upstream/repro/I9.py`)
 
 The tool call is the reference action of airline task 9; the assertion is task 9's third `nl_assertion`.
 
@@ -94,7 +94,7 @@ conversation as sent to the judge:
 tool name in judge prompt: False | arguments in judge prompt: False
 ```
 
-### I10: reply formats (`repro_I10.py`)
+### I10: reply formats (`upstream/repro/I10.py`)
 
 ```python
 """I10: the NL-assertion evaluator parses the judge reply with bare `json.loads(...)` and then
@@ -159,7 +159,7 @@ bare top-level JSON array: AttributeError: 'list' object has no attribute 'get'
 extract_json_from_llm_response(bare array) -> starts '{"', ends 'e}': invalid JSON (Extra data)
 ```
 
-### I14: omitted assertions (`repro_I14.py`)
+### I14: omitted assertions (`upstream/repro/I14.py`)
 
 ```python
 """I14: the NL reward is `all(met)` over whatever results the judge returns. An assertion that the

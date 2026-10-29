@@ -39,7 +39,7 @@ and, under "Task Completion", "If the instruction goal is satisified, generate t
 
 ## Reproduction
 
-The template difference, without a model call (`uv run --no-sync python repro_I15.py` from the repository root):
+The template difference, without a model call (`PYTHONUTF8=1 uv run --no-sync python <path to repro>/I15.py` from the tau2-bench root; the script is `upstream/repro/I15.py` in the audit repository):
 
 ```python
 """I15: the text-mode user-simulator guidelines lack three scenario-adherence rules that both voice
@@ -87,16 +87,16 @@ The behavioural findings below come from agent runs and need model calls; they a
 
 Observed in the audit's runs (`claude-haiku-5-5` as agent and as user simulator, provider-default sampling, 3 trials per task plus one ground-truth-agent run, i.e. an agent that sees the reference actions):
 
-- Airline, 20 sampled tasks: the simulator departs from its scenario in 7 of 20 tasks (tasks 7, 11, 16, 19, 22, 23, 32; every row confirmed by an adversarial review). Examples: it invents a "change of plan" against "You are sick" (task 7); it reads "original payment method" as "not the gift card" when the reservation was paid by gift card (tasks 11 and 16); it asks the agent to rebook against "You will book the flight again yourself later" (task 19); it withholds the instructed three-reservation idea at its trigger and raises it turns later (task 23); it invents "I didn't book this for anyone else" (task 32). Flips between trials trace to the simulator in 3 tasks (8, 11, 19).
-- Retail, all 114 tasks: the trajectory review attributes 12 of the 23 ground-truth-agent failures, and the flip of 24 of the 32 unstable tasks (1 or 2 of 3 trials passed), to the simulator; after the adversarial review of the run rows (four parts, rules fixed in advance), simulator deviations stand on 32 of the 45 reviewed tasks.
+- Airline, 20 sampled tasks: the simulator departs from its scenario in 7 of 20 tasks (tasks 7, 11, 16, 19, 22, 23, 32; after an adversarial review: 5 rows confirmed as filed, task 22 confirmed as weak, task 7 added by the review). Examples: it invents a "change of plan" against "You are sick" (task 7); it reads "original payment method" as "not the gift card" when the reservation was paid by gift card (tasks 11 and 16); it asks the agent to rebook against "You will book the flight again yourself later" (task 19); it withholds the instructed three-reservation idea at its trigger and raises it turns later (task 23); it invents "I didn't book this for anyone else" (task 32). Flips between trials trace to the simulator in 3 tasks (8, 11, 19). Over all 50 airline tasks, departures are filed on 14 tasks and simulator flips on 5 (`airline_full/audit_log.csv`, checks 5d and 5c).
+- Retail, all 114 tasks: after the trajectory review and its adversarial review (four parts, rules fixed in advance), 12 of the 23 ground-truth-agent failures, and the flip of 24 of the 32 unstable tasks (1 or 2 of 3 trials passed), run through the simulator (in 21 of the 24 flips it departs from its scenario, in 3 it makes a choice the scenario leaves open); simulator deviations stand on 32 of the 45 reviewed tasks.
 
 Expected: the simulator follows its scenario; it does not end or accept a transfer while an instructed request is pending, and it does not invent preferences or facts.
 
-A related design point, not a deviation: in the English pack the persona is assigned by caller gender (`assign_persona`, `src/tau2/multilingual/runtime.py` lines 568-581). The persona `priya_patil` (`data/tau2/multilingual/en/pack.yaml` lines 83-102) scripts early escalation ("When you're not getting somewhere fast, asking for a supervisor or a timeline early is characteristic", "Can I just talk to someone who can actually fix this"). These phrases appear verbatim in airline tasks 8, 19 and 44, where the scenario gives no instruction for a predictable refusal, and the conversations end with in-scope work pending.
+A related design point, not a deviation: in the English pack the persona is assigned by caller gender (`assign_persona`, `src/tau2/multilingual/runtime.py` lines 568-581). The persona `priya_patil` (`data/tau2/multilingual/en/pack.yaml` lines 83-102) scripts early escalation ("When you're not getting somewhere fast, asking for a supervisor or a timeline early is characteristic", "Can I just talk to someone who can actually fix this"). These phrases appear verbatim in airline tasks 8, 19 and 44. In 8 and 44 the scenario gives no instruction for a predictable refusal, and the conversations end with in-scope work pending; in 19 the scenario does give a fallback, so the request for a human there is counted as a departure from the scenario.
 
 ## Impact on scores
 
-In retail, the simulator explains more ground-truth failures (12 of 23) than the task and scoring defects do (8 of 23), under the caveat above. A change to the simulator model or to its scaffold moves the pass rate without any change in the agent; text and voice runs use different rules for the same task.
+In retail, the simulator explains more ground-truth failures (12 of 23) than the task and scoring defects do (8 of 23). A change to the simulator model or to its scaffold moves the pass rate without any change in the agent; text and voice runs use different rules for the same task.
 
 ## Suggested fix
 
@@ -106,6 +106,6 @@ In retail, the simulator explains more ground-truth failures (12 of 23) than the
 
 ## Evidence (audit repository)
 
-- Airline: `results/review_agent.csv` (rows 5c, 5d), `results/review_agent_overrides.csv`, `results/skeptic_report_agent.md` (sections 1, 2 and 6), `results/trajectories/*.md`, `audit_log.csv` rows 5c and 5d.
+- Airline: `results/review_agent.csv` (rows 5c, 5d), `results/review_agent_overrides.csv`, `results/skeptic_report_agent.md` (sections 1, 2 and 6), `results/trajectories/*.md`, `audit_log.csv` and `airline_full/audit_log.csv` rows 5c and 5d.
 - Retail: `results/retail/review_agent_A.md` to `review_agent_E.md` and the matching `.csv` files, `retail/audit_log.csv` rows 5c, 5d, 1e, `retail/PLAN.md` (deviation of 2026-10-28, reviewer consistency), `report.md` section 5.3.
 - `upstream/repro/I15.py`.

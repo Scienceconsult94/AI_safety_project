@@ -20,7 +20,7 @@ Tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`.
 
 ## Reproduction
 
-No model call. The reference actions of retail tasks 20 and 15 are replayed as an agent trajectory and scored with `EnvironmentEvaluator`. Run from the repository root with `uv run --no-sync python repro_I11.py`.
+No model call. The reference actions of retail tasks 20 and 15 are replayed as an agent trajectory and scored with `EnvironmentEvaluator`. Run from the tau2-bench root with `PYTHONUTF8=1 uv run --no-sync python <path to repro>/I11.py` (the script is `upstream/repro/I11.py` in the audit repository).
 
 ```python
 """I11: retail `modify_pending_order_items` stores the last new variant's price and options in every
@@ -123,7 +123,7 @@ task 15, payment_history[-1]: refund 0.3499999999999943
 - Over all 114 retail tasks, the reference modifies two or more items in one call in 5 tasks (20, 21, 36, 37, 100). In their targets, 9 items carry another variant's price and options (task 20: 3 of 4; 21: 1 of 2; 36: 2 of 3; 37: 2 of 3; 100: 1 of 2).
 - Reordering the pairs inside that call changes the target hash in 18 of 23 orders for task 20, 1 of 1 for task 21, 4 of 5 for tasks 36 and 37, and 1 of 1 for task 100. An agent that makes the right swaps in another order scores 0.
 - The agent reads the stored state back: in one recorded ground-truth-agent run (task 100), the agent noticed that `get_order_details` showed the luggage line with the skateboard's price and options, and transferred the user to a human.
-- With the attached patch, the same probe finds 0 items with another variant's data and 0 order-dependent hashes. The patch changes the target hash of 35 of the 114 retail tasks (5 through the variant fix, the rest through rounding). Within one code version the gold and the predicted state are built by the same tool, so a trajectory's pass or fail changes only where the pair order mattered; but recorded `results.json` files re-graded with strict replay would see different tool outputs.
+- With the attached patch, the same probe finds 0 items with another variant's data and 0 order-dependent hashes (run on a patched copy; the output is not saved in this repository). The patch changes the target hash of these 5 tasks (variant fix) and of further tasks through the rounding; their number is not recorded in this repository. Within one code version the gold and the predicted state are built by the same tool, so a trajectory's pass or fail changes only where the pair order mattered; but recorded `results.json` files re-graded with strict replay would see different tool outputs.
 
 ## Suggested fix
 

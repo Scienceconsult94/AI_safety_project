@@ -10,7 +10,7 @@
 
 ## Summary
 
-Reading all 114 retail tasks against `db.json`, and reading the failed runs, found two groups of task-data defects. (I13) Reference trajectories with errors: a product id that exists nowhere (tasks 2-4), an only reference action that raises (task 105, so the target is the unchanged database while the assertion demands the exchange), a transfer summary copied from another task (26), a no-op user-address write (110), a fallback branch whose premise is false in the data (18), an exchange on a pending order (64), and action ids carrying another task's number (95-113). (I16) Task texts that a scenario-faithful user cannot follow to the reference: a compatibility name absent from the catalogue (0, 1), an option set that two products match (100), a request that no product satisfies (52), an address the user is never given (34), and an ambiguous phrase (15).
+Reading all 114 retail tasks against `db.json`, and reading the failed runs, found two groups of task-data defects. (I13) Reference trajectories with errors: a product id that exists nowhere (tasks 2-4), an only reference action that raises (task 105, so the target is the unchanged database while the assertion demands the exchange), a transfer summary copied from another task (26), a no-op user-address write (110), a fallback branch whose premise is false in the data (18), an exchange on a pending order (64), and action ids carrying another task's number (95-113). (I16) Task texts that a scenario-faithful user cannot follow to the reference: a compatibility name absent from the catalogue (0, 1), an option set that two products match (100), and a request that no product satisfies (52). The trajectory review also filed an address the user is never given (34) and an ambiguous phrase (15); the adversarial review of the run rows attributes those failures to the simulator.
 
 ## Affected version
 
@@ -18,9 +18,9 @@ Tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`; `data/tau2/doma
 
 ## Reproduction
 
-Static checks and reference replays, no model call. Run from the repository root with `uv run --no-sync python <file>`.
+Static checks and reference replays, no model call. Run each from the tau2-bench root with `PYTHONUTF8=1 uv run --no-sync python <path to repro>/<id>.py` (the scripts are in `upstream/repro/` of the audit repository).
 
-### I13: reference defects (`repro_I13.py`)
+### I13: reference defects (`upstream/repro/I13.py`)
 
 ```python
 """I13: retail reference-trajectory defects (tasks 2-4, 105, 26, 110, 18, 64, action ids from 95 on).
@@ -126,7 +126,7 @@ Output:
     task 104 action ids: ['105_0', '105_1', '105_2', '105_3', 'action_1746656550382']
 ```
 
-### I16: task texts vs `db.json` (`repro_I16.py`)
+### I16: task texts vs `db.json` (`upstream/repro/I16.py`)
 
 ```python
 """I16: retail task texts that a scenario-faithful user cannot follow to the reference
@@ -222,9 +222,9 @@ I16, task texts (the run observations come from the audit's runs with `claude-ha
 
 - (a) Tasks 0 and 1 make the exchange conditional on a thermostat "compatible with Google Home". `db.json` contains no "Google Home"; the catalogue's Smart Thermostat variants say "Google Assistant", and the reference picks `7747408585` (Google Assistant). An agent that does not assert the equivalence cannot confirm it, and the user keeps the old item. In task 1, the ground-truth run and two of three trials end without a write. Expected: the scenario names the catalogue value, or says that Google Assistant is acceptable.
 - (b) Task 100 asks for a skateboard with `{'length': '34 inch', 'design': 'custom'}`, which two available variants match (plastic `9594745976` at 184.13, bamboo `6956751343` at 217.06); the reference fixes bamboo. In 4 of 4 runs the simulator picked the cheaper deck and the run scored 0. Expected: the scenario states the deck material (or keeps the current one), or both end states are accepted.
-- (c) Task 52 asks for maximum zoom with "all the other specifications of the camera ... the same". The only available camera with the ordered resolution and storage is the ordered one (24MP, 3x, SD); the reference `9228757377` changes the resolution to 30MP. The simulator refused it in 4 of 4 runs. Expected: a scenario that allows the resolution change, or a reference that satisfies it. Severity high on the run evidence; the static row (medium) passed an adversarial review.
-- (d) Task 34: the reference writes the profile address (224 Elm Street, Suite 491, New York, 10108), but the scenario gives the user only "your NYC place" and the zip code; in the ground-truth run and one trial the user rejected the street the agent read back. Expected: the scenario states the street.
-- (e) Task 15: "want the material" was read as a material change in 2 of 4 runs; under that reading the target is unreachable, because the only size-8 boot available is synthetic (`3613716226`) and the leather size 8 (`2648909398`) is unavailable. Expected: unambiguous wording ("keep the material").
+- (c) Task 52 asks for maximum zoom with "all the other specifications of the camera ... the same". The only available camera with the ordered resolution and storage is the ordered one (24MP, 3x, SD); the reference `9228757377` changes the resolution to 30MP. The simulator refused it in 4 of 4 runs. Expected: a scenario that allows the resolution change, or a reference that satisfies it. Severity medium: the adversarial review of the run rows moved the run row from high to medium, because the reference is reachable if the user lets "maximum zoom" win; the static row (medium) also passed an adversarial review.
+- (d) Task 34 (not counted as a task-text defect: the adversarial review of the run rows attributes these failures to the simulator; the wording gap is listed for the maintainers): the reference writes the profile address (224 Elm Street, Suite 491, New York, 10108), but the scenario gives the user only "your NYC place" and the zip code; in the ground-truth run and one trial the user rejected the street the agent read back. Expected: the scenario states the street.
+- (e) Task 15 (not counted as a task-text defect, for the same reason as (d)): "want the material" was read as a material change in 2 of 4 runs; under that reading the target is unreachable, because the only size-8 boot available is synthetic (`3613716226`) and the leather size 8 (`2648909398`) is unavailable. Expected: unambiguous wording ("keep the material").
 
 ## Impact on scores
 
@@ -234,7 +234,7 @@ I16, task texts (the run observations come from the audit's runs with `claude-ha
 
 ## Suggested fix
 
-Edit `tasks.json`: correct the product id in 2-4; make 105 consistent (payment method or assertion); remove or correct the transfer in 26; drop `111_1` or change the assertion in 110; state the availability premise correctly in 18; remove `64_6`; renumber the action ids of 95-113; and add the missing facts to the scenarios of 0, 1, 15, 34, 52 and 100 (or accept the alternative end states). A check in CI that replays every reference and flags raising WRITE actions and no-op WRITE actions would catch (b), (d) and (f).
+Edit `tasks.json`: correct the product id in 2-4; make 105 consistent (payment method or assertion); remove or correct the transfer in 26; drop `111_1` or change the assertion in 110; state the availability premise correctly in 18; remove `64_6`; renumber the action ids of 95-113; and add the missing facts to the scenarios of 0, 1, 52 and 100 (or accept the alternative end states); clearer wording in 15 and 34 would also remove the readings the simulator got wrong. A check in CI that replays every reference and flags raising WRITE actions and no-op WRITE actions would catch (b), (d) and (f).
 
 ## Evidence (audit repository)
 

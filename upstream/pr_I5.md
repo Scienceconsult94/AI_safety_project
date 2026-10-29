@@ -9,7 +9,7 @@ This is a partial fix. It does not change the default `llm_args` (`{"temperature
 Two reporting problems that the default-temperature failure exposed:
 
 1. `run_tasks` printed "Successfully completed all simulations!" unconditionally, also when every simulation had ended as an infrastructure error and nothing was evaluated (`src/tau2/runner/batch.py`, local and worker branches).
-2. `agent_cost` was `None` for every half-duplex simulation: the greeting built by `Orchestrator.initial_agent_message` from the language pack had no `cost`, unlike `DEFAULT_FIRST_AGENT_MESSAGE` (`cost=0.0`), and `get_cost` returns `None` for a side when any of its messages lacks a cost. Every text run sets a call context, so this greeting is always the one used, and "Avg Cost/Conversation" was always "n/a".
+2. `agent_cost` was `None` for every half-duplex simulation: the greeting built by `Orchestrator.initial_agent_message` from the language pack had no `cost`, unlike `DEFAULT_FIRST_AGENT_MESSAGE` (`cost=0.0`), and `get_cost` returns `None` for a side when any of its messages lacks a cost. Every text run sets a call context, so this greeting is always the one used, and "Avg Cost/Conversation" was "n/a" in every run that evaluated any simulation.
 
 Changes:
 

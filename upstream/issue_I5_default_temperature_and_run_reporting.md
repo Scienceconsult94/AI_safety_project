@@ -10,7 +10,7 @@
 
 ## Summary
 
-The default `llm_args` for agent and user are `{"temperature": 0.0}`. Current Anthropic models reject a non-default `temperature` with HTTP 400 (observed with `claude-haiku-5-5`: "`temperature` is deprecated for this model."), so a plain `tau2 run --agent-llm anthropic/claude-haiku-5-5 --user-llm anthropic/claude-haiku-5-5` fails every simulation after 4 attempts. The runner then prints "Successfully completed all simulations!" and "Average Reward 0.0000", with the failures visible only as "Infra Errors 5 (excluded from metrics below)", and exits with code 0. Separately, `agent_cost` is `None` for every half-duplex simulation, because the greeting that opens the conversation carries no cost, so "Avg Cost/Conversation" is always "n/a".
+The default `llm_args` for agent and user are `{"temperature": 0.0}`. Current Anthropic models reject a non-default `temperature` with HTTP 400 (observed with `claude-haiku-5-5`: "`temperature` is deprecated for this model."), so a plain `tau2 run --agent-llm anthropic/claude-haiku-5-5 --user-llm anthropic/claude-haiku-5-5` fails every simulation after 4 attempts. The runner then prints "Successfully completed all simulations!" and "Average Reward 0.0000", with the failures visible only as "Infra Errors 5 (excluded from metrics below)", and exits with code 0. Separately, `agent_cost` is `None` for every half-duplex simulation, because the greeting that opens the conversation carries no cost, so "Avg Cost/Conversation" is "n/a" in every run that evaluates any simulation.
 
 ## Affected version
 
@@ -23,7 +23,7 @@ Tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`.
 
 ## Reproduction
 
-No model call: the provider error is raised by a stub with the error text recorded on 2026-10-27 (below). Run from the repository root with `uv run --no-sync python repro_I5.py`.
+No model call: the provider error is raised by a stub with the error text recorded on 2026-10-27 (below). Run from the tau2-bench root with `PYTHONUTF8=1 uv run --no-sync python <path to repro>/I5.py` (the script is `upstream/repro/I5.py` in the audit repository).
 
 ```python
 """I5: default llm_args send temperature 0.0, which current Anthropic models reject (HTTP 400); the run
@@ -109,14 +109,14 @@ then "Task 1 failed after 4 attempts", then "Successfully completed all simulati
 
 ## Observed vs expected
 
-- Observed: the default arguments are sent to a provider that rejects them; the run ends with a success message and a reward of 0.0 computed over zero evaluated simulations. In every completed run of the audit, `agent_cost` is `None` while `user_cost` is filled (60 of 60 simulations in the 3-trial airline run).
+- Observed: the default arguments are sent to a provider that rejects them; the run ends with a success message and a reward of 0.0 computed over zero evaluated simulations. In every completed run of the audit, `agent_cost` is `None` (60 of 60 simulations in the 3-trial airline run, where `user_cost` is filled; in the retail and block-2 runs `user_cost` is 0.0, because the cost lookup failed there and `get_response_cost` returns 0.0 on an error).
 - Expected: either defaults that the selected provider accepts, or a clear failure; an end-of-run message that says no simulation was evaluated; an agent cost that sums the model calls.
 
 ## Impact on scores
 
 - A default run with a current Anthropic model evaluates nothing, and the console output reads as a completed run with a score of 0.0000. The audit worked around it with `--agent-llm-args '{}' --user-llm-args '{}'` (provider-default sampling), which also means its runs were not at temperature 0.
 - Any run where only some simulations hit infrastructure errors is reported as a success with those simulations dropped from the denominator; the count is printed, but the success line does not reflect it.
-- Cost reporting: "Avg Cost/Conversation" is "n/a" for every run, whatever the provider, because the greeting has no cost.
+- Cost reporting: "Avg Cost/Conversation" is "n/a" for every run that evaluates any simulation, whatever the provider, because the greeting has no cost.
 
 ## Suggested fix
 

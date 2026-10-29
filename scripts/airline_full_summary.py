@@ -163,7 +163,7 @@ def main() -> int:
             tg = [i for i in key if key[i]["target"] == "1"]
             dc = [i for i in key if key[i]["target"] == "0"]
             hc[x] = (sum(lab[x].get(i) == jm(i) for i in tg), len(tg), sum(lab[x].get(i) == jm(i) for i in dc), len(dc))
-            L.append(f"| judge hand-check round 2, reader {x.upper()} vs judge | targets {hc[x][0]}/{hc[x][1]}, decoys {hc[x][2]}/{hc[x][3]} |")
+            L.append(f"| judge check round 2, model reader {x.upper()} vs judge | targets {hc[x][0]}/{hc[x][1]}, decoys {hc[x][2]}/{hc[x][3]} |")
     L.append("")
 
     # ---- Table 6: block 2 on the rest (Q5)

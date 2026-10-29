@@ -21,7 +21,7 @@ Tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`.
 
 ## Reproduction
 
-No model call: the judge call is replaced by a counting stub. Run from the repository root with `uv run --no-sync python repro_I1.py`.
+No model call: the judge call is replaced by a counting stub. Run from the tau2-bench root with `PYTHONUTF8=1 uv run --no-sync python <path to repro>/I1.py` (the script is `upstream/repro/I1.py` in the audit repository).
 
 ```python
 """I1: docs/evaluation.md says the CLI runner uses EvaluationType.ALL_WITH_NL_ASSERTIONS by default;

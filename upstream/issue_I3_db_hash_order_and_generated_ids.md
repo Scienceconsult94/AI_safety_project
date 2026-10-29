@@ -22,7 +22,7 @@ Tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`.
 
 ## Reproduction
 
-No model call. Each case replays the reference actions of an airline task as an agent trajectory and scores it with `EnvironmentEvaluator`; the variant changes only the order of a list. Run from the repository root with `uv run --no-sync python repro_I3.py`.
+No model call. Each case replays the reference actions of an airline task as an agent trajectory and scores it with `EnvironmentEvaluator`; the variant changes only the order of a list. Run from the tau2-bench root with `PYTHONUTF8=1 uv run --no-sync python <path to repro>/I3.py` (the script is `upstream/repro/I3.py` in the audit repository).
 
 ```python
 """I3: the DB hash keeps list order and the ids handed out by the fixed sequence HATHAT/HATHAU/HATHAV,
@@ -120,9 +120,10 @@ task 23, same three bookings in the order Liam, Raj, Mohamed: ids {'Liam': 'HATH
 
 ## Impact on scores
 
-- Reordering whole WRITE calls of the reference, on the 13 tasks of a 20-task airline sample that have two or more WRITE calls: 24 of 78 reorderings change the hash. 20 of the 24 (all in task 23) reach the same state up to which booking received which generated id. With the canonical form described below, 4 of 78 still differ, and those 4 are real outcome changes (tasks 7 and 32: a refund before an upgrade, a flight change before a cabin change).
+- Reordering whole WRITE calls of the reference, on the 13 airline tasks (of all 50) that have two or more WRITE calls, 6 of them in a 20-task sample: 24 of 78 reorderings change the hash. 20 of the 24 (all in task 23) reach the same state up to which booking received which generated id. With the canonical form described below, 4 of 78 still differ, and those 4 are real outcome changes (tasks 7 and 32: a refund before an upgrade, a flight change before a cabin change).
 - Order inside one call: passengers (task 8) and payment methods (tasks 20 and 23) change the hash.
-- Reversing a reservation's `flights` list also changes the hash in 11 of the same 13 tasks. Itinerary order may be meant to matter, so this is listed for completeness only.
+- Over all 50 airline tasks, the audit files this order sensitivity (check 2h, `airline_full/audit_log.csv`) on six tasks: passenger, payment-method or booking order in tasks 8, 14, 20, 23 and 25, and in task 33 the same two flight changes made in two calls instead of the reference's one, which leaves another `payment_history`. Two further 2h rows (tasks 17 and 22) concern the bag allowance, a different mechanism.
+- Reversing a reservation's `flights` list also changes the hash (an adversarial review in the audit reports this for 11 of 13 sampled write tasks, without listing them). Itinerary order may be meant to matter, so this is listed for completeness only.
 - In the audit's 76 recorded conversations (claude-haiku-5-5 agent and ground-truth agent), none of the 20 DB mismatches was order-only, so the property did not decide a recorded score in that sample. It rejects valid solutions that choose another order, and it makes the target depend on incidental call order.
 - The same mechanism appears in retail through `modify_pending_order_items`, where the order of the (old, new) pairs inside one call changes the stored items (separate issue, audit id I11).
 

@@ -28,8 +28,8 @@ after the item change, modify_pending_order_payment: Error: Non-pending order ca
 after the item change, cancel_pending_order: Error: Non-pending order cannot be cancelled
 ```
 
-- All 14 retail tasks whose reference changes an order's address and later its items (41, 42, 71, 72, 78, 96, 97, 101, 102, 103, 104, 109, 111, 112): with the address change moved after the item change, the replay reached the target hash without error in 14 of 14 before the patch; after it, the moved call is rejected in 14 of 14.
-- Gold (target) hashes of all 114 retail tasks before and after: 0 changed. No reference in `tasks.json`, `multilingual/en/retail_tasks_en.json` or the five regional retail files modifies, pays for or cancels an order after modifying its items.
+- All 14 retail tasks whose reference changes an order's address and later its items (41, 42, 71, 72, 78, 96, 97, 101, 102, 103, 104, 109, 111, 112): with the address change moved after the item change, the replay reached the target hash without error in 14 of 14 before the patch; after it, the moved call is rejected in 14 of 14 (after-patch output not saved in this repository).
+- Gold (target) hashes of all 114 retail tasks before and after: 0 changed (output not saved in this repository). No reference in `tasks.json`, `multilingual/en/retail_tasks_en.json` or the five regional retail files modifies, pays for or cancels an order after modifying its items.
 
 ## Risk
 

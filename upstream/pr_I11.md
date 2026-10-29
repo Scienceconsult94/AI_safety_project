@@ -31,11 +31,11 @@ task 20, same pairs in reverse order inside the call: db_reward = 1.0
 task 15, payment_history[-1]: refund 0.35
 ```
 
-- All 114 retail references replayed before and after: reference actions that raise, 18 before and 18 after; items stored with another variant's data, 9 before and 0 after; pair orders that change the target hash, 18/23, 1/1, 4/5, 4/5, 1/1 (tasks 20, 21, 36, 37, 100) before and 0 in every task after.
+- All 114 retail references replayed before and after (the after-patch output is not saved in this repository): reference actions that raise, 18 before and 18 after; items stored with another variant's data, 9 before and 0 after; pair orders that change the target hash, 18/23, 1/1, 4/5, 4/5, 1/1 (tasks 20, 21, 36, 37, 100) before and 0 in every task after.
 
 ## Risk
 
-- The target hash changes for 35 of the 114 retail tasks: 5 through the variant fix (20, 21, 36, 37, 100) and the others because stored differences are now rounded. Within one code version the gold and the predicted state are produced by the same tool, so a trajectory's pass or fail changes only where the order of the pairs mattered (a correct solution that used another order now passes). Published retail numbers stay comparable except on those 5 tasks.
+- The target hash changes for the 5 tasks of the variant fix (20, 21, 36, 37, 100) and for further retail tasks whose stored differences are now rounded (their number is not recorded in this repository). Within one code version the gold and the predicted state are produced by the same tool, so a trajectory's pass or fail changes only where the order of the pairs mattered (a correct solution that used another order now passes). Published retail numbers stay comparable except on those 5 tasks.
 - Re-grading old `results.json` files with strict replay (`strict=True`) would raise on recorded tool outputs that contain the old prices or unrounded amounts; `tau2 evaluate-trajs` uses `strict_replay=False`, which only logs a warning.
 - The multilingual retail task sets use the same tool; their references with multi-item calls (tasks 21 and 36 in each set) change in the same way.
 - The two hunks (variant, rounding) are independent and can be split if the maintainers prefer to land only the variant fix.

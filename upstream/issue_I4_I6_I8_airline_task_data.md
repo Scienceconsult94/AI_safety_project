@@ -1,4 +1,4 @@
-# airline task data: accidental substring matches (tasks 3, 23), a required total that counts cancelled reservations (task 7), a budget clause that forbids the reference path (task 32)
+# airline task data: accidental substring matches (tasks 3, 14, 23), a required total that counts cancelled reservations (task 7), a budget clause that forbids the reference path (task 32)
 
 | field | value |
 |---|---|
@@ -10,21 +10,21 @@
 
 ## Summary
 
-Three defects in `data/tau2/domains/airline/tasks.json` that one edit pass would fix. (I4) The required strings `"4"` (task 3) and `"327"` (task 23) are matched as substrings of the agent's text after commas are removed, so they are found inside dates, fares and larger amounts. (I6) Task 7 requires the total `"1628"`, the amount paid for all four upcoming reservations, including the two that the same conversation cancels; the scenario asks for the user's other upcoming flights, whose total after the cancellations is 708. (I8) Task 32's scenario says "You are willing to pay up to $100 for the change", while the only path to the target hash charges $396 and then refunds $510 to the same card.
+Three defects in `data/tau2/domains/airline/tasks.json` that one edit pass would fix. (I4) The required strings `"4"` (task 3) and `"327"` (tasks 14 and 23) are matched as substrings of the agent's text after commas are removed, so they are found inside dates, fares and larger amounts. (I6) Task 7 requires the total `"1628"`, the amount paid for all four upcoming reservations, including the two that the same conversation cancels; the scenario asks for the user's other upcoming flights, whose total after the cancellations is 708. (I8) Task 32's scenario says "You are willing to pay up to $100 for the change", while the only path to the target hash charges $396 and then refunds $510 to the same card.
 
 ## Affected version
 
 Tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`.
 
-- `data/tau2/domains/airline/tasks.json`, tasks 3, 7, 23 and 32.
+- `data/tau2/domains/airline/tasks.json`, tasks 3, 7, 14, 23 and 32.
 - `src/tau2/evaluator/evaluator_communicate.py` lines 165-191, substring branch (the test at lines 173-175: `info_str.lower() in message.content.lower().replace(",", "")`). This branch runs with `--communicate-scorer substring`, the original τ-bench scoring; the default at v2.0.0 is the semantic judge, which this report does not cover.
 - `src/tau2/domains/airline/tools.py` lines 665 onward (`update_reservation_flights`) and 210 onward (`_payment_for_update`), for task 32's amounts.
 
 ## Reproduction
 
-No model call. Run each from the repository root with `uv run --no-sync python <file>`.
+No model call. Run each from the tau2-bench root with `PYTHONUTF8=1 uv run --no-sync python <path to repro>/<id>.py` (the scripts are in `upstream/repro/` of the audit repository).
 
-### I4: short numeric strings (`repro_I4.py`)
+### I4: short numeric strings (`upstream/repro/I4.py`)
 
 Task 3 is shown statically (its correct answer is 4 suitcases). For task 23, the sentence is copied from a recorded ground-truth-agent run (message 26); it states 1,327 = certificates 1,000 + gift cards 327, a different quantity from the required gift-card total.
 
@@ -83,7 +83,7 @@ task 23 communicate_info = ['327', '1000', '1286']
   substring verdicts on that one sentence: {'327': True, '1000': False, '1286': True}
 ```
 
-### I6: task 7's required total (`repro_I6.py`)
+### I6: task 7's required total (`upstream/repro/I6.py`)
 
 The answer sentence is copied from a recorded run (claude-haiku-5-5 agent, trial 0, message 32) whose database matched the target.
 
@@ -144,7 +144,7 @@ sum of the other upcoming (not cancelled): 708
 recorded answer '...total of $708.' -> required '1628' met: False
 ```
 
-### I8: task 32's budget clause (`repro_I8.py`)
+### I8: task 32's budget clause (`upstream/repro/I8.py`)
 
 ```python
 """I8: airline task 32's reference charges +396 and then refunds -510 to the same card, while the
@@ -225,6 +225,7 @@ without 32_3 (one change straight to HAT041 economy): db_reward = 0.0
 From the audit's runs (claude-haiku-5-5 as agent and as user simulator; 3 trials per task plus one ground-truth-agent run, i.e. the agent that sees the reference actions):
 
 - I4: in all 4 recorded runs of task 23 the first match of `"327"` was an explicit "$327", so no recorded reward depended on the accidental match; 2 of the 4 runs also produced the "$1,327" sentence unprompted, and rescoring those runs with every standalone "327" replaced still meets the check (one of them keeps reward 1.0). Task 3 has no WRITE, so the DB part is 1.0 for any conversation and the one-digit string carries the whole score.
+- I4 over all 50 airline tasks: task 14 has the same defect. It requires `["327", "1000", "1786"]`, and in trials 0 and 1 of the stock run the sentence "$1,327.00" (certificates 1,000 + gift cards 327) meets `"327"`; no recorded reward depended on it. The class therefore covers tasks 3, 14 and 23 (`airline_full/audit_log.csv`, row 14/2g).
 - I6: no assistant message in the 4 recorded runs contains 1628. The trial whose DB matched the target answered 708 and scored 0 on this string alone. With the corrected total (708), the ground-truth agent passed 4 of 4 fresh runs, against 0 of 1 before.
 - I8: 4 of 4 recorded runs failed the task (with imperfect agent explanations as well). In a pre-registered probe that replayed the conversation up to the user's request and added one plainly worded agent message (+$396, then −$510 to the same card, net $114 back), the claude-haiku-5-5 simulator refused the first step in 10 of 10 samples (two independent classifications agreed 10/10).
 
@@ -232,11 +233,11 @@ From the audit's runs (claude-haiku-5-5 as agent and as user simulator; 3 trials
 
 - I4: replace one-character and embedded numeric strings with values that cannot occur by accident (for task 3, rely on the assertion or on a phrase), or make the substring scorer match numbers as whole tokens, with thousands separators normalised on both sides. The audit's token-boundary variant is `comm_boundary` in `scripts/v2/scorer_v2.py`.
 - I6: change `communicate_info` to `["708"]` and the scenario to "any other upcoming flights (other than the two reservations you are cancelling)"; correct the last `nl_assertion` accordingly. This was tested: the ground-truth agent went from 0/1 to 4/4.
-- I8: make the budget a net cap and say when a temporary charge is acceptable. Wording tested with the same probe design (simulator authorisation of step 1, 10 samples per arm): "You are willing to pay up to $100 net for the change. A single step may charge more than that only if a later step in the same conversation refunds it so that the net result is within $100 (or a refund to you). Before you authorize any charge above $100, ask the agent to state the net amount after all steps, and agree only once the agent has stated it." It gave 8 of 10 authorisations when the agent stated the net, and 0 of 10 when the agent asked for the +$396 step without mentioning the refund. A sentence naming the refund card was also tested and is not recommended: it made the simulator reject agents that wrongly said the refund goes to the original payment method, and the task passed 2 of 7 fresh runs. Alternatively, accept the one-step change (basic economy straight to the nonstop in economy) as a second valid end state.
+- I8: make the budget a net cap and say when a temporary charge is acceptable. Wording tested with the same probe design (simulator authorisation of step 1, 10 samples per arm): "You are willing to pay up to $100 net for the change. A single step may charge more than that only if a later step in the same conversation refunds it so that the net result is within $100 (or a refund to you). Before you authorize any charge above $100, ask the agent to state the net amount after all steps, and agree only once the agent has stated it." It gave 8 of 10 authorisations when the agent stated the net, and 0 of 10 when the agent asked for the +$396 step without mentioning the refund. The tested text also carried a sentence naming the refund card ("Any charge or refund should go to your Visa credit card ending in 1777."), with which the task passed 2 of 7 fresh runs. A later pre-registered test ran the ground-truth agent 10 times with this wording and the sentence and 10 times with the wording alone: both passed 2 of 10 (`airline_full/cf32.md` in the audit repository), so the sentence is not taken to cause the failures, and the fix above does not need it. Alternatively, accept the one-step change (basic economy straight to the nonstop in economy) as a second valid end state.
 
 ## Evidence (audit repository)
 
-- I4: `results/skeptic_report.md` (3/2g), `results/skeptic_report_rereview.md` (23/2g, counterfactual rescoring), `results/trajectories/23_gt_t0.md` message 26, `audit_log.csv` rows 2g.
+- I4: `results/skeptic_report.md` (3/2g), `results/skeptic_report_rereview.md` (23/2g, counterfactual rescoring), `results/trajectories/23_gt_t0.md` message 26, `audit_log.csv` and `airline_full/audit_log.csv` rows 2g.
 - I6: `results/trajectories/7_*.md`, `results/skeptic_report_agent.md` section 4, `block2/task_fixes.md` (task 7), `block2/summary_v2.md` (H4).
 - I8: `results/probe_32/` (`protocol.md`, `samples.md`, `result.md`, two classification files), `results/skeptic_report_agent.md` section 3 (arithmetic and uniqueness of the path), `results/v2/probe_32_v2/result.md` (tested wordings), `block2/task_fixes.md` (task 32, post-run observation).
 - `upstream/repro/I4.py`, `upstream/repro/I6.py`, `upstream/repro/I8.py`.

@@ -21,7 +21,7 @@ Tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`.
 
 ## Reproduction
 
-No model call. The reference actions of retail task 41 are replayed as an agent trajectory and scored with `EnvironmentEvaluator`, once in the reference order and once with the address change of order `#W4082615` moved after its item change. Run from the repository root with `uv run --no-sync python repro_I12.py`.
+No model call. The reference actions of retail task 41 are replayed as an agent trajectory and scored with `EnvironmentEvaluator`, once in the reference order and once with the address change of order `#W4082615` moved after its item change. Run from the tau2-bench root with `PYTHONUTF8=1 uv run --no-sync python <path to repro>/I12.py` (the script is `upstream/repro/I12.py` in the audit repository).
 
 ```python
 """I12: retail `modify_pending_order_address` accepts an order whose items were already modified
@@ -112,8 +112,8 @@ after the item change, cancel_pending_order: Error: Non-pending order cannot be 
 
 ## Impact on scores
 
-- 14 retail tasks have a reference that changes an order's address and later its items (41, 42, 71, 72, 78, 96, 97, 101, 102, 103, 104, 109, 111, 112). Moving the address change after the item change reaches the target hash without a tool error in 14 of 14. The DB check cannot tell the forbidden order from the compliant one, and several of these scenarios are written to test exactly this rule (for example 41, 72, 97, 104).
-- With the attached patch the moved address change is rejected in 14 of 14 tasks, and no retail target hash changes (no reference modifies an order after its items; checked in `tasks.json`, the English retail task file and the five regional retail files).
+- 14 retail tasks have a reference that changes an order's address and later its items (41, 42, 71, 72, 78, 96, 97, 101, 102, 103, 104, 109, 111, 112). Moving the address change after the item change reaches the target hash without a tool error in 14 of 14. The DB check cannot tell the forbidden order from the compliant one, and several of these scenarios are written to test exactly this rule (for example 41, 72, 97).
+- With the attached patch (run on a patched copy; the output is not saved in this repository) the moved address change is rejected in 14 of 14 tasks, and no retail target hash changes (no reference modifies an order after its items; checked in `tasks.json`, the English retail task file and the five regional retail files).
 
 ## Suggested fix
 

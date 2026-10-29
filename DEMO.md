@@ -1,6 +1,6 @@
 # Five-minute demo: how an agent exam fails
 
-Audience: someone who knows what an LLM agent is but has not seen tau2-bench. Everything shown runs offline, makes no model call and finishes in about 12 seconds.
+Audience: someone who knows what an LLM agent is but has not seen tau2-bench. Everything shown runs offline, makes no model call and finishes in under a minute (19 and 37 seconds in two runs on 2026-10-28).
 
 ## Before the talk
 
@@ -17,7 +17,7 @@ Audience: someone who knows what an LLM agent is but has not seen tau2-bench. Ev
 ## Script
 
 **0:00–0:30 — The claim.**
-Agent benchmarks are exams, and their pass rates feed leaderboards and deployment decisions. This project checks the exam itself. The target is tau2-bench v2.0.0, a widely used customer-service agent benchmark: airline (all 50 tasks; 20 sampled first) and retail (all 114 tasks). The tools are a fixed checklist of 49 checks (retail added two), probes with known answers, paid agent runs and an adversarial review of every finding.
+Agent benchmarks are exams, and their pass rates feed leaderboards and deployment decisions. This project checks the exam itself. The target is tau2-bench v2.0.0, a widely used customer-service agent benchmark: airline (all 50 tasks; 20 sampled first) and retail (all 114 tasks). The tools are a fixed checklist of 49 checks (retail added two), probes with known answers, paid agent runs and an adversarial review of every finding about a task.
 
 **0:30–1:30 — An agent that says nothing.**
 Run `--only 1`. On screen: full reward on 23 of 50 airline tasks for an empty conversation.
@@ -37,18 +37,18 @@ Say: to pass the hash the database must stay unchanged; to pass the assertion th
 
 **3:45–4:30 — What this does to model comparisons.**
 Show `strong_vs_weak/fig_per_task.png`.
-Say: the same 20 airline tasks were run with a stronger agent model. It is ahead on 6 tasks and behind on 1, but the difference is not significant (p = 0.125). Nine of the 20 tasks tie both models by construction: 7 pass for doing nothing and 2 cannot be passed. Correcting one wrong reference answer widens the gap (p = 0.039, before correcting for the three comparisons). In retail, the user simulator, not the agent, explains 12 of the 23 failures of an agent that sees the answer key.
+Say: the same 20 airline tasks were run with a stronger agent model. It is ahead on 6 tasks and behind on 1, but the difference is not significant (p = 0.125). Nine of the 20 tasks tie both models by construction: 7 pass for doing nothing and 2 have defective reference answers that both models fail. Correcting one wrong reference answer lowers p to 0.070; the full repaired protocol brings it to 0.039, before correcting for the three comparisons. In retail, the user simulator, not the agent, explains 12 of the 23 failures of an agent that sees the answer key.
 
 **4:30–5:00 — The point.**
-A pass rate measures the agent, the user simulator and the exam together. The exam has to be validated as an instrument before its numbers are read. Every number here is rebuilt by script from recorded runs, and 16 issue drafts with reproductions are prepared for the maintainers.
+A pass rate measures the agent, the user simulator and the exam together. The exam has to be validated as an instrument before its numbers are read. Every number here from the recorded runs is rebuilt by script, apart from a few counts taken from review reports and the leaderboard scores read from a web page, and 16 issue candidates are drafted for the maintainers, with 14 reproduction scripts.
 
 ## Likely questions
 
 - **Isn't the pass for doing nothing documented as intended?** The documentation calls the refusal outcome intended. The finding is about resolution: the exam cannot distinguish a refusal from inaction. Block 2 shows a stricter protocol in which an empty conversation scores 0 on all 50 airline tasks.
-- **How solid are the defect counts?** In retail, every defect row went through an adversarial review: the rows from reading and probes first, the rows from the agent runs later, in a second review in four parts. A second model reader re-labelled 12 tasks blind and agreed with the first reviewers on 97 of 98 labels; the adversarial review settled the one difference in favour of the blind reader. With the 6 tasks that pass for doing nothing counted on their own line, 38 of 114 tasks are defective from reading and probes, and 61 counting the agent runs.
-- **Is the tool bug fixed upstream?** Not at the pinned commit. The fix takes a few lines; the patch and its description are drafted in `upstream/` and have not been filed.
+- **How solid are the defect counts?** In retail, every task-level defect row went through an adversarial review (of the rows about the benchmark as a whole, the one medium row, 2j, has no verdict, and the four low rows were not reviewed): the rows from reading and probes first, the rows from the agent runs later, in a second review in four parts. A second model reader re-labelled 12 tasks blind and agreed with the first reviewers on 97 of 98 labels; the adversarial review settled the one difference in favour of the blind reader. With the 6 tasks that pass for doing nothing counted on their own line, 38 of 114 tasks are defective from reading and probes, and 61 counting the agent runs.
+- **Is the tool bug fixed upstream?** Not at the pinned commit, and not on the main branch on 2026-10-28. It was already reported in the benchmark's issue tracker, with a fix in a pull request that is not merged (report Section 8). The fix takes a few lines; the patch and description drafted here in `upstream/` were not filed.
 - **Does this generalize beyond tau2-bench?** See the external null-agent table in `results/null_agent/external.md`.
-- **What did it cost?** About $28 of API calls in total (`cost.md`).
+- **What did it cost?** About $33 of API calls in total (`cost.md`).
 
 ## If the live run fails
 
