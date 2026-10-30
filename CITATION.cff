@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "How an agent exam fails: a validation audit of tau2-bench (airline and retail), and a stricter protocol laid over it"
+authors:
+  - given-names: Vadim
+date-released: 2026-10-29
+url: "https://github.com/Scienceconsult94/AI_safety_project"
+repository-code: "https://github.com/Scienceconsult94/AI_safety_project"
+abstract: "Validation audit of tau2-bench v2.0.0 (airline, all 50 tasks; retail, all 114): do-nothing floors on tau2-bench and four external benchmarks, a 49-check defect audit with blind re-review and adversarial review, a stricter scoring protocol (v2), and a strong-vs-weak agent comparison under both protocols."
+keywords:
+  - ai-safety
+  - evals
+  - benchmarks
+  - tau2-bench
