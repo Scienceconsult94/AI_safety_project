@@ -4,7 +4,7 @@ Audience: someone who knows what an LLM agent is but has not seen tau2-bench. Ev
 
 ## Before the talk
 
-- Prepare the pinned clone and its environment as `STRUCTURE.md` describes. Run the demo once to confirm it works:
+- Prepare the pinned clone and its environment as the Setup section of `STRUCTURE.md` describes (clone, checkout of the pinned commit, `uv sync`). Run the demo once to confirm it works:
 
   ```bash
   cd tau2-bench

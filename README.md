@@ -1,17 +1,17 @@
 # How an agent exam fails: a validation audit of tau2-bench (airline and retail), and a stricter protocol laid over it
 
 **Key results.**
-- An agent that does nothing passes 23 of 50 airline tasks of the pinned benchmark; under the stricter v2 protocol it passes 0 of 50, and a refusal-only agent still passes 14 of those 23 (`summary_numbers.md`, `block2/summary_v2.md`).
-- 34 of 50 airline tasks carry at least one confirmed medium- or high-severity defect (16 of 20 in the sampled block; 44 of 50 counting the pass for doing nothing); a blind second reader agreed with the original labels on 147 of 153 rows (`airline_full/summary_numbers.md`, `results/rereview_summary.md`, `results/rereview_summary_rest.md`, `results/retail/rereview_summary.md`).
-- Retail: 61 of 114 tasks carry such a defect (38 from reading and probes alone; 6 pass for doing nothing) (`retail/summary_numbers.md`).
-- A stronger agent model is ahead of a weaker one on 6 of 20 airline tasks and behind on 1 under the stock scorer (pass^1, the share of trials passed, 0.850 against 0.733, p = 0.125); under v2 the gap is +0.150 (p = 0.039, uncorrected for the three comparisons) (`strong_vs_weak/summary.md`).
-- On the original tau-bench airline set an agent that does nothing scores 38% (19 of 50) with the benchmark's own reward code; four published runs on the HAL leaderboard score below that floor, at 28%, 36%, 36% and 36% (`results/null_agent/external.md`, `results/null_agent/hal_check.md`).
+- An agent that does nothing passes 23 of 50 airline tasks of the pinned benchmark; under the stricter v2 protocol it passes 0 of 50 by rule (the empty conversation fails by construction), and a refusal-only agent still passes 14 of those 23 ([summary_numbers.md](summary_numbers.md), [block2/summary_v2.md](block2/summary_v2.md)).
+- 34 of 50 airline tasks carry at least one confirmed medium- or high-severity defect (16 of 20 in the sampled block; 44 of 50 counting the pass for doing nothing); across the airline and retail blind re-reviews a second reader agreed with the original labels on 147 of 153 rows (27 of 29, 23 of 26, 97 of 98) ([airline_full/summary_numbers.md](airline_full/summary_numbers.md), [results/rereview_summary.md](results/rereview_summary.md), [results/rereview_summary_rest.md](results/rereview_summary_rest.md), [results/retail/rereview_summary.md](results/retail/rereview_summary.md)).
+- Retail: 61 of 114 tasks carry such a defect (38 from reading and probes alone; 6 pass for doing nothing) ([retail/summary_numbers.md](retail/summary_numbers.md)).
+- A stronger agent model is ahead of a weaker one on 6 of 20 airline tasks and behind on 1 under the stock scorer (pass^1, the share of trials passed, 0.850 against 0.733, p = 0.125); under v2 the gap is +0.150 (p = 0.039 before correcting for the three comparisons; not significant after it) ([strong_vs_weak/summary.md](strong_vs_weak/summary.md)).
+- On the original tau-bench airline set an agent that does nothing scores 38% (19 of 50) with the benchmark's own reward code; four published runs on the HAL leaderboard score below that floor, at 28%, 36%, 36% and 36% ([results/null_agent/external.md](results/null_agent/external.md), [results/null_agent/hal_check.md](results/null_agent/hal_check.md)).
 
-Full report: `report.md` · One page: `ONE_PAGER.md` · Demo (under a minute, no model call): `DEMO.md` · Reproduce: `STRUCTURE.md`.
+Full report: [report.md](report.md) · One page: [ONE_PAGER.md](ONE_PAGER.md) · Demo (under a minute, no model call): [DEMO.md](DEMO.md) · Reproduce: [STRUCTURE.md](STRUCTURE.md).
 
 **If you have 5 minutes:** read the key results above, then the Block 1 and Block 2 tables under "Headline results".
-**If you have 15 minutes:** read `ONE_PAGER.md`. It gives the method, the results, what they mean and the limits on one page. Then run the demo in `DEMO.md`: one command, under a minute, no model call. The expected output is printed there.
-**If you have an hour:** read `report.md`, the full write-up, section by section. `STRUCTURE.md` links every number to the files and scripts that produce it. `audit_log.csv` holds every verdict on every task, and `schema.md` explains its columns.
+**If you have 15 minutes:** read [ONE_PAGER.md](ONE_PAGER.md). It gives the method, the results, what they mean and the limits on one page. Then run the demo in [DEMO.md](DEMO.md): one command, under a minute, no model call. The expected output is printed there.
+**If you have an hour:** read [report.md](report.md), the full write-up, section by section. [STRUCTURE.md](STRUCTURE.md) links every number to the files and scripts that produce it. [audit_log.csv](audit_log.csv) holds every verdict on every task, and [schema.md](schema.md) explains its columns.
 
 This repository asks one question of a widely used agent benchmark: when a task is marked "passed", did the agent do the job, or did the examination procedure (the way the benchmark checks the result) let it through?
 
@@ -143,7 +143,7 @@ Sixteen issue candidates are drafted in `issues_draft.md` (I1–I16, with file a
 - `scripts/`, `scripts/v2/`: every script that produced a number; `scripts/runs/`, `scripts/v2/run_v2.py` and `scripts/retail/run_retail.py` are the paid runs.
 - `results/`, `results/v2/`: recorded runs (`results.json` of every simulation), re-scores, gates, judge votes and raw replies, provenance stamps, probe transcripts.
 - `ONE_PAGER.md`: the results on one page; `DEMO.md`: the five-minute demo script.
-- `issues_draft.md`, `upstream/` (issue and pull-request texts ready to file, with reproductions and patches; not filed), `cost.md`, `COMMIT_MAP.md`.
+- `issues_draft.md`, `upstream/` (issue and pull-request texts ready to file, with reproductions and patches; not filed), `patches/` (the one recorded local patch to the benchmark checkout, with its README), `cost.md`, `COMMIT_MAP.md` (hash maps of the three history rewrites).
 
 Not in the repository: the upstream clone (pinned by commit; clone it next to the scripts as `tau2-bench/`), the API key, and the descriptions of scorer-bypass constructions (kept private by design; the aggregates and the rules are public).
 

@@ -1,7 +1,7 @@
 # Repository structure
 
 A validation audit of tau2-bench (airline and retail), pinned at tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`.
-Each sampled task is checked against a fixed checklist (static reading, mechanical probes, agent runs); every verdict is one row of `audit_log.csv`, and the headline numbers are rebuilt from the CSV files by script.
+Each task (all 50 airline and all 114 retail) is checked against a fixed checklist (static reading, mechanical probes, agent runs); every verdict is one row of `audit_log.csv`, and the headline numbers are rebuilt from the CSV files by script.
 
 ## Layout
 
@@ -141,6 +141,19 @@ Each sampled task is checked against a fixed checklist (static reading, mechanic
 10. `audit_log.csv`, `results/static_scan.csv`, `results/rereview.csv`, `results/runs/*.results.json` -> `scripts/make_summary.py` -> `summary_numbers.md`, `fig_defects.png`
 11. `analysis.ipynb` -> imports `scripts/make_summary.py`, displays the figure and the tables
 12. `tau2-bench/`, `results/runs/sample20_pass3_haiku.results.json` -> `scripts/probe_32.py` (API calls) -> `results/probe_32/`
+
+## Setup
+
+The scripts expect the upstream benchmark next to them in `tau2-bench/` (gitignored) and two Python environments.
+
+```bash
+git clone https://github.com/sierra-research/tau2-bench
+cd tau2-bench
+git checkout 989d3285ae669e49503324bdb9981bf14fccedeb
+uv sync
+```
+
+`uv sync` creates `tau2-bench/.venv` (Python 3.12 was used here). Scripts that import tau2 run from `tau2-bench/` as `uv run --no-sync python ../scripts/<name>.py` in bash, or `& $uv run --no-sync python ..\scripts\<name>.py` in the PowerShell blocks below. The summaries, figures and the notebook need a separate Python 3.11 with `pandas`, `matplotlib`, `statsmodels` and `jupyter`, run with `-X utf8`. The retail agent runs used one recorded local patch to the checkout (`patches/nl_judge_haiku.patch`, a judge-model substitution); the offline rebuild and the demo do not need it.
 
 ## Rebuild everything (offline, no API calls)
 
@@ -284,4 +297,3 @@ Live parts (spend money; recorded in `cost.md`): `scripts/runs/run_rest30.ps1`, 
 - `private/`: descriptions of scorer bypasses, kept out of publication.
 - Python and OS noise (`.venv/`, `__pycache__/`, `.ipynb_checkpoints/`, `Thumbs.db`).
 
-`README.md` and `report.md` are written separately by the owner.
