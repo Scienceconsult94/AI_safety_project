@@ -2,7 +2,7 @@
 .env
 .env.*
 
-# Scorer-bypass descriptions stay private (kickoff prompt, "Запреты")
+# Internal notes stay private
 private/
 
 # Upstream benchmark clone (pinned by commit hash in audit_log.csv, not vendored)
@@ -19,5 +19,5 @@ __pycache__/
 Thumbs.db
 desktop.ini
 
-# Internal kickoff notes (not part of the publication)
-14_*_kickoff.md
+# Internal planning notes (not part of the publication)
+14_*.md
