@@ -3,6 +3,8 @@ message: "If you use this work, please cite it as below."
 title: "How an agent exam fails: a validation audit of tau2-bench (airline and retail), and a stricter protocol laid over it"
 authors:
   - given-names: Vadim
+    family-names: Syropyatov
+license: MIT
 date-released: 2026-10-29
 url: "https://github.com/Scienceconsult94/AI_safety_project"
 repository-code: "https://github.com/Scienceconsult94/AI_safety_project"
