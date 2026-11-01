@@ -31,7 +31,7 @@
 
 **What would help** (proposal). Publish next to every agent leaderboard: do-nothing and refuse-only floors; a replay of each task's reference solution (official correct actions) as a control; the task-file version behind each score; and, with a simulated customer, the share of failures it causes. Scripts here produce the do-nothing floor and the reference replay for five of the six tau2 task sets (airline, retail, telecom base, telecom full, intake; banking_knowledge could not be built) without paid model calls.
 
-**What is in the repository.** Full report (`report.md`), audit logs, an offline demo (under a minute, no model call; `scripts/demo/demo.py`, script in `DEMO.md`), and 16 issue candidates for the maintainers (`issues_draft.md`), 15 of them written up with 14 reproduction scripts and 5 patches (`upstream/`); nothing filed; two of them, and part of a third, were already reported by others.
+**What is in the repository.** Full report (`report.md`), audit logs, an offline demo (under a minute, no model call; `scripts/demo/demo.py`, script in `DEMO.md`), and 16 issue candidates for the maintainers (`issues_draft.md`), 15 of them written up with 14 reproduction scripts and 5 patches (`upstream/`); nothing filed; four of them, and parts of two more, were already reported by others (tracker checks of 2026-10-28 and 2026-10-31).
 
 **Limits.** One benchmark audited in depth; reviewers and adversarial reviewers are language models, not people; one run per model in the strong-vs-weak comparison; three of the nine external floor figures in the report's Table 9b (six rows in the README table; OSWorld-Verified in two task-file versions, the original WebArena) counted from task files rather than measured.
 

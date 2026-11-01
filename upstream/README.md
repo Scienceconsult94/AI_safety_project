@@ -1,6 +1,6 @@
 # Upstream issue and pull-request drafts for tau2-bench
 
-Target: `sierra-research/tau2-bench`, tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`. Source drafts: `issues_draft.md` rows I1 and I3 to I16. Nothing here has been filed or opened, and nothing is to be filed for now. A check of the tracker on 2026-10-28 found three of the drafts already reported by others; see the status column.
+Target: `sierra-research/tau2-bench`, tag `v2.0.0`, commit `989d3285ae669e49503324bdb9981bf14fccedeb`. Source drafts: `issues_draft.md` rows I1 and I3 to I16. Nothing here has been filed or opened, and nothing is to be filed for now. Checks of the tracker on 2026-10-28 and 2026-10-31 found four of the drafts already reported by others (I6, I9, I11, I14) and two in part (I3, I10); see the status column and the paste-ready texts in `ready/`.
 
 ## Issues
 
@@ -8,7 +8,7 @@ Target: `sierra-research/tau2-bench`, tag `v2.0.0`, commit `989d3285ae669e495033
 |---|---|---|---|---|---|---|---|
 | 1 | I11 | `modify_pending_order_items` stores the last new variant in every modified item; price difference not rounded | bug | retail | medium | `issue_I11_modify_items_last_variant.md` | draft, not filed; already reported as sierra-research/tau2-bench#318 (also #317, #325; fix in pull request #322, not merged); the unrounded price difference is not reported there |
 | 2 | I12 | address change accepted after an item change, against the policy; the forbidden order reaches the target | bug | retail | medium | `issue_I12_modify_after_item_change.md` | draft, not filed |
-| 3 | I9, I10, I14 | NL-assertion judge: tool calls invisible, fenced or array replies rejected, omitted assertion counts as met | scoring validity, bug | retail; any task judged on `nl_assertions` | medium | `issue_I9_I10_I14_nl_assertion_judge.md` | draft, not filed |
+| 3 | I9, I10, I14 | NL-assertion judge: tool calls invisible, fenced or array replies rejected, omitted assertion counts as met | scoring validity, bug | retail; any task judged on `nl_assertions` | medium | `issue_I9_I10_I14_nl_assertion_judge.md` | draft, not filed; I9 already reported as sierra-research/tau2-bench#553 and I14 as #554 (fixes #584 and #581 open), the fenced-reply part of I10 as #555 (fixes #562 and #469 open); the bare-array reply not reported there; narrowed paste-ready text in `ready/issue_nl_assertion_judge.md` (check of 2026-10-31) |
 | 4 | I1 | docs say the runner defaults to `ALL_WITH_NL_ASSERTIONS`; the code defaults to `ALL` | docs | all (visible in airline) | low | `issue_I1_docs_default_evaluation_type.md` | draft, not filed |
 | 5 | I5 | default `temperature: 0.0` rejected by current Anthropic models; failed run reported as success; agent cost always `None` | bug (reporting) | all | medium | `issue_I5_default_temperature_and_run_reporting.md` | draft, not filed |
 | 6 | I4, I6, I8 | airline task data: accidental substring matches (3, 14, 23), wrong required total (7), budget clause that forbids the reference (32) | task data | airline | I4 medium, I6 medium, I8 high | `issue_I4_I6_I8_airline_task_data.md` | draft, not filed; I6 already reported as sierra-research/tau2-bench#495; I4 and I8 not found there |
