@@ -1,6 +1,6 @@
 # Overnight work 2026-10-31 → 2026-11-01: summary for the author
 
-Branch `overnight-2026-11-01` (from main a3fd7e1). Nothing was pushed, filed, posted or sent. No published number was edited; all new results are under `results/overnight/`, new texts under `upstream/ready/`, the new script under `scripts/overnight/`. Running log: `LOG.md`. Paid calls: one judge run, 9,349 calls, own estimate $7.73 (`cost_overnight.md`; cap $40). Two independent read-only reviews of the branch (models claude-fable-5-1 and claude-opus-5-5) recomputed every T3 number and checked T1, T2, T5, T6 and hygiene; both verdicts "mergeable after fixes"; the fixes are applied and listed in `LOG.md`.
+Branch `overnight-2026-11-01` (from main a3fd7e1), merged into main and pushed on 2026-10-31 evening after the two reviews named below. Nothing was filed, posted or sent. No published number was edited; all new results are under `results/overnight/`, new texts under `upstream/ready/`, the new script under `scripts/overnight/`. Running log: `LOG.md`. Paid calls: one judge run, 9,349 calls, own estimate $7.73 (`cost_overnight.md`; cap $40). Two independent read-only reviews of the branch (models claude-fable-5-1 and claude-opus-5-5) recomputed every T3 number and checked T1, T2, T5, T6 and hygiene; both verdicts "mergeable after fixes"; the fixes are applied and listed in `LOG.md`.
 
 | task | status | result in one line | files |
 |---|---|---|---|
