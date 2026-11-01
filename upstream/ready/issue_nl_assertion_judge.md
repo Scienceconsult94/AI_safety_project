@@ -1,3 +1,5 @@
+Filed 2026-11-01 as [#735](https://github.com/sierra-research/tau2-bench/issues/735) (the paste-ready text below, title = its first heading).
+
 Status: partly covered, do not file those parts: I9 (tool calls invisible to the judge) is #553; the fenced-reply part of I10 is #555; I14 (an omitted or empty verdict counts as met) is #554. Remaining part, the bare top-level JSON array reply of I10: still reproduces at da0835f6c67baef58bdda18f2a3b037dfb3a1754 (by reading the code; not run)
 
 Source draft: `upstream/issue_I9_I10_I14_nl_assertion_judge.md`. Upstream `main` read at `da0835f6c67baef58bdda18f2a3b037dfb3a1754` (2026-10-29 22:37 -0700, merge of #692), shallow clone in `<fresh-folder>\upstream_main`.

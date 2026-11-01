@@ -1,3 +1,5 @@
+Filed 2026-11-01 as [#736](https://github.com/sierra-research/tau2-bench/issues/736) (the paste-ready text below, title = its first heading).
+
 Status: partly covered by #514, so do not file the payment-method-order part: #514 shows that `get_dict_hash` keeps list order, using airline `payment_history`. The passenger-order and generated-reservation-id parts still reproduce at da0835f6c67baef58bdda18f2a3b037dfb3a1754 (by reading the code; not run)
 
 Source draft: `upstream/issue_I3_db_hash_order_and_generated_ids.md`. Upstream `main` read at `da0835f6c67baef58bdda18f2a3b037dfb3a1754` (2026-10-29 22:37 -0700, merge of #692), shallow clone in `<fresh-folder>\upstream_main`.
