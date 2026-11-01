@@ -1,5 +1,13 @@
 # How an agent exam fails: a validation audit of tau2-bench (airline and retail), and a stricter protocol laid over it
 
+**What a reviewer can verify in five minutes** (added 2026-11-01). After the Setup section of [STRUCTURE.md](STRUCTURE.md) (clone, pinned checkout, `uv sync`), run from `tau2-bench/`; no model call, under a minute, the expected output, shortened, in [DEMO.md](DEMO.md).
+
+| command | prints | the number comes from |
+|---|---|---|
+| `PYTHONUTF8=1 uv run --no-sync python ../scripts/demo/demo.py --only 1` | full reward on 23 of 50 airline tasks for an empty conversation | [summary_numbers.md](summary_numbers.md), row "no-op pass, all airline tasks" |
+| `PYTHONUTF8=1 uv run --no-sync python ../scripts/demo/demo.py --only 3` | retail task 20: 3 of 4 items stored with another variant's price and options | [retail/audit_log.csv](retail/audit_log.csv), task 20, check 1g; probe [results/retail/probe_1g.csv](results/retail/probe_1g.csv) |
+| `PYTHONUTF8=1 uv run --no-sync python ../scripts/demo/demo.py --only 4` | retail task 105: the only reference action is rejected (21.10 to pay, 17.00 on the gift card) | [retail/audit_log.csv](retail/audit_log.csv), task 105, checks 1b and 4b; [results/retail/task_cards/task_105.md](results/retail/task_cards/task_105.md) |
+
 **Key results.**
 - An agent that does nothing passes 23 of 50 airline tasks of the pinned benchmark; under the stricter v2 protocol it passes 0 of 50 by rule (the empty conversation fails by construction), and a refusal-only agent still passes 14 of those 23 ([summary_numbers.md](summary_numbers.md), [block2/summary_v2.md](block2/summary_v2.md)).
 - 34 of 50 airline tasks carry at least one confirmed medium- or high-severity defect (16 of 20 in the sampled block; 44 of 50 counting the pass for doing nothing); across the airline and retail blind re-reviews a second reader agreed with the original labels on 147 of 153 rows (27 of 29, 23 of 26, 97 of 98) ([airline_full/summary_numbers.md](airline_full/summary_numbers.md), [results/rereview_summary.md](results/rereview_summary.md), [results/rereview_summary_rest.md](results/rereview_summary_rest.md), [results/retail/rereview_summary.md](results/retail/rereview_summary.md)).

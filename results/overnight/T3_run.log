@@ -1,0 +1,109 @@
+units: 519 ({'A1': 60, 'A2': 90, 'A3': 60, 'A4': 90, 'A5': 60, 'B1': 120, 'B2': 39})
+judge stage: 9342 ballots, 0 cached, 9342 to call
+  100/9342 ballots  calls=100 retries=0 in=568,084 out=64,656 own $0.089  51s
+  200/9342 ballots  calls=200 retries=0 in=1,337,344 out=115,656 own $0.192  92s
+  300/9342 ballots  calls=300 retries=0 in=1,971,090 out=183,361 own $0.289  141s
+  400/9342 ballots  calls=400 retries=0 in=2,494,894 out=227,839 own $0.363  179s
+  500/9342 ballots  calls=500 retries=0 in=3,014,366 out=290,217 own $0.447  226s
+  600/9342 ballots  calls=600 retries=0 in=3,808,434 out=342,375 own $0.552  269s
+  700/9342 ballots  calls=701 retries=1 in=4,463,782 out=417,582 own $0.655  325s
+  800/9342 ballots  calls=801 retries=1 in=4,948,538 out=481,629 own $0.736  375s
+  900/9342 ballots  calls=901 retries=1 in=5,658,118 out=531,030 own $0.831  415s
+  1000/9342 ballots  calls=1002 retries=2 in=6,239,232 out=597,844 own $0.923  465s
+  1100/9342 ballots  calls=1103 retries=2 in=6,806,202 out=649,371 own $1.005  508s
+  1200/9342 ballots  calls=1202 retries=2 in=7,364,586 out=708,155 own $1.091  555s
+  1300/9342 ballots  calls=1302 retries=2 in=8,151,620 out=785,194 own $1.208  611s
+  1400/9342 ballots  calls=1402 retries=2 in=8,663,552 out=839,505 own $1.286  653s
+  1500/9342 ballots  calls=1502 retries=2 in=9,178,176 out=903,170 own $1.369  705s
+  1600/9342 ballots  calls=1602 retries=2 in=9,623,354 out=935,650 own $1.430  735s
+  1700/9342 ballots  calls=1702 retries=2 in=10,062,918 out=988,977 own $1.501  780s
+  1800/9342 ballots  calls=1802 retries=2 in=10,694,466 out=1,042,461 own $1.591  821s
+  1900/9342 ballots  calls=1902 retries=2 in=11,373,526 out=1,109,855 own $1.692  872s
+  2000/9342 ballots  calls=2003 retries=2 in=11,960,754 out=1,154,066 own $1.773  910s
+  2100/9342 ballots  calls=2102 retries=2 in=12,447,342 out=1,202,454 own $1.846  948s
+  2200/9342 ballots  calls=2202 retries=2 in=12,747,766 out=1,231,151 own $1.890  977s
+  2300/9342 ballots  calls=2302 retries=2 in=13,157,806 out=1,300,096 own $1.966  1032s
+  2400/9342 ballots  calls=2402 retries=2 in=13,823,994 out=1,384,824 own $2.075  1092s
+  2500/9342 ballots  calls=2502 retries=2 in=14,358,656 out=1,437,307 own $2.155  1137s
+  2600/9342 ballots  calls=2602 retries=2 in=14,868,486 out=1,506,540 own $2.240  1190s
+  2700/9342 ballots  calls=2702 retries=2 in=15,258,204 out=1,536,393 own $2.294  1216s
+  2800/9342 ballots  calls=2802 retries=2 in=15,709,860 out=1,601,125 own $2.372  1267s
+  2900/9342 ballots  calls=2902 retries=2 in=16,407,432 out=1,647,268 own $2.464  1306s
+  3000/9342 ballots  calls=3002 retries=2 in=17,054,154 out=1,716,028 own $2.563  1355s
+  3100/9342 ballots  calls=3103 retries=2 in=17,561,964 out=1,761,480 own $2.637  1392s
+  3200/9342 ballots  calls=3203 retries=2 in=18,107,367 out=1,817,732 own $2.720  1434s
+  3300/9342 ballots  calls=3302 retries=2 in=18,717,846 out=1,865,634 own $2.805  1473s
+  3400/9342 ballots  calls=3403 retries=2 in=19,392,659 out=1,934,384 own $2.906  1525s
+  3500/9342 ballots  calls=3502 retries=2 in=19,891,436 out=1,992,614 own $2.985  1573s
+  3600/9342 ballots  calls=3602 retries=2 in=20,493,894 out=2,043,773 own $3.071  1613s
+  3700/9342 ballots  calls=3702 retries=2 in=21,112,524 out=2,115,316 own $3.169  1665s
+  3800/9342 ballots  calls=3802 retries=2 in=21,643,324 out=2,160,760 own $3.245  1703s
+  3900/9342 ballots  calls=3902 retries=2 in=22,061,010 out=2,212,634 own $3.312  1742s
+  4000/9342 ballots  calls=4003 retries=2 in=22,811,163 out=2,272,992 own $3.418  1787s
+  4100/9342 ballots  calls=4102 retries=2 in=23,450,962 out=2,325,652 own $3.508  1829s
+  4200/9342 ballots  calls=4202 retries=2 in=23,968,926 out=2,369,875 own $3.582  1866s
+  4300/9342 ballots  calls=4302 retries=2 in=24,406,832 out=2,418,533 own $3.650  1908s
+  4400/9342 ballots  calls=4402 retries=2 in=24,847,494 out=2,469,715 own $3.720  1951s
+  4500/9342 ballots  calls=4502 retries=2 in=25,360,398 out=2,521,243 own $3.797  1992s
+  4600/9342 ballots  calls=4602 retries=2 in=26,019,028 out=2,594,753 own $3.899  2045s
+  4700/9342 ballots  calls=4702 retries=2 in=26,617,612 out=2,660,834 own $3.992  2099s
+  4800/9342 ballots  calls=4803 retries=2 in=27,074,067 out=2,698,350 own $4.057  2130s
+  4900/9342 ballots  calls=4902 retries=2 in=27,510,918 out=2,740,455 own $4.121  2167s
+  5000/9342 ballots  calls=5002 retries=2 in=27,985,890 out=2,793,631 own $4.195  2211s
+  5100/9342 ballots  calls=5102 retries=2 in=28,868,184 out=2,881,542 own $4.328  2273s
+  5200/9342 ballots  calls=5202 retries=2 in=29,422,014 out=2,925,436 own $4.405  2310s
+  5300/9342 ballots  calls=5302 retries=2 in=29,901,590 out=2,974,281 own $4.477  2348s
+  5400/9342 ballots  calls=5403 retries=3 in=30,309,040 out=3,006,797 own $4.534  2377s
+  5500/9342 ballots  calls=5503 retries=3 in=30,883,134 out=3,079,629 own $4.628  2433s
+  5600/9342 ballots  calls=5604 retries=3 in=31,665,886 out=3,132,877 own $4.733  2476s
+  5700/9342 ballots  calls=5703 retries=3 in=32,356,079 out=3,210,200 own $4.841  2532s
+  5800/9342 ballots  calls=5803 retries=3 in=32,790,326 out=3,254,222 own $4.906  2569s
+  5900/9342 ballots  calls=5904 retries=3 in=33,517,966 out=3,320,746 own $5.012  2618s
+  6000/9342 ballots  calls=6003 retries=3 in=34,103,224 out=3,370,179 own $5.095  2658s
+  6100/9342 ballots  calls=6103 retries=3 in=34,715,266 out=3,426,873 own $5.185  2702s
+  6200/9342 ballots  calls=6204 retries=4 in=35,345,332 out=3,496,083 own $5.283  2754s
+  6300/9342 ballots  calls=6305 retries=4 in=35,990,330 out=3,554,395 own $5.376  2799s
+  6400/9342 ballots  calls=6404 retries=4 in=36,832,368 out=3,614,381 own $5.490  2844s
+  6500/9342 ballots  calls=6504 retries=4 in=37,491,586 out=3,666,672 own $5.582  2887s
+  6600/9342 ballots  calls=6606 retries=4 in=38,105,706 out=3,706,825 own $5.664  2922s
+  6700/9342 ballots  calls=6705 retries=4 in=38,730,727 out=3,741,266 own $5.744  2953s
+  6800/9342 ballots  calls=6804 retries=4 in=39,218,832 out=3,774,605 own $5.809  2982s
+  6900/9342 ballots  calls=6904 retries=4 in=39,727,840 out=3,807,808 own $5.877  3011s
+  7000/9342 ballots  calls=7004 retries=4 in=40,252,146 out=3,851,034 own $5.951  3049s
+  7100/9342 ballots  calls=7105 retries=5 in=40,943,360 out=3,881,567 own $6.035  3079s
+  7200/9342 ballots  calls=7206 retries=6 in=41,580,204 out=3,937,090 own $6.127  3127s
+  7300/9342 ballots  calls=7306 retries=6 in=42,207,062 out=3,968,999 own $6.205  3157s
+  7400/9342 ballots  calls=7406 retries=6 in=42,890,420 out=4,003,754 own $6.291  3188s
+  7500/9342 ballots  calls=7507 retries=6 in=43,310,970 out=4,033,718 own $6.348  3216s
+  7600/9342 ballots  calls=7606 retries=6 in=43,791,276 out=4,069,026 own $6.414  3247s
+  7700/9342 ballots  calls=7708 retries=6 in=44,279,532 out=4,104,354 own $6.480  3280s
+  7800/9342 ballots  calls=7806 retries=6 in=44,938,332 out=4,140,790 own $6.564  3313s
+  7900/9342 ballots  calls=7906 retries=6 in=45,556,042 out=4,194,923 own $6.653  3361s
+  8000/9342 ballots  calls=8007 retries=6 in=46,159,332 out=4,227,318 own $6.730  3393s
+  8100/9342 ballots  calls=8106 retries=6 in=46,815,132 out=4,266,757 own $6.815  3428s
+  8200/9342 ballots  calls=8207 retries=6 in=47,352,998 out=4,298,029 own $6.884  3456s
+  8300/9342 ballots  calls=8306 retries=6 in=47,830,212 out=4,331,584 own $6.949  3487s
+  8400/9342 ballots  calls=8406 retries=6 in=48,295,188 out=4,374,669 own $7.017  3524s
+  8500/9342 ballots  calls=8506 retries=6 in=48,951,936 out=4,411,280 own $7.101  3556s
+  8600/9342 ballots  calls=8606 retries=6 in=49,570,126 out=4,454,292 own $7.184  3597s
+  8700/9342 ballots  calls=8706 retries=6 in=50,177,940 out=4,488,221 own $7.262  3628s
+  8800/9342 ballots  calls=8806 retries=6 in=50,867,550 out=4,523,316 own $7.348  3659s
+  8900/9342 ballots  calls=8907 retries=6 in=51,393,765 out=4,550,769 own $7.415  3686s
+  9000/9342 ballots  calls=9006 retries=6 in=51,832,170 out=4,583,521 own $7.475  3714s
+  9100/9342 ballots  calls=9107 retries=6 in=52,246,775 out=4,611,644 own $7.530  3741s
+  9200/9342 ballots  calls=9206 retries=6 in=52,811,988 out=4,650,630 own $7.607  3775s
+  9300/9342 ballots  calls=9307 retries=7 in=53,455,454 out=4,695,105 own $7.693  3815s
+  9342/9342 ballots  calls=9349 retries=7 in=53,712,626 out=4,713,201 own $7.728  3830s
+| airline, unanimous threshold: reference passes lost | 5 to 10% | 7/276 = 2.5% |
+| airline, any-vote threshold: judge-decisive fails gained | 10 to 20% | 4/18 = 22.2% |
+| run-to-run spread under R (trial pairs that disagree) | 15 to 30% | A1 14/60 = 23.3%; A2 24/90 = 26.7%; A3 14/60 = 23.3%; A4 24/90 = 26.7%; A5 6/60 = 10.0%; B1 20/120 = 16.7% |
+| retail, same prompt new draw vs R | 1 to 3% | 4/282 = 1.4% |
+| retail, other wording vs R | 3 to 6% | 6/564 = 1.1% |
+| judge calls / own cost | about 9,350 / 9 to 12 USD | 9349 new calls this run (9342 new ballots, 0 cached) / $7.73 this run |
+## What the author must check by hand before using any number
+- The paraphrase prompt (P2) is this script's text; read it once and decide whether it says the same as tau2's prompt.
+- P1 reproduces tau2's stock prompt and list format but keeps the V2 transcript view for airline and the tolerant parser everywhere; it is a wording copy, not a replay of the stock evaluator.
+- The reference R for retail is the 3-vote majority of check 2j, not the live single vote that produced the published retail numbers; L is that live vote.
+- Nothing here changes a published number: the published tables stay as they are; this file reports how far copies of the judge move the same recorded verdicts.
+written results\overnight/T3_sensitivity.md, T3_verdicts.csv, T3_votes.csv, T3_provenance.json; calls 9349, own $7.728
+exit 0

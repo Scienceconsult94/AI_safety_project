@@ -1,0 +1,283 @@
+{
+ "generated": "2026-10-31T19:51",
+ "judge_model": "anthropic/claude-haiku-5-5",
+ "judge_args": {},
+ "votes": 3,
+ "retries": 1,
+ "variants": {
+  "P0": {
+   "prompt_sha256": "c560776f121c1500",
+   "format": "numbered"
+  },
+  "P1": {
+   "prompt_sha256": "994b7abd2d3d869a",
+   "format": "stock"
+  },
+  "P2": {
+   "prompt_sha256": "50731f482ec591b9",
+   "format": "numbered"
+  }
+ },
+ "same_prompt_copy": {
+  "airline": "P0",
+  "retail": "P1"
+ },
+ "airline_view": "with_tool_calls",
+ "retail_view": "stock",
+ "reference": {
+  "airline": "cached V2 verdicts in results/v2/rescore*.csv (V2_nl_detail)",
+  "retail": "3-vote majority in results/retail/judge_cache_rejudge.json"
+ },
+ "overlay_commit": "4d33b64",
+ "judge_run": {
+  "calls": 9349,
+  "new_ballots": 9342,
+  "own_cost_usd": 7.728,
+  "run_finished": "2026-10-31 19:23",
+  "source": "cost_overnight.md"
+ },
+ "cost_this_analysis": {
+  "calls": 0,
+  "in_tokens": 0,
+  "out_tokens": 0,
+  "retries": 0,
+  "new_ballots": 0,
+  "cached_ballots": 0
+ },
+ "complete": true,
+ "summary": {
+  "A1": {
+   "n": 60,
+   "decisive": 45,
+   "passes_R": 44,
+   "flip_vs_R": {
+    "P0.1": 0,
+    "P0.2": 0,
+    "P1.1": 0,
+    "P1.2": 0,
+    "P2.1": 0,
+    "P2.2": 0
+   },
+   "pair_flip_pct": 0.0,
+   "pair_flip_decisive_pct": 0.0,
+   "same_prompt_flips": [
+    [
+     "P0",
+     0
+    ],
+    [
+     "P1",
+     0
+    ],
+    [
+     "P2",
+     0
+    ]
+   ],
+   "trial_pairs_disagree": [
+    14,
+    60
+   ]
+  },
+  "A2": {
+   "n": 90,
+   "decisive": 76,
+   "passes_R": 68,
+   "flip_vs_R": {
+    "P0.1": 2,
+    "P0.2": 2,
+    "P1.1": 2,
+    "P1.2": 2,
+    "P2.1": 1,
+    "P2.2": 2
+   },
+   "pair_flip_pct": 1.9,
+   "pair_flip_decisive_pct": 2.26,
+   "same_prompt_flips": [
+    [
+     "P0",
+     2
+    ],
+    [
+     "P1",
+     2
+    ],
+    [
+     "P2",
+     1
+    ]
+   ],
+   "trial_pairs_disagree": [
+    24,
+    90
+   ]
+  },
+  "A3": {
+   "n": 60,
+   "decisive": 47,
+   "passes_R": 47,
+   "flip_vs_R": {
+    "P0.1": 0,
+    "P0.2": 0,
+    "P1.1": 0,
+    "P1.2": 0,
+    "P2.1": 0,
+    "P2.2": 1
+   },
+   "pair_flip_pct": 0.48,
+   "pair_flip_decisive_pct": 0.61,
+   "same_prompt_flips": [
+    [
+     "P0",
+     0
+    ],
+    [
+     "P1",
+     0
+    ],
+    [
+     "P2",
+     1
+    ]
+   ],
+   "trial_pairs_disagree": [
+    14,
+    60
+   ]
+  },
+  "A4": {
+   "n": 90,
+   "decisive": 72,
+   "passes_R": 64,
+   "flip_vs_R": {
+    "P0.1": 0,
+    "P0.2": 0,
+    "P1.1": 0,
+    "P1.2": 0,
+    "P2.1": 0,
+    "P2.2": 0
+   },
+   "pair_flip_pct": 0.0,
+   "pair_flip_decisive_pct": 0.0,
+   "same_prompt_flips": [
+    [
+     "P0",
+     0
+    ],
+    [
+     "P1",
+     0
+    ],
+    [
+     "P2",
+     0
+    ]
+   ],
+   "trial_pairs_disagree": [
+    24,
+    90
+   ]
+  },
+  "A5": {
+   "n": 60,
+   "decisive": 54,
+   "passes_R": 53,
+   "flip_vs_R": {
+    "P0.1": 1,
+    "P0.2": 2,
+    "P1.1": 0,
+    "P1.2": 1,
+    "P2.1": 2,
+    "P2.2": 1
+   },
+   "pair_flip_pct": 2.22,
+   "pair_flip_decisive_pct": 2.47,
+   "same_prompt_flips": [
+    [
+     "P0",
+     1
+    ],
+    [
+     "P1",
+     1
+    ],
+    [
+     "P2",
+     1
+    ]
+   ],
+   "trial_pairs_disagree": [
+    6,
+    60
+   ]
+  },
+  "B1": {
+   "n": 120,
+   "decisive": 107,
+   "passes_R": 99,
+   "flip_vs_R": {
+    "L": 1,
+    "P0.1": 2,
+    "P0.2": 2,
+    "P1.1": 1,
+    "P1.2": 1,
+    "P2.1": 2,
+    "P2.2": 2
+   },
+   "pair_flip_pct": 1.11,
+   "pair_flip_decisive_pct": 1.25,
+   "same_prompt_flips": [
+    [
+     "P0",
+     2
+    ],
+    [
+     "P1",
+     2
+    ],
+    [
+     "P2",
+     0
+    ]
+   ],
+   "trial_pairs_disagree": [
+    20,
+    120
+   ]
+  },
+  "B2": {
+   "n": 39,
+   "decisive": 34,
+   "passes_R": 31,
+   "flip_vs_R": {
+    "L": 0,
+    "P0.1": 0,
+    "P0.2": 0,
+    "P1.1": 0,
+    "P1.2": 0,
+    "P2.1": 0,
+    "P2.2": 0
+   },
+   "pair_flip_pct": 0.0,
+   "pair_flip_decisive_pct": 0.0,
+   "same_prompt_flips": [
+    [
+     "P0",
+     0
+    ],
+    [
+     "P1",
+     0
+    ],
+    [
+     "P2",
+     0
+    ]
+   ],
+   "trial_pairs_disagree": [
+    0,
+    0
+   ]
+  }
+ }
+}

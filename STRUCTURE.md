@@ -166,6 +166,8 @@ $uv = "$env:USERPROFILE\.local\bin\uv.exe"
 & $uv run --no-sync python ..\scripts\static_scan.py
 & $uv run --no-sync python ..\scripts\probe_2h.py
 & $uv run --no-sync python ..\scripts\extract_tasks.py
+# agent_rows.py reads the recorded runs from tau2-bench\data\simulations\<run>\results.json; a fresh clone has none, so copy the committed files first (added 2026-11-01)
+foreach ($r in "sample20_pass3_haiku", "sample20_gt_haiku") { New-Item -ItemType Directory -Force data\simulations\$r | Out-Null; Copy-Item ..\results\runs\$r.results.json data\simulations\$r\results.json }
 & $uv run --no-sync python ..\scripts\agent_rows.py --log ..\results\runs\sample20.log
 & $uv run --no-sync python ..\scripts\probe_32.py --dry     # optional; rewrites results\probe_32\setup.json (timestamp)
 cd ..
@@ -183,7 +185,7 @@ The `--log` path is resolved against the current directory.
 
 ```powershell
 python -I scripts\v2\make_tasks_v2.py --check          # tasks v2 equal the anchored edits
-cd tau2-bench; $env:PYTHONUTF8 = 1
+cd tau2-bench; $env:PYTHONUTF8 = 1; $uv = "$env:USERPROFILE\.local\bin\uv.exe"
 & $uv run --no-sync python ..\scripts\v2\scorer_v2.py --selftest
 & $uv run --no-sync python ..\scripts\v2\noop_scan_v2.py
 & $uv run --no-sync python ..\scripts\v2\rescore.py --no-judge          # gates + deterministic configurations
@@ -205,7 +207,7 @@ The judge, probe and live-run scripts refuse to run while `scripts/v2` or `block
 Same checklist and models as the airline block; differences are listed in `retail/checklist.md`, the protocol and its dated deviations in `retail/PLAN.md`. Offline rebuild:
 
 ```powershell
-cd tau2-bench; $env:PYTHONUTF8 = 1
+cd tau2-bench; $env:PYTHONUTF8 = 1; $uv = "$env:USERPROFILE\.local\bin\uv.exe"
 & $uv run --no-sync python ..\scripts\retail\static_scan.py
 & $uv run --no-sync python ..\scripts\retail\probe_2h.py
 & $uv run --no-sync python ..\scripts\retail\probe_2d.py
@@ -230,7 +232,7 @@ Pipeline: `static_scan.py`, the probes and `extract_tasks.py` -> twelve reviewer
 
 ```powershell
 python -I -X utf8 scripts\strong_vs_weak\compare.py           # strong_vs_weak/summary.md, per_task.csv, fig_per_task.png
-cd tau2-bench; $env:PYTHONUTF8 = 1
+cd tau2-bench; $env:PYTHONUTF8 = 1; $uv = "$env:USERPROFILE\.local\bin\uv.exe"
 & $uv run --no-sync python ..\scripts\demo\demo.py           # four reproductions, under a minute; --only N runs one
 cd ..
 ```
@@ -265,6 +267,7 @@ $uv = "$env:USERPROFILE\.local\bin\uv.exe"
 & $uv run --no-sync python ..\scripts\v2\rescore.py --set fresh_rest30
 & $uv run --no-sync python ..\scripts\probe_29.py --dry     # optional; prints the prefix, makes no model call and writes nothing
 cd ..
+foreach ($r in "rest30_pass3_haiku", "rest30_gt_haiku") { New-Item -ItemType Directory -Force tau2-bench\data\simulations\$r | Out-Null; Copy-Item results\runs\$r.results.json tau2-bench\data\simulations\$r\results.json }   # same copy step as above (added 2026-11-01)
 python -I scripts\agent_rows.py --ids rest
 python -I scripts\build_audit_log.py --ids population
 python -I scripts\validate_audit_log.py airline_full\audit_log.csv

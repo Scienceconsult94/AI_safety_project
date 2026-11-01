@@ -20,4 +20,5 @@ Thumbs.db
 desktop.ini
 
 # Internal planning notes (not part of the publication)
-14_*.md
+/14_*.md
+/15_*.md
